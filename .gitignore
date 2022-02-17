@@ -25,5 +25,8 @@ hs_err_pid*
 # Ignore Gradle project-specific cache directory
 .gradle
 
+# Ignore vscode settings directory
+.vscode
+
 # Ignore Gradle build output directory
 build

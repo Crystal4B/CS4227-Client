@@ -9,6 +9,8 @@ public class App
 
 	public static void main(String[] args)
 	{
+		UI myUi = new UI();
+		myUi.run();
 		System.out.println(new App().getGreeting());
 	}
 }

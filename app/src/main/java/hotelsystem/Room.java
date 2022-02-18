@@ -1,4 +1,7 @@
 //Developed by Jakub Pažej - 18260179@studentmail.ul.ie
+
+package hotelsystem;
+
 public abstract class Room
 {
     protected String roomName, perks;                              // name of room as String

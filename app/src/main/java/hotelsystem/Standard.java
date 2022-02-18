@@ -1,4 +1,7 @@
 //Developed by Jakub Pažej - 18260179@studentmail.ul.ie
+
+package hotelsystem;
+
 public class Standard extends Room
 {
     String defaultPerks = "WiFi, TV, Toilet, Shower";

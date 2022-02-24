@@ -30,6 +30,16 @@ public class Staff extends Person
         return password;
     }
 
+    @Override
+    public void setEmail(String email) {
+        this.email=email;
+    }
+
+    @Override
+    public String getEmail() {
+        return email;
+    }
+
     public void setSalary(double salary)
     {
         this.salary=salary;

@@ -4,7 +4,10 @@ package hotelsystem;
 
 public abstract class Person
 {
-    protected String userName;                              // username as String
+    protected String userName, password;                              // username as String
+
     public abstract void setUserName(String userName);
     public abstract String getUserName();
+    public abstract void setPassword(String password);
+    public abstract String getPassword();
 }

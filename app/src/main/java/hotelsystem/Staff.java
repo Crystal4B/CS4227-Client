@@ -5,13 +5,38 @@ package hotelsystem;
 public class Staff extends Person
 {
     private double salary;
-    @Override public void setUserName(String userName)
+
+    @Override
+    public void setUserName(String userName)
     {
         this.userName = userName;
     }
-    @Override public String getUserName(){
+
+    @Override public
+    String getUserName()
+    {
         return userName;
     }
-    public void setSalary(double salary){this.salary=salary;}
-    public double getSalary(){return salary;}
+
+    @Override
+    public void setPassword(String password)
+    {
+        this.password=password;
+    }
+
+    @Override
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setSalary(double salary)
+    {
+        this.salary=salary;
+    }
+
+    public double getSalary()
+    {
+        return salary;
+    }
 }

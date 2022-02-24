@@ -6,10 +6,10 @@ public class Order {
 
     private final Date startDate;
     private final Date endDate;
-    private final int finalCost;
+    private final double finalCost;
     private final int numberOfOccupants;
     
-    public Order(Date startDate, Date endDate, int finalCost, int numberOfOccupants){
+    public Order(Date startDate, Date endDate, double finalCost, int numberOfOccupants){
         this.startDate = startDate;
         this.endDate = endDate;
         this.finalCost = finalCost;
@@ -24,7 +24,7 @@ public class Order {
         return endDate;
     }
 
-    public int getFinalCost(){
+    public double getFinalCost(){
         return finalCost;
     }
 

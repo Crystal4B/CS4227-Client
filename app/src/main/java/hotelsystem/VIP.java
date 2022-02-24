@@ -4,7 +4,7 @@ package hotelsystem;
 
 public class VIP extends Deluxe
 {
-    VIP(String roomName, int roomNumber, int numberBeds)
+    public VIP(String roomName, int roomNumber, int numberBeds)
     {
         super(roomName, roomNumber, numberBeds);
         String temp = getPerks();

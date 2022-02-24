@@ -4,7 +4,7 @@ package hotelsystem;
 
 public class Deluxe extends Standard
 {
-    Deluxe(String roomName, int roomNumber, int numberBeds)
+    public Deluxe(String roomName, int roomNumber, int numberBeds)
     {
         super(roomName, roomNumber, numberBeds);
         String temp = getPerks();

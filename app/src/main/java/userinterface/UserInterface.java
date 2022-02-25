@@ -1,6 +1,12 @@
 package userinterface;
 
 import java.util.Scanner;
+import login.login;
+import hotelsystem.Person;
+
+import login.login;
+import login.Signup;
+import hotelsystem.Person;
 
 public class UserInterface {
 
@@ -28,8 +34,10 @@ public class UserInterface {
         int option = scanner.nextInt();
         switch (option) {
             case 1:  System.out.println("Login");
+                     login();
                      break;
             case 2:  System.out.println("Sign-Up");
+                     signup();
                      break;
             case 3:  System.exit(0);
                      break;
@@ -38,6 +46,31 @@ public class UserInterface {
         }
     }
 
+    public void login() {
+        System.out.println("Please enter email");
+        String email = scanner.next();
+        System.out.println("Please enter password");
+        String password = scanner.next();
+        login login = new login(email, password);
+        Person user = login.returnUser();
+    }
+
+
+  
+    public void signup() {
+        System.out.println("Please enter email");
+        String email = scanner.next();
+        System.out.println("Please enter username");
+        String username = scanner.next();
+        System.out.println("Please enter password");
+        String password = scanner.next();
+        Signup signup = new Signup(email, username, password);
+        Person user = signup.returnUser();
+        System.out.println("New User Created: Email: " + user.getEmail() + " , Username: " + user.getUserName()  + " , Password: " + user.getPassword());
+}
+ 
+
+  
     public void runMenu(){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");

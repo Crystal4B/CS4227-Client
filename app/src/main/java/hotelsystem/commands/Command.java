@@ -1,4 +1,4 @@
-package hotelsystem;
+package hotelsystem.commands;
 
 /**
  * interface representing commands in the reservation system

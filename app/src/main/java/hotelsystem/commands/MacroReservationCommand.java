@@ -1,4 +1,4 @@
-package hotelsystem;
+package hotelsystem.commands;
 
 /**
  * A Macro command class for executing multiple commands together

@@ -1,4 +1,4 @@
-package hotelsystem;
+package hotelsystem.commands;
 
 /**
  * A Cancel Reservation Command for canceling an exiting reservation in the system

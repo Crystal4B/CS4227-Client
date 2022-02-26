@@ -14,6 +14,27 @@ public class OrderBuilder implements Builder{
     private int numberOfOccupants;
 
     @Override
+    public void setRooms(ArrayList<Room> rooms) {
+        this.rooms = rooms;
+        setFinalCost();
+        setNumberOfOccupants();
+    }
+
+    @Override
+    public void addRoom(Room room){
+        this.rooms.add(room);
+        setFinalCost();
+        setNumberOfOccupants();
+    }
+
+    @Override
+    public void removeRoom(Room room){
+        this.rooms.remove(room);
+        setFinalCost();
+        setNumberOfOccupants();
+    }
+
+    @Override
     public void setStartDate(Date startDate) {
         this.startDate = startDate;  
     }
@@ -24,25 +45,25 @@ public class OrderBuilder implements Builder{
     }
 
     @Override
-    public void setFinalCost(ArrayList<Room> rooms) {
+    public void setFinalCost() {
         double totalCost = 0.0;
-        for(Room r : rooms){
+        for(Room r : this.rooms){
             totalCost += r.getPrice();
         }
         this.finalCost = totalCost;
     }
 
     @Override
-    public void setNumberOfOccupants(ArrayList<Room> rooms) {
+    public void setNumberOfOccupants() {
         int totalOccupants = 0;
-        for(Room r : rooms){
+        for(Room r : this.rooms){
             totalOccupants += r.getOccupants().size();
         }
         this.numberOfOccupants = totalOccupants;
     }
 
     public Order getOrder(){
-        return new Order(startDate, endDate, finalCost, numberOfOccupants);
+        return new Order(rooms, startDate, endDate, finalCost, numberOfOccupants);
     }
     
 }

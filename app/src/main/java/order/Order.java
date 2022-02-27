@@ -1,6 +1,6 @@
 package order;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import java.util.ArrayList;
 import hotelsystem.Room;
@@ -8,12 +8,12 @@ import hotelsystem.Room;
 public class Order {
 
     private final ArrayList<Room> rooms;
-    private final Date startDate;
-    private final Date endDate;
+    private final Timestamp startDate;
+    private final Timestamp endDate;
     private final double finalCost;
     private final int numberOfOccupants;
     
-    public Order(ArrayList<Room> rooms, Date startDate, Date endDate, double finalCost, int numberOfOccupants){
+    public Order(ArrayList<Room> rooms, Timestamp startDate, Timestamp endDate, double finalCost, int numberOfOccupants){
         this.rooms = rooms;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -25,11 +25,11 @@ public class Order {
         return rooms;
     }
 
-    public Date getStartDate(){
+    public Timestamp getStartDate(){
         return startDate;
     }
 
-    public Date getEndDate(){
+    public Timestamp getEndDate(){
         return endDate;
     }
 

@@ -25,4 +25,14 @@ public class MacroReservationCommand implements Command
 			command.execute();
 		}
 	}
+
+	@Override
+	public void undo()
+	{
+		// Run from end to start to keep order of operations
+		for (int i = commands.length-1; i > 0; i--)
+		{
+			commands[i].undo();
+		}
+	}
 }

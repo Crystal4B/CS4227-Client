@@ -1,5 +1,8 @@
 package hotelsystem.commands;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import hotelsystem.ReservationSystem;
 import order.Order;
 
@@ -22,6 +25,14 @@ public class CreateReservationCommand implements Command
 	@Override
 	public void execute()
 	{
-		ReservationSystem.createReservation(reservationOrder);
+		String message = String.format("{\"query\":\"mutation { createReservation(input: { reservationDate: \\\"%s\\\" arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" numberOfOccupants: 4}){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", Timestamp.valueOf(LocalDateTime.now()), reservationOrder.getStartDate(), reservationOrder.getEndDate(), reservationOrder.getNumberOfOccupants());
+
+		ReservationSystem.sendRequest(message);
+	}
+
+	@Override
+	public void undo()
+	{
+		// TODO: Formulate a message for removing of reservation
 	}
 }

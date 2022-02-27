@@ -6,14 +6,14 @@ package hotelsystem.commands;
  */
 public class ReservationInvoker
 {
-	private static Command command;
+	private Command command;
 
-	public static void setCommand(Command newCommand)
+	public void setCommand(Command newCommand)
 	{
 		command = newCommand;
 	}
 
-	public static void execute()
+	public void execute()
 	{
 		command.execute();
 	}

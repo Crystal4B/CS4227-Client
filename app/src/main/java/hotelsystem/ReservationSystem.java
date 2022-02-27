@@ -9,21 +9,16 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
 
-import order.Order;
-
+/**
+ * Reservation System handling HttpClient requests
+ * @author Marcin Sęk
+ */
 public class ReservationSystem
 {
 	private static HttpClient client = HttpClient.newHttpClient();
 
-	/**
-	 * Create new Reservation
-	 * @param order the order reservation being made
-	 * @return boolean value showing success or failure of action
-	 */
-	public static boolean createReservation(Order order)
+	public static void sendRequest(String message)
 	{
-		String message = "{\"query\":\" query { bookById(id: \"book-1\"){id}}}";
-
 		try
 		{
 			HttpRequest request = HttpRequest.newBuilder()
@@ -39,16 +34,5 @@ public class ReservationSystem
 		{
 			System.out.println(e);
 		}
-		return false;
-	}
-
-	/**
-	 * Cancel an existing Reservation
-	 * @param order the order reservation being cancelled
-	 * @return boolean value showing success or failure of action
-	 */
-	public static boolean cancelReservation(Order order)
-	{
-		return false;
 	}
 }

@@ -1,8 +1,7 @@
-import userinterface.UserInterface;
-
 // import java.util.ArrayList;
 
-// import hotelsystem.Room;
+import userinterface.*;
+// import hotelsystem.*;
 // import order.*;
 
 public class App
@@ -11,6 +10,7 @@ public class App
 	{	
 		// Use only for testing order builder. Remove after fully implemented.
 		// ArrayList<Room> rooms = new ArrayList<>();
+		// rooms.add(new Standard("Test Name", 321, 1));
 
 		// Director director = new Director();
 		// OrderBuilder builder = new OrderBuilder();

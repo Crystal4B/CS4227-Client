@@ -1,15 +1,15 @@
 package order;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
 import hotelsystem.Room;
 
 public class OrderBuilder implements Builder{
 
     private ArrayList<Room> rooms;
-    private Date startDate;
-    private Date endDate;
+    private Timestamp startDate;
+    private Timestamp endDate;
     private double finalCost;
     private int numberOfOccupants;
 
@@ -35,12 +35,12 @@ public class OrderBuilder implements Builder{
     }
 
     @Override
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;  
     }
 
     @Override
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
 

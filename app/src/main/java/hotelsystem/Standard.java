@@ -10,7 +10,7 @@ public class Standard extends Room
     boolean taken = false;
     ArrayList<Person> occupants = new ArrayList<Person>();
 
-    Standard(String roomName, int roomNumber, int numberBeds)
+    public Standard(String roomName, int roomNumber, int numberBeds)
     {
         setRoomName(roomName);
         setPerks(defaultPerks);

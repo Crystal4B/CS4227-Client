@@ -8,7 +8,7 @@ import hotelsystem.Room;
 
 public class OrderBuilder implements Builder{
 
-    private ArrayList<Room> rooms;
+    private ArrayList<Room> rooms = new ArrayList<>();
     private Timestamp startDate;
     private Timestamp endDate;
     private long numberOfDaysBooked;

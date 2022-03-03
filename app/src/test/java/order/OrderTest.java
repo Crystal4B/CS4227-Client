@@ -3,23 +3,20 @@ package order;
 import hotelsystem.*;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.*; 
 
 class RoomTest {
 
     // Order Unit Tests
 
     @Test void checkOrderRateCost() {
-        ArrayList<Room> rooms = new ArrayList<>();
-        rooms.add(new Standard("Test Name", 123, 2));
-        rooms.add(new Deluxe("Test Name", 321, 3));
-        rooms.add(new VIP("Test Name", 111, 4));
         
-        Director director = new Director();
 		OrderBuilder builder = new OrderBuilder();
-		director.constructOrder(builder, rooms);
+
+        builder.addRoom(new Standard("Test Name", 123, 2));
+        builder.addRoom(new Deluxe("Test Name", 321, 3));
+        builder.addRoom(new VIP("Test Name", 111, 4));
+
 		Order order = builder.getOrder();
         
         assertEquals(order.getRateCost(), 1700);

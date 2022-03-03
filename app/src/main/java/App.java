@@ -1,11 +1,11 @@
-import userinterface.*;
+import userinterface.UI;
 
 public class App
 {
 	public static void main(String[] args)
 	{	
 		// Run terminal-based user interface
-		UserInterface ui = new UserInterface();
+		UI ui = new UI();
 		ui.run();
 	}
 }

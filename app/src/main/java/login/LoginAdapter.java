@@ -13,11 +13,9 @@ public class LoginAdapter implements LoginInterface{
     }
 
     public boolean login(String email, String password) {
-        System.out.println("Using adapter \n");
         return signup.signup(email, password);
     }
     public void isValidEmail(String email) {
-        System.out.println("Using adapter \n");
         signup.isValidEmail(email);
     }
     public void setName(String username) {

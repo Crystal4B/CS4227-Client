@@ -5,6 +5,7 @@ package hotelsystem.user;
 public class Customer extends Person
 {
     private boolean paid;
+    final String type = "Customer";
 
     public Customer(){}
 
@@ -47,6 +48,11 @@ public class Customer extends Person
     @Override
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public String getUserType() {
+        return type;
     }
 
     public void setPaid(boolean bool)

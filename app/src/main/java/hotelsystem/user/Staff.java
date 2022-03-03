@@ -5,6 +5,7 @@ package hotelsystem.user;
 public class Staff extends Person
 {
     private double salary;
+    final String type = "Staff";
 
     public Staff(){}
 
@@ -47,6 +48,11 @@ public class Staff extends Person
     @Override
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public String getUserType() {
+        return type;
     }
 
     public void setSalary(double salary)

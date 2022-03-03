@@ -1,7 +1,7 @@
 package login;
 
 import hotelsystem.Person;
-import hotelsystem.Customer;
+
 
 public interface SignupInterface {
     public boolean signup(String email, String password);

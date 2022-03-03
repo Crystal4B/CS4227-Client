@@ -5,9 +5,7 @@ import login.Login;
 import login.LoginAdapter;
 import hotelsystem.Person;
 
-import login.Login;
 import login.Signup;
-import hotelsystem.Person;
 
 public class UserInterface {
 

@@ -1,7 +1,7 @@
 package login;
 
-import hotelsystem.Person;
-import hotelsystem.Customer;
+import hotelsystem.user.Person;
+import hotelsystem.user.Customer;
 
 
 public class LoginAdapter implements LoginInterface{

@@ -3,11 +3,9 @@ package userinterface;
 import java.util.Scanner;
 import login.Login;
 import login.LoginAdapter;
-import hotelsystem.Person;
+import hotelsystem.user.Person;
 
-import login.Login;
 import login.Signup;
-import hotelsystem.Person;
 
 public class UserInterface {
 

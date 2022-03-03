@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.time.Duration;
 import java.util.ArrayList;
 
-import hotelsystem.Room;
+import hotelsystem.room.Room;
 
 public class OrderBuilder implements Builder{
 

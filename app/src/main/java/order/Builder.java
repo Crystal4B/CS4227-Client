@@ -2,7 +2,7 @@ package order;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
-import hotelsystem.Room;
+import hotelsystem.room.Room;
 
 public interface Builder {
     void setRooms(ArrayList<Room> rooms);

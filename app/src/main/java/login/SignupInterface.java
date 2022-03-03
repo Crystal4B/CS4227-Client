@@ -1,7 +1,6 @@
 package login;
 
-import hotelsystem.Person;
-import hotelsystem.Customer;
+import hotelsystem.user.Person;
 
 public interface SignupInterface {
     public void signup(String email, String password);

@@ -1,10 +1,19 @@
 //Developed by Jakub Pažej - 18260179@studentmail.ul.ie
 
-package hotelsystem;
+package hotelsystem.user;
 
 public class Staff extends Person
 {
     private double salary;
+
+    public Staff(){}
+
+    public Staff(String userName, String password, String email)
+    {
+        this.userName=userName;
+        this.password=password;
+        this.email=email;
+    }
 
     @Override
     public void setUserName(String userName)

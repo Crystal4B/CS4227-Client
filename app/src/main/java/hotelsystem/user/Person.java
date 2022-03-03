@@ -1,6 +1,6 @@
 //Developed by Jakub Pažej - 18260179@studentmail.ul.ie
 
-package hotelsystem;
+package hotelsystem.user;
 
 public abstract class Person
 {

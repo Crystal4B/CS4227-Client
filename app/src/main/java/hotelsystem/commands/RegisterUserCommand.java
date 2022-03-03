@@ -1,6 +1,6 @@
 package hotelsystem.commands;
 
-import hotelsystem.Person;
+import hotelsystem.user.Person;
 import hotelsystem.ReservationSystem;
 
 public class RegisterUserCommand implements Command

@@ -1,6 +1,8 @@
 //Developed by Jakub Pažej - 18260179@studentmail.ul.ie
 
-package hotelsystem;
+package hotelsystem.room;
+
+import hotelsystem.user.Person;
 
 import java.lang.String;
 import java.util.ArrayList;

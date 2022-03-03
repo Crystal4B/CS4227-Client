@@ -1,5 +1,7 @@
 package hotelsystem;
 
+import hotelsystem.user.Customer;
+import hotelsystem.user.Staff;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

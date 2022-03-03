@@ -1,6 +1,6 @@
 package login;
 
-import hotelsystem.Person;
+import hotelsystem.user.Person;
 import java.util.regex.Pattern;
 
 

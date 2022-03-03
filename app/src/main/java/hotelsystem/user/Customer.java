@@ -55,6 +55,16 @@ public class Customer extends Person
         return type;
     }
 
+    @Override
+    public void setId(int id) {
+        this.id=id;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
     public void setPaid(boolean bool)
     {
         this.paid=bool;

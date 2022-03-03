@@ -1,4 +1,5 @@
 package hotelsystem.billing;
+import java.math.BigDecimal;
 
 public class BillingVIP extends BillingTemplate {
     @Override
@@ -15,6 +16,14 @@ public class BillingVIP extends BillingTemplate {
     int Round(double num) {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    BigDecimal RoundToTwoDec(double num) {
+        BigDecimal temp = new BigDecimal(Double.toString(num));
+        temp = temp.setScale(2);
+        // TODO Auto-generated method stub
+        return temp;
     }
 
     @Override

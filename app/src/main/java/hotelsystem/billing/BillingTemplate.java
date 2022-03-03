@@ -1,9 +1,13 @@
 package hotelsystem.billing;
 
+import java.math.BigDecimal;
+
 abstract class BillingTemplate {
    abstract double BillCalc();
 
    abstract int Round(double num);
+
+   abstract BigDecimal RoundToTwoDec(double num);
 
    abstract String Bill();
 

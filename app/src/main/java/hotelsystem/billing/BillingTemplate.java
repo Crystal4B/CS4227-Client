@@ -15,4 +15,10 @@ abstract class BillingTemplate {
 
    abstract String IntToString(int num);
 
+   String GetBill(){
+      String temp = "";
+      temp = Bill();
+      return temp;
+   }
+
 }

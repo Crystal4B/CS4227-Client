@@ -10,13 +10,17 @@ public class Order {
     private final ArrayList<Room> rooms;
     private final Timestamp startDate;
     private final Timestamp endDate;
+    private final long numberOfDaysBooked;
+    private final double rateCost;
     private final double finalCost;
     private final int numberOfOccupants;
     
-    public Order(ArrayList<Room> rooms, Timestamp startDate, Timestamp endDate, double finalCost, int numberOfOccupants){
+    public Order(ArrayList<Room> rooms, Timestamp startDate, Timestamp endDate, long numberOfDaysBooked, double rateCost, double finalCost, int numberOfOccupants){
         this.rooms = rooms;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.numberOfDaysBooked = numberOfDaysBooked;
+        this.rateCost = rateCost;
         this.finalCost = finalCost;
         this.numberOfOccupants = numberOfOccupants;
     }   
@@ -33,6 +37,14 @@ public class Order {
         return endDate;
     }
 
+    public long getNumberOfDaysBooked(){
+        return numberOfDaysBooked;
+    }
+
+    public double getRateCost(){
+        return rateCost;
+    }
+
     public double getFinalCost(){
         return finalCost;
     }
@@ -43,7 +55,20 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Number of Occupants: " + getNumberOfOccupants() + "\tStart Date: " + getStartDate() + "\tEnd Date: " + getEndDate() + "\tCost: EURO " + getFinalCost() ;
+        String roomsDetails = "";
+        for(Room r : this.rooms){
+            roomsDetails += "\t" + r.toString() + "\n";
+        }
+
+        return  "Rooms: \n" +
+                roomsDetails +
+                "\nNumber of Occupants: " + getNumberOfOccupants() + 
+                "\nStart Date: " + getStartDate() + 
+                "\nEnd Date: " + getEndDate() + 
+                "\nNumber of Days Booked: " + getNumberOfDaysBooked() + 
+                "\nRate Cost: EURO " + getRateCost() + 
+                "\nTotal Cost: EURO " + getFinalCost() + 
+                "\n";
     }
 
     @Override

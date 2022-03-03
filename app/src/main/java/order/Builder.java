@@ -10,6 +10,8 @@ public interface Builder {
     void removeRoom(Room room);
     void setStartDate(Timestamp startDate);
     void setEndDate(Timestamp endDate);
+    void setNumberOfDaysBooked();
+    void setRateCost();
     void setFinalCost();
     void setNumberOfOccupants();
 }

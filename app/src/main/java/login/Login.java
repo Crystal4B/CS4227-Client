@@ -1,17 +1,22 @@
 package login;
 
+import hotelsystem.commands.LoginUserCommand;
+import hotelsystem.commands.ReservationInvoker;
 import hotelsystem.user.Person;
+import hotelsystem.user.Customer;
 import java.util.regex.Pattern;
 
 
 public class Login implements LoginInterface {
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     public Person person;
+    ReservationInvoker invoker;
 
-    public void login(String email, String password) {
+    public boolean login(String email, String password) {
+        invoker = new ReservationInvoker();
         this.isValidEmail(email);
-        person = this.validatesUser(email,password);
-        
+        validatesUser(email,password);
+        return true;
         
     }
 
@@ -26,16 +31,11 @@ public class Login implements LoginInterface {
 
     public Person validatesUser(String email, String password) {
 
-        //Selects user from database with email and returns them as a Person object
-
-
-       /* Person user = 
-            if (user.password == password) {
-                return user;
-            }
-            else {
-                return null;
-            } */
+        person = new Customer();
+        person.setEmail(email);
+        person.setPassword(password);
+        invoker.setCommand(new LoginUserCommand(person));
+        invoker.execute();
         return null;
         
     }

@@ -1,5 +1,7 @@
 package login;
 
+import hotelsystem.commands.RegisterUserCommand;
+import hotelsystem.commands.ReservationInvoker;
 import hotelsystem.user.Person;
 import hotelsystem.user.Customer;
 import java.util.regex.Pattern;
@@ -8,12 +10,17 @@ public class Signup implements SignupInterface{
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     public Customer person;
     private String username;
+    ReservationInvoker invoker;
 
-    public void signup(String email, String password) {
+    public boolean signup(String email, String password) {
+        invoker = new ReservationInvoker();
         this.isValidEmail(email);
         
         person = new Customer();
         person = this.createsUser(email, username, password); 
+        invoker.setCommand(new RegisterUserCommand(person));
+        invoker.execute();
+        return true;
     }
     public void setName(String username){
         this.username = username;

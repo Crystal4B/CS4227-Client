@@ -3,7 +3,7 @@ package order;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
-import hotelsystem.Room;
+import hotelsystem.room.Room;
 
 public class Order {
 

@@ -1,5 +1,8 @@
 package hotelsystem;
 
+import hotelsystem.room.Deluxe;
+import hotelsystem.room.Standard;
+import hotelsystem.room.VIP;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

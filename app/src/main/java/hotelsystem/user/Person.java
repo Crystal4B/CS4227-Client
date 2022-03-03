@@ -1,6 +1,6 @@
 //Developed by Jakub Pažej - 18260179@studentmail.ul.ie
 
-package hotelsystem;
+package hotelsystem.user;
 
 public abstract class Person
 {
@@ -12,4 +12,5 @@ public abstract class Person
     public abstract String getPassword();
     public abstract void setEmail(String email);
     public abstract String getEmail();
+    public abstract String getUserType();
 }

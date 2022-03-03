@@ -3,7 +3,7 @@ package userinterface;
 import java.util.Scanner;
 import login.Login;
 import login.LoginAdapter;
-import hotelsystem.Person;
+import hotelsystem.user.Person;
 
 import login.Signup;
 

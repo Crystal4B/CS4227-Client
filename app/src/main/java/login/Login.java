@@ -2,8 +2,8 @@ package login;
 
 import hotelsystem.commands.LoginUserCommand;
 import hotelsystem.commands.ReservationInvoker;
-import hotelsystem.Person;
-import hotelsystem.Customer;
+import hotelsystem.user.Person;
+import hotelsystem.user.Customer;
 import java.util.regex.Pattern;
 
 

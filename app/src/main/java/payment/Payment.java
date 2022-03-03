@@ -1,9 +1,8 @@
 package payment;
 
+import hotelsystem.room.Room;
 import order.Order;
 import java.util.ArrayList;
-import hotelsystem.Room;
-
 
 public class Payment {
     private final ArrayList<Room> rooms;

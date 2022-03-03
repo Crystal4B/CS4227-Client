@@ -9,11 +9,12 @@ public class Signup implements SignupInterface{
     public Customer person;
     private String username;
 
-    public void signup(String email, String password) {
+    public boolean signup(String email, String password) {
         this.isValidEmail(email);
         
         person = new Customer();
         person = this.createsUser(email, username, password); 
+        return true;
     }
     public void setName(String username){
         this.username = username;

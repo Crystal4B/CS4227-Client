@@ -8,10 +8,10 @@ public class Login implements LoginInterface {
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     public Person person;
 
-    public void login(String email, String password) {
+    public boolean login(String email, String password) {
         this.isValidEmail(email);
         person = this.validatesUser(email,password);
-        
+        return true;
         
     }
 

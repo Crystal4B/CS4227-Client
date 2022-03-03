@@ -1,10 +1,11 @@
 package userinterface;
 
 import java.util.Scanner;
-import login.login;
+import login.Login;
+import login.LoginAdapter;
 import hotelsystem.Person;
 
-import login.login;
+import login.Login;
 import login.Signup;
 import hotelsystem.Person;
 
@@ -51,7 +52,8 @@ public class UserInterface {
         String email = scanner.next();
         System.out.println("Please enter password");
         String password = scanner.next();
-        login login = new login(email, password);
+        Login login = new Login();
+        login.login(email, password);
         Person user = login.returnUser();
     }
 
@@ -64,7 +66,9 @@ public class UserInterface {
         String username = scanner.next();
         System.out.println("Please enter password");
         String password = scanner.next();
-        Signup signup = new Signup(email, username, password);
+        LoginAdapter signup = new LoginAdapter(new Signup());
+        signup.setName(username);
+        signup.login(email, password);
         Person user = signup.returnUser();
         System.out.println("New User Created: Email: " + user.getEmail() + " , Username: " + user.getUserName()  + " , Password: " + user.getPassword());
 }

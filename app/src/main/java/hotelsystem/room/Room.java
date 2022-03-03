@@ -34,4 +34,5 @@ public abstract class Room
     public abstract void removeOccupants(Person[] people);
     public abstract void removeOccupants(ArrayList<Person> people);
     public abstract ArrayList<Person>  getOccupants();
+    public abstract String toString();
 }

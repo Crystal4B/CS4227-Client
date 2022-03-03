@@ -136,4 +136,9 @@ public class Standard extends Room
     public ArrayList<Person> getOccupants() {
         return occupants;
     }
+
+    @Override
+    public String toString() {
+        return "Room Name: "+roomName+" ; Room Number: "+roomNumber+" ; Beds: "+numberBeds+" ; Price: "+price+" ; Taken?: "+taken;
+    }
 }

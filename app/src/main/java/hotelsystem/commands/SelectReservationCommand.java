@@ -1,5 +1,7 @@
 package hotelsystem.commands;
 
+import java.util.Map;
+
 import hotelsystem.ReservationSystem;
 
 /**
@@ -19,12 +21,23 @@ public class SelectReservationCommand implements Command
 	public void execute()
 	{
 		String message = String.format("{\"query\":\"query{reservationById(id: %s){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", id);
-		ReservationSystem.sendRequest(message);
+		
+		Map<String, Object> response = ReservationSystem.sendRequest(message);
+		if (response.containsKey("reservationById"))
+		{
+			Map<String, Object> reservationData = (Map<String, Object>) response.get("reservationById");
+		}
 	}
 
 	@Override
 	public void undo()
 	{
 		// Undo does not apply to this command
+	}
+
+	@Override
+	public Object getResponse()
+	{
+		return null;
 	}
 }

@@ -8,6 +8,10 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Reservation System handling HttpClient requests
@@ -17,7 +21,7 @@ public class ReservationSystem
 {
 	private static HttpClient client = HttpClient.newHttpClient();
 
-	public static void sendRequest(String message)
+	public static Map<String, Object> sendRequest(String message)
 	{
 		try
 		{
@@ -28,11 +32,24 @@ public class ReservationSystem
 				.build();
 
 			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+
 			System.out.println(response.body());
+
+			Map<String, Map<String,Object>> mapping = new ObjectMapper().readValue(response.body(), HashMap.class);
+			if (mapping.containsKey("data"))
+			{
+				return mapping.get("data");
+			}
+			else if(mapping.containsKey("errors"))
+			{
+				// TODO: handle errors
+			}
 		}
 		catch(URISyntaxException | IOException | InterruptedException e)
 		{
 			System.out.println(e);
 		}
+
+		return null;
 	}
 }

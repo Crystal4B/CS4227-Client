@@ -15,4 +15,10 @@ public interface Command
 	 * abstract undo function for commands
 	 */
 	public abstract void undo();
+
+	/**
+	 * abstract function for getting server response from command
+	 * @return Object response
+	 */
+	public abstract Object getResponse();
 }

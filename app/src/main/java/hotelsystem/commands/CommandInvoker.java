@@ -1,10 +1,10 @@
 package hotelsystem.commands;
 
 /**
- * Reservation System class for organizing and controlling the reservations
+ * Command invoker for controlling commands
  * @author Marcin Sęk
  */
-public class ReservationInvoker
+public class CommandInvoker
 {
 	private Command command;
 
@@ -16,5 +16,10 @@ public class ReservationInvoker
 	public void execute()
 	{
 		command.execute();
+	}
+
+	public Object getResponse()
+	{
+		return command.getResponse();
 	}
 }

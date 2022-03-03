@@ -2,6 +2,7 @@ package hotelsystem.commands;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import hotelsystem.ReservationSystem;
 import order.Order;
@@ -34,5 +35,11 @@ public class CreateReservationCommand implements Command
 	public void undo()
 	{
 		// TODO: Formulate a message for removing of reservation
+	}
+
+	@Override
+	public Object getResponse()
+	{
+		return null;
 	}
 }

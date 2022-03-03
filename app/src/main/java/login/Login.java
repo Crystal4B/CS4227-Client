@@ -1,7 +1,7 @@
 package login;
 
 import hotelsystem.commands.LoginUserCommand;
-import hotelsystem.commands.ReservationInvoker;
+import hotelsystem.commands.CommandInvoker;
 import hotelsystem.user.Person;
 import hotelsystem.user.Customer;
 import java.util.regex.Pattern;
@@ -10,10 +10,10 @@ import java.util.regex.Pattern;
 public class Login implements LoginInterface {
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     public Person person;
-    ReservationInvoker invoker;
+    CommandInvoker invoker;
 
     public boolean login(String email, String password) {
-        invoker = new ReservationInvoker();
+        invoker = new CommandInvoker();
         this.isValidEmail(email);
         validatesUser(email,password);
         return true;

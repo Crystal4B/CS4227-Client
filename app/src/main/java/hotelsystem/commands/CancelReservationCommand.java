@@ -2,6 +2,7 @@ package hotelsystem.commands;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import hotelsystem.ReservationSystem;
 import order.Order;
@@ -34,5 +35,11 @@ public class CancelReservationCommand implements Command
 		String message = String.format("{\"query\":\"mutation { createReservation(input: { reservationDate: \\\"%s\\\" arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" numberOfOccupants: 4}){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", Timestamp.valueOf(LocalDateTime.now()), orderCancelation.getStartDate(), orderCancelation.getEndDate(), orderCancelation.getNumberOfOccupants());
 
 		ReservationSystem.sendRequest(message);
+	}
+
+	@Override
+	public Object getResponse()
+	{
+		return null;
 	}
 }

@@ -3,7 +3,7 @@ package userinterface;
 import java.io.Console;
 import java.sql.Timestamp;
 
-import hotelsystem.*;
+import hotelsystem.room.*;
 import order.*;
 
 public class ReservationUI {

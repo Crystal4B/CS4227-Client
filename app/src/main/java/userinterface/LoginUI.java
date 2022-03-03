@@ -2,8 +2,10 @@ package userinterface;
 
 import java.io.Console;
 
-import hotelsystem.Person;
-import login.*;
+import hotelsystem.user.Person;
+import login.Login;
+import login.LoginAdapter;
+import login.Signup;
 
 public class LoginUI {
     
@@ -22,7 +24,7 @@ public class LoginUI {
             case 1:
                 login(console);
             case 2:  
-                return 1;
+                signup(console);
             case 3:  
                 return -1;
         }
@@ -39,7 +41,7 @@ public class LoginUI {
         login.returnUser();
     }
 
-    public void signup(Console console) {
+    public static void signup(Console console) {
         System.out.println("Please enter email");
         String email = console.readLine();
         System.out.println("Please enter username");

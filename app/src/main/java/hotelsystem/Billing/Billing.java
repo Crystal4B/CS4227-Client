@@ -1,4 +1,4 @@
-package hotelsystem;
+package hotelsystem.Billing;
 
 class Billing extends BillingTemplate {
     @Override

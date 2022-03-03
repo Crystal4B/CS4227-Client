@@ -31,7 +31,7 @@ jobs:
       uses: gradle/gradle-build-action@v2
     
     - name: Execute Gradle build
-      run: ./gradlew build
+      run: ./gradlew build --parallel
       
     - name: Testing Gradle
-      run: ./gradlew test
+      run: ./gradlew test --parallel

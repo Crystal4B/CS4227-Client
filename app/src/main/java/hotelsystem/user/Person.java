@@ -1,10 +1,11 @@
 //Developed by Jakub Pažej - 18260179@studentmail.ul.ie
 
-package hotelsystem;
+package hotelsystem.user;
 
 public abstract class Person
 {
     protected String userName, password, email;                              // username as String
+    protected int id;
 
     public abstract void setUserName(String userName);
     public abstract String getUserName();
@@ -12,4 +13,7 @@ public abstract class Person
     public abstract String getPassword();
     public abstract void setEmail(String email);
     public abstract String getEmail();
+    public abstract String getUserType();
+    public abstract void setId(int id);
+    public abstract int getId();
 }

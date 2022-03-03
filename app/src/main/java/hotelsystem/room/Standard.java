@@ -1,6 +1,8 @@
 //Developed by Jakub Pažej - 18260179@studentmail.ul.ie
 
-package hotelsystem;
+package hotelsystem.room;
+
+import hotelsystem.user.Person;
 
 import java.util.ArrayList;
 
@@ -133,5 +135,10 @@ public class Standard extends Room
     @Override
     public ArrayList<Person> getOccupants() {
         return occupants;
+    }
+
+    @Override
+    public String toString() {
+        return "Room Name: "+roomName+" ; Room Number: "+roomNumber+" ; Beds: "+numberBeds+" ; Price: "+price+" ; Taken?: "+taken;
     }
 }

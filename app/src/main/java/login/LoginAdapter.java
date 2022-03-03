@@ -1,7 +1,7 @@
 package login;
 
-import hotelsystem.Person;
-import hotelsystem.Customer;
+import hotelsystem.user.Person;
+import hotelsystem.user.Customer;
 
 
 public class LoginAdapter implements LoginInterface{
@@ -12,12 +12,10 @@ public class LoginAdapter implements LoginInterface{
         this.signup = signup;
     }
 
-    public void login(String email, String password) {
-        System.out.println("Using adapter \n");
-        signup.signup(email, password);
+    public boolean login(String email, String password) {
+        return signup.signup(email, password);
     }
     public void isValidEmail(String email) {
-        System.out.println("Using adapter \n");
         signup.isValidEmail(email);
     }
     public void setName(String username) {

@@ -3,7 +3,7 @@ package hotelsystem.commands;
 import java.util.ArrayList;
 
 import hotelsystem.ReservationSystem;
-import hotelsystem.Room;
+import hotelsystem.room.Room;
 
 public class CreateRoomsCommand implements Command
 {

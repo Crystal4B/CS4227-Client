@@ -1,10 +1,20 @@
 //Developed by Jakub Pažej - 18260179@studentmail.ul.ie
 
-package hotelsystem;
+package hotelsystem.user;
 
 public class Customer extends Person
 {
     private boolean paid;
+    final String type = "Customer";
+
+    public Customer(){}
+
+    public Customer(String userName, String password, String email)
+    {
+      this.userName=userName;
+      this.password=password;
+      this.email=email;
+    }
 
     @Override
     public void setUserName(String userName)
@@ -38,6 +48,21 @@ public class Customer extends Person
     @Override
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public String getUserType() {
+        return type;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id=id;
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     public void setPaid(boolean bool)

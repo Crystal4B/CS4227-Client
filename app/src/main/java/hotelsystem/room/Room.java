@@ -1,6 +1,8 @@
 //Developed by Jakub Pažej - 18260179@studentmail.ul.ie
 
-package hotelsystem;
+package hotelsystem.room;
+
+import hotelsystem.user.Person;
 
 import java.lang.String;
 import java.util.ArrayList;
@@ -32,4 +34,5 @@ public abstract class Room
     public abstract void removeOccupants(Person[] people);
     public abstract void removeOccupants(ArrayList<Person> people);
     public abstract ArrayList<Person>  getOccupants();
+    public abstract String toString();
 }

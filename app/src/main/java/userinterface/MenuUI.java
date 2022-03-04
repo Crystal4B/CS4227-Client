@@ -18,16 +18,17 @@ public class MenuUI {
         int option = Integer.parseInt(console.readLine());
         switch (option) {
             case 1: 
-                return 2;
+                return UI.RESERVATION_STATE;
             case 2: 
                 System.out.println("Cancel");
-                break;
+                return UI.MENU_STATE;
             case 3: 
                 System.out.println("View");
-                break;
+                return UI.MENU_STATE;
             case 4: 
-                return -1;
+                return UI.EXIT;
+            default:
+                return UI.MENU_STATE;
         }
-        return 1;
     }
 }

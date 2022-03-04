@@ -8,6 +8,7 @@ import hotelsystem.room.Room;
 
 public class OrderBuilder implements Builder{
 
+    private String orderID;
     private ArrayList<Room> rooms = new ArrayList<>();
     private Timestamp startDate;
     private Timestamp endDate;
@@ -17,39 +18,48 @@ public class OrderBuilder implements Builder{
     private int numberOfOccupants;
 
     @Override
+    public void setOrderID(String orderID){
+        this.orderID = orderID;
+    }
+
+    @Override
     public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
         setRateCost();
-        setFinalCost();
         setNumberOfOccupants();
+        setFinalCost();
     }
 
     @Override
     public void addRoom(Room room){
         this.rooms.add(room);
         setRateCost();
-        setFinalCost();
         setNumberOfOccupants();
+        setFinalCost();
     }
 
     @Override
     public void removeRoom(Room room){
         this.rooms.remove(room);
         setRateCost();
-        setFinalCost();
         setNumberOfOccupants();
+        setFinalCost();
     }
 
     @Override
     public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
-        setNumberOfDaysBooked(); 
+        setRateCost();
+        setNumberOfDaysBooked();
+        setFinalCost();
     }
 
     @Override
     public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
+        setRateCost();
         setNumberOfDaysBooked();
+        setFinalCost();
     }
 
     @Override
@@ -82,8 +92,26 @@ public class OrderBuilder implements Builder{
         this.numberOfOccupants = totalOccupants;
     }
 
+    @Override
+    public String toString() {
+        String roomsDetails = "";
+        for(Room r : this.rooms){
+            roomsDetails += "\t" + r.toString() + "\n";
+        }
+
+        return  "Rooms: \n" +
+                roomsDetails +
+                "\nNumber of Occupants: " + this.numberOfOccupants + 
+                "\nStart Date: " + this.startDate + 
+                "\nEnd Date: " + this.endDate + 
+                "\nNumber of Days Booked: " + this.numberOfDaysBooked + 
+                "\nRate Cost: EURO " + this.rateCost + 
+                "\nTotal Cost: EURO " + this.finalCost + 
+                "\n";
+    }
+
     public Order getOrder(){
-        return new Order(rooms, startDate, endDate, numberOfDaysBooked, rateCost, finalCost, numberOfOccupants);
+        return new Order(orderID, rooms, startDate, endDate, numberOfDaysBooked, rateCost, finalCost, numberOfOccupants);
     }
     
 }

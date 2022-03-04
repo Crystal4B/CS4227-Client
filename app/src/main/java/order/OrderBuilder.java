@@ -25,41 +25,31 @@ public class OrderBuilder implements Builder{
     @Override
     public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
-        setRateCost();
-        setNumberOfOccupants();
-        setFinalCost();
+        update();
     }
 
     @Override
     public void addRoom(Room room){
         this.rooms.add(room);
-        setRateCost();
-        setNumberOfOccupants();
-        setFinalCost();
+        update();
     }
 
     @Override
-    public void removeRoom(Room room){
+    public void removeRoom(int room){
         this.rooms.remove(room);
-        setRateCost();
-        setNumberOfOccupants();
-        setFinalCost();
+        update();
     }
 
     @Override
     public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
-        setRateCost();
-        setNumberOfDaysBooked();
-        setFinalCost();
+        update();
     }
 
     @Override
     public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
-        setRateCost();
-        setNumberOfDaysBooked();
-        setFinalCost();
+        update();
     }
 
     @Override
@@ -92,6 +82,12 @@ public class OrderBuilder implements Builder{
         this.numberOfOccupants = totalOccupants;
     }
 
+    private void update(){
+        setRateCost();
+        setNumberOfDaysBooked();
+        setFinalCost();
+    }
+
     @Override
     public String toString() {
         String roomsDetails = "";
@@ -108,6 +104,14 @@ public class OrderBuilder implements Builder{
                 "\nRate Cost: EURO " + this.rateCost + 
                 "\nTotal Cost: EURO " + this.finalCost + 
                 "\n";
+    }
+
+    public ArrayList<Room> getRoomsBuilder(){
+        return this.rooms;
+    }
+
+    public int getRoomsArrayListSize(){
+        return this.rooms.size();
     }
 
     public Order getOrder(){

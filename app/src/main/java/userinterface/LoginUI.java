@@ -23,12 +23,15 @@ public class LoginUI {
         switch (option) {
             case 1:
                 login(console);
-            case 2:  
-                signup(console);
+                return UI.MENU_STATE;
+            case 2: 
+                // signup(console);
+                return UI.MENU_STATE;
             case 3:  
-                return -1;
+                return UI.EXIT;
+            default:
+                return UI.LOGIN_STATE;
         }
-        return 0;
     }
 
     public static void login(Console console) {

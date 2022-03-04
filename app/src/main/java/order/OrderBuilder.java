@@ -43,12 +43,16 @@ public class OrderBuilder implements Builder{
     @Override
     public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
+        setRateCost();
+        setFinalCost();
         setNumberOfDaysBooked(); 
     }
 
     @Override
     public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
+        setRateCost();
+        setFinalCost();
         setNumberOfDaysBooked();
     }
 
@@ -80,6 +84,24 @@ public class OrderBuilder implements Builder{
             totalOccupants += r.getOccupants().size();
         }
         this.numberOfOccupants = totalOccupants;
+    }
+
+    @Override
+    public String toString() {
+        String roomsDetails = "";
+        for(Room r : this.rooms){
+            roomsDetails += "\t" + r.toString() + "\n";
+        }
+
+        return  "Rooms: \n" +
+                roomsDetails +
+                "\nNumber of Occupants: " + this.numberOfOccupants + 
+                "\nStart Date: " + this.startDate + 
+                "\nEnd Date: " + this.endDate + 
+                "\nNumber of Days Booked: " + this.numberOfDaysBooked + 
+                "\nRate Cost: EURO " + this.rateCost + 
+                "\nTotal Cost: EURO " + this.finalCost + 
+                "\n";
     }
 
     public Order getOrder(){

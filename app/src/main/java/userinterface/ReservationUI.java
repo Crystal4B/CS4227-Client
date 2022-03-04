@@ -1,14 +1,12 @@
 package userinterface;
 
 import java.io.Console;
-import java.sql.Timestamp;
-
-import hotelsystem.room.*;
 import order.*;
 
 public class ReservationUI {
 
     private static OrderBuilder builder = new OrderBuilder();
+    private static Director director = new Director();
     
     public static int run(Console console){
         System.out.println("\n####################################################");
@@ -25,24 +23,43 @@ public class ReservationUI {
         int option = Integer.parseInt(console.readLine());
         switch (option) {
             case 1: 
-                addRoomToCart(console);
-                break;
+                while(!addRoomToCart(console)){}
+                return UI.RESERVATION_STATE;
             case 2:
-                setDetails(console);
-                break;
+                while(!setDetails(console)){}
+                return UI.RESERVATION_STATE;
             case 3: 
                 System.out.println("Remove Room");
-                break;
+                return UI.RESERVATION_STATE;
             case 4: 
-                viewOrder(console);
-                break;
+                while(!viewOrder(console)){}
+                return UI.RESERVATION_STATE;
             case 5: 
-                return 1;
+                return UI.MENU_STATE;
+            default:
+                return UI.RESERVATION_STATE;
         }
-        return 2;
     }
 
-    public static void setDetails(Console console){
+    public static Boolean addRoomToCart(Console console){
+        System.out.println("\n####################################################");
+        System.out.println("#     Welcome to the Hotel Reservation System      #");
+        System.out.println("####################################################\n");
+        System.out.println("Please select one of the following options:");
+        System.out.println("1. \t Standard Room");
+        System.out.println("2. \t Deluxe Room");
+        System.out.println("3. \t VIP Room");
+        System.out.println("4. \t Back");
+        System.out.println("\n####################################################\n");
+        System.out.println("Enter option here:");
+        int option = Integer.parseInt(console.readLine());
+        if(director.addRoomUsingUI(builder, option)){
+            return true;
+        }
+        return false;
+    }
+
+    public static Boolean setDetails(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -51,71 +68,27 @@ public class ReservationUI {
         System.out.println("Please enter check-out date (YYYY-MM-DD) @ 12:00:");
         String checkOutDate = console.readLine();
         System.out.println("\n####################################################\n");
-        try {
-            if(Timestamp.valueOf(checkInDate + " 12:00:00").before(Timestamp.valueOf(checkOutDate + " 12:00:00"))){
-                builder.setStartDate(Timestamp.valueOf(checkInDate + " 12:00:00"));
-                builder.setEndDate(Timestamp.valueOf(checkOutDate + " 12:00:00"));
-            }
-            else{
-                setDetails(console);
-                return ;  
-            }
-        } catch (Exception e) {
-            setDetails(console);
-            return ;
+        if(director.setDatesUsingUI(builder, checkInDate, checkOutDate)){
+            return true;
         }
+        return false;
     }
 
-    public static void addRoomToCart(Console console){
-        Order order = builder.getOrder();
-        if(order.getStartDate() != null && order.getEndDate() != null){
-            System.out.println("\n####################################################");
-            System.out.println("#     Welcome to the Hotel Reservation System      #");
-            System.out.println("####################################################\n");
-            System.out.println("Please select one of the following options:");
-            System.out.println("1. \t Standard Room");
-            System.out.println("2. \t Deluxe Room");
-            System.out.println("3. \t VIP Room");
-            System.out.println("4. \t Back");
-            System.out.println("\n####################################################\n");
-            System.out.println("Enter option here:");
-            int option = Integer.parseInt(console.readLine());
-            switch (option) {
-                case 1: 
-                    builder.addRoom(new Standard("Test Name", 123, 2));
-                    break;
-                case 2: 
-                    builder.addRoom(new Deluxe("Test Name", 123, 2));
-                    break;
-                case 3: 
-                    builder.addRoom(new VIP("Test Name", 123, 2));
-                    break;
-                case 4: 
-                    run(console);
-            }
-            
-        }else{
-            setDetails(console);
-            addRoomToCart(console);
-        }
-    }
-
-    public static void viewOrder(Console console){
+    public static Boolean viewOrder(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println("Order Cart Information:\n");
-		Order order = builder.getOrder();
-        System.out.println(order.toString());
+        System.out.println(director.viewCart(builder));
         System.out.println("1. \t Back");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
         int option = Integer.parseInt(console.readLine());
         switch (option) {
             case 1: 
-                run(console);
+                return true;
             default:
-                run(console);
+                return false;
         }
     }
 }

@@ -35,9 +35,9 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 	public String createMessage(boolean undo) {
 		if (undo)
 		{
-			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id arrivalDate departureDate numberOfOccupants}}\"}", UNDO_MUTATION_NAME, reservationOrder.getOrderID());
+			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id arrivalDate departureDate numberOfOccupants rooms{id type name perks numberOfBeds rate}}}\"}", UNDO_MUTATION_NAME, reservationOrder.getOrderID());
 		}
-		return String.format("{\"query\":\"mutation{%s(input:{reservationDate: \\\"%s\\\" arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" numberOfOccupants: %d}){id arrivalDate departureDate numberOfOccupants}}\"}", MUTATION_NAME, reservationOrder.getStartDate(), reservationOrder.getEndDate(), reservationOrder.getNumberOfOccupants());
+		return String.format("{\"query\":\"mutation{%s(input:{reservationDate: \\\"%s\\\" arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" numberOfOccupants: %d}){id arrivalDate departureDate rooms{id type name perks numberOfBeds rate}}}\"}", MUTATION_NAME, reservationOrder.getStartDate(), reservationOrder.getEndDate(), reservationOrder.getNumberOfOccupants());
 	}
 
 	@Override

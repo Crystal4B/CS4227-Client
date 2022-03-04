@@ -1,8 +1,14 @@
 package hotelsystem.commands;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Map;
 
+import hotelsystem.room.Deluxe;
+import hotelsystem.room.Standard;
+import hotelsystem.room.VIP;
 import order.Order;
+import order.OrderBuilder;
 
 /**
  * A Select Reservation Command for selecting reservation data from the API
@@ -28,7 +34,7 @@ public class SelectReservationCommand extends CommandTemplate<Order>
 	public String createMessage(boolean undo)
 	{
 		// Undo does not apply to requests of type query
-		return String.format("{\"query\":\"query{%s(id: %s){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", QUERY_NAME, id);
+		return String.format("{\"query\":\"query{%s(id: %s){id reservationDate arrivalDate departureDate rooms{id type name perks numberOfBeds rate}}}\"}", QUERY_NAME, id);
 	}
 
 	@Override
@@ -37,6 +43,38 @@ public class SelectReservationCommand extends CommandTemplate<Order>
 		if (response.containsKey(QUERY_NAME))
 		{
 			Map<String, Object> reservationData = (Map<String, Object>) response.get(QUERY_NAME);
+
+			String reservationId = (String) reservationData.get("id");
+			Timestamp arrivalDate = (Timestamp) reservationData.get("arrivalDate");
+			Timestamp departureDate = (Timestamp) reservationData.get("departureDate");
+			ArrayList<Map<String, Object>> roomsMap = (ArrayList<Map<String, Object>>) reservationData.get("rooms");
+	
+			OrderBuilder builder = new OrderBuilder();
+			builder.setOrderID(reservationId);
+			builder.setStartDate(arrivalDate);
+			builder.setEndDate(departureDate);
+	
+			for (Map<String, Object> map : roomsMap)
+			{
+				String roomId = (String) map.get("id");
+				String type = (String) map.get("type");
+				String name = (String) map.get("name");
+				int numberOfBeds = (int) map.get("numberOfBeds");
+	
+				switch(type)
+				{
+				case "Standard":
+					builder.addRoom(new Standard(name, Integer.parseInt(roomId), numberOfBeds));
+					break;
+				case "Deluxe":
+					builder.addRoom(new Deluxe(name, Integer.parseInt(roomId), numberOfBeds));
+					break;
+				case "VIP":
+					builder.addRoom(new VIP(name, Integer.parseInt(roomId), numberOfBeds));
+				}
+			}
+	
+			responseObject = builder.getOrder();
 		}
 	}
 }

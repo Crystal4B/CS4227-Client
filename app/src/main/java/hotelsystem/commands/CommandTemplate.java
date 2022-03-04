@@ -35,7 +35,7 @@ public abstract class CommandTemplate<T>
 
 	/**
 	 * template function for getting server response from command
-	 * @return Object response
+	 * @return Object response as type T defined
 	 */
 	public T getResponse()
 	{

@@ -12,12 +12,20 @@ import hotelsystem.room.VIP;
 /**
  * Command for getting all available room for specified dates
  * @author Marcin Sęk
+ * @apiNote Response type of ArrayList[Room]
  */
 public class GetAvailableRoomsCommand extends CommandTemplate<ArrayList<Room>>
 {
+	private static final String QUERY_NAME = "availableRoomsByDates";
+
 	private Timestamp arrivalDate;
 	private Timestamp departureDate;
 
+	/**
+	 * Simple constructor for command
+	 * @param arrivalDate desired date for check-in
+	 * @param departureDate desired date for check-out
+	 */
 	public GetAvailableRoomsCommand(Timestamp arrivalDate, Timestamp departureDate)
 	{
 		this.arrivalDate = arrivalDate;
@@ -28,15 +36,15 @@ public class GetAvailableRoomsCommand extends CommandTemplate<ArrayList<Room>>
 	public String createMessage(boolean undo)
 	{
 		// Undo doesn't apply to requests of type query
-		return String.format("{\"query\":\"query{availableRoomsByDates(arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\"){id type name numberOfBeds}}\"}", arrivalDate, departureDate);
+		return String.format("{\"query\":\"query{%s(arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\"){id type name numberOfBeds}}\"}", QUERY_NAME, arrivalDate, departureDate);
 	}
 
 	@Override
 	public void parseResponse(Map<String, Object> response)
 	{
-		if (response.containsKey("availableRoomsByDates"))
+		if (response.containsKey(QUERY_NAME))
 		{
-			ArrayList<Map<String,Object>> roomsData = (ArrayList<Map<String, Object>>) response.get("availableRoomsByDates");
+			ArrayList<Map<String,Object>> roomsData = (ArrayList<Map<String, Object>>) response.get(QUERY_NAME);
 			responseObject = new ArrayList<>();
 			for (Map<String,Object> room : roomsData)
 			{

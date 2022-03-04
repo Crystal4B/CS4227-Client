@@ -2,20 +2,30 @@ package hotelsystem.commands;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Map;
 
+import hotelsystem.room.Deluxe;
+import hotelsystem.room.Standard;
+import hotelsystem.room.VIP;
 import order.Order;
+import order.OrderBuilder;
 
 /**
  * A Cancel Reservation Command for canceling an exiting reservation in the system
  * @author Marcin Sęk
+ * @apiNote Response of type Order
  */
-public class CancelReservationCommand extends CommandTemplate<Object> // TODO: ask Jakub to create Reservation type
+public class CancelReservationCommand extends CommandTemplate<Order>
 {
+	private static final String MUTATION_NAME = "removeReservation";
+	private static final String UNDO_MUTATION_NAME = "createReservation";
+
 	private Order orderCancelation;
 
 	/**
 	 * Cancel Reservation Command constructor
+	 * @param orderCancelation the order being cancelled
 	 */
 	public CancelReservationCommand(Order orderCancelation)
 	{
@@ -27,15 +37,63 @@ public class CancelReservationCommand extends CommandTemplate<Object> // TODO: a
 	{
 		if (undo)
 		{
-			return ""; // TODO: Formulate a message for removing a reservation from the system	
+			return String.format("{\"query\":\"mutation{%s(input:{arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" numberOfOccupants: %d}){id arrivalDate departureDate rooms{id type name perks numberOfBeds rate}}}\"}", UNDO_MUTATION_NAME, Timestamp.valueOf(LocalDateTime.now()), orderCancelation.getStartDate(), orderCancelation.getEndDate(), orderCancelation.getNumberOfOccupants());
 		}
-		return String.format("{\"query\":\"mutation { createReservation(input: { reservationDate: \\\"%s\\\" arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" numberOfOccupants: 4}){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", Timestamp.valueOf(LocalDateTime.now()), orderCancelation.getStartDate(), orderCancelation.getEndDate(), orderCancelation.getNumberOfOccupants());
-
+		return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id arrivalDate departureDate}}\"}", MUTATION_NAME, orderCancelation.getOrderID());
 	}
 
 	@Override
 	public void parseResponse(Map<String, Object> response)
 	{
-		// TODO: parse response from both cancel reservation and create reservation
+		String mutation;
+		if (response.containsKey(MUTATION_NAME))
+		{
+			mutation = MUTATION_NAME;
+		}
+		else if (response.containsKey(UNDO_MUTATION_NAME))
+		{
+			mutation = UNDO_MUTATION_NAME;
+		}
+		else
+		{
+			// Break if no acceptable response is returned
+			return;
+		}
+
+		Map<String, Object> reservationData = (Map<String, Object>) response.get(mutation);
+		String reservationId = (String) reservationData.get("id");
+		Timestamp arrivalDate = (Timestamp) reservationData.get("arrivalDate");
+		Timestamp departureDate = (Timestamp) reservationData.get("departureDate");
+		ArrayList<Map<String, Object>> roomsMap = (ArrayList<Map<String, Object>>) reservationData.get("rooms");
+
+		OrderBuilder builder = new OrderBuilder();
+		builder.setOrderID(reservationId);
+		builder.setStartDate(arrivalDate);
+		builder.setEndDate(departureDate);
+
+		for (Map<String, Object> map : roomsMap)
+		{
+			String roomId = (String) map.get("id");
+			String type = (String) map.get("type");
+			String name = (String) map.get("name");
+			int numberOfBeds = (int) map.get("numberOfBeds");
+
+			switch(type)
+			{
+			case "Standard":
+				builder.addRoom(new Standard(name, Integer.parseInt(roomId), numberOfBeds));
+				break;
+			case "Deluxe":
+				builder.addRoom(new Deluxe(name, Integer.parseInt(roomId), numberOfBeds));
+				break;
+			case "VIP":
+				builder.addRoom(new VIP(name, Integer.parseInt(roomId), numberOfBeds));
+			}
+		}
+
+		responseObject = builder.getOrder();
+
+		// Make copy for undo
+		this.orderCancelation = responseObject;
 	}
 }

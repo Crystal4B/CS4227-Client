@@ -25,7 +25,7 @@ public class LoginUI {
                 login(console);
                 return UI.MENU_STATE;
             case 2: 
-                // signup(console);
+                signup(console);
                 return UI.MENU_STATE;
             case 3:  
                 return UI.EXIT;

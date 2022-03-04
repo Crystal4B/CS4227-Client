@@ -39,11 +39,28 @@ public class Director {
         }
     }
 
-    public void removeRoomUsingUI(Builder builder){
-        // TODO: Add Implementation
+    public boolean removeRoomUsingUI(OrderBuilder builder, int option){
+        if(option == 0){
+            return true;
+        }
+        else if(option > 0 && option < builder.getRoomsArrayListSize()+1){
+            builder.removeRoom(option-1);
+            return true;
+        }
+        return false;
     }
 
     public String viewCart(OrderBuilder builder){
         return builder.toString();
+    }
+
+    public String viewRoomsInCart(OrderBuilder builder){
+        String roomsInCart = "";
+        roomsInCart += "0.\t Back\n\n";
+        for (int i=0; i < builder.getRoomsBuilder().size(); i++) 
+        { 
+            roomsInCart += (i+1) + ".\t" + builder.getRoomsBuilder().get(i).toString() + "\n";
+        }
+        return roomsInCart;
     }
 }

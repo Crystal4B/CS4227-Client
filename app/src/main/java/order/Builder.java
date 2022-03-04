@@ -8,7 +8,7 @@ public interface Builder {
     void setOrderID(String orderID);
     void setRooms(ArrayList<Room> rooms);
     void addRoom(Room room);
-    void removeRoom(Room room);
+    void removeRoom(int room);
     void setStartDate(Timestamp startDate);
     void setEndDate(Timestamp endDate);
     void setNumberOfDaysBooked();

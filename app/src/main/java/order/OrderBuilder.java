@@ -20,40 +20,40 @@ public class OrderBuilder implements Builder{
     public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
         setRateCost();
-        setFinalCost();
         setNumberOfOccupants();
+        setFinalCost();
     }
 
     @Override
     public void addRoom(Room room){
         this.rooms.add(room);
         setRateCost();
-        setFinalCost();
         setNumberOfOccupants();
+        setFinalCost();
     }
 
     @Override
     public void removeRoom(Room room){
         this.rooms.remove(room);
         setRateCost();
-        setFinalCost();
         setNumberOfOccupants();
+        setFinalCost();
     }
 
     @Override
     public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
         setRateCost();
+        setNumberOfDaysBooked();
         setFinalCost();
-        setNumberOfDaysBooked(); 
     }
 
     @Override
     public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
         setRateCost();
-        setFinalCost();
         setNumberOfDaysBooked();
+        setFinalCost();
     }
 
     @Override

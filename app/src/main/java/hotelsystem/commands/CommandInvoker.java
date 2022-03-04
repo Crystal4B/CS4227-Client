@@ -6,9 +6,9 @@ package hotelsystem.commands;
  */
 public class CommandInvoker
 {
-	private Command command;
+	private CommandTemplate command;
 
-	public void setCommand(Command newCommand)
+	public void setCommand(CommandTemplate newCommand)
 	{
 		command = newCommand;
 	}

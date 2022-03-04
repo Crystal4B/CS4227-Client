@@ -2,13 +2,11 @@ package hotelsystem.commands;
 
 import java.util.Map;
 
-import hotelsystem.ReservationSystem;
-
 /**
  * A Select Reservation Command for selecting reservation data from the API
  * @author Marcin Sęk
  */
-public class SelectReservationCommand implements Command
+public class SelectReservationCommand extends CommandTemplate<Object> // TODO: ask Jakub to create Reservation type
 {
 	private String id;
 
@@ -18,26 +16,19 @@ public class SelectReservationCommand implements Command
 	}
 
 	@Override
-	public void execute()
+	public String createMessage(boolean undo)
 	{
-		String message = String.format("{\"query\":\"query{reservationById(id: %s){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", id);
-		
-		Map<String, Object> response = ReservationSystem.sendRequest(message);
+		// Undo does not apply to requests of type query
+		return String.format("{\"query\":\"query{reservationById(id: %s){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", id);
+	}
+
+	@Override
+	public void parseResponse(Map response)
+	{
 		if (response.containsKey("reservationById"))
 		{
 			Map<String, Object> reservationData = (Map<String, Object>) response.get("reservationById");
+			// TODO: finish parsing response
 		}
-	}
-
-	@Override
-	public void undo()
-	{
-		// Undo does not apply to this command
-	}
-
-	@Override
-	public Object getResponse()
-	{
-		return null;
 	}
 }

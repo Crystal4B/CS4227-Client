@@ -6,13 +6,11 @@ import hotelsystem.user.Staff;
 
 import java.util.Map;
 
-import hotelsystem.ReservationSystem;
-
 /**
  * Command for logging into the system
  * @author Marcin Sęk
  */
-public class LoginUserCommand implements Command
+public class LoginUserCommand extends CommandTemplate<Person>
 {
 	private Person user;
 
@@ -22,11 +20,15 @@ public class LoginUserCommand implements Command
 	}
 
 	@Override
-	public void execute()
+	public String createMessage(boolean undo)
 	{
-		String message = String.format("{\"query\":\"query{loginUser(input:{email: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", user.getEmail(), user.getPassword());
-		
-		Map<String, Object> response = ReservationSystem.sendRequest(message);
+		// Undo does not apply to requests of type query
+		return String.format("{\"query\":\"query{loginUser(input:{email: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", user.getEmail(), user.getPassword());
+	}
+
+	@Override
+	public void parseResponse(Map<String, Object> response)
+	{
 		if (response.containsKey("loginUser"))
 		{
 			Map<String, String> userData = (Map<String, String>) response.get("loginUser");
@@ -46,18 +48,6 @@ public class LoginUserCommand implements Command
 			}
 			user.setId(Integer.parseInt(id));
 		}
-	}
-
-	@Override
-	public void undo()
-	{
-		// Signout
-	}
-
-	@Override
-	public Object getResponse()
-	{
-		return this.user;
 	}
 	
 }

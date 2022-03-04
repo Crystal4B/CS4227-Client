@@ -4,14 +4,13 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-import hotelsystem.ReservationSystem;
 import order.Order;
 
 /**
  * A Cancel Reservation Command for canceling an exiting reservation in the system
  * @author Marcin Sęk
  */
-public class CancelReservationCommand implements Command
+public class CancelReservationCommand extends CommandTemplate<Object> // TODO: ask Jakub to create Reservation type
 {
 	private Order orderCancelation;
 
@@ -24,22 +23,19 @@ public class CancelReservationCommand implements Command
 	}
 
 	@Override
-	public void execute()
+	public String createMessage(boolean undo)
 	{
-		// TODO: formulate a message for removing a reservation from the system
+		if (undo)
+		{
+			return ""; // TODO: Formulate a message for removing a reservation from the system	
+		}
+		return String.format("{\"query\":\"mutation { createReservation(input: { reservationDate: \\\"%s\\\" arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" numberOfOccupants: 4}){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", Timestamp.valueOf(LocalDateTime.now()), orderCancelation.getStartDate(), orderCancelation.getEndDate(), orderCancelation.getNumberOfOccupants());
+
 	}
 
 	@Override
-	public void undo()
+	public void parseResponse(Map<String, Object> response)
 	{
-		String message = String.format("{\"query\":\"mutation { createReservation(input: { reservationDate: \\\"%s\\\" arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" numberOfOccupants: 4}){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", Timestamp.valueOf(LocalDateTime.now()), orderCancelation.getStartDate(), orderCancelation.getEndDate(), orderCancelation.getNumberOfOccupants());
-
-		ReservationSystem.sendRequest(message);
-	}
-
-	@Override
-	public Object getResponse()
-	{
-		return null;
+		// TODO: parse response from both cancel reservation and create reservation
 	}
 }

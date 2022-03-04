@@ -12,7 +12,7 @@ import hotelsystem.ReservationSystem;
  * Command for adding a new user into the system
  * @author Marcin Sęk
  */
-public class RegisterUserCommand implements Command
+public class RegisterUserCommand extends CommandTemplate<Object> // TODO: ask Jakub to create Reservation type
 {
 	private Person user;
 
@@ -27,6 +27,34 @@ public class RegisterUserCommand implements Command
 		String message = String.format("{\"query\":\"mutation{createUser(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", user.getClass().getSimpleName(), user.getEmail(), user.getUserName(), user.getPassword());
 		
 		Map<String, Object> response = ReservationSystem.sendRequest(message);
+
+	}
+
+	@Override
+	public void undo()
+	{
+		//TODO: Formulate request to remove user
+	}
+
+	@Override
+	public Object getResponse()
+	{
+		return this.user;
+	}
+
+	@Override
+	public String createMessage(boolean undo)
+	{
+		if (undo)
+		{
+			// TODO: Formulate request to remove user
+		}
+		return String.format("{\"query\":\"mutation{createUser(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", user.getClass().getSimpleName(), user.getEmail(), user.getUserName(), user.getPassword());
+	}
+
+	@Override
+	public void parseResponse(Map<String, Object> response)
+	{
 		if (response.containsKey("createUser"))
 		{
 			Map<String, String> userData = (Map<String, String>) response.get("createUser");
@@ -46,17 +74,5 @@ public class RegisterUserCommand implements Command
 			}
 			user.setId(Integer.parseInt(id));
 		}
-	}
-
-	@Override
-	public void undo()
-	{
-		//TODO: Formulate request to remove user
-	}
-
-	@Override
-	public Object getResponse()
-	{
-		return this.user;
 	}
 }

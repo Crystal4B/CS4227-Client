@@ -11,7 +11,7 @@ import order.Order;
  * A Create Reservation Command for creating a new reservation in the system
  * @author Marcin Sęk
  */
-public class CreateReservationCommand implements Command
+public class CreateReservationCommand extends CommandTemplate<Object> // TODO: ask Jakub to create Reservation type
 {
 	private Order reservationOrder;
 
@@ -24,22 +24,17 @@ public class CreateReservationCommand implements Command
 	}
 
 	@Override
-	public void execute()
-	{
-		String message = String.format("{\"query\":\"mutation { createReservation(input: { reservationDate: \\\"%s\\\" arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" numberOfOccupants: 4}){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", Timestamp.valueOf(LocalDateTime.now()), reservationOrder.getStartDate(), reservationOrder.getEndDate(), reservationOrder.getNumberOfOccupants());
-
-		ReservationSystem.sendRequest(message);
+	public String createMessage(boolean undo) {
+		if (undo)
+		{
+			return ""; // TODO: Formulate a message for removing of reservation
+		}
+		return String.format("{\"query\":\"mutation { createReservation(input: { reservationDate: \\\"%s\\\" arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" numberOfOccupants: 4}){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", Timestamp.valueOf(LocalDateTime.now()), reservationOrder.getStartDate(), reservationOrder.getEndDate(), reservationOrder.getNumberOfOccupants());
 	}
 
 	@Override
-	public void undo()
+	public void parseResponse(Map<String, Object> response)
 	{
-		// TODO: Formulate a message for removing of reservation
-	}
-
-	@Override
-	public Object getResponse()
-	{
-		return null;
+		// TODO: parse response from both cancel reservation and create reservation
 	}
 }

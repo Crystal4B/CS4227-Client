@@ -7,6 +7,7 @@ import hotelsystem.room.Room;
 
 public class Order {
 
+    private final String orderID;
     private final ArrayList<Room> rooms;
     private final Timestamp startDate;
     private final Timestamp endDate;
@@ -15,7 +16,8 @@ public class Order {
     private final double finalCost;
     private final int numberOfOccupants;
     
-    public Order(ArrayList<Room> rooms, Timestamp startDate, Timestamp endDate, long numberOfDaysBooked, double rateCost, double finalCost, int numberOfOccupants){
+    public Order(String orderID, ArrayList<Room> rooms, Timestamp startDate, Timestamp endDate, long numberOfDaysBooked, double rateCost, double finalCost, int numberOfOccupants){
+        this.orderID = orderID;
         this.rooms = rooms;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -24,6 +26,10 @@ public class Order {
         this.finalCost = finalCost;
         this.numberOfOccupants = numberOfOccupants;
     }   
+
+    public String getOrderID(){
+        return orderID;
+    }
  
     public ArrayList<Room> getRooms(){
         return rooms;

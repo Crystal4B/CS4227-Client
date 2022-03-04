@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import hotelsystem.room.Room;
 
 public interface Builder {
+    void setOrderID(String orderID);
     void setRooms(ArrayList<Room> rooms);
     void addRoom(Room room);
     void removeRoom(Room room);

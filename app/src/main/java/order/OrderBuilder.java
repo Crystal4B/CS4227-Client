@@ -8,6 +8,7 @@ import hotelsystem.room.Room;
 
 public class OrderBuilder implements Builder{
 
+    private String orderID;
     private ArrayList<Room> rooms = new ArrayList<>();
     private Timestamp startDate;
     private Timestamp endDate;
@@ -15,6 +16,11 @@ public class OrderBuilder implements Builder{
     private double rateCost;
     private double finalCost;
     private int numberOfOccupants;
+
+    @Override
+    public void setOrderID(String orderID){
+        this.orderID = orderID;
+    }
 
     @Override
     public void setRooms(ArrayList<Room> rooms) {
@@ -105,7 +111,7 @@ public class OrderBuilder implements Builder{
     }
 
     public Order getOrder(){
-        return new Order(rooms, startDate, endDate, numberOfDaysBooked, rateCost, finalCost, numberOfOccupants);
+        return new Order(orderID, rooms, startDate, endDate, numberOfDaysBooked, rateCost, finalCost, numberOfOccupants);
     }
     
 }

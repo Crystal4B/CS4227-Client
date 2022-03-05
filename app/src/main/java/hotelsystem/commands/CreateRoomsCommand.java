@@ -48,7 +48,7 @@ public class CreateRoomsCommand extends CommandTemplate<ArrayList<Room>>
 			}
 			else
 			{
-				message += String.format("{type: \\\"%s\\\" name: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}", room.getClass().getSimpleName(), room.getRoomName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
+				message += String.format("{type: \\\"%s\\\" name: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d occupants: []}", room.getClass().getSimpleName(), room.getRoomName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
 			}
 
 			if (i < rooms.size() - 1)
@@ -56,7 +56,7 @@ public class CreateRoomsCommand extends CommandTemplate<ArrayList<Room>>
 				message += ",";
 			}
 		}
-		message += "]){ id type name perks numberOfBeds rate }}\"}";
+		message += "]){id type name perks numberOfBeds rate}}\"}";
 
 		return message;
 	}

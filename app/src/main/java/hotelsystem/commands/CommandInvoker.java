@@ -24,6 +24,7 @@ public class CommandInvoker
 	 */
 	public void execute()
 	{
+		commandExecuted = true;
 		command.execute();
 	}
 

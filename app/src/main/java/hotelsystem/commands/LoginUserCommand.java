@@ -1,13 +1,13 @@
 package hotelsystem.commands;
 
-import hotelsystem.user.Person;
+import hotelsystem.user.User;
 import hotelsystem.ReservationSystem;
 
 public class LoginUserCommand implements Command
 {
-	private Person user;
+	private User user;
 
-	public LoginUserCommand(Person user)
+	public LoginUserCommand(User user)
 	{
 		this.user = user;
 	}

@@ -2,10 +2,20 @@
 
 package hotelsystem.user;
 
-public class Customer extends Person
+import java.util.ArrayList;
+
+public class Customer extends User
 {
-    private boolean paid;
     final String type = "Customer";
+    final ArrayList<String> permissions = new ArrayList<String>(){
+        {
+            permissions.add("CancelReservation");
+            permissions.add("CreateReservation");
+            permissions.add("GetAvailableRooms");
+            permissions.add("LoginUser");
+            permissions.add("RegisterUser");
+        }};
+    private boolean paid;
 
     public Customer(){}
 

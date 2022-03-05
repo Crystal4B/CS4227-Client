@@ -2,7 +2,7 @@
 
 package hotelsystem.room;
 
-import hotelsystem.user.Person;
+import hotelsystem.user.User;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class Standard extends Room
 {
     String defaultPerks = "WiFi, TV, Toilet, Shower";
     boolean taken = false;
-    ArrayList<Person> occupants = new ArrayList<Person>();
+    ArrayList<User> occupants = new ArrayList<User>();
 
     public Standard(String roomName, int roomNumber, int numberBeds)
     {
@@ -91,49 +91,49 @@ public class Standard extends Room
     }
 
     @Override
-    public void setOccupant(Person person) {
-        occupants.add(person);
+    public void setOccupant(User user) {
+        occupants.add(user);
     }
 
     @Override
-    public void setOccupants(Person[] people) {
-        for (Person person : people)
+    public void setOccupants(User[] people) {
+        for (User user : people)
         {
-            occupants.add(person);
+            occupants.add(user);
         }
     }
 
     @Override
-    public void setOccupants(ArrayList<Person> people) {
-        for (Person person : people)
+    public void setOccupants(ArrayList<User> people) {
+        for (User user : people)
         {
-            occupants.add(person);
+            occupants.add(user);
         }
     }
 
     @Override
-    public void removeOccupant(Person person) {
-        occupants.remove(person);
+    public void removeOccupant(User user) {
+        occupants.remove(user);
     }
 
     @Override
-    public void removeOccupants(Person[] people) {
-        for (Person person : people)
+    public void removeOccupants(User[] people) {
+        for (User user : people)
         {
-            occupants.remove(person);
+            occupants.remove(user);
         }
     }
 
     @Override
-    public void removeOccupants(ArrayList<Person> people) {
-        for (Person person : people)
+    public void removeOccupants(ArrayList<User> people) {
+        for (User user : people)
         {
-            occupants.remove(person);
+            occupants.remove(user);
         }
     }
 
     @Override
-    public ArrayList<Person> getOccupants() {
+    public ArrayList<User> getOccupants() {
         return occupants;
     }
 

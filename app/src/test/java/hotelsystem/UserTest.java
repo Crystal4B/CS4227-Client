@@ -5,7 +5,7 @@ import hotelsystem.user.Staff;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class PersonTest {
+class UserTest {
 
     // Customer Unit Tests
 

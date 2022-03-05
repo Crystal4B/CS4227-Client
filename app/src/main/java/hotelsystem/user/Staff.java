@@ -2,10 +2,25 @@
 
 package hotelsystem.user;
 
-public class Staff extends Person
+import java.util.ArrayList;
+
+public class Staff extends User
 {
-    private double salary;
     final String type = "Staff";
+    final ArrayList<String> permissions = new ArrayList<String>(){
+        {
+            permissions.add("CancelReservation");
+            permissions.add("CreateReservation");
+            permissions.add("CreateRooms");
+            permissions.add("GetAvailableRooms");
+            permissions.add("LoginUser");
+            permissions.add("MacroReservation");
+            permissions.add("RegisterUser");
+            permissions.add("ReservationInvoker");
+            permissions.add("SelectReservation");
+        }};
+    private double salary;
+    private int holidayDaysAvailable;
 
     public Staff(){}
 
@@ -73,5 +88,20 @@ public class Staff extends Person
     public double getSalary()
     {
         return salary;
+    }
+
+    public void setHolidays(int days)
+    {
+        this.holidayDaysAvailable=days;
+    }
+
+    public void addHolidays(int days)
+    {
+        this.holidayDaysAvailable+=days;
+    }
+
+    public int getHolidays()
+    {
+        return holidayDaysAvailable;
     }
 }

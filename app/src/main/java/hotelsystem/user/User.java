@@ -2,7 +2,7 @@
 
 package hotelsystem.user;
 
-public abstract class Person
+public abstract class User
 {
     protected String userName, password, email;                              // username as String
     protected int id;

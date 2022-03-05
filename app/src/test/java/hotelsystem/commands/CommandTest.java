@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,13 +20,20 @@ import order.OrderBuilder;
 
 public class CommandTest
 {
+	// Default parameters for Commands
 	CommandInvoker invoker = new CommandInvoker();
+	Customer customer = new Customer("test", "password", "test@test.com");
+	// Create rooms
+	ArrayList<Room> rooms = new ArrayList<>(Arrays.asList(
+		new Standard("Test Suite 1", 0, 2),
+		new Deluxe("Test Suite 2", 0, 2),
+		new VIP("Test Suite 3", 0, 2)
+	));
 
 	// Command Unit Tests
-	@Test void checkRegisterCommand()
+	@Test void checkRegisterCommandExecution()
 	{
 		// Send new customer request
-		Customer customer = new Customer("test", "password", "test@test.com");
 		invoker.setCommand(new RegisterUserCommand(customer));
 		invoker.execute();
 
@@ -35,6 +43,16 @@ public class CommandTest
 		assertEquals(customer.getPassword(), result.getPassword());
 		assertEquals(customer.getEmail(), result.getEmail());
 		assertFalse(result.getId() == 0); // TODO: get Jakub to update ID to a nullable type like Integer
+	}
+
+	@Test void checkRegisterCommandUndo()
+	{
+		// Override customer
+		customer = new Customer("test 2", "password 2", "test2@test.com");
+
+		// Run execution
+		checkRegisterCommandExecution();
+		Customer result = invoker.getResponse();
 
 		// Undo command and assert
 		boolean undo = invoker.undo();
@@ -48,17 +66,20 @@ public class CommandTest
 
 	@Test void checkLoginUserCommand()
 	{
+		// Send new login command
+		invoker.setCommand(new LoginUserCommand(customer));
+		invoker.execute();
 
+		// Retrieve data and assert
+		Customer result = invoker.getResponse();
+		assertEquals(customer.getUserName(), result.getUserName());
+		assertEquals(customer.getPassword(), result.getPassword());
+		assertEquals(customer.getEmail(), result.getEmail());
+		assertFalse(result.getId() == 0); // TODO: get Jakub to update ID to a nullable type like Integer
 	}
 
-	@Test void checkCreateRoomsCommand()
+	@Test void checkCreateRoomsCommandExecution()
 	{
-		// Create rooms
-		ArrayList<Room> rooms = new ArrayList<>();
-		rooms.add(new Standard("Test Suite 1", 0, 2));
-		rooms.add(new Deluxe("Test Suite 2", 0, 1));
-		rooms.add(new VIP("Test Suite 3", 0, 2));
-
 		// Send new createRooms request
 		invoker.setCommand(new CreateRoomsCommand(rooms));
 		invoker.execute();
@@ -73,6 +94,20 @@ public class CommandTest
 			assertEquals(rooms.get(i).getNumberBeds(), resultRooms.get(i).getNumberBeds());
 			assertFalse(resultRooms.get(i).getRoomNumber() == 0);
 		}
+	}
+
+	@Test void checkCreateRoomsCommandUndo()
+	{
+		// Override rooms
+		rooms = new ArrayList<>(Arrays.asList(
+			new Standard("Test Suite 4", 0, 3),
+			new Deluxe("Test Suite 5", 0, 5),
+			new VIP("Test Suite 6", 0, 1)
+		));
+
+		// Run execution
+		checkCreateRoomsCommandExecution();
+		ArrayList<Room> resultRooms = invoker.getResponse();
 
 		// undo command and assert
 		boolean undo = invoker.undo();
@@ -95,10 +130,10 @@ public class CommandTest
 
 	}
 
-	@Test void checkCreateReservationCommand()
+	@Test void checkCreateReservationCommandExecution()
 	{
 		// Create room for order
-		Room room = new Standard("Test Suite 1", 1, 2);
+		Room room = rooms.get(0);
 		room.setOccupant(new Customer("test", "password", "test@test.com"));
 
 		// Create order
@@ -121,6 +156,16 @@ public class CommandTest
 		assertEquals(order.getFinalCost(), resultOrder.getFinalCost());
 		assertEquals(order.getNumberOfOccupants(), resultOrder.getNumberOfOccupants());
 		assertFalse(resultOrder.getOrderID() == null);
+	}
+
+	@Test void checkCreateReservationCommandUndo()
+	{
+		// Override room order
+		rooms.set(0, new Deluxe("Test Suite 7", 0, 1));
+
+		// run execution
+		checkCreateRoomsCommandExecution();
+		Order resultOrder = invoker.getResponse();
 
 		// undo command and assert
 		boolean undo = invoker.undo();
@@ -136,8 +181,33 @@ public class CommandTest
 		assertEquals(resultOrder.getOrderID(), resultUndoOrder.getOrderID());
 	}
 
-	@Test void checkCancelReservationCommand()
+	@Test void checkCancelReservationCommandExecution()
 	{
 
+	}
+
+	@Test void checkCancelReservationCommandUndo()
+	{
+		
+	}
+
+	@Test void checkRemoveRoomsCommandExecution()
+	{
+		// TODO: create removeRooms command
+	}
+
+	@Test void checkRemoveRoomsCommandUndo()
+	{
+		// TODO: add undo to command above
+	}
+
+	@Test void checkRemoveUserCommandExecution()
+	{
+		// TODO: create removeUser command
+	}
+
+	@Test void checkRemoveUserCommandUndo()
+	{
+		// TODO: add undo to command above
 	}
 }

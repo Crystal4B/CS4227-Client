@@ -48,12 +48,12 @@ public class LoginUserCommand extends CommandTemplate<Person>
 			switch(type)
 			{
 			case "Customer":
-				user = new Customer(username, password, email);
+				responseObject = new Customer(username, password, email);
 				break;
 			case "Staff":
-				user = new Staff(username, password, email);
+				responseObject = new Staff(username, password, email);
 			}
-			user.setId(Integer.parseInt(id));
+			responseObject.setId(Integer.parseInt(id));
 		}
 	}
 	

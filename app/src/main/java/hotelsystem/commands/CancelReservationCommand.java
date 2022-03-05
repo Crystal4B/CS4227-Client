@@ -37,7 +37,7 @@ public class CancelReservationCommand extends CommandTemplate<Order>
 	{
 		if (undo)
 		{
-			return String.format("{\"query\":\"mutation{%s(input:{arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" numberOfOccupants: %d}){id arrivalDate departureDate rooms{id type name perks numberOfBeds rate}}}\"}", UNDO_MUTATION_NAME, Timestamp.valueOf(LocalDateTime.now()), orderCancelation.getStartDate(), orderCancelation.getEndDate(), orderCancelation.getNumberOfOccupants());
+			return String.format("{\"query\":\"mutation{%s(input:{arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\"}){id arrivalDate departureDate rooms{id type name perks numberOfBeds rate}}}\"}", UNDO_MUTATION_NAME, orderCancelation.getStartDate(), orderCancelation.getEndDate());
 		}
 		return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id arrivalDate departureDate rooms{id type name perks numberOfBeds rate}}}\"}", MUTATION_NAME, orderCancelation.getOrderID());
 	}

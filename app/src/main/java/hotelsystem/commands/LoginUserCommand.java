@@ -39,6 +39,11 @@ public class LoginUserCommand extends CommandTemplate<Person>
 		if (response.containsKey(QUERY_NAME))
 		{
 			Map<String, String> userData = (Map<String, String>) response.get(QUERY_NAME);
+			if (userData == null)
+			{
+				return;
+			}
+
 			String id = userData.get("id");
 			String type = userData.get("type");
 			String email = userData.get("email");

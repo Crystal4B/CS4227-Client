@@ -53,7 +53,7 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			}
 		}
 
-		return String.format("{\"query\":\"mutation{%s(input:{arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" rooms: [%s]}){id arrivalDate departureDate rooms{id type name perks numberOfBeds rate rooms{id type name}}}}\"}", MUTATION_NAME, reservationOrder.getStartDate(), reservationOrder.getEndDate(), orderRooms);
+		return String.format("{\"query\":\"mutation{%s(input:{arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" rooms: [%s]}){id arrivalDate departureDate rooms{id type name numberOfBeds}}}\"}", MUTATION_NAME, reservationOrder.getStartDate(), reservationOrder.getEndDate(), orderRooms);
 	}
 
 	@Override

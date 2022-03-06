@@ -1,30 +1,72 @@
 package hotelsystem.commands;
 
-import hotelsystem.ReservationSystem;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Map;
+
+import hotelsystem.room.Standard;
+import order.Order;
+import order.OrderBuilder;
 
 /**
  * A Select Reservation Command for selecting reservation data from the API
  * @author Marcin Sęk
+ * @apiNote Response type of Order
  */
-public class SelectReservationCommand implements Command
+public class SelectReservationCommand extends CommandTemplate<Order>
 {
+	private static final String QUERY_NAME = "reservationById";
+
 	private String id;
 
+	/**
+	 * Simple constructor for the command
+	 * @param id of the reservation being selected
+	 */
 	public SelectReservationCommand(String id)
 	{
 		this.id = id;
 	}
 
 	@Override
-	public void execute()
+	public String createMessage(boolean undo)
 	{
-		String message = String.format("{\"query\":\"query{reservationById(id: %s){id reservationDate arrivalDate departureDate numberOfOccupants}}\"}", id);
-		ReservationSystem.sendRequest(message);
+		// Undo does not apply to requests of type query
+		return String.format("{\"query\":\"query{%s(id: %s){id reservationDate arrivalDate departureDate rooms{id type name perks numberOfBeds rate}}}\"}", QUERY_NAME, id);
 	}
 
 	@Override
-	public void undo()
+	public void parseResponse(Map<String, Object> response)
 	{
-		// Undo does not apply to this command
+		if (response.containsKey(QUERY_NAME))
+		{
+			Map<String, Object> reservationData = (Map<String, Object>) response.get(QUERY_NAME);
+
+			String reservationId = (String) reservationData.get("id");
+			Timestamp arrivalDate = (Timestamp) reservationData.get("arrivalDate");
+			Timestamp departureDate = (Timestamp) reservationData.get("departureDate");
+			ArrayList<Map<String, Object>> roomsMap = (ArrayList<Map<String, Object>>) reservationData.get("rooms");
+	
+			OrderBuilder builder = new OrderBuilder();
+			builder.setOrderID(reservationId);
+			builder.setStartDate(arrivalDate);
+			builder.setEndDate(departureDate);
+	
+			for (Map<String, Object> map : roomsMap)
+			{
+				String roomId = (String) map.get("id");
+				String type = (String) map.get("type");
+				String name = (String) map.get("name");
+				int numberOfBeds = (int) map.get("numberOfBeds");
+	
+				switch(type)
+				{
+				case "Standard":
+					builder.addRoom(new Standard(name, Integer.parseInt(roomId), numberOfBeds));
+				}
+			}
+	
+			responseObject = builder.getOrder();
+		}
 	}
 }

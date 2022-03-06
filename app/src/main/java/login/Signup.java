@@ -2,7 +2,7 @@ package login;
 
 import hotelsystem.commands.RegisterUserCommand;
 import hotelsystem.commands.CommandInvoker;
-import hotelsystem.user.Person;
+import hotelsystem.user.User;
 import hotelsystem.user.Customer;
 import java.util.regex.Pattern;
 
@@ -43,7 +43,7 @@ public class Signup implements SignupInterface{
 
     }
 
-    public Person returnUser() {
+    public User returnUser() {
         return person;
     }
 }

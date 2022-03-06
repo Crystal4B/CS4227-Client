@@ -1,7 +1,7 @@
 package hotelsystem.commands;
 
+import hotelsystem.user.User;
 import hotelsystem.user.Customer;
-import hotelsystem.user.Person;
 import hotelsystem.user.Staff;
 
 import java.util.Map;
@@ -11,18 +11,18 @@ import java.util.Map;
  * @author Marcin Sęk
  * @apiNote Response type of Person
  */
-public class RegisterUserCommand extends CommandTemplate<Person>
+public class RegisterUserCommand extends CommandTemplate<User>
 {
 	private static final String MUTATION_NAME = "createUser";
 	private static final String UNDO_MUTATION_NAME = "removeUser";
 
-	private Person user;
+	private User user;
 
 	/**
 	 * Simple constructor for command
 	 * @param user being registered with the system
 	 */
-	public RegisterUserCommand(Person user)
+	public RegisterUserCommand(User user)
 	{
 		this.user = user;
 	}

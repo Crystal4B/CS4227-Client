@@ -3,12 +3,12 @@ package order;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
-import hotelsystem.room.Room;
+import hotelsystem.room.Standard;
 
 public class Order {
 
     private final String orderID;
-    private final ArrayList<Room> rooms;
+    private final ArrayList<Standard> rooms;
     private final Timestamp startDate;
     private final Timestamp endDate;
     private final long numberOfDaysBooked;
@@ -16,7 +16,7 @@ public class Order {
     private final double finalCost;
     private final int numberOfOccupants;
     
-    public Order(String orderID, ArrayList<Room> rooms, Timestamp startDate, Timestamp endDate, long numberOfDaysBooked, double rateCost, double finalCost, int numberOfOccupants){
+    public Order(String orderID, ArrayList<Standard> rooms, Timestamp startDate, Timestamp endDate, long numberOfDaysBooked, double rateCost, double finalCost, int numberOfOccupants){
         this.orderID = orderID;
         this.rooms = rooms;
         this.startDate = startDate;
@@ -31,7 +31,7 @@ public class Order {
         return orderID;
     }
  
-    public ArrayList<Room> getRooms(){
+    public ArrayList<Standard> getRooms(){
         return rooms;
     }
 
@@ -62,7 +62,7 @@ public class Order {
     @Override
     public String toString() {
         String roomsDetails = "";
-        for(Room r : this.rooms){
+        for(Standard r : this.rooms){
             roomsDetails += "\t" + r.toString() + "\n";
         }
 

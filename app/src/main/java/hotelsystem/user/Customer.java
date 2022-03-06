@@ -1,11 +1,23 @@
-//Developed by Jakub Pažej - 18260179@studentmail.ul.ie
-
+/**
+ * @author Jakub Pažej
+ * Customer class implementing the user abstract factory method.
+ */
 package hotelsystem.user;
 
-public class Customer extends Person
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.*;
+
+public class Customer extends User
 {
-    private boolean paid;
     final String type = "Customer";
+    final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
+            "CreateReservation",
+            "GetAvailableRooms",
+            "LoginUser",
+            "RegisterUser"
+    ));
+    private boolean paid;
 
     public Customer(){}
 

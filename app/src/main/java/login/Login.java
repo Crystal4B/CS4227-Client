@@ -2,15 +2,15 @@ package login;
 
 import hotelsystem.commands.LoginUserCommand;
 import hotelsystem.commands.CommandInvoker;
-import hotelsystem.user.Person;
+import hotelsystem.user.User;
 import hotelsystem.user.Customer;
 import java.util.regex.Pattern;
 
 
 public class Login implements LoginInterface {
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
-    public Person person;
     CommandInvoker invoker;
+    public User user;
 
     public boolean login(String email, String password) {
         invoker = new CommandInvoker();
@@ -29,18 +29,18 @@ public class Login implements LoginInterface {
         }
     }
 
-    public Person validatesUser(String email, String password) {
+    public User validatesUser(String email, String password) {
 
-        person = new Customer();
-        person.setEmail(email);
-        person.setPassword(password);
-        invoker.setCommand(new LoginUserCommand(person));
+        user = new Customer();
+        user.setEmail(email);
+        user.setPassword(password);
+        invoker.setCommand(new LoginUserCommand(user));
         invoker.execute();
         return null;
         
     }
 
-    public Person returnUser() {
-        return person;
+    public User returnUser() {
+        return user;
     }
 }

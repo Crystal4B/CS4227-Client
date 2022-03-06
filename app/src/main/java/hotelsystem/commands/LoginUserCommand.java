@@ -1,8 +1,8 @@
 package hotelsystem.commands;
 
 import hotelsystem.user.Customer;
-import hotelsystem.user.Person;
 import hotelsystem.user.Staff;
+import hotelsystem.user.User;
 
 import java.util.Map;
 
@@ -11,17 +11,17 @@ import java.util.Map;
  * @author Marcin Sęk
  * @apiNote Response type of Person
  */
-public class LoginUserCommand extends CommandTemplate<Person>
+public class LoginUserCommand extends CommandTemplate<User>
 {
 	private static final String QUERY_NAME = "loginUser";
 
-	private Person user;
+	private User user;
 
 	/**
 	 * Simple constructor for command
 	 * @param user attempting to login
 	 */
-	public LoginUserCommand(Person user)
+	public LoginUserCommand(User user)
 	{
 		this.user = user;
 	}

@@ -1,8 +1,6 @@
 package order;
 
-import hotelsystem.room.Deluxe;
 import hotelsystem.room.Standard;
-import hotelsystem.room.VIP;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,12 +16,10 @@ class RoomTest {
 		OrderBuilder builder = new OrderBuilder();
 
         builder.addRoom(new Standard("Test Name", 123, 2));
-        builder.addRoom(new Deluxe("Test Name", 321, 3));
-        builder.addRoom(new VIP("Test Name", 111, 4));
 
 		Order order = builder.getOrder();
         
-        assertEquals(order.getRateCost(), 1700);
+        assertEquals(order.getRateCost(), 200);
     }
 
     @Test void checkOrderFinalCost() {
@@ -31,15 +27,13 @@ class RoomTest {
         OrderBuilder builder = new OrderBuilder();
 
         builder.addRoom(new Standard("Test Name", 123, 2));
-        builder.addRoom(new Deluxe("Test Name", 321, 3));
-        builder.addRoom(new VIP("Test Name", 111, 4));
         
         builder.setStartDate(Timestamp.valueOf("2020-10-10 12:00:00"));
         builder.setEndDate(Timestamp.valueOf("2020-10-12 12:00:00"));
 
         Order order = builder.getOrder();
         
-        assertEquals(order.getFinalCost(), 3400);
+        assertEquals(order.getFinalCost(), 400);
     }
 
 }

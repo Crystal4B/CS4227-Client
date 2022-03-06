@@ -4,12 +4,12 @@ import java.sql.Timestamp;
 import java.time.Duration;
 import java.util.ArrayList;
 
-import hotelsystem.room.Room;
+import hotelsystem.room.Standard;
 
 public class OrderBuilder implements Builder{
 
     private String orderID;
-    private ArrayList<Room> rooms = new ArrayList<>();
+    private ArrayList<Standard> rooms = new ArrayList<>();
     private Timestamp startDate;
     private Timestamp endDate;
     private long numberOfDaysBooked;
@@ -23,13 +23,13 @@ public class OrderBuilder implements Builder{
     }
 
     @Override
-    public void setRooms(ArrayList<Room> rooms) {
+    public void setRooms(ArrayList<Standard> rooms) {
         this.rooms = rooms;
         update();
     }
 
     @Override
-    public void addRoom(Room room){
+    public void addRoom(Standard room){
         this.rooms.add(room);
         update();
     }
@@ -62,7 +62,7 @@ public class OrderBuilder implements Builder{
     @Override
     public void setRateCost() {
         double totalCost = 0.0;
-        for(Room r : this.rooms){
+        for(Standard r : this.rooms){
             totalCost += r.getPrice();
         }
         this.rateCost = totalCost;
@@ -76,7 +76,7 @@ public class OrderBuilder implements Builder{
     @Override
     public void setNumberOfOccupants() {
         int totalOccupants = 0;
-        for(Room r : this.rooms){
+        for(Standard r : this.rooms){
             totalOccupants += r.getOccupants().size();
         }
         this.numberOfOccupants = totalOccupants;
@@ -91,7 +91,7 @@ public class OrderBuilder implements Builder{
     @Override
     public String toString() {
         String roomsDetails = "";
-        for(Room r : this.rooms){
+        for(Standard r : this.rooms){
             roomsDetails += "\t" + r.toString() + "\n";
         }
 
@@ -106,7 +106,7 @@ public class OrderBuilder implements Builder{
                 "\n";
     }
 
-    public ArrayList<Room> getRoomsBuilder(){
+    public ArrayList<Standard> getRoomsBuilder(){
         return this.rooms;
     }
 

@@ -26,13 +26,7 @@ public class Director {
             case 1: 
                 builder.addRoom(new Standard("Test Name", 123, 2));
                 return true;
-            case 2: 
-                builder.addRoom(new Deluxe("Test Name", 123, 2));
-                return true;
-            case 3: 
-                builder.addRoom(new VIP("Test Name", 123, 2));
-                return true;
-            case 4: 
+            case 2:
                 return true;
             default:
                 return false;

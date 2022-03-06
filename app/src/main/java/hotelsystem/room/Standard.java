@@ -4,9 +4,8 @@
  */
 package hotelsystem.room;
 
-import hotelsystem.user.User;
-
 import java.util.ArrayList;
+import hotelsystem.user.User;
 
 public class Standard extends Room
 {

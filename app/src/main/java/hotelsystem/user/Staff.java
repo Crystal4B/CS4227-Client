@@ -5,22 +5,22 @@
 package hotelsystem.user;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Staff extends User
 {
     final String type = "Staff";
-    final ArrayList<String> permissions = new ArrayList<String>(){
-        {
-            permissions.add("CancelReservation");
-            permissions.add("CreateReservation");
-            permissions.add("CreateRooms");
-            permissions.add("GetAvailableRooms");
-            permissions.add("LoginUser");
-            permissions.add("MacroReservation");
-            permissions.add("RegisterUser");
-            permissions.add("ReservationInvoker");
-            permissions.add("SelectReservation");
-        }};
+    final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
+            "CancelReservation",
+            "CreateReservation",
+            "CreateRooms",
+            "GetAvailableRooms",
+            "LoginUser",
+            "MacroReservation",
+            "RegisterUser",
+            "ReservationInvoker",
+            "SelectReservation"
+    ));
     private double salary;
     private int holidayDaysAvailable;
 
@@ -39,8 +39,8 @@ public class Staff extends User
         this.userName = userName;
     }
 
-    @Override public
-    String getUserName()
+    @Override
+    public String getUserName()
     {
         return userName;
     }

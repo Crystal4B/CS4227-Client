@@ -5,18 +5,18 @@
 package hotelsystem.user;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.*;
 
 public class Customer extends User
 {
     final String type = "Customer";
-    final ArrayList<String> permissions = new ArrayList<String>(){
-        {
-            permissions.add("CancelReservation");
-            permissions.add("CreateReservation");
-            permissions.add("GetAvailableRooms");
-            permissions.add("LoginUser");
-            permissions.add("RegisterUser");
-        }};
+    final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
+            "CreateReservation",
+            "GetAvailableRooms",
+            "LoginUser",
+            "RegisterUser"
+    ));
     private boolean paid;
 
     public Customer(){}

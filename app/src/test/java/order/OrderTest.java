@@ -19,7 +19,7 @@ class RoomTest {
 
 		Order order = builder.getOrder();
         
-        assertEquals(order.getRateCost(), 1700);
+        assertEquals(order.getRateCost(), 200);
     }
 
     @Test void checkOrderFinalCost() {
@@ -33,7 +33,7 @@ class RoomTest {
 
         Order order = builder.getOrder();
         
-        assertEquals(order.getFinalCost(), 3400);
+        assertEquals(order.getFinalCost(), 400);
     }
 
 }

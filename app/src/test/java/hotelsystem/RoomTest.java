@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RoomTest {
 
-    // Standand Room Unit Tests
+    // Standard Room Unit Tests
 
     @Test void checkStandardRoomName() {
         Standard room = new Standard("Test Name", 123, 2);

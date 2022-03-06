@@ -1,11 +1,13 @@
-//Developed by Jakub Pažej - 18260179@studentmail.ul.ie
-
+/**
+ * @author Jakub Pažej
+ * Abstract factory method for users of the hotel system.
+ */
 package hotelsystem.user;
 
 public abstract class User
 {
-    protected String userName, password, email;                              // username as String
-    protected int id;
+    protected String userName, password, email;                              // Username as String
+    protected int id;                                                        // ID for better database implementation and security reasons
 
     public abstract void setUserName(String userName);
     public abstract String getUserName();

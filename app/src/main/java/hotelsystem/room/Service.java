@@ -1,6 +1,6 @@
 /**
  * @author Jakub Pažej
- * Standard implementation of room
+ * Implementation of room for service and staff rooms like kitchens,storage rooms etc.
  */
 package hotelsystem.room;
 
@@ -8,21 +8,15 @@ import hotelsystem.user.User;
 
 import java.util.ArrayList;
 
-public class Standard extends Room
+public class Service extends Room
 {
-    private String perks = "WiFi, TV, Toilet, Shower";
-    private boolean taken = false;
-    private int numberBeds;
-    private double price;
+    private ArrayList<String> items = new ArrayList<String>();
     private ArrayList<User> occupants = new ArrayList<User>();
 
-    public Standard(String roomName, int roomNumber, int numberBeds)
+    public Service(String roomName, int roomNumber)
     {
         setRoomName(roomName);
-        setPerks(perks);
         setRoomNumber(roomNumber);
-        setNumberBeds(numberBeds);
-        setPrice(200.00);
     }
 
     @Override
@@ -47,14 +41,6 @@ public class Standard extends Room
     public int getRoomNumber()
     {
         return roomNumber;
-    }
-
-    public void setTaken(boolean taken) {
-        this.taken = taken;
-    }
-
-    public boolean getTaken() {
-        return taken;
     }
 
     @Override
@@ -106,36 +92,46 @@ public class Standard extends Room
 
     @Override
     public String toString() {
-        return "Room Name: "+roomName+" ; Room Number: "+roomNumber+" ; Beds: "+numberBeds+" ; Price: "+price+" ; Taken?: "+taken;
+        return "Room Name: "+roomName+" ; Room Number: "+roomNumber;
     }
 
-    public void setPerks(String perks)
-    {
-        this.perks = perks;
+    public void addItem(String item) {
+        items.add(item);
     }
 
-    public String getPerks()
-    {
-        return perks;
+    public void addItems(String[] items) {
+        for (String item : items)
+        {
+            this.items.add(item);
+        }
     }
 
-    public void setNumberBeds(int numberBeds)
-    {
-        this.numberBeds = numberBeds;
+    public void setOccupants(ArrayList<String> items) {
+        for (String item : items)
+        {
+            this.items.add(item);
+        }
     }
 
-    public int getNumberBeds()
-    {
-        return numberBeds;
+    public void removeItem(String item) {
+        items.remove(item);
     }
 
-    public void setPrice(double price)
-    {
-        this.price=price;
+    public void removeItems(String[] items) {
+        for (String item : items)
+        {
+            this.items.remove(item);
+        }
     }
 
-    public double getPrice()
-    {
-        return price;
+    public void removeItems(ArrayList<String> items) {
+        for (String item : items)
+        {
+            this.items.remove(item);
+        }
+    }
+
+    public ArrayList<String> getItems() {
+        return items;
     }
 }

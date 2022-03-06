@@ -1,5 +1,7 @@
-//Developed by Jakub Pažej - 18260179@studentmail.ul.ie
-
+/**
+ * @author Jakub Pažej
+ * Customer class implementing the user abstract factory method.
+ */
 package hotelsystem.user;
 
 import java.util.ArrayList;

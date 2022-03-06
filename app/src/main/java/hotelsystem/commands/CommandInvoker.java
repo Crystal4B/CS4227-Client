@@ -49,7 +49,6 @@ public class CommandInvoker
 	 */
 	public <T> T getResponse()
 	{
-		System.out.println(command.getClass().getSimpleName());
 		return (T) command.getResponse();
 	}
 }

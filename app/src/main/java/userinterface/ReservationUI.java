@@ -29,7 +29,7 @@ public class ReservationUI {
                 while(!setDetails(console)){}
                 return UI.RESERVATION_STATE;
             case 3: 
-                System.out.println("Remove Room");
+                while(!removeRoomFromCart(console)){}
                 return UI.RESERVATION_STATE;
             case 4: 
                 while(!viewOrder(console)){}
@@ -69,6 +69,21 @@ public class ReservationUI {
         String checkOutDate = console.readLine();
         System.out.println("\n####################################################\n");
         if(director.setDatesUsingUI(builder, checkInDate, checkOutDate)){
+            return true;
+        }
+        return false;
+    }
+
+    public static Boolean removeRoomFromCart(Console console){
+        System.out.println("\n####################################################");
+        System.out.println("#     Welcome to the Hotel Reservation System      #");
+        System.out.println("####################################################\n");
+        System.out.println("Please select a room to remove:\n");
+        System.out.println(director.viewRoomsInCart(builder));
+        System.out.println("\n####################################################\n");
+        System.out.println("Enter option here:");
+        int option = Integer.parseInt(console.readLine());
+        if(director.removeRoomUsingUI(builder, option)){
             return true;
         }
         return false;

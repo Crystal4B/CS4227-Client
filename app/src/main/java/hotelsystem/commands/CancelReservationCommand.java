@@ -1,13 +1,10 @@
 package hotelsystem.commands;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
 
-import hotelsystem.room.Deluxe;
 import hotelsystem.room.Standard;
-import hotelsystem.room.VIP;
 import order.Order;
 import order.OrderBuilder;
 
@@ -83,11 +80,6 @@ public class CancelReservationCommand extends CommandTemplate<Order>
 			case "Standard":
 				builder.addRoom(new Standard(name, Integer.parseInt(roomId), numberOfBeds));
 				break;
-			case "Deluxe":
-				builder.addRoom(new Deluxe(name, Integer.parseInt(roomId), numberOfBeds));
-				break;
-			case "VIP":
-				builder.addRoom(new VIP(name, Integer.parseInt(roomId), numberOfBeds));
 			}
 		}
 

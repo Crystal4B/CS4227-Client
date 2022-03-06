@@ -4,10 +4,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
-import hotelsystem.room.Deluxe;
 import hotelsystem.room.Room;
 import hotelsystem.room.Standard;
-import hotelsystem.room.VIP;
 
 /**
  * Command for getting all available room for specified dates
@@ -56,12 +54,6 @@ public class GetAvailableRoomsCommand extends CommandTemplate<ArrayList<Room>>
 				{
 				case "Standard":
 					responseObject.add(new Standard(name, Integer.parseInt(id), numberOfBeds));
-					break;
-				case "Deluxe":
-					responseObject.add(new Deluxe(name, Integer.parseInt(id), numberOfBeds));
-					break;
-				case "VIP":
-					responseObject.add(new VIP(name, Integer.parseInt(id), numberOfBeds));
 				}
 			}
 		}

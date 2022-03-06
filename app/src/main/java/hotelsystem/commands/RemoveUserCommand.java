@@ -2,18 +2,18 @@ package hotelsystem.commands;
 
 import java.util.Map;
 
+import hotelsystem.user.User;
 import hotelsystem.user.Customer;
-import hotelsystem.user.Person;
 import hotelsystem.user.Staff;
 
-public class RemoveUserCommand extends CommandTemplate<Person>
+public class RemoveUserCommand extends CommandTemplate<User>
 {
 	private static final String MUTATION_NAME = "removeUser";
 	private static final String UNDO_MUTATION_NAME = "createUser";
 
-	private Person user;
+	private User user;
 
-	public RemoveUserCommand(Person user)
+	public RemoveUserCommand(User user)
 	{
 		this.user = user;
 	}

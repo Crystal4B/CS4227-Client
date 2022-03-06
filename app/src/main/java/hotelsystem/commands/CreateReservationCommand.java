@@ -4,10 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
-import hotelsystem.room.Deluxe;
-import hotelsystem.room.Room;
 import hotelsystem.room.Standard;
-import hotelsystem.room.VIP;
 import order.Order;
 import order.OrderBuilder;
 
@@ -41,11 +38,11 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 		}
 
 
-		ArrayList<Room> rooms = reservationOrder.getRooms();
+		ArrayList<Standard> rooms = reservationOrder.getRooms();
 		String orderRooms = "";
 		for (int i = 0; i < rooms.size(); i++)
 		{
-			Room room = rooms.get(i);
+			Standard room = rooms.get(i);
 			orderRooms += String.format("{id: \\\"%d\\\"}", room.getRoomNumber());
 			if (i < rooms.size() - 1)
 			{
@@ -96,12 +93,6 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			{
 			case "Standard":
 				builder.addRoom(new Standard(name, Integer.parseInt(roomId), numberOfBeds));
-				break;
-			case "Deluxe":
-				builder.addRoom(new Deluxe(name, Integer.parseInt(roomId), numberOfBeds));
-				break;
-			case "VIP":
-				builder.addRoom(new VIP(name, Integer.parseInt(roomId), numberOfBeds));
 			}
 		}
 

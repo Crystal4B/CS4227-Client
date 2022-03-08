@@ -7,9 +7,12 @@ package hotelsystem;
 import hotelsystem.room.Standard;
 import hotelsystem.user.Customer;
 import hotelsystem.user.Staff;
+import hotelsystem.user.User;
 import hotelsystem.room.Service;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
 
 class RoomTest {
 
@@ -43,13 +46,25 @@ class RoomTest {
         assertEquals(room.getOccupants().get(0).getUserName(), "John Doe");
     }
 
-    @Test void checkStandardAddOccupants(){
+    @Test void checkStandardAddOccupantsArray(){
         Customer[] occupants = {
             new Customer(),
             new Customer(),
             new Customer(),
             new Customer()
         };
+
+        Standard room = new Standard("Test Name", 123, 2);
+        room.addOccupants(occupants);
+        assertEquals(room.getOccupants().size(), 4);
+    }
+
+    @Test void checkStandardAddOccupantsArrayList(){
+        ArrayList<User> occupants = new ArrayList<>();
+        occupants.add(new Customer());
+        occupants.add(new Customer());
+        occupants.add(new Customer());
+        occupants.add(new Customer());
 
         Standard room = new Standard("Test Name", 123, 2);
         room.addOccupants(occupants);
@@ -107,7 +122,7 @@ class RoomTest {
         assertEquals(room.getOccupants().get(0).getUserName(), "John Doe");
     }
 
-    @Test void checkServiceAddOccupants(){
+    @Test void checkServiceAddOccupantsArray(){
         Staff[] occupants = {
             new Staff(),
             new Staff(),
@@ -116,6 +131,18 @@ class RoomTest {
         };
 
         Service room = new Service("Test Name", 123);
+        room.addOccupants(occupants);
+        assertEquals(room.getOccupants().size(), 4);
+    }
+
+    @Test void checkServiceAddOccupantsArrayList(){
+        ArrayList<User> occupants = new ArrayList<>();
+        occupants.add(new Staff());
+        occupants.add(new Staff());
+        occupants.add(new Staff());
+        occupants.add(new Staff());
+
+        Standard room = new Standard("Test Name", 123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 4);
     }

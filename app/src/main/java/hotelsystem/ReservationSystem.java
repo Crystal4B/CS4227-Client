@@ -14,19 +14,24 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Reservation System handling HttpClient requests
+ * Reservation System handling HttpClient requests and responses
  * @author Marcin Sęk
  */
 public class ReservationSystem
 {
 	private static HttpClient client = HttpClient.newHttpClient();
 
+	/**
+	 * Function for sending and receiving requests from the GraphQL server
+	 * @param message the message being sent to the server
+	 * @return the data recieved in the response from the server, null if error occured
+	 */
 	public static Map<String, Object> sendRequest(String message)
 	{
 		try
 		{
 			HttpRequest request = HttpRequest.newBuilder()
-				.uri(new URI("http://crys4b.dev:8080/graphql"))
+				.uri(new URI(Config.getProperty(Config.SERVER_IP)))
 				.header("Content-Type", "application/json")
 				.POST(BodyPublishers.ofString(message))
 				.build();

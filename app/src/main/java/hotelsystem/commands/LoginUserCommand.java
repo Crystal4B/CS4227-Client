@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Command for logging into the system
  * @author Marcin Sęk
- * @apiNote Response type of Person
+ * @apiNote Response type of User
  */
 public class LoginUserCommand extends CommandTemplate<User>
 {

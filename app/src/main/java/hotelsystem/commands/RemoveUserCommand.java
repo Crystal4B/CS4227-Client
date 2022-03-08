@@ -6,6 +6,11 @@ import hotelsystem.user.User;
 import hotelsystem.user.Customer;
 import hotelsystem.user.Staff;
 
+/**
+ * Command for removing a user from the system
+ * @author Marcin Sęk
+ * @apiNote Response type of User
+ */
 public class RemoveUserCommand extends CommandTemplate<User>
 {
 	private static final String MUTATION_NAME = "removeUser";
@@ -13,6 +18,10 @@ public class RemoveUserCommand extends CommandTemplate<User>
 
 	private User user;
 
+	/**
+	 * Simple constructor for command
+	 * @param user being removed from the system
+	 */
 	public RemoveUserCommand(User user)
 	{
 		this.user = user;

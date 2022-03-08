@@ -5,6 +5,11 @@ import java.util.Map;
 
 import hotelsystem.room.Standard;
 
+/**
+ * Command for removing rooms from the system
+ * @author Marcin Sęk
+ * @apiNote Response type of ArrayList[Standard]
+ */
 public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 {
 	private static final String MUTATION_NAME = "removeRooms";
@@ -14,7 +19,7 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 
 	/**
 	 * Simple constructor for command
-	 * @param rooms ArrayList of rooms being added to the system
+	 * @param rooms ArrayList of rooms being removed from the system
 	 */
 	public RemoveRoomsCommand(ArrayList<Standard> rooms)
 	{
@@ -36,11 +41,11 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 			Standard room = rooms.get(i);
 			if (undo)
 			{
-                message += String.format("{type: \\\"%s\\\" name: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d occupants: []}", room.getClass().getSimpleName(), room.getRoomName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
+				message += String.format("{type: \\\"%s\\\" name: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d occupants: []}", room.getClass().getSimpleName(), room.getRoomName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
 			}
 			else
 			{
-                message += String.format("{id: \\\"%s\\\"}", room.getRoomNumber());
+				message += String.format("{id: \\\"%s\\\"}", room.getRoomNumber());
 			}
 
 			if (i < rooms.size() - 1)

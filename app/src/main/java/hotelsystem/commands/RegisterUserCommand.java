@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Command for adding a new user into the system
  * @author Marcin Sęk
- * @apiNote Response type of Person
+ * @apiNote Response type of User
  */
 public class RegisterUserCommand extends CommandTemplate<User>
 {

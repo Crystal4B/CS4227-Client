@@ -2,7 +2,6 @@ package order;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
-import hotelsystem.room.Room;
 import hotelsystem.room.Standard;
 
 public interface Builder {

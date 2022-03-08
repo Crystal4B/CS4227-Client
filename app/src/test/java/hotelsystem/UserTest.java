@@ -1,3 +1,7 @@
+/**
+ * @author Jordan Marshall
+ */
+
 package hotelsystem;
 
 import hotelsystem.user.Customer;
@@ -33,6 +37,17 @@ class UserTest {
         assertEquals(person.getPaid(), true);
     }
 
+    @Test void checkCustomerType() {
+        Customer person = new Customer();
+        assertEquals(person.getUserType(), "Customer");
+    }
+
+    @Test void checkCustomerID() {
+        Customer person = new Customer();
+        person.setId(123);
+        assertEquals(person.getId(), 123);
+    }
+
     // Staff Unit Tests
 
     @Test void checkStaffEmail() {
@@ -51,5 +66,16 @@ class UserTest {
         Staff person = new Staff();
         person.setUserName("John Doe");
         assertEquals(person.getUserName(), "John Doe");
+    }
+
+    @Test void checkStaffType() {
+        Staff person = new Staff();
+        assertEquals(person.getUserType(), "Staff");
+    }
+
+    @Test void checkStaffID() {
+        Staff person = new Staff();
+        person.setId(123);
+        assertEquals(person.getId(), 123);
     }
 }

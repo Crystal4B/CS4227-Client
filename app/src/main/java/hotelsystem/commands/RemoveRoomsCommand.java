@@ -5,6 +5,11 @@ import java.util.Map;
 
 import hotelsystem.room.Standard;
 
+/**
+ * Command for removing rooms from the system
+ * @author Marcin Sęk
+ * @apiNote Response type of ArrayList[Standard]
+ */
 public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 {
 	private static final String MUTATION_NAME = "removeRooms";
@@ -14,7 +19,7 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 
 	/**
 	 * Simple constructor for command
-	 * @param rooms ArrayList of rooms being added to the system
+	 * @param rooms ArrayList of rooms being removed from the system
 	 */
 	public RemoveRoomsCommand(ArrayList<Standard> rooms)
 	{

@@ -1,3 +1,7 @@
+/**
+ * @author Jordan Marshall
+ */
+
 package order;
 
 import hotelsystem.room.Standard;
@@ -5,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Timestamp;
-
 
 class RoomTest {
 
@@ -34,6 +37,26 @@ class RoomTest {
         Order order = builder.getOrder();
         
         assertEquals(order.getFinalCost(), 400);
+    }
+
+    @Test void checkOrderStartDate(){
+        OrderBuilder builder = new OrderBuilder();
+        
+        builder.setStartDate(Timestamp.valueOf("2020-10-10 12:00:00"));
+
+        Order order = builder.getOrder();
+        
+        assertEquals(order.getStartDate(), Timestamp.valueOf("2020-10-10 12:00:00"));
+    }
+
+    @Test void checkOrderEndDate(){
+        OrderBuilder builder = new OrderBuilder();
+        
+        builder.setEndDate(Timestamp.valueOf("2020-10-12 12:00:00"));
+
+        Order order = builder.getOrder();
+        
+        assertEquals(order.getEndDate(), Timestamp.valueOf("2020-10-12 12:00:00"));
     }
 
 }

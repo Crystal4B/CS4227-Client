@@ -1,28 +1,65 @@
 package hotelsystem.commands;
 
-import hotelsystem.user.Person;
-import hotelsystem.ReservationSystem;
+import hotelsystem.user.Customer;
+import hotelsystem.user.Staff;
+import hotelsystem.user.User;
 
-public class LoginUserCommand implements Command
+import java.util.Map;
+
+/**
+ * Command for logging into the system
+ * @author Marcin Sęk
+ * @apiNote Response type of User
+ */
+public class LoginUserCommand extends CommandTemplate<User>
 {
-	private Person user;
+	private static final String QUERY_NAME = "loginUser";
 
-	public LoginUserCommand(Person user)
+	private User user;
+
+	/**
+	 * Simple constructor for command
+	 * @param user attempting to login
+	 */
+	public LoginUserCommand(User user)
 	{
 		this.user = user;
 	}
 
 	@Override
-	public void execute()
+	public String createMessage(boolean undo)
 	{
-		String message = String.format("{\"query\":\"query{loginUser(input:{email: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", user.getEmail(), user.getPassword());
-		ReservationSystem.sendRequest(message);
+		// Undo does not apply to requests of type query
+		return String.format("{\"query\":\"query{%s(input:{email: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", QUERY_NAME, user.getEmail(), user.getPassword());
 	}
 
 	@Override
-	public void undo()
+	public void parseResponse(Map<String, Object> response)
 	{
-		// Signout
+		if (response.containsKey(QUERY_NAME))
+		{
+			Map<String, String> userData = (Map<String, String>) response.get(QUERY_NAME);
+			if (userData == null)
+			{
+				return;
+			}
+
+			String id = userData.get("id");
+			String type = userData.get("type");
+			String email = userData.get("email");
+			String username = userData.get("username");
+			String password = userData.get("password");
+	
+			switch(type)
+			{
+			case "Customer":
+				responseObject = new Customer(username, password, email);
+				break;
+			case "Staff":
+				responseObject = new Staff(username, password, email);
+			}
+			responseObject.setId(Integer.parseInt(id));
+		}
 	}
 	
 }

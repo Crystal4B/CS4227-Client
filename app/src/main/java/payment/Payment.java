@@ -1,11 +1,11 @@
 package payment;
 
-import hotelsystem.room.Room;
+import hotelsystem.room.Standard;
 import order.Order;
 import java.util.ArrayList;
 
 public class Payment {
-    private final ArrayList<Room> rooms;
+    private final ArrayList<Standard> rooms;
     private final double finalCost;
    
     public Payment(Order order) {

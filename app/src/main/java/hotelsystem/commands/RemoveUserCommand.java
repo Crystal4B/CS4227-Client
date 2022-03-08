@@ -1,28 +1,28 @@
 package hotelsystem.commands;
 
+import java.util.Map;
+
 import hotelsystem.user.User;
 import hotelsystem.user.Customer;
 import hotelsystem.user.Staff;
 
-import java.util.Map;
-
 /**
- * Command for adding a new user into the system
+ * Command for removing a user from the system
  * @author Marcin Sęk
  * @apiNote Response type of User
  */
-public class RegisterUserCommand extends CommandTemplate<User>
+public class RemoveUserCommand extends CommandTemplate<User>
 {
-	private static final String MUTATION_NAME = "createUser";
-	private static final String UNDO_MUTATION_NAME = "removeUser";
+	private static final String MUTATION_NAME = "removeUser";
+	private static final String UNDO_MUTATION_NAME = "createUser";
 
 	private User user;
 
 	/**
 	 * Simple constructor for command
-	 * @param user being registered with the system
+	 * @param user being removed from the system
 	 */
-	public RegisterUserCommand(User user)
+	public RemoveUserCommand(User user)
 	{
 		this.user = user;
 	}
@@ -32,9 +32,9 @@ public class RegisterUserCommand extends CommandTemplate<User>
 	{
 		if (undo)
 		{
-			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type email username password}}\"}", UNDO_MUTATION_NAME, user.getId());
+			return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", UNDO_MUTATION_NAME, user.getClass().getSimpleName(), user.getEmail(), user.getUserName(), user.getPassword());
 		}
-		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", MUTATION_NAME, user.getClass().getSimpleName(), user.getEmail(), user.getUserName(), user.getPassword());
+		return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type email username password}}\"}", MUTATION_NAME, user.getId());
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package login;
 
-import hotelsystem.user.Person;
+import hotelsystem.user.User;
 import hotelsystem.user.Customer;
 
 
@@ -22,11 +22,11 @@ public class LoginAdapter implements LoginInterface{
         signup.setName(username);
     }
 
-    public Person validatesUser(String email, String password){
+    public User validatesUser(String email, String password){
         return signup.createsUser(email, username, password);
     }
 
-    public Person returnUser() {
+    public User returnUser() {
         return signup.returnUser();
     }
 }

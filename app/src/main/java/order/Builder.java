@@ -3,11 +3,12 @@ package order;
 import java.util.ArrayList;
 import java.sql.Timestamp;
 import hotelsystem.room.Room;
+import hotelsystem.room.Standard;
 
 public interface Builder {
     void setOrderID(String orderID);
-    void setRooms(ArrayList<Room> rooms);
-    void addRoom(Room room);
+    void setRooms(ArrayList<Standard> rooms);
+    void addRoom(Standard room);
     void removeRoom(int room);
     void setStartDate(Timestamp startDate);
     void setEndDate(Timestamp endDate);

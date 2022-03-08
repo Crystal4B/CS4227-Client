@@ -2,7 +2,7 @@ package userinterface;
 
 import java.io.Console;
 
-import hotelsystem.user.Person;
+import hotelsystem.user.User;
 import login.Login;
 import login.LoginAdapter;
 import login.Signup;
@@ -54,7 +54,7 @@ public class LoginUI {
         LoginAdapter signup = new LoginAdapter(new Signup());
         signup.setName(username);
         signup.login(email, password);
-        Person user = signup.returnUser();
+        User user = signup.returnUser();
         System.out.println("New User Created: Email: " + user.getEmail() + " , Username: " + user.getUserName()  + " , Password: " + user.getPassword());
     }
 }

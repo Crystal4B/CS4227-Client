@@ -1,11 +1,11 @@
 package login;
 
-import hotelsystem.user.Person;
+import hotelsystem.user.User;
 
 public interface SignupInterface {
     public boolean signup(String email, String password);
     public void setName(String username);
     public void isValidEmail(String email);
-    public Person createsUser(String email,String username, String password);
-    public Person returnUser();    
+    public User createsUser(String email, String username, String password);
+    public User returnUser();
 }

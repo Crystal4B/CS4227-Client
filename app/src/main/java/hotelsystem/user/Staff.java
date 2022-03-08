@@ -1,11 +1,28 @@
-//Developed by Jakub Pažej - 18260179@studentmail.ul.ie
-
+/**
+ * @author Jakub Pažej
+ * Staff class implementing the user abstract factory method.
+ */
 package hotelsystem.user;
 
-public class Staff extends Person
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Staff extends User
 {
-    private double salary;
     final String type = "Staff";
+    final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
+            "CancelReservation",
+            "CreateReservation",
+            "CreateRooms",
+            "GetAvailableRooms",
+            "LoginUser",
+            "MacroReservation",
+            "RegisterUser",
+            "ReservationInvoker",
+            "SelectReservation"
+    ));
+    private double salary;
+    private int holidayDaysAvailable;
 
     public Staff(){}
 
@@ -22,8 +39,8 @@ public class Staff extends Person
         this.userName = userName;
     }
 
-    @Override public
-    String getUserName()
+    @Override
+    public String getUserName()
     {
         return userName;
     }
@@ -73,5 +90,20 @@ public class Staff extends Person
     public double getSalary()
     {
         return salary;
+    }
+
+    public void setHolidays(int days)
+    {
+        this.holidayDaysAvailable=days;
+    }
+
+    public void addHolidays(int days)
+    {
+        this.holidayDaysAvailable+=days;
+    }
+
+    public int getHolidays()
+    {
+        return holidayDaysAvailable;
     }
 }

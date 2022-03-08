@@ -26,7 +26,7 @@ public class ReservationSystem
 		try
 		{
 			HttpRequest request = HttpRequest.newBuilder()
-				.uri(new URI("http://crys4b.dev:8080/graphql"))
+				.uri(new URI(Config.getProperty(Config.SERVER_IP)))
 				.header("Content-Type", "application/json")
 				.POST(BodyPublishers.ofString(message))
 				.build();

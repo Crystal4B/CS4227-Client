@@ -33,7 +33,7 @@ public class CommandExecuteTest
 
 	@Test
 	@Order(1)
-	public void checkRegisterCommandExecution()
+	public void checkRegisterCommand()
 	{
 		// Send new customer request
 		invoker.setCommand(new RegisterUserCommand(customer));

@@ -77,6 +77,37 @@ public class Customer extends User
         return id;
     }
 
+    @Override
+    public void setFirstName(String name) {
+        this.firstName=name;
+    }
+
+    @Override
+    public String getFirstName() {
+        return firstName;
+    }
+
+    @Override
+    public void setLastName(String name) {
+        this.lastName=name;
+    }
+
+    @Override
+    public String getLastNameName() {
+        return lastName;
+    }
+
+    @Override
+    public void setLegalName(String firstName, String lastName) {
+        this.firstName=firstName;
+        this.lastName=lastName;
+    }
+
+    @Override
+    public String getLegalName() {
+        return firstName+" "+lastName;
+    }
+
     public void setPaid(boolean bool)
     {
         this.paid=bool;

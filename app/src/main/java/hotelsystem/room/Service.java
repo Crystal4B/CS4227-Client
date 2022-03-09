@@ -10,7 +10,7 @@ import hotelsystem.user.User;
 public class Service extends Room
 {
     private ArrayList<String> items = new ArrayList<String>();
-    private ArrayList<User> occupants = new ArrayList<User>();
+    private ArrayList<String> occupants = new ArrayList<String>();
 
     public Service(String roomName, int roomNumber)
     {
@@ -43,49 +43,49 @@ public class Service extends Room
     }
 
     @Override
-    public void addOccupant(User user) {
-        occupants.add(user);
+    public void addOccupant(String occupant) {
+        occupants.add(occupant);
     }
 
     @Override
-    public void addOccupants(User[] people) {
-        for (User user : people)
+    public void addOccupants(String[] people) {
+        for (String user : people)
         {
             occupants.add(user);
         }
     }
 
     @Override
-    public void addOccupants(ArrayList<User> people) {
-        for (User user : people)
+    public void addOccupants(ArrayList<String> people) {
+        for (String user : people)
         {
             occupants.add(user);
         }
     }
 
     @Override
-    public void removeOccupant(User user) {
+    public void removeOccupant(String user) {
         occupants.remove(user);
     }
 
     @Override
-    public void removeOccupants(User[] people) {
-        for (User user : people)
+    public void removeOccupants(String[] people) {
+        for (String user : people)
         {
             occupants.remove(user);
         }
     }
 
     @Override
-    public void removeOccupants(ArrayList<User> people) {
-        for (User user : people)
+    public void removeOccupants(ArrayList<String> people) {
+        for (String user : people)
         {
             occupants.remove(user);
         }
     }
 
     @Override
-    public ArrayList<User> getOccupants() {
+    public ArrayList<String> getOccupants() {
         return occupants;
     }
 
@@ -105,7 +105,7 @@ public class Service extends Room
         }
     }
 
-    public void setOccupants(ArrayList<String> items) {
+    public void addItems(ArrayList<String> items) {
         for (String item : items)
         {
             this.items.add(item);

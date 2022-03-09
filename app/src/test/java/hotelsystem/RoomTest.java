@@ -37,21 +37,22 @@ class RoomTest {
         Customer user = new Customer();
         user.setEmail("test@test.com");
         user.setPassword("#Password123");
-        user.setUserName("John Doe");
+        user.setUserName("Johndoe2525");
+        user.setLegalName("John", "Doe");
         user.setPaid(true);
 
         Standard room = new Standard("Test Name", 123, 2);
-        room.addOccupant(user);
+        room.addOccupant(user.getLegalName());
         assertEquals(room.getOccupants().size(), 1);
-        assertEquals(room.getOccupants().get(0).getUserName(), "John Doe");
+        assertEquals(room.getOccupants().get(0), "John Doe");
     }
 
     @Test void checkStandardAddOccupantsArray(){
-        Customer[] occupants = {
-            new Customer(),
-            new Customer(),
-            new Customer(),
-            new Customer()
+        String[] occupants = {
+            "John Doe",
+            "John 2",
+            "John 3",
+            "John 4"
         };
 
         Standard room = new Standard("Test Name", 123, 2);
@@ -60,11 +61,11 @@ class RoomTest {
     }
 
     @Test void checkStandardAddOccupantsArrayList(){
-        ArrayList<User> occupants = new ArrayList<>();
-        occupants.add(new Customer());
-        occupants.add(new Customer());
-        occupants.add(new Customer());
-        occupants.add(new Customer());
+        ArrayList<String> occupants = new ArrayList<>();
+        occupants.add("John Doe");
+        occupants.add("John 2");
+        occupants.add("John 3");
+        occupants.add("John 4");
 
         Standard room = new Standard("Test Name", 123, 2);
         room.addOccupants(occupants);
@@ -79,17 +80,17 @@ class RoomTest {
         user.setPaid(true);
 
         Standard room = new Standard("Test Name", 123, 2);
-        room.addOccupant(user);
-        room.removeOccupant(user);
+        room.addOccupant(user.getLegalName());
+        room.removeOccupant(user.getLegalName());
         assertEquals(room.getOccupants().size(), 0);
     }
 
     @Test void checkStandardRemoveOccupants(){
-        Customer[] occupants = {
-            new Customer(),
-            new Customer(),
-            new Customer(),
-            new Customer()
+        String[] occupants = {
+                "John Doe",
+                "John 2",
+                "John 3",
+                "John 4"
         };
 
         Standard room = new Standard("Test Name", 123, 2);
@@ -114,20 +115,21 @@ class RoomTest {
         Staff user = new Staff();
         user.setEmail("test@test.com");
         user.setPassword("#Password123");
-        user.setUserName("John Doe");
+        user.setUserName("Johndoe2525");
+        user.setLegalName("John","Doe");
 
         Service room = new Service("Test Name", 123);
-        room.addOccupant(user);
+        room.addOccupant(user.getLegalName());
         assertEquals(room.getOccupants().size(), 1);
-        assertEquals(room.getOccupants().get(0).getUserName(), "John Doe");
+        assertEquals(room.getOccupants().get(0), "John Doe");
     }
 
     @Test void checkServiceAddOccupantsArray(){
-        Staff[] occupants = {
-            new Staff(),
-            new Staff(),
-            new Staff(),
-            new Staff()
+        String[] occupants = {
+                "John Doe",
+                "John 2",
+                "John 3",
+                "John 4"
         };
 
         Service room = new Service("Test Name", 123);
@@ -136,11 +138,11 @@ class RoomTest {
     }
 
     @Test void checkServiceAddOccupantsArrayList(){
-        ArrayList<User> occupants = new ArrayList<>();
-        occupants.add(new Staff());
-        occupants.add(new Staff());
-        occupants.add(new Staff());
-        occupants.add(new Staff());
+        ArrayList<String> occupants = new ArrayList<>();
+        occupants.add("John Doe");
+        occupants.add("John 2");
+        occupants.add("John 3");
+        occupants.add("John 4");
 
         Standard room = new Standard("Test Name", 123, 2);
         room.addOccupants(occupants);
@@ -154,17 +156,17 @@ class RoomTest {
         user.setUserName("John Doe");
 
         Service room = new Service("Test Name", 123);
-        room.addOccupant(user);
-        room.removeOccupant(user);
+        room.addOccupant(user.getLegalName());
+        room.removeOccupant(user.getLegalName());
         assertEquals(room.getOccupants().size(), 0);
     }
 
     @Test void checkServiceRemoveOccupants(){
-        Staff[] occupants = {
-            new Staff(),
-            new Staff(),
-            new Staff(),
-            new Staff()
+        String[] occupants = {
+                "John Doe",
+                "John 2",
+                "John 3",
+                "John 4"
         };
 
         Service room = new Service("Test Name", 123);

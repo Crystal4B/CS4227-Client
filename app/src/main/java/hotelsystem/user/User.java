@@ -6,7 +6,7 @@ package hotelsystem.user;
 
 public abstract class User
 {
-    protected String userName, password, email;                              // Username as String
+    protected String userName, password, email, firstName, lastName;
     protected int id;                                                        // ID for better database implementation and security reasons
 
     public abstract void setUserName(String userName);
@@ -18,4 +18,10 @@ public abstract class User
     public abstract String getUserType();
     public abstract void setId(int id);
     public abstract int getId();
+    public abstract void setFirstName(String name);
+    public abstract String getFirstName();
+    public abstract void setLastName(String name);
+    public abstract String getLastNameName();
+    public abstract void setLegalName(String firstName, String lastName);
+    public abstract String getLegalName();
 }

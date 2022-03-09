@@ -116,7 +116,7 @@ public class CommandExecuteTest
 	{
 		// Create room for order
 		Standard room = rooms.get(0);
-		room.addOccupant(customer);
+		room.addOccupant(customer.getLegalName());
 
 		// Create order
 		OrderBuilder builder = new OrderBuilder();

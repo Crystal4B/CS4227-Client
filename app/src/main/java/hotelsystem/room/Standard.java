@@ -13,7 +13,7 @@ public class Standard extends Room
     private boolean taken = false;
     private int numberBeds;
     private double price;
-    private ArrayList<User> occupants = new ArrayList<User>();
+    private ArrayList<String> occupants = new ArrayList<String>();
 
     public Standard(String roomName, int roomNumber, int numberBeds)
     {
@@ -57,49 +57,49 @@ public class Standard extends Room
     }
 
     @Override
-    public void addOccupant(User user) {
+    public void addOccupant(String user) {
         occupants.add(user);
     }
 
     @Override
-    public void addOccupants(User[] people) {
-        for (User user : people)
+    public void addOccupants(String[] people) {
+        for (String user : people)
         {
             occupants.add(user);
         }
     }
 
     @Override
-    public void addOccupants(ArrayList<User> people) {
-        for (User user : people)
+    public void addOccupants(ArrayList<String> people) {
+        for (String user : people)
         {
             occupants.add(user);
         }
     }
 
     @Override
-    public void removeOccupant(User user) {
+    public void removeOccupant(String user) {
         occupants.remove(user);
     }
 
     @Override
-    public void removeOccupants(User[] people) {
-        for (User user : people)
+    public void removeOccupants(String[] people) {
+        for (String user : people)
         {
             occupants.remove(user);
         }
     }
 
     @Override
-    public void removeOccupants(ArrayList<User> people) {
-        for (User user : people)
+    public void removeOccupants(ArrayList<String> people) {
+        for (String user : people)
         {
             occupants.remove(user);
         }
     }
 
     @Override
-    public ArrayList<User> getOccupants() {
+    public ArrayList<String> getOccupants() {
         return occupants;
     }
 

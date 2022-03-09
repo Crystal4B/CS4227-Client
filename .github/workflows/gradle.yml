@@ -44,6 +44,5 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         directory: ./app/build/reports/jacoco/test/
-        files: ./jacocoTestReport.xml
 
 

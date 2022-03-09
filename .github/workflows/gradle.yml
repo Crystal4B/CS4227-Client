@@ -35,4 +35,13 @@ jobs:
       
     - name: Testing Gradle
       run:  ./gradlew test
+      
+    - name: Jacoco Code Coverage
+      run: ./gradlew build jacocoTestReport
+      
+    - name: Codecov
+      uses: codecov/codecov-action@v2.1.0
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+
 

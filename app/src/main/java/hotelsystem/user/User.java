@@ -21,7 +21,7 @@ public abstract class User
     public abstract void setFirstName(String name);
     public abstract String getFirstName();
     public abstract void setLastName(String name);
-    public abstract String getLastNameName();
+    public abstract String getLastName();
     public abstract void setLegalName(String firstName, String lastName);
     public abstract String getLegalName();
 }

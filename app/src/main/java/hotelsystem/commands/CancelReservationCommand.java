@@ -40,6 +40,7 @@ public class CancelReservationCommand extends CommandTemplate<Order>
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void parseResponse(Map<String, Object> response)
 	{
 		String mutation;

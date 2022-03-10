@@ -48,6 +48,18 @@ class UserTest {
         assertEquals(person.getId(), 123);
     }
 
+    @Test void checkCustomerFirstName() {
+        Customer person = new Customer();
+        person.setFirstName("John");
+        assertEquals(person.getFirstName(), "John");
+    }
+
+    @Test void checkCustomerLastName() {
+        Customer person = new Customer();
+        person.setLastName("Doe");
+        assertEquals(person.getLastName(), "Doe");
+    }
+
     // Staff Unit Tests
 
     @Test void checkStaffEmail() {

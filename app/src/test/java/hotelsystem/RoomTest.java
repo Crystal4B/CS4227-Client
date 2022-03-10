@@ -7,7 +7,6 @@ package hotelsystem;
 import hotelsystem.room.Standard;
 import hotelsystem.user.Customer;
 import hotelsystem.user.Staff;
-import hotelsystem.user.User;
 import hotelsystem.room.Service;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -85,7 +84,7 @@ class RoomTest {
         assertEquals(room.getOccupants().size(), 0);
     }
 
-    @Test void checkStandardRemoveOccupants(){
+    @Test void checkStandardRemoveOccupantsArray(){
         String[] occupants = {
                 "John Doe",
                 "John 2",
@@ -97,6 +96,31 @@ class RoomTest {
         room.addOccupants(occupants);
         room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
+    }
+
+    @Test void checkStandardRemoveOccupantsArrayList(){
+        ArrayList<String> occupants = new ArrayList<>();
+        occupants.add("John Doe");
+        occupants.add("John Doe 1");
+        occupants.add("John Doe 2");
+        occupants.add("John Doe 3");
+
+
+        Standard room = new Standard("Test Name", 123, 2);
+        room.addOccupants(occupants);
+        room.removeOccupants(occupants);
+        assertEquals(room.getOccupants().size(), 0);
+    }
+
+    @Test void checkStandardIsTaken(){
+        Standard room = new Standard("Test Name", 123, 2);
+        room.setTaken(true);
+        assertEquals(room.getTaken(), true);
+    }
+
+    @Test void checkStandardToString(){
+        Standard room = new Standard("Test Name", 123, 2);
+        assertEquals(room.toString(), "Room Name: Test Name ; Room Number: 123 ; Beds: 2 ; Price: 200.0 ; Taken?: false");
     }
 
     // Service Room Unit Tests

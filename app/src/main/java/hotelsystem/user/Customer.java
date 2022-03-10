@@ -6,7 +6,6 @@ package hotelsystem.user;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.*;
 
 public class Customer extends User
 {
@@ -93,7 +92,7 @@ public class Customer extends User
     }
 
     @Override
-    public String getLastNameName() {
+    public String getLastName() {
         return lastName;
     }
 

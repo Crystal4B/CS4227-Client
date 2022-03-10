@@ -98,7 +98,7 @@ public class Staff extends User
     }
 
     @Override
-    public String getLastNameName() {
+    public String getLastName() {
         return lastName;
     }
 

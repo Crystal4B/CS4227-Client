@@ -5,7 +5,7 @@ import hotelsystem.user.User;
 public interface SignupInterface {
     public boolean signup(String email, String password);
     public void setName(String username);
-    public void isValidEmail(String email);
+    public boolean isValidEmail(String email);
     public User createsUser(String email, String username, String password);
     public User returnUser();
 }

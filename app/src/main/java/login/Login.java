@@ -14,19 +14,26 @@ public class Login implements LoginInterface {
 
     public boolean login(String email, String password) {
         invoker = new CommandInvoker();
-        this.isValidEmail(email);
-        validatesUser(email,password);
-        return true;
+        if (!isValidEmail(email)) {
+            return false;
+        }
+        if(validatesUser(email,password) != null) {
+            return true;
+        }
+        else {
+            return false;
+        }
         
     }
 
-    public void isValidEmail(String email) {
+    public boolean isValidEmail(String email) {
         
         Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
 
         if(!pattern.matcher(email).matches()) {
-            throw new IllegalArgumentException("Invalid email");
+            return false;
         }
+        return true;
     }
 
     public User validatesUser(String email, String password) {
@@ -36,7 +43,12 @@ public class Login implements LoginInterface {
         user.setPassword(password);
         invoker.setCommand(new LoginUserCommand(user));
         invoker.execute();
-        return null;
+        if(invoker.getResponse() == null) {
+            return null;
+        }
+        else {
+            return invoker.getResponse();
+        }
         
     }
 

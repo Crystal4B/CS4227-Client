@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 import order.Order;
 
 public class Email {
-    public boolean sendEmail(String email, Order order) {
+    public Email(String email, Order order) {
         String to = email;
         String from = "teamplatinumlimerick@gmail.com";
         String host = "smtp.gmail.com";
@@ -54,9 +54,9 @@ public class Email {
 
             Transport.send(message);
             System.out.println("Sent message successfully....");
-            return true;
         } catch (MessagingException mex) {
-            return false;
+            mex.printStackTrace();
+        }
 
     }
 }

@@ -34,6 +34,7 @@ public class LoginUserCommand extends CommandTemplate<User>
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void parseResponse(Map<String, Object> response)
 	{
 		if (response.containsKey(QUERY_NAME))

@@ -59,6 +59,7 @@ public class CreateRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void parseResponse(Map<String, Object> response)
 	{
 		String mutation;

@@ -26,6 +26,7 @@ public class ReservationSystem
 	 * @param message the message being sent to the server
 	 * @return the data recieved in the response from the server, null if error occured
 	 */
+	@SuppressWarnings("unchecked")
 	public static Map<String, Object> sendRequest(String message)
 	{
 		try

@@ -47,6 +47,7 @@ public class CommandInvoker
 	 * @param <T> The expected type of response [Must match command response type]
 	 * @return The server response parsed into its object
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> T getResponse()
 	{
 		return (T) command.getResponse();

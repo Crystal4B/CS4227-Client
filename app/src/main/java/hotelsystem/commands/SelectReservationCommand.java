@@ -36,6 +36,7 @@ public class SelectReservationCommand extends CommandTemplate<Order>
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void parseResponse(Map<String, Object> response)
 	{
 		if (response.containsKey(QUERY_NAME))

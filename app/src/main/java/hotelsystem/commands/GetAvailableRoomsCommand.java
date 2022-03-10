@@ -38,6 +38,7 @@ public class GetAvailableRoomsCommand extends CommandTemplate<ArrayList<Room>>
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void parseResponse(Map<String, Object> response)
 	{
 		if (response.containsKey(QUERY_NAME))

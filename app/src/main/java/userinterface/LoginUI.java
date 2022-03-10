@@ -40,8 +40,13 @@ public class LoginUI {
         System.out.println("Please enter password");
         String password = String.valueOf(console.readPassword());
         Login login = new Login();
-        login.login(email, password);
-        login.returnUser();
+        if(login.login(email, password)) {
+            login.returnUser();
+        }
+        else{
+            System.out.println("Invalid User \nPlease try logging in again \n \n");
+            login(console);
+        }
     }
 
     public static void signup(Console console) {

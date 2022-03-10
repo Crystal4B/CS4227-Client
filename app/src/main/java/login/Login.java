@@ -15,8 +15,12 @@ public class Login implements LoginInterface {
     public boolean login(String email, String password) {
         invoker = new CommandInvoker();
         this.isValidEmail(email);
-        validatesUser(email,password);
-        return true;
+        if(validatesUser(email,password) != null) {
+            return true;
+        }
+        else {
+            return false;
+        }
         
     }
 
@@ -36,7 +40,12 @@ public class Login implements LoginInterface {
         user.setPassword(password);
         invoker.setCommand(new LoginUserCommand(user));
         invoker.execute();
-        return null;
+        if(invoker.getResponse() == null) {
+            return null;
+        }
+        else {
+            return invoker.getResponse();
+        }
         
     }
 

@@ -14,7 +14,9 @@ public class Signup implements SignupInterface{
 
     public boolean signup(String email, String password) {
         invoker = new CommandInvoker();
-        this.isValidEmail(email);
+        if (!isValidEmail(email)) {
+            return false;
+        }
         
         person = new Customer();
         person = this.createsUser(email, username, password); 
@@ -25,13 +27,15 @@ public class Signup implements SignupInterface{
     public void setName(String username){
         this.username = username;
     }
-    public void isValidEmail(String email) {
+    public boolean isValidEmail(String email) {
         
         Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
 
         if(!pattern.matcher(email).matches()) {
-            throw new IllegalArgumentException("Invalid email");
+            return false;
         }
+
+        return true;
     }
 
     public Customer createsUser(String email,String username, String password) {

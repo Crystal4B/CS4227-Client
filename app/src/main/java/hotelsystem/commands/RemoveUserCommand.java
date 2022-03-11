@@ -69,6 +69,7 @@ public class RemoveUserCommand extends CommandTemplate<User>
 			break;
 		case "Staff":
 			responseObject = new Staff(username, password, email);
+			break;
 		}
 		responseObject.setId(Integer.parseInt(id));
 	

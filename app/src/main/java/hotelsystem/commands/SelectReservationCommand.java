@@ -64,6 +64,7 @@ public class SelectReservationCommand extends CommandTemplate<Order>
 				{
 				case "Standard":
 					builder.addRoom(new Standard(name, Integer.parseInt(roomId), numberOfBeds));
+					break;
 				}
 			}
 	

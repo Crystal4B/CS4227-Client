@@ -89,6 +89,7 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 			{
 			case "Standard":
 				responseObject.add(new Standard(name, Integer.parseInt(id), numberOfBeds));
+				break;
 			}
 		}
 		

@@ -79,10 +79,22 @@ public class Order {
 
     @Override
     public boolean equals(Object obj){
-        if(!(obj instanceof Order)){
-            return false;
+        if((obj instanceof Order)){
+            Order order = (Order)obj;
+            if(
+                this.orderID == order.getOrderID() &&
+                this.rooms == order.getRooms() &&
+                this.startDate == order.getStartDate() &&
+                this.endDate == order.getEndDate() &&
+                this.numberOfDaysBooked == order.getNumberOfDaysBooked() &&
+                this.rateCost == order.getRateCost() &&
+                this.finalCost == order.getFinalCost() &&
+                this.numberOfOccupants == order.getNumberOfOccupants()
+            ){
+            return true;
+            }
         }
-        return true;
+        return false;
     }
 
 }

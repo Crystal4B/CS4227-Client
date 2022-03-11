@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Timestamp;
 
-class RoomTest {
+class OrderTest {
 
     // Order Unit Tests
 
@@ -75,5 +75,20 @@ class RoomTest {
         "\nTotal Cost: EURO 400.0" + 
         "\n";
         assertEquals(order.toString(), expected);
+    }
+
+    @Test void checkOrderEquals(){
+        OrderBuilder builder = new OrderBuilder();
+        builder.addRoom(new Standard("Test Name", 123, 2));
+        builder.setStartDate(Timestamp.valueOf("2020-10-10 12:00:00"));
+        builder.setEndDate(Timestamp.valueOf("2020-10-12 12:00:00"));
+        Order order = builder.getOrder();
+
+        OrderBuilder builder2 = new OrderBuilder();
+        builder2.addRoom(new Standard("Test Name", 123, 2));
+        Order order2 = builder2.getOrder();
+
+        assertTrue(order.equals(order));
+        assertFalse(order.equals(order2));
     }
 }

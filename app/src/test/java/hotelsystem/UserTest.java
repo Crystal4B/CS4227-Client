@@ -62,6 +62,13 @@ class UserTest {
 
     // Staff Unit Tests
 
+    @Test void checkStaff() {
+        Staff person = new Staff("TestUsername", "TestPassword", "test@test.com");
+        assertEquals(person.getUserName(), "TestUsername");
+        assertEquals(person.getPassword(), "TestPassword");
+        assertEquals(person.getEmail(), "test@test.com");
+    } 
+
     @Test void checkStaffEmail() {
         Staff person = new Staff();
         person.setEmail("test@test.com");
@@ -89,5 +96,30 @@ class UserTest {
         Staff person = new Staff();
         person.setId(123);
         assertEquals(person.getId(), 123);
+    }
+    
+    @Test void checkStaffFirstName() {
+        Staff person = new Staff();
+        person.setFirstName("John");
+        assertEquals(person.getFirstName(), "John");
+    }
+
+    @Test void checkStaffLastName() {
+        Staff person = new Staff();
+        person.setLastName("Doe");
+        assertEquals(person.getLastName(), "Doe");
+    }
+
+    @Test void checkStaffSalary() {
+        Staff person = new Staff();
+        person.setSalary(30000);
+        assertEquals(person.getSalary(), 30000);
+    }
+
+    @Test void checkStaffHolidays() {
+        Staff person = new Staff();
+        person.setHolidays(5);
+        person.addHolidays(3);
+        assertEquals(person.getHolidays(), 8);
     }
 }

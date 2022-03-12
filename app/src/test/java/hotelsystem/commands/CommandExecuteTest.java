@@ -176,6 +176,7 @@ public class CommandExecuteTest
 
 		rooms = resultRooms;
 	}
+	
 	@Test
 	@Order(9)
 	public void checkRemoveUserCommand()

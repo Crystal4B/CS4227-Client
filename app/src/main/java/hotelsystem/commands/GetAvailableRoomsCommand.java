@@ -55,6 +55,7 @@ public class GetAvailableRoomsCommand extends CommandTemplate<ArrayList<Room>>
 				{
 				case "Standard":
 					responseObject.add(new Standard(name, Integer.parseInt(id), numberOfBeds));
+					break;
 				}
 			}
 		}

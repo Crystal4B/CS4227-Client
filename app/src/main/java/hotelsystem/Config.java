@@ -30,6 +30,7 @@ public class Config
 
 			InputStream inputStream = Resources.getResource(propFileName).openStream();
 			properties.load(inputStream);
+			inputStream.close();
 
 			return properties;
 		}

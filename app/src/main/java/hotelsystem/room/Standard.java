@@ -5,23 +5,20 @@
 package hotelsystem.room;
 
 import java.util.ArrayList;
-import hotelsystem.user.User;
 
 public class Standard extends Room
 {
     private String perks = "WiFi, TV, Toilet, Shower";
     private boolean taken = false;
     private int numberBeds;
-    private double price;
+    private double price = 200.0;
     private ArrayList<String> occupants = new ArrayList<String>();
 
     public Standard(String roomName, int roomNumber, int numberBeds)
     {
-        setRoomName(roomName);
-        setPerks(perks);
-        setRoomNumber(roomNumber);
-        setNumberBeds(numberBeds);
-        setPrice(200.00);
+        this.roomName = roomName;
+        this.roomNumber = roomNumber;
+        this.numberBeds = numberBeds;
     }
 
     @Override

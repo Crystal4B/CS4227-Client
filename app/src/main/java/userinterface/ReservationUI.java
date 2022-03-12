@@ -23,16 +23,32 @@ public class ReservationUI {
         int option = Integer.parseInt(console.readLine());
         switch (option) {
             case 1: 
-                while(!addRoomToCart(console)){}
+                while(true){
+                    if(addRoomToCart(console)){
+                        break;
+                    }
+                }
                 return UI.RESERVATION_STATE;
             case 2:
-                while(!setDetails(console)){}
+                while(true){
+                    if(setDetails(console)){
+                        break;
+                    }
+                }
                 return UI.RESERVATION_STATE;
             case 3: 
-                while(!removeRoomFromCart(console)){}
+                while(true){
+                    if(removeRoomFromCart(console)){
+                        break;
+                    }
+                }
                 return UI.RESERVATION_STATE;
             case 4: 
-                while(!viewOrder(console)){}
+                while(true){
+                    if(viewOrder(console)){
+                        break;
+                    }
+                }
                 return UI.RESERVATION_STATE;
             case 5: 
                 return UI.MENU_STATE;

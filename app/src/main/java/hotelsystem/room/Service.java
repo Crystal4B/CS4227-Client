@@ -5,7 +5,6 @@
 package hotelsystem.room;
 
 import java.util.ArrayList;
-import hotelsystem.user.User;
 
 public class Service extends Room
 {
@@ -14,8 +13,8 @@ public class Service extends Room
 
     public Service(String roomName, int roomNumber)
     {
-        setRoomName(roomName);
-        setRoomNumber(roomNumber);
+        this.roomName = roomName;
+        this.roomNumber = roomNumber;
     }
 
     @Override

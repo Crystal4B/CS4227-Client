@@ -4,7 +4,6 @@
  */
 package hotelsystem.room;
 
-import hotelsystem.user.User;
 import java.lang.String;
 import java.util.ArrayList;
 

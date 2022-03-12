@@ -18,7 +18,7 @@ public class UI {
         while(true){
             switch (state) {
                 case EXIT:    
-                    System.exit(0);
+                    Runtime.getRuntime().exit(0);
                 case LOGIN_STATE:
                     state = LoginUI.run(console);
                     break;

@@ -26,9 +26,9 @@ public class CommandExecuteTest
 	static CommandInvoker invoker = new CommandInvoker();
 	static Customer customer = new Customer("test", "password", "test@test.com");
 	static ArrayList<Standard> rooms = new ArrayList<>(Arrays.asList(
-		new Standard("Test Suite 1", 0, 2),
-		new Standard("Test Suite 2", 0, 2),
-		new Standard("Test Suite 3", 0, 2)
+		new Standard("Standard", 0, 2),
+		new Standard("Standard", 0, 2),
+		new Standard("Standard", 0, 2)
 	));
 
 	@Test

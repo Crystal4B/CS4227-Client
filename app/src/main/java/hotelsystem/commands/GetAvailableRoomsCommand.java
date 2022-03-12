@@ -16,25 +16,25 @@ public class GetAvailableRoomsCommand extends CommandTemplate<ArrayList<Room>>
 {
 	private static final String QUERY_NAME = "availableRoomsByDates";
 
-	private Timestamp arrivalDate;
-	private Timestamp departureDate;
+	private Timestamp checkIn;
+	private Timestamp checkOut;
 
 	/**
 	 * Simple constructor for command
-	 * @param arrivalDate desired date for check-in
-	 * @param departureDate desired date for check-out
+	 * @param checkIn desired date for check-in
+	 * @param checkOut desired date for check-out
 	 */
-	public GetAvailableRoomsCommand(Timestamp arrivalDate, Timestamp departureDate)
+	public GetAvailableRoomsCommand(Timestamp checkIn, Timestamp checkOut)
 	{
-		this.arrivalDate = arrivalDate;
-		this.departureDate = departureDate;
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
 	}
 
 	@Override
 	public String createMessage(boolean undo)
 	{
 		// Undo doesn't apply to requests of type query
-		return String.format("{\"query\":\"query{%s(arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\"){id type name numberOfBeds}}\"}", QUERY_NAME, arrivalDate, departureDate);
+		return String.format("{\"query\":\"query{%s(checkIn: \\\"%s\\\" checkOut: \\\"%s\\\"){id type numberOfBeds}}\"}", QUERY_NAME, checkIn, checkOut);
 	}
 
 	@Override
@@ -49,12 +49,11 @@ public class GetAvailableRoomsCommand extends CommandTemplate<ArrayList<Room>>
 			{
 				String id = (String) room.get("id");
 				String type = (String) room.get("type");
-				String name = (String) room.get("name");
 				int numberOfBeds = (int) room.get("numberOfBeds");
 				switch(type)
 				{
 				case "Standard":
-					responseObject.add(new Standard(name, Integer.parseInt(id), numberOfBeds));
+					responseObject.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
 					break;
 				}
 			}

@@ -47,7 +47,8 @@ public class Login implements LoginInterface {
             return null;
         }
         else {
-            return invoker.getResponse();
+            this.user = invoker.getResponse();
+            return this.user;
         }
         
     }

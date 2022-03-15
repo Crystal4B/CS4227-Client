@@ -51,7 +51,12 @@ public class ReservationUI {
                 }
                 return UI.RESERVATION_STATE;
             case 5: 
-                return UI.MENU_STATE;
+                if(LoginUI.userType.equals("Customer")){
+                    return UI.MENU_STATE;
+                }
+                else if(LoginUI.userType.equals("Staff")){
+                    return UI.STAFF_MENU;
+            }
             default:
                 return UI.RESERVATION_STATE;
         }

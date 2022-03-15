@@ -12,6 +12,7 @@ public class UI {
     public final static int RESERVATION_STATE = 2;
     public final static int PAYMENT_STATE = 3;
     public final static int BILLING_STATE = 4;
+    public final static int STAFF_MENU = 5;
 
     public void run() {
         int state = 0;
@@ -34,6 +35,10 @@ public class UI {
                 case BILLING_STATE:
                     state = BillingUI.run(console);
                     break;
+                case STAFF_MENU:
+                    state = StaffUI.run(console);
+                    break;
+
             }
         }
     }

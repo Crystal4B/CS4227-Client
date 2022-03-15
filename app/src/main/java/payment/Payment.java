@@ -19,7 +19,7 @@ public class Payment {
 
     }
 
-    public boolean payCreditCard(int cardNo, String cardName, int cardDate, int cardBack){
+    public boolean payCreditCard(String cardNo, String cardName, int cardDate, int cardBack){
         if (isValid("cardNo", cardNo) &&
         isValid("cardDate", cardDate) &&
         isValid("cardBack", cardBack) ) {
@@ -46,18 +46,10 @@ public class Payment {
 
     public boolean isValid (String name, int toCheck) {
         switch (name) {
-            case "cardNo":    
-                String num = String.valueOf(toCheck);
-                num.replaceAll(" ", "");
-                if(num.length() == 16)  {
-                    return true;
-                }
-                else{
-                    break;
-                }
             case "cardDate":
                 if(String.valueOf(toCheck).length() == 4 ) {
                     return true;
+                    
                 }
                 else{
                     break;
@@ -69,6 +61,19 @@ public class Payment {
                 else{
                     break;
                 }
+        }
+		return false;
+    }
+
+    public boolean isValid (String name, String toCheck) {
+        switch (name) {
+            case "cardNo":    
+                    if(toCheck.length() == 16)  {
+                        return true;
+                    }
+                    else{
+                        break;
+                    }
         }
 		return false;
     }

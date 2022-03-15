@@ -6,8 +6,8 @@ package billing;
 
 import org.junit.jupiter.api.Test;
 
-import hotelsystem.billing.Billing;
-import hotelsystem.room.Standard;
+import hotelsystem.billing.BillingCash;
+import hotelsystem.Standard;
 import order.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +20,7 @@ class BillingTest {
         OrderBuilder builder = new OrderBuilder();
         builder.addRoom(new Standard("Test Name", 123, 2));
         Order order = builder.getOrder();
-        Billing bill = new Billing();
+        BillingCash bill = new BillingCash();
         String expected = "Date:              Description:                Voucher:               Charges:"
         + "\n" + "SD:  null  ED:  null \t\t\t" +  "Room Charge\t\t\t" + "\t\t\t" + 200.0 + "\t\t\t" 
         + "\n" + "\t\t\t\t\t\t\t\t Total: " + 1000.0;

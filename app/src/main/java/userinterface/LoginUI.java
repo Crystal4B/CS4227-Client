@@ -8,6 +8,8 @@ import login.LoginAdapter;
 import login.Signup;
 
 public class LoginUI {
+
+    public static String userType;
     
     public static int run(Console console){
         System.out.println("\n####################################################");
@@ -22,11 +24,9 @@ public class LoginUI {
         int option = Integer.parseInt(console.readLine());
         switch (option) {
             case 1:
-                login(console);
-                return UI.MENU_STATE;
+                return login(console);
             case 2: 
-                signup(console);
-                return UI.MENU_STATE;
+                return signup(console);
             case 3:  
                 return UI.EXIT;
             default:
@@ -34,22 +34,31 @@ public class LoginUI {
         }
     }
 
-    public static void login(Console console) {
+    public static int login(Console console) {
         System.out.println("Please enter email");
         String email = console.readLine();
         System.out.println("Please enter password");
         String password = String.valueOf(console.readPassword());
         Login login = new Login();
         if(login.login(email, password)) {
-            login.returnUser();
+            User user = login.returnUser();
+            if(user.getClass().getSimpleName().equals("Customer")){
+                LoginUI.userType = "Customer";
+                return UI.MENU_STATE;
+            }
+            else if(user.getClass().getSimpleName().equals("Staff")){
+                LoginUI.userType = "Staff";
+                return UI.STAFF_MENU;
+            }
         }
         else{
             System.out.println("Invalid User \nPlease try logging in again \n \n");
             login(console);
         }
+        return UI.LOGIN_STATE;
     }
 
-    public static void signup(Console console) {
+    public static int signup(Console console) {
         System.out.println("Please enter email");
         String email = console.readLine();
         System.out.println("Please enter username");
@@ -60,6 +69,12 @@ public class LoginUI {
         signup.setName(username);
         signup.login(email, password);
         User user = signup.returnUser();
-        System.out.println("New User Created: Email: " + user.getEmail() + " , Username: " + user.getUserName()  + " , Password: " + user.getPassword());
+        if(user.getClass().getSimpleName().equals("Customer")){
+            return UI.MENU_STATE;
+        }
+        else if(user.getClass().getSimpleName().equals("Staff")){
+            return UI.STAFF_MENU;
+        }
+        return UI.LOGIN_STATE;
     }
 }

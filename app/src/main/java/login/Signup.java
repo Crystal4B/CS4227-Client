@@ -1,26 +1,41 @@
 package login;
 
-import hotelsystem.Person;
-import hotelsystem.Customer;
+import hotelsystem.user.User;
+import requestsystem.commands.CommandInvoker;
+import requestsystem.commands.RegisterUserCommand;
+import hotelsystem.user.Customer;
 import java.util.regex.Pattern;
 
-public class Signup {
+public class Signup implements SignupInterface{
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     public Customer person;
+    private String username;
+    CommandInvoker invoker;
 
-    public Signup(String email, String username, String password) {
-        this.isValidEmail(email);
+    public boolean signup(String email, String password) {
+        invoker = new CommandInvoker();
+        if (!isValidEmail(email)) {
+            return false;
+        }
+        
         person = new Customer();
         person = this.createsUser(email, username, password); 
+        invoker.setCommand(new RegisterUserCommand(person));
+        invoker.execute();
+        return true;
     }
-
-    private void isValidEmail(String email) {
+    public void setName(String username){
+        this.username = username;
+    }
+    public boolean isValidEmail(String email) {
         
         Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
 
         if(!pattern.matcher(email).matches()) {
-            throw new IllegalArgumentException("Invalid email");
+            return false;
         }
+
+        return true;
     }
 
     public Customer createsUser(String email,String username, String password) {
@@ -32,7 +47,7 @@ public class Signup {
 
     }
 
-    public Person returnUser() {
+    public User returnUser() {
         return person;
     }
 }

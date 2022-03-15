@@ -7,10 +7,13 @@ package login;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Order;
+
 class LoginTest {
 
     // Signup Unit Tests
     
+	@Order(1)
     @Test void checkSignup() {
         Signup signup = new Signup();
         assertTrue(signup.signup("test@test.com", "#Password123"));
@@ -22,7 +25,7 @@ class LoginTest {
     }
 
     // Login Unit Tests
-    
+    @Order(2)
     @Test void checkLogin(){
         Login login = new Login();
         assertTrue(login.login("test@test.com", "#Password123"));

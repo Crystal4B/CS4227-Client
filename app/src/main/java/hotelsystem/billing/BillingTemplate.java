@@ -2,12 +2,10 @@ package hotelsystem.billing;
 
 import java.math.BigDecimal;
 import order.*;
-import hotelsystem.room.Standard;
+import hotelsystem.Standard;
 
 abstract class BillingTemplate {
    abstract public double BillCalc(Order order);
-
-   abstract public int Round(double num);
 
    abstract public BigDecimal RoundToTwoDec(double num);
 
@@ -19,13 +17,17 @@ abstract class BillingTemplate {
 
    OrderBuilder builder = new OrderBuilder();
 
+   Order TempOrder;
+
+   public Order GetOrder(){
+      return TempOrder;
+   }
+
    public void BuildBasicOrder(){
       builder.addRoom(new Standard("Test Name", 123, 2));
    }
 
-   Order order = builder.getOrder();
-
-   public String GetBill(){
+   public String GetBill(Order order){
       String temp = "";
       temp = Bill(order);
       return temp;

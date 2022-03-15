@@ -4,23 +4,19 @@ import java.math.BigDecimal;
 import order.*;
 
 
-public class Billing extends BillingTemplate {
+public class BillingCashless extends BillingTemplate {
     @Override
     public double BillCalc(Order order) {
         return order.getFinalCost() + 1000;
     }
     @Override 
     public String Bill(Order order) {
-        String bill = "Date:              Description:                Voucher:               Charges:"
-         + "\n" + "SD: " + order.getStartDate() + " ED: "+ order.getEndDate() + "\t\t\t" +  "Room Charge\t\t\t" + "\t\t\t" + order.getFinalCost() + "\t\t\t" 
-         + "\n" + "\t\t\t\t\t\t\t\t\t\t\t\t\t Total: " + BillCalc(order);
+        TempOrder = order;
+        String bill = "Date:\t\t" + order.getStartDate() + "-"+ order.getEndDate() + 
+        "\n" + "Description:\t\t" + "Room Charge\t" + order.getFinalCost() + 
+        "\n" + "Total:\t\t" + BillCalc(order) +
+        "\n" + "Paid By:\t\tVoucher";
         return bill;
-    }
-
-    @Override
-    public int Round(double num) {
-        // TODO Auto-generated method stub
-        return 0;
     }
 
     @Override

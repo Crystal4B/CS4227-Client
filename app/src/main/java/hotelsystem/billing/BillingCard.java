@@ -1,18 +1,22 @@
 package hotelsystem.billing;
+
 import java.math.BigDecimal;
 import order.*;
 
-public class BillingVIP extends BillingTemplate {
+
+public class BillingCard extends BillingTemplate {
     @Override
     public double BillCalc(Order order) {
         return order.getFinalCost() + 1000;
     }
     @Override 
     public String Bill(Order order) {
-        String bill = "";
-        bill = "Date:              Description:                Voucher:               Charges:";
-        bill = bill + "\n" + "SD: " + order.getStartDate() + " ED: "+ order.getEndDate() + "\t\t\t\t" +  "Room Charge\t\t\t\t" + "\t\t\t\t" + order.getFinalCost() + "\t\t\t\t" ;
-        bill = bill + "\n" + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t Total: " + BillCalc(order);
+        TempOrder = order;
+        String bill = "Date:\t\t" + order.getStartDate() + "-"+ order.getEndDate() + 
+        "\n" + "Description:\t\t" + "Room Charge\t" + order.getFinalCost() + 
+        "\n" + "Voucher:\t\t" + 
+        "\n" + "Total:\t\t" + BillCalc(order) +
+        "\n" + "Paid By:\t\tCard";
         return bill;
     }
 
@@ -28,7 +32,8 @@ public class BillingVIP extends BillingTemplate {
         String str = num + "";
         return str;
     }
-   
+
+    
     @Override
     public String IntToString(int num) {
         String str = num + "";

@@ -1,23 +1,33 @@
 package hotelsystem.billing;
 
 import java.math.BigDecimal;
+import order.*;
+import hotelsystem.room.Standard;
 
 abstract class BillingTemplate {
-   abstract double BillCalc();
+   abstract public double BillCalc(Order order);
 
-   abstract int Round(double num);
+   abstract public int Round(double num);
 
-   abstract BigDecimal RoundToTwoDec(double num);
+   abstract public BigDecimal RoundToTwoDec(double num);
 
-   abstract String Bill();
+   abstract public String Bill(Order order);
 
-   abstract String DoubleToString(double num);
+   abstract public String DoubleToString(double num);
 
-   abstract String IntToString(int num);
+   abstract public String IntToString(int num);
 
-   String GetBill(){
+   OrderBuilder builder = new OrderBuilder();
+
+   public void BuildBasicOrder(){
+      builder.addRoom(new Standard("Test Name", 123, 2));
+   }
+
+   Order order = builder.getOrder();
+
+   public String GetBill(){
       String temp = "";
-      temp = Bill();
+      temp = Bill(order);
       return temp;
    }
 

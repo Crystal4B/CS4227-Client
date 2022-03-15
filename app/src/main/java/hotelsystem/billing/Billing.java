@@ -1,41 +1,44 @@
 package hotelsystem.billing;
 
 import java.math.BigDecimal;
+import order.*;
+
 
 public class Billing extends BillingTemplate {
     @Override
-    double BillCalc() {
-        // TODO Auto-generated method stub
-        return 0;
+    public double BillCalc(Order order) {
+        return order.getFinalCost() + 1000;
     }
     @Override 
-    String Bill() {
-        return "";
+    public String Bill(Order order) {
+        String bill = "Date:              Description:                Voucher:               Charges:"
+         + "\n" + "SD: " + order.getStartDate() + " ED: "+ order.getEndDate() + "\t\t\t" +  "Room Charge\t\t\t" + "\t\t\t" + order.getFinalCost() + "\t\t\t" 
+         + "\n" + "\t\t\t\t\t\t\t\t\t\t\t\t\t Total: " + BillCalc(order);
+        return bill;
     }
 
     @Override
-    int Round(double num) {
+    public int Round(double num) {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    BigDecimal RoundToTwoDec(double num) {
+    public BigDecimal RoundToTwoDec(double num) {
         BigDecimal temp = new BigDecimal(Double.toString(num));
         temp = temp.setScale(2);
-        // TODO Auto-generated method stub
         return temp;
     }
 
     @Override
-    String DoubleToString(double num) {
+    public String DoubleToString(double num) {
         String str = num + "";
         return str;
     }
 
     
     @Override
-    String IntToString(int num) {
+    public String IntToString(int num) {
         String str = num + "";
         return str;
     }

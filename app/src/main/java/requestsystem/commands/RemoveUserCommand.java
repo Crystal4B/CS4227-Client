@@ -1,4 +1,4 @@
-package hotelsystem.commands;
+package requestsystem.commands;
 
 import java.util.Map;
 

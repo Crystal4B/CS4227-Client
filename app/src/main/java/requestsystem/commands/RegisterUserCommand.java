@@ -1,4 +1,4 @@
-package hotelsystem.commands;
+package requestsystem.commands;
 
 import hotelsystem.user.User;
 import hotelsystem.user.Customer;

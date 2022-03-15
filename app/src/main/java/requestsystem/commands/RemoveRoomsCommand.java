@@ -1,4 +1,4 @@
-package hotelsystem.commands;
+package requestsystem.commands;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -6,22 +6,22 @@ import java.util.Map;
 import hotelsystem.room.Standard;
 
 /**
- * Command for adding new rooms into the system
+ * Command for removing rooms from the system
  * @author Marcin Sęk
- * @apiNote Response of type ArrayList[Room]
+ * @apiNote Response type of ArrayList[Standard]
  */
-public class CreateRoomsCommand extends CommandTemplate<ArrayList<Standard>>
+public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 {
-	private static final String MUTATION_NAME = "createRooms";
-	private static final String UNDO_MUTATION_NAME = "removeRooms";
+	private static final String MUTATION_NAME = "removeRooms";
+	private static final String UNDO_MUTATION_NAME = "createRooms";
 
 	private ArrayList<Standard> rooms;
 
 	/**
 	 * Simple constructor for command
-	 * @param rooms ArrayList of rooms being added to the system
+	 * @param rooms ArrayList of rooms being removed from the system
 	 */
-	public CreateRoomsCommand(ArrayList<Standard> rooms)
+	public RemoveRoomsCommand(ArrayList<Standard> rooms)
 	{
 		this.rooms = rooms;
 	}
@@ -41,11 +41,11 @@ public class CreateRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 			Standard room = rooms.get(i);
 			if (undo)
 			{
-				message += String.format("{id: \\\"%s\\\"}", room.getRoomNumber());
+				message += String.format("{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}", room.getClass().getSimpleName(), room.getRoomName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
 			}
 			else
 			{
-				message += String.format("{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}", room.getClass().getSimpleName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
+				message += String.format("{id: \\\"%s\\\"}", room.getRoomNumber());
 			}
 
 			if (i < rooms.size() - 1)

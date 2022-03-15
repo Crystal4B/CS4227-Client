@@ -16,6 +16,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import hotelsystem.room.Standard;
 import hotelsystem.user.Customer;
+import hotelsystem.user.Staff;
 import hotelsystem.user.User;
 import order.OrderBuilder;
 
@@ -24,7 +25,8 @@ public class CommandExecuteTest
 {
 	// Default parameters for Commands
 	static CommandInvoker invoker = new CommandInvoker();
-	static Customer customer = new Customer("test", "password", "test@test.com");
+	static Customer customer = new Customer("testCustomer", "customer_password", "testCustomer@test.com");
+	static Staff staff = new Staff("testStaff", "staff_password", "testStaff@test.com");
 	static ArrayList<Standard> rooms = new ArrayList<>(Arrays.asList(
 		new Standard("Standard", 0, 2),
 		new Standard("Standard", 0, 2),
@@ -33,7 +35,7 @@ public class CommandExecuteTest
 
 	@Test
 	@Order(1)
-	public void checkRegisterCommand()
+	public void checkRegisterCommandOnCustomer()
 	{
 		// Send new customer request
 		invoker.setCommand(new RegisterUserCommand(customer));
@@ -41,6 +43,7 @@ public class CommandExecuteTest
 
 		// Retrieve response and assert
 		User result = invoker.getResponse();
+		assertFalse(result instanceof Staff);
 		assertTrue(result instanceof Customer);
 		assertEquals(customer.getUserName(), result.getUserName());
 		assertEquals(customer.getPassword(), result.getPassword());
@@ -53,7 +56,28 @@ public class CommandExecuteTest
 
 	@Test
 	@Order(2)
-	public void checkCorrectLoginUserCommand()
+	public void checkRegisterCommandOnStaff()
+	{
+		// Send new customer request
+		invoker.setCommand(new RegisterUserCommand(staff));
+		invoker.execute();
+
+		// Retrieve response and assert
+		User result = invoker.getResponse();
+		assertFalse(result instanceof Customer);
+		assertTrue(result instanceof Staff);
+		assertEquals(staff.getUserName(), result.getUserName());
+		assertEquals(staff.getPassword(), result.getPassword());
+		assertEquals(staff.getEmail(), result.getEmail());
+		assertFalse(result.getId() == 0);
+
+		// Update customer
+		staff = (Staff) result;
+	}
+
+	@Test
+	@Order(3)
+	public void checkCorrectLoginUserCommandOnCustomer()
 	{
 		// Send new login command
 		invoker.setCommand(new LoginUserCommand(customer));
@@ -61,6 +85,7 @@ public class CommandExecuteTest
 
 		// Retrieve data and assert
 		User result = invoker.getResponse();
+		assertFalse(result instanceof Staff);
 		assertTrue(result instanceof Customer);
 		assertEquals(customer.getUserName(), result.getUserName());
 		assertEquals(customer.getPassword(), result.getPassword());
@@ -69,8 +94,26 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(3)
-	public void checkIncorrectLoginUserCommand()
+	@Order(4)
+	public void checkCorrectLoginUserCommandOnStaff()
+	{
+		// Send new login command
+		invoker.setCommand(new LoginUserCommand(staff));
+		invoker.execute();
+
+		// Retrieve data and assert
+		User result = invoker.getResponse();
+		assertFalse(result instanceof Customer);
+		assertTrue(result instanceof Staff);
+		assertEquals(staff.getUserName(), result.getUserName());
+		assertEquals(staff.getPassword(), result.getPassword());
+		assertEquals(staff.getEmail(), result.getEmail());
+		assertFalse(result.getId() == 0);
+	}
+
+	@Test
+	@Order(5)
+	public void checkIncorrectLoginUserCommandCustomer()
 	{
 		// Set incorrect password
 		String password = customer.getPassword();
@@ -88,7 +131,26 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(4)
+	@Order(6)
+	public void checkIncorrectLoginUserCommandStaff()
+	{
+		// Set incorrect password
+		String password = staff.getPassword();
+		staff.setPassword("INCORRECT_PASSWORD");
+
+		// Send new login command
+		invoker.setCommand(new LoginUserCommand(staff));
+		invoker.execute();
+
+		// Retrieve data and assert
+		User result = invoker.getResponse();
+		assertTrue(result == null);
+
+		staff.setPassword(password);
+	}
+
+	@Test
+	@Order(7)
 	public void checkCreateRoomsCommand()
 	{
 		// Send new createRooms request
@@ -189,7 +251,7 @@ public class CommandExecuteTest
 	
 	@Test
 	@Order(9)
-	public void checkRemoveUserCommand()
+	public void checkRemoveUserCommandOnCustomer()
 	{
 		// Send new customer request
 		invoker.setCommand(new RemoveUserCommand(customer));
@@ -197,8 +259,25 @@ public class CommandExecuteTest
 
 		// Retrieve response and assert (NOTE: Removing user does not return username and password)
 		User result = invoker.getResponse();
+		assertFalse(result instanceof Staff);
 		assertTrue(result instanceof Customer);
 		assertEquals(customer.getEmail(), result.getEmail());
 		assertEquals(customer.getId(), result.getId());
+	}
+
+	@Test
+	@Order(10)
+	public void checkRemoveUserCommandOnStaff()
+	{
+		// Send new customer request
+		invoker.setCommand(new RemoveUserCommand(staff));
+		invoker.execute();
+
+		// Retrieve response and assert (NOTE: Removing user does not return username and password)
+		User result = invoker.getResponse();
+		assertFalse(result instanceof Customer);
+		assertTrue(result instanceof Staff);
+		assertEquals(staff.getEmail(), result.getEmail());
+		assertEquals(staff.getId(), result.getId());
 	}
 }

@@ -5,10 +5,14 @@
 package login;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Order;
 
+@TestMethodOrder(OrderAnnotation.class)
 class LoginTest {
 
     // Signup Unit Tests

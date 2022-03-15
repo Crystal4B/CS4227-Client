@@ -1,4 +1,4 @@
-package hotelsystem.commands;
+package requestsystem.commands;
 
 /**
  * Command invoker for controlling commands

@@ -1,8 +1,8 @@
-package hotelsystem.commands;
+package requestsystem.commands;
 
 import java.util.Map;
 
-import hotelsystem.ReservationSystem;
+import requestsystem.RequestClient;
 
 /**
  * interface representing commands in the reservation system
@@ -19,7 +19,7 @@ public abstract class CommandTemplate<T>
 	public void execute()
 	{
 		String message = createMessage(false);
-		Map<String, Object> response = ReservationSystem.sendRequest(message);
+		Map<String, Object> response = RequestClient.sendRequest(message);
 		parseResponse(response);
 	};
 
@@ -29,7 +29,7 @@ public abstract class CommandTemplate<T>
 	public void undo()
 	{
 		String message = createMessage(true);
-		Map<String, Object> response = ReservationSystem.sendRequest(message);
+		Map<String, Object> response = RequestClient.sendRequest(message);
 		parseResponse(response);
 	}
 

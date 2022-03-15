@@ -1,4 +1,4 @@
-package hotelsystem;
+package requestsystem;
 
 import java.io.IOException;
 import java.net.URI;
@@ -13,11 +13,13 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import hotelsystem.Config;
+
 /**
  * Reservation System handling HttpClient requests and responses
  * @author Marcin Sęk
  */
-public class ReservationSystem
+public class RequestClient
 {
 	private static HttpClient client = HttpClient.newHttpClient();
 

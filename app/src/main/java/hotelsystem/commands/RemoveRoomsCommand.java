@@ -41,7 +41,7 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 			Standard room = rooms.get(i);
 			if (undo)
 			{
-				message += String.format("{type: \\\"%s\\\" name: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d occupants: []}", room.getClass().getSimpleName(), room.getRoomName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
+				message += String.format("{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}", room.getClass().getSimpleName(), room.getRoomName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
 			}
 			else
 			{
@@ -53,7 +53,7 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 				message += ",";
 			}
 		}
-		message += "]){id type name perks numberOfBeds rate}}\"}";
+		message += "]){id type perks numberOfBeds rate}}\"}";
 
 		return message;
 	}
@@ -83,12 +83,11 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 		{
 			String id = (String) room.get("id");
 			String type = (String) room.get("type");
-			String name = (String) room.get("name");
 			int numberOfBeds = (int) room.get("numberOfBeds");
 			switch(type)
 			{
 			case "Standard":
-				responseObject.add(new Standard(name, Integer.parseInt(id), numberOfBeds));
+				responseObject.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
 				break;
 			}
 		}

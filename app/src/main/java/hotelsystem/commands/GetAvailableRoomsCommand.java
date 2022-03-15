@@ -33,6 +33,8 @@ public class GetAvailableRoomsCommand extends CommandTemplate<ArrayList<Room>>
 	@Override
 	public String createMessage(boolean undo)
 	{
+		System.out.println(String.format("{\"query\":\"query{%s(checkIn: \\\"%s\\\" checkOut: \\\"%s\\\"){id type numberOfBeds}}\"}", QUERY_NAME, checkIn, checkOut));
+
 		// Undo doesn't apply to requests of type query
 		return String.format("{\"query\":\"query{%s(checkIn: \\\"%s\\\" checkOut: \\\"%s\\\"){id type numberOfBeds}}\"}", QUERY_NAME, checkIn, checkOut);
 	}

@@ -144,8 +144,18 @@ public class CommandExecuteTest
 	// @Order(6)
 	public void checkGetAvailableRoomsCommand()
 	{
-		// TODO: set specific dates to initial Reservation so we have one for test
-		assertFalse(true);
+		invoker.setCommand(new GetAvailableRoomsCommand(Timestamp.valueOf("2020-02-10 10:00:00"), Timestamp.valueOf("2020-02-12 10:00:00")));
+		invoker.execute();
+
+		// Retrieve Response and assert
+		ArrayList<Standard> availableRooms = invoker.getResponse();
+		assertEquals(rooms.size(), availableRooms.size()); // TODO: Update test to work with any number of rooms
+		for (int i = 0; i < availableRooms.size(); i++)
+		{
+			assertEquals(rooms.get(i).getRoomNumber(), availableRooms.get(i).getRoomNumber());
+			assertEquals(rooms.get(i).getRoomName(), availableRooms.get(i).getRoomName());
+			assertEquals(rooms.get(i).getNumberBeds(), availableRooms.get(i).getNumberBeds());
+		}
 	}
 
 	// @Test

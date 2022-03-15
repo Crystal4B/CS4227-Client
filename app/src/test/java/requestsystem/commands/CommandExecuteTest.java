@@ -19,14 +19,6 @@ import hotelsystem.user.Customer;
 import hotelsystem.user.Staff;
 import hotelsystem.user.User;
 import order.OrderBuilder;
-import requestsystem.commands.CommandInvoker;
-import requestsystem.commands.CreateReservationCommand;
-import requestsystem.commands.CreateRoomsCommand;
-import requestsystem.commands.GetAvailableRoomsCommand;
-import requestsystem.commands.LoginUserCommand;
-import requestsystem.commands.RegisterUserCommand;
-import requestsystem.commands.RemoveRoomsCommand;
-import requestsystem.commands.RemoveUserCommand;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CommandExecuteTest

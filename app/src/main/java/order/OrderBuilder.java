@@ -5,10 +5,12 @@ import java.time.Duration;
 import java.util.ArrayList;
 
 import hotelsystem.room.Standard;
+import hotelsystem.user.User;
 
 public class OrderBuilder implements Builder{
 
     private String orderID;
+    private User user;
     private ArrayList<Standard> rooms = new ArrayList<>();
     private Timestamp startDate;
     private Timestamp endDate;
@@ -20,6 +22,11 @@ public class OrderBuilder implements Builder{
     @Override
     public void setOrderID(String orderID){
         this.orderID = orderID;
+    }
+
+    @Override
+    public void setUser(User user){
+        this.user = user;
     }
 
     @Override
@@ -115,7 +122,7 @@ public class OrderBuilder implements Builder{
     }
 
     public Order getOrder(){
-        return new Order(orderID, rooms, startDate, endDate, numberOfDaysBooked, rateCost, finalCost, numberOfOccupants);
+        return new Order(orderID, user, rooms, startDate, endDate, numberOfDaysBooked, rateCost, finalCost, numberOfOccupants);
     }
     
 }

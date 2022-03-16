@@ -5,6 +5,8 @@
 package order;
 
 import hotelsystem.room.Standard;
+import hotelsystem.user.Customer;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +21,15 @@ class OrderTest {
         builder.setOrderID("123");
 		Order order = builder.getOrder();
         assertEquals(order.getOrderID(), "123");
+    }
+
+    @Test void checkOrderUser() {
+		OrderBuilder builder = new OrderBuilder();
+        builder.setUser(new Customer("username", "password", "email@test.com"));
+		Order order = builder.getOrder();
+        assertEquals(order.getUser().getUserName(), "username");
+        assertEquals(order.getUser().getPassword(), "password");
+        assertEquals(order.getUser().getEmail(), "email@test.com");
     }
 
     @Test void checkOrderGetRooms() {

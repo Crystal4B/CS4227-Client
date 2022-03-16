@@ -4,10 +4,12 @@ import java.sql.Timestamp;
 
 import java.util.ArrayList;
 import hotelsystem.room.Standard;
+import hotelsystem.user.User;
 
 public class Order {
 
     private final String orderID;
+    private final User user;
     private final ArrayList<Standard> rooms;
     private final Timestamp startDate;
     private final Timestamp endDate;
@@ -16,8 +18,9 @@ public class Order {
     private final double finalCost;
     private final int numberOfOccupants;
     
-    public Order(String orderID, ArrayList<Standard> rooms, Timestamp startDate, Timestamp endDate, long numberOfDaysBooked, double rateCost, double finalCost, int numberOfOccupants){
+    public Order(String orderID, User user, ArrayList<Standard> rooms, Timestamp startDate, Timestamp endDate, long numberOfDaysBooked, double rateCost, double finalCost, int numberOfOccupants){
         this.orderID = orderID;
+        this.user = user;
         this.rooms = rooms;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -29,6 +32,10 @@ public class Order {
 
     public String getOrderID(){
         return orderID;
+    }
+
+    public User getUser(){
+        return user;
     }
  
     public ArrayList<Standard> getRooms(){
@@ -83,6 +90,7 @@ public class Order {
             Order order = (Order)obj;
             if(
                 this.orderID == order.getOrderID() &&
+                this.user == order.getUser() &&
                 this.rooms == order.getRooms() &&
                 this.startDate == order.getStartDate() &&
                 this.endDate == order.getEndDate() &&

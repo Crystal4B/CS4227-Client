@@ -8,7 +8,7 @@ import order.*;
 public class BillingCard extends BillingTemplate {
     @Override
     public double BillCalc(Order order) {
-        return order.getFinalCost() + 1000;
+        return order.getFinalCost();
     }
     @Override 
     public String Bill(Order order) {

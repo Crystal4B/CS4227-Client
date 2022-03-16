@@ -24,10 +24,6 @@ abstract class BillingTemplate {
       return TempOrder;
    }
 
-   public void BuildBasicOrder(){
-      builder.addRoom(new Standard("Test Name", 123, 2));
-   }
-
    public String GetBill(Order order){
       String temp = "";
       temp = Bill(order);

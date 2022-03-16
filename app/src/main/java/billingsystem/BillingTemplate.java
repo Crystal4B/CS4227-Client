@@ -1,8 +1,9 @@
-package hotelsystem.billing;
+package billingsystem;
+
 
 import java.math.BigDecimal;
 import order.*;
-import hotelsystem.Standard;
+import hotelsystem.room.Standard;
 
 abstract class BillingTemplate {
    abstract public double BillCalc(Order order);

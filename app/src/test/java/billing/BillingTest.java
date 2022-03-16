@@ -6,8 +6,8 @@ package billing;
 
 import org.junit.jupiter.api.Test;
 
-import hotelsystem.billing.BillingCash;
-import hotelsystem.Standard;
+import billingsystem.BillingCash;
+import hotelsystem.room.Standard;
 import order.*;
 
 import static org.junit.jupiter.api.Assertions.*;

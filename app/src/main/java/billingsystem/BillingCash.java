@@ -1,10 +1,11 @@
-package hotelsystem.billing;
+package billingsystem;
+
 
 import java.math.BigDecimal;
 import order.*;
 
 
-public class BillingCard extends BillingTemplate {
+public class BillingCash extends BillingTemplate {
     @Override
     public double BillCalc(Order order) {
         return order.getFinalCost() + 1000;
@@ -16,7 +17,7 @@ public class BillingCard extends BillingTemplate {
         "\n" + "Description:\t\t" + "Room Charge\t" + order.getFinalCost() + 
         "\n" + "Voucher:\t\t" + 
         "\n" + "Total:\t\t" + BillCalc(order) +
-        "\n" + "Paid By:\t\tCard";
+        "\n" + "Paid By:\t\tCash";
         return bill;
     }
 

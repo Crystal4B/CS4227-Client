@@ -1,10 +1,11 @@
-package hotelsystem.billing;
+package billingsystem;
+
 
 import java.math.BigDecimal;
 import order.*;
 
 
-public class BillingCash extends BillingTemplate {
+public class BillingCashless extends BillingTemplate {
     @Override
     public double BillCalc(Order order) {
         return order.getFinalCost() + 1000;
@@ -14,9 +15,8 @@ public class BillingCash extends BillingTemplate {
         TempOrder = order;
         String bill = "Date:\t\t" + order.getStartDate() + "-"+ order.getEndDate() + 
         "\n" + "Description:\t\t" + "Room Charge\t" + order.getFinalCost() + 
-        "\n" + "Voucher:\t\t" + 
         "\n" + "Total:\t\t" + BillCalc(order) +
-        "\n" + "Paid By:\t\tCash";
+        "\n" + "Paid By:\t\tVoucher";
         return bill;
     }
 

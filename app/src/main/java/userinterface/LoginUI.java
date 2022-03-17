@@ -53,7 +53,7 @@ public class LoginUI {
         }
         else{
             System.out.println("Invalid User \nPlease try logging in again \n \n");
-            login(console);
+            return login(console);
         }
         return UI.LOGIN_STATE;
     }

@@ -1,7 +1,6 @@
 package userinterface;
 
 import java.io.Console;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import hotelsystem.room.Room;
@@ -9,7 +8,6 @@ import hotelsystem.room.Standard;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.CreateRoomCommand;
 import requestsystem.commands.GetAllRoomsCommand;
-import requestsystem.commands.GetAvailableRoomsCommand;
 import requestsystem.commands.RemoveRoomCommand;
 
 public class StaffUI {

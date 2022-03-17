@@ -25,7 +25,7 @@ public class RemoveRoomCommand extends CommandTemplate<Standard>
 	{
 		if (undo)
 		{
-			return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}){id type perks numberOfBeds rate}}\"}", UNDO_MUTATION_NAME, room.getClass().getSimpleName(), room.getRoomName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
+			return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}){id type perks numberOfBeds rate}}\"}", UNDO_MUTATION_NAME, room.getClass().getSimpleName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
 		}
 
 		return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type perks numberOfBeds rate}}\"}", MUTATION_NAME, room.getRoomNumber());

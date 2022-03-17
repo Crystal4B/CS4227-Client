@@ -41,7 +41,7 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 			Standard room = rooms.get(i);
 			if (undo)
 			{
-				message += String.format("{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}", room.getClass().getSimpleName(), room.getRoomName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
+				message += String.format("{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}", room.getClass().getSimpleName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
 			}
 			else
 			{

@@ -25,6 +25,7 @@ public abstract class Room
     public abstract void removeOccupant(User occupant);
     public abstract void removeOccupants(User[] occupants);
     public abstract void removeOccupants(ArrayList<User> occupants);
+    public abstract void removeAllOccupants();
     public abstract ArrayList<User>  getOccupants();
     public abstract String toString();                              // Returns a string with details about the room
 }

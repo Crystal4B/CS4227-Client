@@ -4,6 +4,8 @@
  */
 package hotelsystem.room;
 
+import hotelsystem.user.User;
+
 import java.util.ArrayList;
 
 public class Standard extends Room
@@ -12,7 +14,7 @@ public class Standard extends Room
     private boolean taken = false;
     private int numberBeds;
     private double price = 200.0;
-    private ArrayList<String> occupants = new ArrayList<String>();
+    private ArrayList<User> occupants = new ArrayList<User>();
 
     public Standard(String roomName, int roomNumber, int numberBeds)
     {
@@ -54,49 +56,49 @@ public class Standard extends Room
     }
 
     @Override
-    public void addOccupant(String user) {
+    public void addOccupant(User user) {
         occupants.add(user);
     }
 
     @Override
-    public void addOccupants(String[] people) {
-        for (String user : people)
+    public void addOccupants(User[] people) {
+        for (User user : people)
         {
             occupants.add(user);
         }
     }
 
     @Override
-    public void addOccupants(ArrayList<String> people) {
-        for (String user : people)
+    public void addOccupants(ArrayList<User> people) {
+        for (User user : people)
         {
             occupants.add(user);
         }
     }
 
     @Override
-    public void removeOccupant(String user) {
+    public void removeOccupant(User user) {
         occupants.remove(user);
     }
 
     @Override
-    public void removeOccupants(String[] people) {
-        for (String user : people)
+    public void removeOccupants(User[] people) {
+        for (User user : people)
         {
             occupants.remove(user);
         }
     }
 
     @Override
-    public void removeOccupants(ArrayList<String> people) {
-        for (String user : people)
+    public void removeOccupants(ArrayList<User> people) {
+        for (User user : people)
         {
             occupants.remove(user);
         }
     }
 
     @Override
-    public ArrayList<String> getOccupants() {
+    public ArrayList<User> getOccupants() {
         return occupants;
     }
 

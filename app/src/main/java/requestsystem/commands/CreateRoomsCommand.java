@@ -1,6 +1,7 @@
 package requestsystem.commands;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import hotelsystem.room.Standard;
@@ -8,20 +9,20 @@ import hotelsystem.room.Standard;
 /**
  * Command for adding new rooms into the system
  * @author Marcin Sęk
- * @apiNote Response of type ArrayList[Room]
+ * @apiNote Response of type List[Room]
  */
-public class CreateRoomsCommand extends CommandTemplate<ArrayList<Standard>>
+public class CreateRoomsCommand extends CommandTemplate<List<Standard>>
 {
 	private static final String MUTATION_NAME = "createRooms";
 	private static final String UNDO_MUTATION_NAME = "removeRooms";
 
-	private ArrayList<Standard> rooms;
+	private List<Standard> rooms;
 
 	/**
 	 * Simple constructor for command
-	 * @param rooms ArrayList of rooms being added to the system
+	 * @param rooms List of rooms being added to the system
 	 */
-	public CreateRoomsCommand(ArrayList<Standard> rooms)
+	public CreateRoomsCommand(List<Standard> rooms)
 	{
 		this.rooms = rooms;
 	}
@@ -77,7 +78,7 @@ public class CreateRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 			return;
 		}
 
-		ArrayList<Map<String,Object>> roomsData = (ArrayList<Map<String, Object>>) response.get(mutation);
+		List<Map<String,Object>> roomsData = (List<Map<String, Object>>) response.get(mutation);
 		responseObject = new ArrayList<>();
 		for (Map<String,Object> room : roomsData)
 		{

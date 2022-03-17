@@ -98,6 +98,11 @@ public class Standard extends Room
     }
 
     @Override
+    public void removeAllOccupants() {
+        occupants.clear();
+    }
+
+    @Override
     public ArrayList<User> getOccupants() {
         return occupants;
     }

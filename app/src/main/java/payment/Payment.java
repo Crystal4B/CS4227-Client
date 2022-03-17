@@ -1,9 +1,9 @@
 package payment;
 
-import hotelsystem.room.Standard;
-import order.Order;
+import hotelsystem.room.*;
+import order.*;
 import java.util.ArrayList;
-import hotelsystem.billing.Billing;
+import billingsystem.*;
 import java.util.Random;
 
 public class Payment {

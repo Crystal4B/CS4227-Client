@@ -2,9 +2,11 @@ package requestsystem.commands;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import hotelsystem.room.Standard;
+import hotelsystem.user.User;
 import order.Order;
 import order.OrderBuilder;
 
@@ -37,20 +39,33 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id arrivalDate departureDate numberOfOccupants rooms{id type name perks numberOfBeds rate}}}\"}", UNDO_MUTATION_NAME, reservationOrder.getOrderID());
 		}
 
+		User creator = reservationOrder.getUser();
 
 		ArrayList<Standard> rooms = reservationOrder.getRooms();
-		String orderRooms = "";
+		String orderGuests = "";
 		for (int i = 0; i < rooms.size(); i++)
 		{
 			Standard room = rooms.get(i);
-			orderRooms += String.format("{id: \\\"%d\\\"}", room.getRoomNumber());
-			if (i < rooms.size() - 1)
+			int roomId = room.getRoomNumber();
+
+			List<User> occupants = room.getOccupants();
+			for (int j = 0; j < rooms.size(); j++)
 			{
-				orderRooms += ",";
+				User occupant = occupants.get(j);
+
+				String firstName = occupant.getFirstName();
+				String lastName = occupant.getLastName();
+
+				orderGuests += String.format("{firstName: \\\"%s\\\" lastName: \\\"%s\\\" roomId: \\\"%d\\\"}", firstName, lastName, roomId);
+
+				if (i < occupants.size() - 1)
+				{
+					orderGuests += ",";
+				}
 			}
 		}
 
-		return String.format("{\"query\":\"mutation{%s(input:{arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\" rooms: [%s]}){id arrivalDate departureDate rooms{id type name numberOfBeds}}}\"}", MUTATION_NAME, reservationOrder.getStartDate(), reservationOrder.getEndDate(), orderRooms);
+		return String.format("{\"query\":\"mutation{%s(input:{checkIn: \\\"%s\\\" checkOut: \\\"%s\\\" user: {id: \\\"%d\\\"} guests: [%s]}){id checkIn checkOut guests{id firstName lastName room{id type perks numberOfBeds rate}}}}\"}", MUTATION_NAME, reservationOrder.getStartDate(), reservationOrder.getEndDate(), creator.getId(), orderGuests);
 	}
 
 	@Override

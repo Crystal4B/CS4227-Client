@@ -14,7 +14,7 @@ public class GetAllRoomsCommand extends CommandTemplate<List<Standard>>
 	public String createMessage(boolean undo)
 	{
 		// Undo doesn't apply to requests of type query
-		return String.format("{\"query\":\"query{%s(){id type numberOfBeds}}\"}", QUERY_NAME);
+		return String.format("{\"query\":\"query{%s{id type numberOfBeds}}\"}", QUERY_NAME);
 	}
 
 	@Override

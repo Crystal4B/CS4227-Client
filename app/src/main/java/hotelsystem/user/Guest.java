@@ -7,7 +7,8 @@ package hotelsystem.user;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Guest extends User {
+public class Guest extends User
+{
     final String type = "Guest";
     final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
             "RegisterUser"

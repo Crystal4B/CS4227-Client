@@ -2,12 +2,12 @@
  * @author Aleksandr Jakusevs
  */
 
-package billing;
+package billingsystem;
 
 import org.junit.jupiter.api.Test;
 
-import billingsystem.BillingCash;
-import hotelsystem.room.Standard;
+import billingsystem.*;
+import hotelsystem.room.*;
 import order.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,9 +22,10 @@ class BillingTest {
         Order order = builder.getOrder();
         BillingCash bill = new BillingCash();
         String expected = "Date:\t\t" + order.getStartDate() + "-"+ order.getEndDate() + 
-        "\n" + "Description:\t\t" + "Room Charge\t" + 0 + 
-        "\n" + "Total:\t\t" + 0 +
-        "\n" + "Paid By:\t\tVoucher";
+                "\n" + "Description:\t\t" + "Room Charge\t" + 0.0 +
+                "\n" + "Voucher:\t\t" +
+                "\n" + "Total:\t\t" + 0.0 +
+                "\n" + "Paid By:\t\tCash";
         assertEquals(bill.Bill(order),expected);
     }
 }

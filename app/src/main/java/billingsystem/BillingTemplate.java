@@ -6,15 +6,27 @@ import order.*;
 import hotelsystem.room.Standard;
 
 abstract class BillingTemplate {
-   abstract public double BillCalc(Order order);
+   public double BillCalc(Order order) {
+      return order.getFinalCost();
+   }
 
-   abstract public BigDecimal RoundToTwoDec(double num);
+   public BigDecimal RoundToTwoDec(double num) {
+      BigDecimal temp = new BigDecimal(Double.toString(num));
+      temp = temp.setScale(2);
+      return temp;
+   }
 
    abstract public String Bill(Order order);
 
-   abstract public String DoubleToString(double num);
+   public String DoubleToString(double num) {
+      String str = num + "";
+      return str;
+   }
 
-   abstract public String IntToString(int num);
+   public String IntToString(int num) {
+      String str = num + "";
+      return str;
+   }
 
    OrderBuilder builder = new OrderBuilder();
 

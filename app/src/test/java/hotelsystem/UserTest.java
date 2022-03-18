@@ -5,6 +5,7 @@
 package hotelsystem;
 
 import hotelsystem.user.Customer;
+import hotelsystem.user.Guest;
 import hotelsystem.user.Staff;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -121,5 +122,55 @@ class UserTest {
         person.setHolidays(5);
         person.addHolidays(3);
         assertEquals(person.getHolidays(), 8);
+    }
+
+    // Guest Unit Tests
+
+    @Test void checkGuest() {
+        Guest person = new Guest("firstName", "lastName", 1234);
+        assertEquals(person.getFirstName(), "firstName");
+        assertEquals(person.getLastName(), "lastName");
+        assertEquals(person.getId(), 1234);
+    }
+
+    @Test void checkGuestEmail() {
+        Guest person = new Guest();
+        person.setEmail("test@test.com");
+        assertEquals(person.getEmail(), "test@test.com");
+    }
+
+    @Test void checkGuestPassword() {
+        Guest person = new Guest();
+        person.setPassword("#Password123");
+        assertEquals(person.getPassword(), "#Password123");
+    }
+
+    @Test void checkGuestUserName() {
+        Guest person = new Guest();
+        person.setUserName("John Doe");
+        assertEquals(person.getUserName(), "John Doe");
+    }
+
+    @Test void checkGuestType() {
+        Guest person = new Guest();
+        assertEquals(person.getUserType(), "Guest");
+    }
+
+    @Test void checkGuestID() {
+        Guest person = new Guest();
+        person.setId(123);
+        assertEquals(person.getId(), 123);
+    }
+
+    @Test void checkGuestFirstName() {
+        Guest person = new Guest();
+        person.setFirstName("John");
+        assertEquals(person.getFirstName(), "John");
+    }
+
+    @Test void checkGuestLastName() {
+        Guest person = new Guest();
+        person.setLastName("Doe");
+        assertEquals(person.getLastName(), "Doe");
     }
 }

@@ -1,21 +1,15 @@
 package payment;
 
-import hotelsystem.room.*;
-import order.*;
-import java.util.ArrayList;
-import billingsystem.*;
 import java.util.Random;
 
 public class Payment {
     private double finalCost;
-   
     
     public void setCost(double cost) {
         finalCost = cost;
     } 
 
     public void payByCash() {
-
 
     }
 
@@ -78,10 +72,6 @@ public class Payment {
 		return false;
     }
 
-    //TODO
-    /*
-    Order object
-    Order.getfinalprice
-    */
+    //TODO: Get Order object, get Order.getfinalprice
 }
 

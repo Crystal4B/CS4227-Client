@@ -2,7 +2,9 @@ package requestsystem.commands;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import hotelsystem.room.Room;
 import hotelsystem.room.Standard;
@@ -10,9 +12,9 @@ import hotelsystem.room.Standard;
 /**
  * Command for getting all available room for specified dates
  * @author Marcin Sęk
- * @apiNote Response type of ArrayList[Room]
+ * @apiNote Response type of Map[Type, List[Room]]
  */
-public class GetAvailableRoomsCommand extends CommandTemplate<ArrayList<Room>>
+public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<Room>>>
 {
 	private static final String QUERY_NAME = "availableRoomsByDates";
 
@@ -44,7 +46,7 @@ public class GetAvailableRoomsCommand extends CommandTemplate<ArrayList<Room>>
 		if (response.containsKey(QUERY_NAME))
 		{
 			ArrayList<Map<String,Object>> roomsData = (ArrayList<Map<String, Object>>) response.get(QUERY_NAME);
-			responseObject = new ArrayList<>();
+			responseObject = new TreeMap<>();
 			for (Map<String,Object> room : roomsData)
 			{
 				String id = (String) room.get("id");
@@ -53,7 +55,9 @@ public class GetAvailableRoomsCommand extends CommandTemplate<ArrayList<Room>>
 				switch(type)
 				{
 				case "Standard":
-					responseObject.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
+					List<Room> rooms = responseObject.getOrDefault(type, new ArrayList<>());
+					rooms.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
+					responseObject.put(type, rooms);
 					break;
 				}
 			}

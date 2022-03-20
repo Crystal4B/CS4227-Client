@@ -62,7 +62,7 @@ public class ReservationUI {
         String checkInDate = console.readLine();
         System.out.println("Please enter check-out date (YYYY-MM-DD) @ 12:00:");
         String checkOutDate = console.readLine();
-        director.setDates(checkInDate, checkOutDate);
+        director.setDates(builder, checkInDate, checkOutDate);
         System.out.println("Please select one of the following options:");
         System.out.println(director.getAvailableRooms(builder));
         int roomTypeOption = Integer.parseInt(console.readLine());

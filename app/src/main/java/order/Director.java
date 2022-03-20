@@ -14,25 +14,12 @@ public class Director {
     private Map<String, List<Room>> rooms;
     private Timestamp checkInTime;
     private Timestamp checkOutTime;
-    
-    public boolean setDatesUsingUI(Builder builder, String checkInDate, String checkOutDate){
-        try {
-            if(Timestamp.valueOf(checkInDate + " 12:00:00").before(Timestamp.valueOf(checkOutDate + " 12:00:00"))){
-                builder.setStartDate(Timestamp.valueOf(checkInDate + " 12:00:00"));
-                builder.setEndDate(Timestamp.valueOf(checkOutDate + " 12:00:00"));
-                return true;
-            }
-            else{
-                return false;  
-            }
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
-    public void setDates(String in, String out){ 
+    public void setDates(OrderBuilder builder, String in, String out){ 
         this.checkInTime = Timestamp.valueOf(in + " 12:00:00");
         this.checkOutTime = Timestamp.valueOf(out + " 12:00:00");
+        builder.setStartDate(this.checkInTime);
+        builder.setEndDate(this.checkOutTime);
     }
 
     public String getAvailableRooms(OrderBuilder builder){
@@ -53,8 +40,6 @@ public class Director {
     }
 
     public void addRoom(OrderBuilder builder, int option){
-        builder.setStartDate(this.checkInTime);
-        builder.setEndDate(this.checkOutTime);
 
         String roomKey = (String)rooms.keySet().toArray()[option];
         List<Room> roomValue = rooms.get(roomKey);

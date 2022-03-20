@@ -14,10 +14,9 @@ public class ReservationUI {
         System.out.println("####################################################\n");
         System.out.println("Please select one of the following options:");
         System.out.println("1. \t Add Room");
-        System.out.println("2. \t Set Check-In and Check-Out dates");
-        System.out.println("3. \t Remove Room");
-        System.out.println("4. \t View Order Cart");
-        System.out.println("5. \t Back");
+        System.out.println("2. \t Remove Room");
+        System.out.println("3. \t View Order Cart");
+        System.out.println("4. \t Back");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
         int option = Integer.parseInt(console.readLine());
@@ -29,28 +28,21 @@ public class ReservationUI {
                     }
                 }
                 return UI.RESERVATION_STATE;
-            case 2:
-                while(true){
-                    if(setDetails(console)){
-                        break;
-                    }
-                }
-                return UI.RESERVATION_STATE;
-            case 3: 
+            case 2: 
                 while(true){
                     if(removeRoomFromCart(console)){
                         break;
                     }
                 }
                 return UI.RESERVATION_STATE;
-            case 4: 
+            case 3: 
                 while(true){
                     if(viewOrder(console)){
                         break;
                     }
                 }
                 return UI.RESERVATION_STATE;
-            case 5: 
+            case 4: 
                 if(LoginUI.userType.equals("Customer")){
                     return UI.MENU_STATE;
                 }
@@ -66,33 +58,17 @@ public class ReservationUI {
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
-        System.out.println("Please select one of the following options:");
-        System.out.println("1. \t Standard Room");
-        System.out.println("2. \t Deluxe Room");
-        System.out.println("3. \t VIP Room");
-        System.out.println("4. \t Back");
-        System.out.println("\n####################################################\n");
-        System.out.println("Enter option here:");
-        int option = Integer.parseInt(console.readLine());
-        if(director.addRoomUsingUI(builder, option)){
-            return true;
-        }
-        return false;
-    }
-
-    public static Boolean setDetails(Console console){
-        System.out.println("\n####################################################");
-        System.out.println("#     Welcome to the Hotel Reservation System      #");
-        System.out.println("####################################################\n");
         System.out.println("Please enter check-in date (YYYY-MM-DD) @ 12:00:");
         String checkInDate = console.readLine();
         System.out.println("Please enter check-out date (YYYY-MM-DD) @ 12:00:");
         String checkOutDate = console.readLine();
+        director.setDates(checkInDate, checkOutDate);
+        System.out.println("Please select one of the following options:");
+        System.out.println(director.getAvailableRooms(builder));
+        int roomTypeOption = Integer.parseInt(console.readLine());
+        director.addRoom(builder, roomTypeOption);
         System.out.println("\n####################################################\n");
-        if(director.setDatesUsingUI(builder, checkInDate, checkOutDate)){
-            return true;
-        }
-        return false;
+        return true;
     }
 
     public static Boolean removeRoomFromCart(Console console){
@@ -101,13 +77,11 @@ public class ReservationUI {
         System.out.println("####################################################\n");
         System.out.println("Please select a room to remove:\n");
         System.out.println(director.viewRoomsInCart(builder));
+        int roomOption = Integer.parseInt(console.readLine());
+        director.removeRoom(builder, roomOption);
         System.out.println("\n####################################################\n");
-        System.out.println("Enter option here:");
-        int option = Integer.parseInt(console.readLine());
-        if(director.removeRoomUsingUI(builder, option)){
-            return true;
-        }
-        return false;
+        return true;
+
     }
 
     public static Boolean viewOrder(Console console){

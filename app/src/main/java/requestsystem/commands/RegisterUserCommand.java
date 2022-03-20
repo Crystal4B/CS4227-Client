@@ -56,6 +56,11 @@ public class RegisterUserCommand extends CommandTemplate<User>
 		}
 
 		Map<String, String> userData = (Map<String, String>) response.get(mutation);
+		if (userData == null)
+		{
+			return;
+		}
+
 		String id = userData.get("id");
 		String type = userData.get("type");
 		String email = userData.get("email");

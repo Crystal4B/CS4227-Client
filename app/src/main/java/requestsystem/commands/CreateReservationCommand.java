@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import hotelsystem.room.Standard;
+import hotelsystem.user.Guest;
 import hotelsystem.user.User;
 import order.Order;
 import order.OrderBuilder;
@@ -65,7 +66,7 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			}
 		}
 
-		return String.format("{\"query\":\"mutation{%s(input:{checkIn: \\\"%s\\\" checkOut: \\\"%s\\\" user: {id: \\\"%d\\\"} guests: [%s]}){id checkIn checkOut guests{id firstName lastName room{id type perks numberOfBeds rate}}}}\"}", MUTATION_NAME, reservationOrder.getStartDate(), reservationOrder.getEndDate(), creator.getId(), orderGuests);
+		return String.format("{\"query\":\"mutation{%s(input:{checkIn: \\\"%s\\\" checkOut: \\\"%s\\\" user: {id: \\\"%d\\\"} guests: [%s]}){id guests{id firstName lastName}}}\"}", MUTATION_NAME, reservationOrder.getStartDate(), reservationOrder.getEndDate(), creator.getId(), orderGuests);
 	}
 
 	@Override
@@ -87,33 +88,20 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			return;
 		}
 
+		// TODO: Get Jordan to have a look at this with you
 		Map<String, Object> reservationData = (Map<String, Object>) response.get(mutation);
 		String reservationId = (String) reservationData.get("id");
-		Timestamp arrivalDate = Timestamp.valueOf((String) reservationData.get("arrivalDate"));
-		Timestamp departureDate = Timestamp.valueOf((String) reservationData.get("departureDate"));
-		ArrayList<Map<String, Object>> roomsMap = (ArrayList<Map<String, Object>>) reservationData.get("rooms");
 
-		OrderBuilder builder = new OrderBuilder();
-		builder.setOrderID(reservationId);
-		builder.setStartDate(arrivalDate);
-		builder.setEndDate(departureDate);
+		List<Map<String, Object>> guestsMap = (List<Map<String, Object>>) reservationData.get("guests");
 
-		for (Map<String, Object> map : roomsMap)
+		for (Map<String, Object> map : guestsMap)
 		{
-			String roomId = (String) map.get("id");
-			String type = (String) map.get("type");
-			String name = (String) map.get("name");
-			int numberOfBeds = (int) map.get("numberOfBeds");
-
-			switch(type)
-			{
-			case "Standard":
-				builder.addRoom(new Standard(name, Integer.parseInt(roomId), numberOfBeds));
-				break;
-			}
+			String guestId = (String) map.get("id");
+			String firstName = (String) map.get("firstName");
+			String lastName = (String) map.get("lastName");
 		}
 
-		responseObject = builder.getOrder();
+		responseObject = reservationOrder;
 
 		// Make copy for undo
 		this.reservationOrder = responseObject;

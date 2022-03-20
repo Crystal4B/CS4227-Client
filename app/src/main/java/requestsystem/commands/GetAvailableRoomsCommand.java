@@ -52,14 +52,9 @@ public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<R
 				String id = (String) room.get("id");
 				String type = (String) room.get("type");
 				int numberOfBeds = (int) room.get("numberOfBeds");
-				switch(type)
-				{
-				case "Standard":
-					List<Room> rooms = responseObject.getOrDefault(type, new ArrayList<>());
-					rooms.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
-					responseObject.put(type, rooms);
-					break;
-				}
+				List<Room> rooms = responseObject.getOrDefault(type, new ArrayList<>());
+				rooms.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
+				responseObject.put(type, rooms);
 			}
 		}
 	}

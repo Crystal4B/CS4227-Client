@@ -1,6 +1,5 @@
 package requestsystem.commands;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +64,7 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			}
 		}
 
-		return String.format("{\"query\":\"mutation{%s(input:{checkIn: \\\"%s\\\" checkOut: \\\"%s\\\" user: {id: \\\"%d\\\"} guests: [%s]}){id checkIn checkOut guests{id firstName lastName room{id type perks numberOfBeds rate}}}}\"}", MUTATION_NAME, reservationOrder.getStartDate(), reservationOrder.getEndDate(), creator.getId(), orderGuests);
+		return String.format("{\"query\":\"mutation{%s(input:{checkIn: \\\"%s\\\" checkOut: \\\"%s\\\" user: {id: \\\"%d\\\"} guests: [%s]}){id guests{id firstName lastName}}}\"}", MUTATION_NAME, reservationOrder.getStartDate(), reservationOrder.getEndDate(), creator.getId(), orderGuests);
 	}
 
 	@Override
@@ -88,30 +87,47 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 		}
 
 		Map<String, Object> reservationData = (Map<String, Object>) response.get(mutation);
+
 		String reservationId = (String) reservationData.get("id");
-		Timestamp arrivalDate = Timestamp.valueOf((String) reservationData.get("arrivalDate"));
-		Timestamp departureDate = Timestamp.valueOf((String) reservationData.get("departureDate"));
-		ArrayList<Map<String, Object>> roomsMap = (ArrayList<Map<String, Object>>) reservationData.get("rooms");
 
 		OrderBuilder builder = new OrderBuilder();
 		builder.setOrderID(reservationId);
-		builder.setStartDate(arrivalDate);
-		builder.setEndDate(departureDate);
+		builder.setStartDate(reservationOrder.getStartDate());
+		builder.setEndDate(reservationOrder.getEndDate());
+		builder.setUser(reservationOrder.getUser());
 
-		for (Map<String, Object> map : roomsMap)
+		List<Standard> rooms = reservationOrder.getRooms();
+
+		List<Map<String, Object>> guestsMap = (List<Map<String, Object>>) reservationData.get("guests");
+		for (Map<String, Object> map : guestsMap)
 		{
-			String roomId = (String) map.get("id");
-			String type = (String) map.get("type");
-			String name = (String) map.get("name");
-			int numberOfBeds = (int) map.get("numberOfBeds");
-
-			switch(type)
+			String guestId = (String) map.get("id");
+			String firstName = (String) map.get("firstName");
+			String lastName = (String) map.get("lastName");
+			
+			for (Standard room : rooms)
 			{
-			case "Standard":
-				builder.addRoom(new Standard(name, Integer.parseInt(roomId), numberOfBeds));
-				break;
+				boolean found = false;
+
+				List<User> guests = room.getOccupants();
+				for (User guest : guests)
+				{
+					if (guest.getFirstName().equals(firstName) && guest.getLastName().equals(lastName))
+					{
+						found = true;
+						guest.setId(Integer.parseInt(guestId));
+						break;
+					}
+				}
+
+				if (found)
+				{
+					break;
+				}
 			}
 		}
+
+		builder.setRooms((ArrayList<Standard>) rooms);
 
 		responseObject = builder.getOrder();
 

@@ -1,10 +1,11 @@
 package requestsystem.commands;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import hotelsystem.room.Standard;
+import hotelsystem.user.User;
 import order.Order;
 import order.OrderBuilder;
 
@@ -34,9 +35,36 @@ public class CancelReservationCommand extends CommandTemplate<Order>
 	{
 		if (undo)
 		{
-			return String.format("{\"query\":\"mutation{%s(input:{arrivalDate: \\\"%s\\\" departureDate: \\\"%s\\\"}){id arrivalDate departureDate rooms{id type name perks numberOfBeds rate}}}\"}", UNDO_MUTATION_NAME, orderCancelation.getStartDate(), orderCancelation.getEndDate());
+			User creator = orderCancelation.getUser();
+
+			ArrayList<Standard> rooms = orderCancelation.getRooms();
+			String orderGuests = "";
+			for (int i = 0; i < rooms.size(); i++)
+			{
+				Standard room = rooms.get(i);
+				int roomId = room.getRoomNumber();
+	
+				List<User> occupants = room.getOccupants();
+				for (int j = 0; j < rooms.size(); j++)
+				{
+					User occupant = occupants.get(j);
+	
+					String firstName = occupant.getFirstName();
+					String lastName = occupant.getLastName();
+	
+					orderGuests += String.format("{firstName: \\\"%s\\\" lastName: \\\"%s\\\" roomId: \\\"%d\\\"}", firstName, lastName, roomId);
+	
+					if (i < occupants.size() - 1)
+					{
+						orderGuests += ",";
+					}
+				}
+			}
+	
+			return String.format("{\"query\":\"mutation{%s(input:{checkIn: \\\"%s\\\" checkOut: \\\"%s\\\" user: {id: \\\"%d\\\"} guests: [%s]}){id guests{id firstName lastName}}}\"}", MUTATION_NAME, orderCancelation.getStartDate(), orderCancelation.getEndDate(), creator.getId(), orderGuests);
+	
 		}
-		return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id arrivalDate departureDate rooms{id type name perks numberOfBeds rate}}}\"}", MUTATION_NAME, orderCancelation.getOrderID());
+		return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id}}\"}", MUTATION_NAME, orderCancelation.getOrderID());
 	}
 
 	@Override
@@ -59,30 +87,18 @@ public class CancelReservationCommand extends CommandTemplate<Order>
 		}
 
 		Map<String, Object> reservationData = (Map<String, Object>) response.get(mutation);
+		
 		String reservationId = (String) reservationData.get("id");
-		Timestamp arrivalDate = (Timestamp) reservationData.get("arrivalDate");
-		Timestamp departureDate = (Timestamp) reservationData.get("departureDate");
-		ArrayList<Map<String, Object>> roomsMap = (ArrayList<Map<String, Object>>) reservationData.get("rooms");
-
+		
 		OrderBuilder builder = new OrderBuilder();
 		builder.setOrderID(reservationId);
-		builder.setStartDate(arrivalDate);
-		builder.setEndDate(departureDate);
+		builder.setStartDate(orderCancelation.getStartDate());
+		builder.setEndDate(orderCancelation.getEndDate());
+		builder.setUser(orderCancelation.getUser());
 
-		for (Map<String, Object> map : roomsMap)
-		{
-			String roomId = (String) map.get("id");
-			String type = (String) map.get("type");
-			String name = (String) map.get("name");
-			int numberOfBeds = (int) map.get("numberOfBeds");
+		List<Standard> rooms = orderCancelation.getRooms();
 
-			switch(type)
-			{
-			case "Standard":
-				builder.addRoom(new Standard(name, Integer.parseInt(roomId), numberOfBeds));
-				break;
-			}
-		}
+		builder.setRooms((ArrayList<Standard>) rooms);
 
 		responseObject = builder.getOrder();
 

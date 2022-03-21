@@ -1,12 +1,10 @@
 package requestsystem.commands;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import hotelsystem.room.Standard;
-import hotelsystem.user.Guest;
 import hotelsystem.user.User;
 import order.Order;
 import order.OrderBuilder;
@@ -88,20 +86,50 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			return;
 		}
 
-		// TODO: Get Jordan to have a look at this with you
 		Map<String, Object> reservationData = (Map<String, Object>) response.get(mutation);
+
 		String reservationId = (String) reservationData.get("id");
 
-		List<Map<String, Object>> guestsMap = (List<Map<String, Object>>) reservationData.get("guests");
+		OrderBuilder builder = new OrderBuilder();
+		builder.setOrderID(reservationId);
+		builder.setStartDate(reservationOrder.getStartDate());
+		builder.setEndDate(reservationOrder.getEndDate());
+		builder.setUser(reservationOrder.getUser());
 
+		List<Standard> rooms = reservationOrder.getRooms();
+
+		List<Map<String, Object>> guestsMap = (List<Map<String, Object>>) reservationData.get("guests");
 		for (Map<String, Object> map : guestsMap)
 		{
 			String guestId = (String) map.get("id");
 			String firstName = (String) map.get("firstName");
 			String lastName = (String) map.get("lastName");
+			
+			for (Standard room : rooms)
+			{
+				boolean found = false;
+
+				List<User> guests = room.getOccupants();
+				for (User guest : guests)
+				{
+					if (guest.getFirstName().equals(firstName) && guest.getLastName().equals(lastName))
+					{
+						found = true;
+						guest.setId(Integer.parseInt(guestId));
+						break;
+					}
+				}
+
+				if (found)
+				{
+					break;
+				}
+			}
 		}
 
-		responseObject = reservationOrder;
+		builder.setRooms((ArrayList<Standard>) rooms);
+
+		responseObject = builder.getOrder();
 
 		// Make copy for undo
 		this.reservationOrder = responseObject;

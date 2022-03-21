@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Order;
@@ -33,6 +34,10 @@ import requestsystem.commands.RemoveUserCommand;
 @TestMethodOrder(OrderAnnotation.class)
 public class CommandExecuteTest
 {
+	// Reservation variabes
+	static Timestamp startDate = Timestamp.valueOf(LocalDateTime.now());
+	static Timestamp endDate = Timestamp.valueOf(LocalDateTime.now().plusDays(2));
+
 	// Default parameters for Commands
 	static CommandInvoker invoker = new CommandInvoker();
 	static Customer customer = new Customer("testCustomer", "customer_password", "testCustomer@test.com");
@@ -44,6 +49,18 @@ public class CommandExecuteTest
 	));
 
 	static order.Order reservation;
+
+	public boolean contains(ArrayList<Standard> list, Standard room)
+	{
+		for (Standard roomStandard : list)
+		{
+			if (roomStandard.getRoomNumber() == room.getRoomNumber())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
 	@Test
 	@Order(1)
@@ -89,6 +106,32 @@ public class CommandExecuteTest
 
 	@Test
 	@Order(3)
+	public void checkIncorrectRegisterCommandOnCustomer()
+	{
+		// Send new customer request
+		invoker.setCommand(new RegisterUserCommand(customer));
+		invoker.execute();
+
+		// Retrieve response and assert
+		User result = invoker.getResponse();
+		assertTrue(result == null);
+	}
+
+	@Test
+	@Order(4)
+	public void checkIncorrectRegisterCommandOnStaff()
+	{
+		// Send new customer request
+		invoker.setCommand(new RegisterUserCommand(staff));
+		invoker.execute();
+
+		// Retrieve response and assert
+		User result = invoker.getResponse();
+		assertTrue(result == null);
+	}
+
+	@Test
+	@Order(5)
 	public void checkCorrectLoginUserCommandOnCustomer()
 	{
 		// Send new login command
@@ -106,7 +149,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(4)
+	@Order(6)
 	public void checkCorrectLoginUserCommandOnStaff()
 	{
 		// Send new login command
@@ -124,7 +167,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(5)
+	@Order(7)
 	public void checkIncorrectLoginUserCommandCustomer()
 	{
 		// Set incorrect password
@@ -143,7 +186,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(6)
+	@Order(8)
 	public void checkIncorrectLoginUserCommandStaff()
 	{
 		// Set incorrect password
@@ -162,7 +205,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(7)
+	@Order(9)
 	public void checkCreateRoomsCommand()
 	{
 		// Send new createRooms request
@@ -182,10 +225,8 @@ public class CommandExecuteTest
 		rooms = resultRooms;
 	}
 
-	// Tests 5-7 work in progress
-
 	@Test
-	@Order(5)
+	@Order(10)
 	public void checkCreateReservationCommand()
 	{
 		// Create room for order
@@ -194,8 +235,8 @@ public class CommandExecuteTest
 
 		// Create order
 		OrderBuilder builder = new OrderBuilder();
-		builder.setStartDate(Timestamp.valueOf(LocalDateTime.now()));
-		builder.setEndDate(Timestamp.valueOf(LocalDateTime.now()));
+		builder.setStartDate(startDate);
+		builder.setEndDate(endDate);
 		builder.addRoom(room);
 		builder.setUser(customer);
 
@@ -245,25 +286,26 @@ public class CommandExecuteTest
 	}
 
 	// @Test
-	// @Order(6)
+	// @Order(11)
 	public void checkGetAvailableRoomsCommand()
 	{
-		invoker.setCommand(new GetAvailableRoomsCommand(Timestamp.valueOf("2020-02-10 10:00:00"), Timestamp.valueOf("2020-02-12 10:00:00")));
+		invoker.setCommand(new GetAvailableRoomsCommand(startDate, endDate));
 		invoker.execute();
 
+		// Weird behaviour I need to fix
+
 		// Retrieve Response and assert
-		ArrayList<Standard> availableRooms = invoker.getResponse();
-		assertEquals(rooms.size(), availableRooms.size()); // TODO: Update test to work with any number of rooms
-		for (int i = 0; i < availableRooms.size(); i++)
-		{
-			assertEquals(rooms.get(i).getRoomNumber(), availableRooms.get(i).getRoomNumber());
-			assertEquals(rooms.get(i).getRoomName(), availableRooms.get(i).getRoomName());
-			assertEquals(rooms.get(i).getNumberBeds(), availableRooms.get(i).getNumberBeds());
-		}
+		Map<String, ArrayList<Standard>> availableRooms = invoker.getResponse();
+
+		// Check for room reserved in Test 10 not being available
+		assertFalse(contains(availableRooms.get("Standard"), rooms.get(0)));
+		// Check for other generated rooms being available
+		assertTrue(contains(availableRooms.get("Standard"), rooms.get(1)));
+		assertTrue(contains(availableRooms.get("Standard"), rooms.get(2)));
 	}
 
 	@Test
-	@Order(7)
+	@Order(12)
 	public void checkCancelReservationCommand()
 	{
 		invoker.setCommand(new CancelReservationCommand(reservation));
@@ -307,7 +349,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(8)
+	@Order(13)
 	public void checkRemoveRoomsCommand()
 	{
 		// Send new createRooms request
@@ -328,7 +370,7 @@ public class CommandExecuteTest
 	}
 	
 	@Test
-	@Order(9)
+	@Order(14)
 	public void checkRemoveUserCommandOnCustomer()
 	{
 		// Send new customer request
@@ -344,7 +386,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(10)
+	@Order(15)
 	public void checkRemoveUserCommandOnStaff()
 	{
 		// Send new customer request

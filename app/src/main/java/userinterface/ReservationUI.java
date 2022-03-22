@@ -7,6 +7,7 @@ public class ReservationUI {
 
     private static OrderBuilder builder = new OrderBuilder();
     private static Director director = new Director();
+    private static Order finalOrder;
     
     public static int run(Console console){
         System.out.println("\n####################################################");
@@ -16,7 +17,8 @@ public class ReservationUI {
         System.out.println("1. \t Add Room");
         System.out.println("2. \t Remove Room");
         System.out.println("3. \t View Order Cart");
-        System.out.println("4. \t Back");
+        System.out.println("4. \t Finalise Order");
+        System.out.println("5. \t Back");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
         int option = Integer.parseInt(console.readLine());
@@ -43,6 +45,11 @@ public class ReservationUI {
                 }
                 return UI.RESERVATION_STATE;
             case 4: 
+                Order order = builder.getOrder();
+                finalOrder = director.addReservation(order);
+                BillingUI.setFinalOrder(finalOrder);
+                return UI.BILLING_STATE;
+            case 5: 
                 if(LoginUI.userType.equals("Customer")){
                     return UI.MENU_STATE;
                 }

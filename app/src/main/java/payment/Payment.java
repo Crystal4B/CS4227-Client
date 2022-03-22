@@ -4,19 +4,23 @@ import java.util.Random;
 
 public class Payment {
     private double finalCost;
+    private boolean isPaid = false;
     
     public void setCost(double cost) {
         finalCost = cost;
     } 
 
-    public void payByCash() {
-
+    // On reservation made, notifies server that this reservation needs to be paid
+    public boolean payByCash() {
+        return true;
     }
 
     public boolean payCreditCard(String cardNo, String cardName, int cardDate, int cardBack){
         if (isValid("cardNo", cardNo) &&
         isValid("cardDate", cardDate) &&
         isValid("cardBack", cardBack) ) {
+            finalCost = 0;
+            isPaid = true;
             return true;
         }
         else{
@@ -24,18 +28,21 @@ public class Payment {
         }
     }
 
-    public boolean payVoucher(int vouchNumber){
-        Random random = new Random();
-        return random.nextBoolean();
-    }
-
-    public double payVoucherDiscount(int vouchNumber){
-        Random random = new Random();
-        double num =  random.nextDouble();
-        if(num > .5) {
-            num = 0.5;
+    // When guest pays at reception, accessible through staff menu
+    public void payAtReception(double amount) {
+        double change;
+        if(amount>finalCost) {
+            change = amount - finalCost ;
+            finalCost = 0;
+            isPaid = true;
         }
-        return num;
+        else if (amount < finalCost){
+            finalCost = finalCost - amount;
+        }
+        else {
+            finalCost = 0;
+            isPaid = true;
+        }
     }
 
     public boolean isValid (String name, int toCheck) {
@@ -70,6 +77,10 @@ public class Payment {
                     }
         }
 		return false;
+    }
+
+    public boolean isPaid() {
+        return isPaid();
     }
 
     //TODO: Get Order object, get Order.getfinalprice

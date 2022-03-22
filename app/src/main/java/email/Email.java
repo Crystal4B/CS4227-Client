@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 import order.Order;
 
 public class Email {
-    public Email(String email, Order order) {
+    public Email(String email, String emailMessage) {
         String to = email;
         String from = "teamplatinumlimerick@gmail.com";
         String host = "smtp.gmail.com";
@@ -44,10 +44,10 @@ public class Email {
 
             message.setSubject("Order Confirmation - Platinum Hotels");
 
-            String emailMessage = "";
+            /*String emailMessage = "";
             emailMessage = "This is an automated message from Platinum Hotels to confirm your recent order.\n\n\n";
             emailMessage += "You booked " + order.getRooms().size() + " room(s) from " + order.getStartDate() + " to " + order.getEndDate() + " . \n\n\n";
-            emailMessage += "Your cost is $" + order.getFinalCost();
+            emailMessage += "Your cost is $" + order.getFinalCost(); */
             message.setText(emailMessage);
 
             System.out.println("sending...");

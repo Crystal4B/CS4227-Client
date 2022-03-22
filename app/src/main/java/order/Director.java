@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import hotelsystem.room.*;
-import hotelsystem.user.Customer;
-import hotelsystem.user.User;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.CreateReservationCommand;
 import requestsystem.commands.GetAvailableRoomsCommand;

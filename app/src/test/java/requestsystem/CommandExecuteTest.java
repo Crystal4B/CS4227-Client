@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,7 @@ import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.CreateReservationCommand;
 import requestsystem.commands.CreateRoomsCommand;
 import requestsystem.commands.GetAvailableRoomsCommand;
+import requestsystem.commands.GetReservationsByUserCommand;
 import requestsystem.commands.LoginUserCommand;
 import requestsystem.commands.RegisterUserCommand;
 import requestsystem.commands.RemoveRoomsCommand;
@@ -283,6 +285,56 @@ public class CommandExecuteTest
 		}
 
 		reservation = resultOrder;
+	}
+
+	// @Test
+	// @Order(11)
+	public void checkGetReservationsByUserCommand()
+	{
+		invoker.setCommand(new GetReservationsByUserCommand(customer));
+		invoker.execute();
+
+		// Weird ordering issue
+
+		//Retrieve Response and assert
+		List<order.Order> reservations = invoker.getResponse();
+		assertEquals(1, reservations.size());
+		
+		order.Order resultReservation = reservations.get(0);
+		assertEquals(reservation.getOrderID(), resultReservation.getOrderID());
+		assertEquals(resultReservation.getStartDate(), resultReservation.getStartDate());
+		assertEquals(resultReservation.getEndDate(), resultReservation.getEndDate());
+		assertEquals(resultReservation.getNumberOfDaysBooked(), resultReservation.getNumberOfDaysBooked());
+		assertEquals(resultReservation.getRateCost(), resultReservation.getRateCost());
+		assertEquals(resultReservation.getFinalCost(), resultReservation.getFinalCost());
+		assertEquals(resultReservation.getNumberOfOccupants(), resultReservation.getNumberOfOccupants());
+
+		ArrayList<Standard> rooms = reservation.getRooms();
+		ArrayList<Standard> resultRooms = resultReservation.getRooms();
+		assertEquals(rooms.size(), resultRooms.size());
+		for (int i = 0; i < rooms.size(); i++)
+		{
+			Standard roomStandard = rooms.get(i);
+			Standard resultRoomStandard = resultRooms.get(i);
+
+			assertEquals(roomStandard.getRoomNumber(), resultRoomStandard.getRoomNumber());
+			assertEquals(roomStandard.getRoomName(), resultRoomStandard.getRoomName());
+			assertEquals(roomStandard.getPerks(), resultRoomStandard.getPerks());
+			assertEquals(roomStandard.getPrice(), resultRoomStandard.getPrice());
+
+			ArrayList<User> occupants = roomStandard.getOccupants();
+			ArrayList<User> resultOccupants = resultRoomStandard.getOccupants();
+			assertEquals(occupants.size(), resultOccupants.size());
+			for (int j = 0; j < occupants.size(); j++)
+			{
+				Guest guest = (Guest) occupants.get(j);
+				Guest resultGuest = (Guest) resultOccupants.get(j);
+
+				assertEquals(guest.getFirstName(), resultGuest.getFirstName());
+				assertEquals(guest.getLastName(), resultGuest.getLastName());
+				assertFalse(resultGuest.getId() == -1);
+			}
+		}
 	}
 
 	// @Test

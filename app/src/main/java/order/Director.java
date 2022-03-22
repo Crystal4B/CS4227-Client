@@ -1,14 +1,18 @@
 package order;
 
+import java.io.Console;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import hotelsystem.room.*;
+import hotelsystem.user.Customer;
+import hotelsystem.user.User;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.CreateReservationCommand;
 import requestsystem.commands.GetAvailableRoomsCommand;
+import userinterface.ReservationUI;
 
 public class Director {
 
@@ -40,13 +44,14 @@ public class Director {
         return listOfRoomOptions;
     }
 
-    public void addRoom(OrderBuilder builder, int option){
+    public void addRoom(Console console, OrderBuilder builder, int option){
 
         String roomKey = (String)rooms.keySet().toArray()[option];
         List<Room> roomValue = rooms.get(roomKey);
 
         int index = (int)Math.random()*roomValue.size();
         Room selectedRoom = roomValue.get(index);
+        selectedRoom.addOccupants(ReservationUI.addGuests(console,((Standard) selectedRoom).getNumberBeds()));
         builder.addRoom((Standard)selectedRoom);
         
         roomValue.remove(index);

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import hotelsystem.room.*;
 import requestsystem.commands.CommandInvoker;
+import requestsystem.commands.CreateReservationCommand;
 import requestsystem.commands.GetAvailableRoomsCommand;
 
 public class Director {
@@ -88,5 +89,12 @@ public class Director {
             roomsInCart += i + ".\t" + builder.getRoomsBuilder().get(i).toString() + "\n";
         }
         return roomsInCart;
+    }
+
+    public Order addReservation(Order order){
+        CommandInvoker invoker = new CommandInvoker();
+        invoker.setCommand(new CreateReservationCommand(order));
+        invoker.execute();
+        return invoker.getResponse();
     }
 }

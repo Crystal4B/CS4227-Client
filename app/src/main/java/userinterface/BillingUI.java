@@ -2,7 +2,11 @@ package userinterface;
 
 import java.io.Console;
 
+import order.Order;
+
 public class BillingUI {
+
+    private static Order order;
 
     public static int run(Console console) {
         System.out.println("\n####################################################");
@@ -31,6 +35,14 @@ public class BillingUI {
             default:
                 return UI.BILLING_STATE;
         }
+    }
+
+    public static void setFinalOrder(Order finalOrder){
+        order = finalOrder;
+    }
+
+    public static Order getFinalOrder(){
+        return order;
     }
 
 }

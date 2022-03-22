@@ -2,7 +2,16 @@ package billingsystem;
 
 import order.*;
 
+import payment.*;
+
 public class BillingCash extends BillingTemplate {
+
+    public boolean PaymentSend(Order order){
+        Payment pay = new Payment();
+        pay.setCost(BillCalc(order));
+        return pay.payByCash();
+    }
+
     @Override
     public String Bill(Order order, double num) {
         temp = num;

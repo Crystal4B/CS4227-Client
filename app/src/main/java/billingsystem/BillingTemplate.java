@@ -2,6 +2,8 @@ package billingsystem;
 
 import java.math.BigDecimal;
 import order.*;
+import hotelsystem.user.*;
+import email.Email;
 
 abstract class BillingTemplate {
    double temp = 0.0;
@@ -13,6 +15,11 @@ abstract class BillingTemplate {
       BigDecimal temp = new BigDecimal(Double.toString(num));
       temp = temp.setScale(2);
       return temp;
+   }
+
+   public void SendEmail(Order order, double num ){
+      User user = order.getUser();
+      Email email = new Email(user.getEmail(), "Platinum Hotels: Booking confirmation", Bill(order, num));
    }
 
    abstract public String Bill(Order order, double num);

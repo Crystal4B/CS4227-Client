@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 import order.*;
 
 abstract class BillingTemplate {
+   double temp = 0.0;
    public double BillCalc(Order order) {
-      return order.getFinalCost();
+      return order.getFinalCost()*(1-temp);
    }
 
    public BigDecimal RoundToTwoDec(double num) {
@@ -14,7 +15,16 @@ abstract class BillingTemplate {
       return temp;
    }
 
-   abstract public String Bill(Order order);
+   abstract public String Bill(Order order, double num);
+
+   public String CouponPaid(){
+
+      if(temp == 0.0){
+         return "";
+      } else {
+         return "\n" + "Coupoun:\t\t" + temp;
+      }
+   }
 
    public String DoubleToString(double num) {
       String str = num + "";
@@ -36,7 +46,7 @@ abstract class BillingTemplate {
 
    public String GetBill(Order order){
       String temp = "";
-      temp = Bill(order);
+      temp = Bill(order, 0);
       return temp;
    }
 

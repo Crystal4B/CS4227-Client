@@ -68,8 +68,7 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void parseResponse(Map<String, Object> response)
+	public void parseResponse(Map<?, ?> response)
 	{
 		String mutation;
 		if (response.containsKey(MUTATION_NAME))
@@ -86,7 +85,7 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			return;
 		}
 
-		Map<String, Object> reservationData = (Map<String, Object>) response.get(mutation);
+		Map<?, ?> reservationData = (Map<?, ?>) response.get(mutation);
 
 		String reservationId = (String) reservationData.get("id");
 
@@ -98,12 +97,14 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 
 		List<Standard> rooms = reservationOrder.getRooms();
 
-		List<Map<String, Object>> guestsMap = (List<Map<String, Object>>) reservationData.get("guests");
-		for (Map<String, Object> map : guestsMap)
+		List<?> guestsList = (List<?>) reservationData.get("guests");
+		for (int i = 0; i < guestsList.size(); i++)
 		{
-			String guestId = (String) map.get("id");
-			String firstName = (String) map.get("firstName");
-			String lastName = (String) map.get("lastName");
+			Map<?, ?> guestMap = (Map<?, ?>) guestsList.get(i);
+
+			String guestId = (String) guestMap.get("id");
+			String firstName = (String) guestMap.get("firstName");
+			String lastName = (String) guestMap.get("lastName");
 			
 			for (Standard room : rooms)
 			{

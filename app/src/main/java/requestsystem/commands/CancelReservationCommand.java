@@ -68,8 +68,7 @@ public class CancelReservationCommand extends CommandTemplate<Order>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void parseResponse(Map<String, Object> response)
+	public void parseResponse(Map<?, ?> response)
 	{
 		String mutation;
 		if (response.containsKey(MUTATION_NAME))
@@ -86,7 +85,7 @@ public class CancelReservationCommand extends CommandTemplate<Order>
 			return;
 		}
 
-		Map<String, Object> reservationData = (Map<String, Object>) response.get(mutation);
+		Map<?, ?> reservationData = (Map<?, ?>) response.get(mutation);
 		
 		String reservationId = (String) reservationData.get("id");
 		

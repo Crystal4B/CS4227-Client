@@ -19,7 +19,7 @@ public abstract class CommandTemplate<T>
 	public void execute()
 	{
 		String message = createMessage(false);
-		Map<String, Object> response = RequestClient.sendRequest(message);
+		Map<?, ?> response = RequestClient.sendRequest(message);
 		parseResponse(response);
 	};
 
@@ -29,7 +29,7 @@ public abstract class CommandTemplate<T>
 	public void undo()
 	{
 		String message = createMessage(true);
-		Map<String, Object> response = RequestClient.sendRequest(message);
+		Map<?, ?> response = RequestClient.sendRequest(message);
 		parseResponse(response);
 	}
 
@@ -53,5 +53,5 @@ public abstract class CommandTemplate<T>
 	 * abstract parseResponse function for converting response to desired Object
 	 * @param response JSON response from server as Map<String, Object>
 	 */
-	public abstract void parseResponse(Map<String, Object> response);
+	public abstract void parseResponse(Map<?, ?> response);
 }

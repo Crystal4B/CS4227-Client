@@ -28,8 +28,7 @@ public class RequestClient
 	 * @param message the message being sent to the server
 	 * @return the data recieved in the response from the server, null if error occured
 	 */
-	@SuppressWarnings("unchecked")
-	public static Map<String, Object> sendRequest(String message)
+	public static Map<?, ?> sendRequest(String message)
 	{
 		try
 		{
@@ -43,10 +42,10 @@ public class RequestClient
 
 			System.out.println(response.body());
 
-			Map<String, Map<String,Object>> mapping = new ObjectMapper().readValue(response.body(), HashMap.class);
+			Map<?, ?> mapping = new ObjectMapper().readValue(response.body(), HashMap.class);
 			if (mapping.containsKey("data"))
 			{
-				return mapping.get("data");
+				return (Map<?, ?>) mapping.get("data");
 			}
 			else if(mapping.containsKey("errors"))
 			{

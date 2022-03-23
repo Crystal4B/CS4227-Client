@@ -30,26 +30,30 @@ public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 	}
 
 	@Override
-	public void parseResponse(Map<String, Object> response)
+	public void parseResponse(Map<?, ?> response)
 	{
-		List<Map<String, Object>> reservationsData = (List<Map<String, Object>>) response.get(QUERY_NAME);
-		responseObject = new ArrayList<>();
-		for (Map<String, Object> reservationData : reservationsData)
-		{
-			OrderBuilder builder = new OrderBuilder();
-	
-			builder.setOrderID((String)reservationData.get("id"));
-			builder.setStartDate(Timestamp.valueOf((String)reservationData.get("checkIn")));
-			builder.setEndDate(Timestamp.valueOf((String)reservationData.get("checkOut")));
-	
-			ArrayList<Standard> rooms = new ArrayList<>();
-			
-			List<Map<String, Object>> guestsMap = (List<Map<String, Object>>) reservationData.get("guests");
-			for (Map<String, Object> map : guestsMap)
-			{
-				Map<String, Object> roomData = (Map<String,Object>) map.get("room");
-				int id = Integer.parseInt((String) roomData.get("id"));
+		List<?> reservationList = (List<?>) response.get(QUERY_NAME);
 
+		responseObject = new ArrayList<>();
+		for (int i = 0; i < reservationList.size(); i++)
+		{
+			Map<?, ?> reservationMap = (Map<?,?>) reservationList.get(i);
+					
+			OrderBuilder builder = new OrderBuilder();
+
+			builder.setOrderID((String) reservationMap.get("id"));
+			builder.setStartDate(Timestamp.valueOf((String) reservationMap.get("checkIn")));
+			builder.setEndDate(Timestamp.valueOf((String) reservationMap.get("checkOut")));
+
+			ArrayList<Standard> rooms = new ArrayList<>();
+
+			List<?> guestList = (List<?>) reservationMap.get("guests");
+			for (int j = 0; j < guestList.size(); j++)
+			{
+				Map<?, ?> guestMap = (Map<?, ?>) guestList.get(j);
+				Map<?, ?> roomMap = (Map<?, ?>) guestMap.get("room");
+
+				int id = Integer.parseInt((String) roomMap.get("id"));
 				Standard standardRoom = null;
 
 				boolean found = false;
@@ -65,15 +69,15 @@ public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 
 				if (!found)
 				{
-					String type = (String) roomData.get("type");
-					int numberOfBeds = (int) roomData.get("numberOfBeds");
+					String type = (String) roomMap.get("type");
+					int numberOfBeds = (int) roomMap.get("numberOfBeds");
 					standardRoom = new Standard(type, id, numberOfBeds);
 					rooms.add(standardRoom);
 				}
 
-				int guestId = Integer.parseInt((String) map.get("id"));
-				String firstName = (String) map.get("firstName");
-				String lastName = (String) map.get("lastName");
+				int guestId = Integer.parseInt((String) guestMap.get("id"));
+				String firstName = (String) guestMap.get("firstName");
+				String lastName = (String) guestMap.get("lastName");
 
 				standardRoom.addOccupant(new Guest(firstName, lastName, guestId));
 			}

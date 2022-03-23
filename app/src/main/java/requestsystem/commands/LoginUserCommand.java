@@ -34,22 +34,21 @@ public class LoginUserCommand extends CommandTemplate<User>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void parseResponse(Map<String, Object> response)
+	public void parseResponse(Map<?, ?> response)
 	{
 		if (response.containsKey(QUERY_NAME))
 		{
-			Map<String, String> userData = (Map<String, String>) response.get(QUERY_NAME);
+			Map<?, ?> userData = (Map<?, ?>) response.get(QUERY_NAME);
 			if (userData == null)
 			{
 				return;
 			}
 
-			String id = userData.get("id");
-			String type = userData.get("type");
-			String email = userData.get("email");
-			String username = userData.get("username");
-			String password = userData.get("password");
+			String id = (String) userData.get("id");
+			String type = (String) userData.get("type");
+			String email = (String) userData.get("email");
+			String username = (String) userData.get("username");
+			String password = (String) userData.get("password");
 	
 			switch(type)
 			{

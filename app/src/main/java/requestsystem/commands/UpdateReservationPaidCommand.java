@@ -31,9 +31,9 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
     }
 
     @Override
-    public void parseResponse(Map<String, Object> response)
+    public void parseResponse(Map<?, ?> response)
     {
-        Map<String, Object> reservationData = (Map<String, Object>) response.get(MUTATION);
+        Map<?, ?> reservationData = (Map<?, ?>) response.get(MUTATION);
         OrderBuilder builder = new OrderBuilder();
 
         builder.setOrderID((String)reservationData.get("id"));
@@ -42,11 +42,13 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 
         ArrayList<Standard> rooms = new ArrayList<>();
         
-        List<Map<String, Object>> guestsMap = (List<Map<String, Object>>) reservationData.get("guests");
-        for (Map<String, Object> map : guestsMap)
+        List<?> guestsList = (List<?>) reservationData.get("guests");
+        for (int i = 0; i < guestsList.size(); i++)
         {
-            Map<String, Object> roomData = (Map<String,Object>) map.get("room");
-            int id = Integer.parseInt((String) roomData.get("id"));
+            Map<?, ?> guestMap = (Map<?, ?>) guestsList.get(i);
+            Map<?, ?> roomMap = (Map<?, ?>) guestMap.get("room");
+
+            int id = Integer.parseInt((String) roomMap.get("id"));
 
             Standard standardRoom = null;
 
@@ -63,14 +65,14 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 
             if (!found)
             {
-                String type = (String) roomData.get("type");
-                int numberOfBeds = Integer.parseInt((String) roomData.get("numberOfBeds"));
+                String type = (String) roomMap.get("type");
+                int numberOfBeds = Integer.parseInt((String) roomMap.get("numberOfBeds"));
                 standardRoom = new Standard(type, id, numberOfBeds);
             }
 
-            int guestId = Integer.parseInt((String) map.get("id"));
-            String firstName = (String) map.get("firstName");
-            String lastName = (String) map.get("lastName");
+            int guestId = Integer.parseInt((String) guestMap.get("id"));
+            String firstName = (String) guestMap.get("firstName");
+            String lastName = (String) guestMap.get("lastName");
 
             standardRoom.addOccupant(new Guest(firstName, lastName, guestId));
         }

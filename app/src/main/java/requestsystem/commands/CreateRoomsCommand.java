@@ -60,8 +60,7 @@ public class CreateRoomsCommand extends CommandTemplate<List<Standard>>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void parseResponse(Map<String, Object> response)
+	public void parseResponse(Map<?, ?> response)
 	{
 		String mutation;
 		if (response.containsKey(MUTATION_NAME))
@@ -78,13 +77,15 @@ public class CreateRoomsCommand extends CommandTemplate<List<Standard>>
 			return;
 		}
 
-		List<Map<String,Object>> roomsData = (List<Map<String, Object>>) response.get(mutation);
+		List<?> roomsList = (List<?>) response.get(mutation);
 		responseObject = new ArrayList<>();
-		for (Map<String,Object> room : roomsData)
+		for (int i = 0; i < roomsList.size(); i++)
 		{
-			String id = (String) room.get("id");
-			String type = (String) room.get("type");
-			int numberOfBeds = (int) room.get("numberOfBeds");
+			Map<?, ?> roomsMap = (Map<?, ?>) roomsList.get(i);
+
+			String id = (String) roomsMap.get("id");
+			String type = (String) roomsMap.get("type");
+			int numberOfBeds = (int) roomsMap.get("numberOfBeds");
 			switch(type)
 			{
 			case "Standard":

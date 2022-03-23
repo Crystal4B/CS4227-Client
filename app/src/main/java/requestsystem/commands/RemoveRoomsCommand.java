@@ -1,6 +1,7 @@
 package requestsystem.commands;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import hotelsystem.room.Standard;
@@ -59,8 +60,7 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void parseResponse(Map<String, Object> response)
+	public void parseResponse(Map<?, ?> response)
 	{
 		String mutation;
 		if (response.containsKey(MUTATION_NAME))
@@ -77,19 +77,16 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 			return;
 		}
 
-		ArrayList<Map<String,Object>> roomsData = (ArrayList<Map<String, Object>>) response.get(mutation);
+		List<?> roomsList = (List<?>) response.get(mutation);
 		responseObject = new ArrayList<>();
-		for (Map<String,Object> room : roomsData)
+		for (int i = 0; i < roomsList.size(); i++)
 		{
-			String id = (String) room.get("id");
-			String type = (String) room.get("type");
-			int numberOfBeds = (int) room.get("numberOfBeds");
-			switch(type)
-			{
-			case "Standard":
-				responseObject.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
-				break;
-			}
+			Map<?, ?> roomMap = (Map<?, ?>) roomsList.get(i);
+
+			String id = (String) roomMap.get("id");
+			String type = (String) roomMap.get("type");
+			int numberOfBeds = (int) roomMap.get("numberOfBeds");
+			responseObject.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
 		}
 		
 		// Make a copy for undo

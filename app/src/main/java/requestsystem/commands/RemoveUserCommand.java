@@ -38,8 +38,7 @@ public class RemoveUserCommand extends CommandTemplate<User>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void parseResponse(Map<String, Object> response)
+	public void parseResponse(Map<?, ?> response)
 	{
 		String mutation;
 		if (response.containsKey(MUTATION_NAME))
@@ -55,12 +54,12 @@ public class RemoveUserCommand extends CommandTemplate<User>
 			return;
 		}
 
-		Map<String, String> userData = (Map<String, String>) response.get(mutation);
-		String id = userData.get("id");
-		String type = userData.get("type");
-		String email = userData.get("email");
-		String username = userData.get("username");
-		String password = userData.get("password");
+		Map<?, ?> userData = (Map<?, ?>) response.get(mutation);
+		String id = (String) userData.get("id");
+		String type = (String) userData.get("type");
+		String email = (String) userData.get("email");
+		String username = (String) userData.get("username");
+		String password = (String) userData.get("password");
 	
 		switch(type)
 		{

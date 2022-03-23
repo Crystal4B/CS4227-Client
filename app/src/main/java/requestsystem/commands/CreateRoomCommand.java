@@ -32,8 +32,7 @@ public class CreateRoomCommand extends CommandTemplate<Standard>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void parseResponse(Map<String, Object> response)
+	public void parseResponse(Map<?, ?> response)
 	{
 		String mutation;
 		if (response.containsKey(MUTATION_NAME))
@@ -50,7 +49,7 @@ public class CreateRoomCommand extends CommandTemplate<Standard>
 			return;
 		}
 
-		Map<String,Object> roomsData = (Map<String, Object>) response.get(mutation);
+		Map<?, ?> roomsData = (Map<?, ?>) response.get(mutation);
 		String id = (String) roomsData.get("id");
 		String type = (String) roomsData.get("type");
 		int numberOfBeds = (int) roomsData.get("numberOfBeds");

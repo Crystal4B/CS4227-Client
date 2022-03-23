@@ -3,10 +3,12 @@ package requestsystem.commands;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
+import hotelsystem.room.Room;
 import hotelsystem.room.Standard;
 
-public class GetAllRoomsCommand extends CommandTemplate<List<Standard>>
+public class GetAllRoomsCommand extends CommandTemplate<Map<String, List<Room>>>
 {
 	private static final String QUERY_NAME = "allRooms";
 
@@ -18,25 +20,25 @@ public class GetAllRoomsCommand extends CommandTemplate<List<Standard>>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void parseResponse(Map<String, Object> response)
+	public void parseResponse(Map<?, ?> response)
 	{
-		if (response.containsKey(QUERY_NAME))
+		if (!response.containsKey(QUERY_NAME))
 		{
-			List<Map<String,Object>> roomsData = (ArrayList<Map<String, Object>>) response.get(QUERY_NAME);
-			responseObject = new ArrayList<>();
-			for (Map<String,Object> room : roomsData)
-			{
-				String id = (String) room.get("id");
-				String type = (String) room.get("type");
-				int numberOfBeds = (int) room.get("numberOfBeds");
-				switch(type)
-				{
-				case "Standard":
-					responseObject.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
-					break;
-				}
-			}
+			return;
+		}
+
+		List<?> roomsList = (List<?>) response.get(QUERY_NAME);
+		responseObject = new TreeMap<>();
+		for (int i = 0; i < roomsList.size(); i++)
+		{
+			Map<?, ?> roomMap = (Map<?, ?>) roomsList.get(i);
+
+			String id = (String) roomMap.get("id");
+			String type = (String) roomMap.get("type");
+			int numberOfBeds = (int) roomMap.get("numberOfBeds");
+			List<Room> rooms = responseObject.getOrDefault(type, new ArrayList<>());
+			rooms.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
+			responseObject.put(type, rooms);
 		}
 	}
 }

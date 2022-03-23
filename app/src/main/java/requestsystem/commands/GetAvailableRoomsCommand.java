@@ -40,22 +40,25 @@ public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<R
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void parseResponse(Map<String, Object> response)
+	public void parseResponse(Map<?, ?> response)
 	{
 		if (response.containsKey(QUERY_NAME))
 		{
-			ArrayList<Map<String,Object>> roomsData = (ArrayList<Map<String, Object>>) response.get(QUERY_NAME);
-			responseObject = new TreeMap<>();
-			for (Map<String,Object> room : roomsData)
-			{
-				String id = (String) room.get("id");
-				String type = (String) room.get("type");
-				int numberOfBeds = (int) room.get("numberOfBeds");
-				List<Room> rooms = responseObject.getOrDefault(type, new ArrayList<>());
-				rooms.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
-				responseObject.put(type, rooms);
-			}
+			return;
+		}
+
+		List<?> roomsList = (List<?>) response.get(QUERY_NAME);
+		responseObject = new TreeMap<>();
+		for (int i = 0; i < roomsList.size(); i++)
+		{
+			Map<?, ?> roomMap = (Map<?, ?>) roomsList.get(i);
+
+			String id = (String) roomMap.get("id");
+			String type = (String) roomMap.get("type");
+			int numberOfBeds = (int) roomMap.get("numberOfBeds");
+			List<Room> rooms = responseObject.getOrDefault(type, new ArrayList<>());
+			rooms.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
+			responseObject.put(type, rooms);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 package requestsystem.commands;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import hotelsystem.room.Standard;
@@ -36,36 +36,30 @@ public class SelectReservationCommand extends CommandTemplate<Order>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public void parseResponse(Map<String, Object> response)
+	public void parseResponse(Map<?, ?> response)
 	{
 		if (response.containsKey(QUERY_NAME))
 		{
-			Map<String, Object> reservationData = (Map<String, Object>) response.get(QUERY_NAME);
+			Map<?, ?> reservationData = (Map<?, ?>) response.get(QUERY_NAME);
 
 			String reservationId = (String) reservationData.get("id");
 			Timestamp arrivalDate = (Timestamp) reservationData.get("arrivalDate");
 			Timestamp departureDate = (Timestamp) reservationData.get("departureDate");
-			ArrayList<Map<String, Object>> roomsMap = (ArrayList<Map<String, Object>>) reservationData.get("rooms");
+			List<?> roomsList = (List<?>) reservationData.get("rooms");
 	
 			OrderBuilder builder = new OrderBuilder();
 			builder.setOrderID(reservationId);
 			builder.setStartDate(arrivalDate);
 			builder.setEndDate(departureDate);
 	
-			for (Map<String, Object> map : roomsMap)
+			for (int i = 0; i < roomsList.size(); i++)
 			{
-				String roomId = (String) map.get("id");
-				String type = (String) map.get("type");
-				String name = (String) map.get("name");
-				int numberOfBeds = (int) map.get("numberOfBeds");
-	
-				switch(type)
-				{
-				case "Standard":
-					builder.addRoom(new Standard(name, Integer.parseInt(roomId), numberOfBeds));
-					break;
-				}
+				Map<?, ?> roomMap = (Map<?, ?>) roomsList.get(i);
+
+				String roomId = (String) roomMap.get("id");
+				String type = (String) roomMap.get("type");
+				int numberOfBeds = (int) roomMap.get("numberOfBeds");
+				builder.addRoom(new Standard(type, Integer.parseInt(roomId), numberOfBeds));
 			}
 	
 			responseObject = builder.getOrder();

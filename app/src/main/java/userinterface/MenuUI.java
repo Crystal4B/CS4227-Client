@@ -7,7 +7,7 @@ import order.Order;
 import requestsystem.commands.*;
 
 public class MenuUI {
-    
+
     public static int run(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -24,7 +24,11 @@ public class MenuUI {
             case 1: 
                 return UI.RESERVATION_STATE;
             case 2: 
-                System.out.println("Cancel");
+            while(true){
+                if(cancelUserReservation(console)){
+                    break;
+                }
+            }
                 return UI.MENU_STATE;
             case 3: 
             while(true){
@@ -45,40 +49,53 @@ public class MenuUI {
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println("Reservation Information:\n");
-        System.out.println(getUserReservations());
-        System.out.println("1. \t Back");
+        System.out.println("0. \t Back");
+        getUserReservations();      
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
         int option = Integer.parseInt(console.readLine());
         switch (option) {
-            case 1:
+            case 0:
                 return true;
             default:
                 return false;
         }
     }
 
-    public static String getUserReservations(){
+    public static List<Order> getUserReservations(){
         CommandInvoker invoker = new CommandInvoker();
-        System.out.print(LoginUI.getUser().getId());
-        System.out.print(LoginUI.getUser().getEmail());
-        System.out.print(LoginUI.getUser().getUserType());
         invoker.setCommand(new GetReservationsByUserCommand(LoginUI.getUser()));
         invoker.execute();
         List<Order> reservations = invoker.getResponse();
-        String reservationList = "";
         for (int i=0; i < reservations.size(); i++) 
         { 
-            reservationList += reservations.get(i).toString() + "\n";
+            System.out.println((i+1) + ". \t" + reservations.get(i).toString() + "\n");
         }
-        return reservationList;
+        return reservations;
         
     }
 
-    public void cancelUserReservation(){
-        CommandInvoker invoker = new CommandInvoker();
-        // invoker.setCommand(new CancelReservationCommand());
-        // invoker.execute();
-        // invoker.getResponse();
+    public static boolean cancelUserReservation(Console console){
+        System.out.println("\n####################################################");
+        System.out.println("#     Welcome to the Hotel Reservation System      #");
+        System.out.println("####################################################\n");
+        System.out.println("Reservation Information:\n");
+        System.out.println("0. \t Back");
+        List<Order> reservations = getUserReservations();
+        System.out.println("\n####################################################\n");
+        System.out.println("Enter option here:");
+        int option = Integer.parseInt(console.readLine());
+        System.out.println(option);
+        System.out.println(reservations.size()+1);
+        if(option == 0){
+            return true;
+        }
+        else if(option > 0 && option < reservations.size()+1){
+            CommandInvoker invoker = new CommandInvoker();
+            invoker.setCommand(new CancelReservationCommand(reservations.get(option-1)));
+            invoker.execute();
+            return true;
+        }
+        return false;
     }
 }

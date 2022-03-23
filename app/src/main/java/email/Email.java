@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 import order.Order;
 
 public class Email {
-    public Email(String email, String emailMessage) {
+    public Email(String email, String subject, String emailMessage) {
         String to = email;
         String from = "teamplatinumlimerick@gmail.com";
         String host = "smtp.gmail.com";
@@ -42,7 +42,7 @@ public class Email {
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-            message.setSubject("Order Confirmation - Platinum Hotels");
+            message.setSubject(subject);
 
             /*String emailMessage = "";
             emailMessage = "This is an automated message from Platinum Hotels to confirm your recent order.\n\n\n";

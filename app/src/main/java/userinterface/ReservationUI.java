@@ -1,6 +1,10 @@
 package userinterface;
 
 import java.io.Console;
+import java.util.ArrayList;
+
+import hotelsystem.user.Guest;
+import hotelsystem.user.User;
 import order.*;
 
 public class ReservationUI {
@@ -22,6 +26,7 @@ public class ReservationUI {
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
         int option = Integer.parseInt(console.readLine());
+        builder.setUser(LoginUI.getUser());
         switch (option) {
             case 1: 
                 while(true){
@@ -50,10 +55,10 @@ public class ReservationUI {
                 BillingUI.setFinalOrder(finalOrder);
                 return UI.BILLING_STATE;
             case 5: 
-                if(LoginUI.userType.equals("Customer")){
+                if(LoginUI.getUser().getUserType().equals("Customer")){
                     return UI.MENU_STATE;
                 }
-                else if(LoginUI.userType.equals("Staff")){
+                else if(LoginUI.getUser().getUserType().equals("Staff")){
                     return UI.STAFF_MENU;
             }
             default:
@@ -73,7 +78,7 @@ public class ReservationUI {
         System.out.println("Please select one of the following options:");
         System.out.println(director.getAvailableRooms(builder));
         int roomTypeOption = Integer.parseInt(console.readLine());
-        director.addRoom(builder, roomTypeOption);
+        director.addRoom(console, builder, roomTypeOption);
         System.out.println("\n####################################################\n");
         return true;
     }
@@ -107,5 +112,18 @@ public class ReservationUI {
             default:
                 return false;
         }
+    }
+
+    public static ArrayList<User> addGuests(Console console, int roomSize){
+        ArrayList<User> guests = new ArrayList<>();
+        for(int i=0; i < roomSize; i++){
+            System.out.println("Please the first name of guest " + (i+1));
+            String firstName = console.readLine();
+            System.out.println("Please the last name of guest " + (i+1));
+            String lastName = console.readLine();
+            Guest guest = new Guest(firstName, lastName, -1);
+            guests.add(guest);
+        }
+        return guests;
     }
 }

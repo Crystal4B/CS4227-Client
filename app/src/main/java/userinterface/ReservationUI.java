@@ -26,6 +26,7 @@ public class ReservationUI {
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
         int option = Integer.parseInt(console.readLine());
+        builder.setUser(LoginUI.getUser());
         switch (option) {
             case 1: 
                 while(true){
@@ -54,10 +55,10 @@ public class ReservationUI {
                 BillingUI.setFinalOrder(finalOrder);
                 return UI.BILLING_STATE;
             case 5: 
-                if(LoginUI.userType.equals("Customer")){
+                if(LoginUI.getUser().getUserType().equals("Customer")){
                     return UI.MENU_STATE;
                 }
-                else if(LoginUI.userType.equals("Staff")){
+                else if(LoginUI.getUser().getUserType().equals("Staff")){
                     return UI.STAFF_MENU;
             }
             default:

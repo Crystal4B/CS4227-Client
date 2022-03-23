@@ -92,6 +92,7 @@ public class OrderBuilder implements Builder{
     private void update(){
         setRateCost();
         setNumberOfDaysBooked();
+        setNumberOfOccupants();
         setFinalCost();
     }
 

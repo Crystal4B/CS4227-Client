@@ -50,10 +50,10 @@ public class BillingUI {
     }
 
     public static int returnToMenu(){ 
-        if(LoginUI.userType.equals("Customer")){
+        if(LoginUI.getUser().getUserType().equals("Customer")){
             return UI.MENU_STATE;
         }
-        else if(LoginUI.userType.equals("Staff")){
+        else if(LoginUI.getUser().getUserType().equals("Staff")){
             return UI.STAFF_MENU;
         }
 		return UI.MENU_STATE;

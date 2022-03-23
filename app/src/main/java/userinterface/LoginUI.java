@@ -9,7 +9,7 @@ import login.Signup;
 
 public class LoginUI {
 
-    public static String userType;
+    private static User user;
     
     public static int run(Console console){
         System.out.println("\n####################################################");
@@ -41,13 +41,11 @@ public class LoginUI {
         String password = String.valueOf(console.readPassword());
         Login login = new Login();
         if(login.login(email, password)) {
-            User user = login.returnUser();
+            setUser(login.returnUser());
             if(user.getClass().getSimpleName().equals("Customer")){
-                LoginUI.userType = "Customer";
                 return UI.MENU_STATE;
             }
             else if(user.getClass().getSimpleName().equals("Staff")){
-                LoginUI.userType = "Staff";
                 return UI.STAFF_MENU;
             }
         }
@@ -68,7 +66,7 @@ public class LoginUI {
         LoginAdapter signup = new LoginAdapter(new Signup());
         signup.setName(username);
         signup.login(email, password);
-        User user = signup.returnUser();
+        user = signup.returnUser();
         if(user.getClass().getSimpleName().equals("Customer")){
             return UI.MENU_STATE;
         }
@@ -76,5 +74,13 @@ public class LoginUI {
             return UI.STAFF_MENU;
         }
         return UI.LOGIN_STATE;
+    }
+
+    public static User getUser(){
+        return user;
+    }
+
+    public static void setUser(User loggedInUser){
+        user = loggedInUser;
     }
 }

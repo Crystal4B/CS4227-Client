@@ -66,8 +66,9 @@ public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 				if (!found)
 				{
 					String type = (String) roomData.get("type");
-					int numberOfBeds = Integer.parseInt((String) roomData.get("numberOfBeds"));
+					int numberOfBeds = (int) roomData.get("numberOfBeds");
 					standardRoom = new Standard(type, id, numberOfBeds);
+					rooms.add(standardRoom);
 				}
 
 				int guestId = Integer.parseInt((String) map.get("id"));

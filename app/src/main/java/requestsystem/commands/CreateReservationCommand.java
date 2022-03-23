@@ -48,7 +48,7 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			int roomId = room.getRoomNumber();
 
 			List<User> occupants = room.getOccupants();
-			for (int j = 0; j < rooms.size(); j++)
+			for (int j = 0; j < occupants.size(); j++)
 			{
 				User occupant = occupants.get(j);
 
@@ -57,7 +57,7 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 
 				orderGuests += String.format("{firstName: \\\"%s\\\" lastName: \\\"%s\\\" roomId: \\\"%d\\\"}", firstName, lastName, roomId);
 
-				if (i < occupants.size() - 1)
+				if (j < occupants.size() - 1)
 				{
 					orderGuests += ",";
 				}

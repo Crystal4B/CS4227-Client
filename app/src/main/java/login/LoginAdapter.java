@@ -33,4 +33,12 @@ public class LoginAdapter implements LoginInterface{
     public void setType(String userType) {
         signup.setType(userType);       
     }
+
+    public void twoFactorAuth(String email) {
+        signup.twoFactorAuth(email);
+    }
+
+    public boolean checkAuth(int num) {
+        return signup.checkAuth(num);
+    }
 }

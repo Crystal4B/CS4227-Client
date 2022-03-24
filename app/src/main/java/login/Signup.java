@@ -8,10 +8,15 @@ import hotelsystem.user.Staff;
 
 import java.util.regex.Pattern;
 
+import email.Email;
+
+import java.util.Random;
+
 public class Signup implements SignupInterface{
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     public String type = "Customer";
     public User person;
+    public int authKey;
     private String username;
     CommandInvoker invoker;
 
@@ -60,4 +65,23 @@ public class Signup implements SignupInterface{
     public User returnUser() {
         return person;
     }
+	@Override
+	public void twoFactorAuth(String email) {
+		Random rand = new Random();
+		authKey = rand.nextInt(10000);
+        String emailToSend = "Thank you for signing up to Platinum Hotels \n Your confirmation code is: " + authKey;
+        new Email(email, "Platinum Hotels Signup Confirmation", emailToSend);
+        //TODO Remove next line before release
+        System.out.println("AUTHKEY FOR DEVELOPMENT PURPOSES //// TO BE REMOVED   : " + authKey);
+	}
+	@Override
+	public boolean checkAuth(int num) {
+		if(num == authKey){
+            return true;
+        }
+        else{
+            return false;
+        }
+		
+	}
 }

@@ -9,4 +9,6 @@ public interface SignupInterface {
     public User createsUser(String email, String username, String password);
     public User returnUser();
     public void setType(String type);
+    public void twoFactorAuth(String email);
+    public boolean checkAuth(int num);
 }

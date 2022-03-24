@@ -19,7 +19,13 @@ public class MenuUI {
         System.out.println("4. \t Exit");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = Integer.parseInt(console.readLine());
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return UI.MENU_STATE;
+        }
         switch (option) {
             case 1: 
                 return UI.RESERVATION_STATE;
@@ -53,7 +59,13 @@ public class MenuUI {
         getUserReservations();      
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = Integer.parseInt(console.readLine());
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return false;
+        }
         switch (option) {
             case 0:
                 return true;
@@ -84,9 +96,13 @@ public class MenuUI {
         List<Order> reservations = getUserReservations();
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = Integer.parseInt(console.readLine());
-        System.out.println(option);
-        System.out.println(reservations.size()+1);
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return false;
+        }
         if(option == 0){
             return true;
         }

@@ -22,7 +22,13 @@ public class BillingUI {
         System.out.println("5. \t Back");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = Integer.parseInt(console.readLine());
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return UI.BILLING_STATE;
+        }
         switch (option) {
             case 1: 
                 while(true){

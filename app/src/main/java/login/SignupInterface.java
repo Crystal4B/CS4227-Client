@@ -8,4 +8,5 @@ public interface SignupInterface {
     public boolean isValidEmail(String email);
     public User createsUser(String email, String username, String password);
     public User returnUser();
+    public void setType(String type);
 }

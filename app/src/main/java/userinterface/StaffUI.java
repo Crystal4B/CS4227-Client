@@ -44,7 +44,8 @@ public class StaffUI {
                 }
                 return UI.STAFF_MENU;
             case 4:  
-                return UI.STAFF_MENU;
+                LoginUI.setType("Staff");
+                return UI.LOGIN_STATE;
             case 5:  
                 return UI.EXIT;
             default:

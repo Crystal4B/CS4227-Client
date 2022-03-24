@@ -80,12 +80,19 @@ public class LoginUI {
         signup.setType(userType);
         signup.login(email, password);
         user = signup.returnUser();
-        if(user.getClass().getSimpleName().equals("Customer")){
-            return UI.MENU_STATE;
+        signup.twoFactorAuth(email);
+        System.out.println("Please enter Auth Code sent to email");
+        int authKey = Integer.parseInt(console.readLine());
+        if (signup.checkAuth(authKey)) {
+            System.out.println("Signed in");
+            if(user.getClass().getSimpleName().equals("Customer")){
+                return UI.MENU_STATE;
+            }
+            else if(user.getClass().getSimpleName().equals("Staff")){
+                return UI.STAFF_MENU;
+            }
         }
-        else if(user.getClass().getSimpleName().equals("Staff")){
-            return UI.STAFF_MENU;
-        }
+        System.out.println("Invalid Code, please try again");
         return UI.LOGIN_STATE;
     }
 

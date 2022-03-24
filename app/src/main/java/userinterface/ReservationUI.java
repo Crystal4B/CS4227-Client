@@ -25,7 +25,13 @@ public class ReservationUI {
         System.out.println("5. \t Back");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = Integer.parseInt(console.readLine());
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return UI.RESERVATION_STATE;
+        }
         builder.setUser(LoginUI.getUser());
         switch (option) {
             case 1: 
@@ -74,11 +80,20 @@ public class ReservationUI {
         String checkInDate = console.readLine();
         System.out.println("Please enter check-out date (YYYY-MM-DD) @ 12:00:");
         String checkOutDate = console.readLine();
-        director.setDates(builder, checkInDate, checkOutDate);
+        if(!director.setDates(builder, checkInDate, checkOutDate)){
+            System.out.println("Invalid Input: Please try again!");
+            return false;
+        }
         System.out.println("Please select one of the following options:");
         System.out.println(director.getAvailableRooms(builder));
-        int roomTypeOption = Integer.parseInt(console.readLine());
-        director.addRoom(console, builder, roomTypeOption);
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return false;
+        }
+        director.addRoom(console, builder, option);
         System.out.println("\n####################################################\n");
         return true;
     }
@@ -88,11 +103,20 @@ public class ReservationUI {
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println("Please select a room to remove:\n");
-        System.out.println(director.viewRoomsInCart(builder));
-        int roomOption = Integer.parseInt(console.readLine());
-        director.removeRoom(builder, roomOption);
-        System.out.println("\n####################################################\n");
-        return true;
+        int numberOfRoomsInCart = director.viewRoomsInCart(builder);
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return false;
+        }
+        if(option >= 0 || option < numberOfRoomsInCart ){
+            director.removeRoom(builder, option);
+            System.out.println("\n####################################################\n");
+            return true;
+        }
+        return false;
 
     }
 
@@ -105,7 +129,13 @@ public class ReservationUI {
         System.out.println("1. \t Back");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = Integer.parseInt(console.readLine());
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return false;
+        }
         switch (option) {
             case 1: 
                 return true;

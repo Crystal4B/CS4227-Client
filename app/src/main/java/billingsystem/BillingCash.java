@@ -9,7 +9,8 @@ public class BillingCash extends BillingTemplate {
     public boolean PaymentSend(Order order){
         Payment pay = new Payment();
         pay.setCost(BillCalc(order));
-        return pay.payByCash();
+        int orderId = Integer.parseInt(order.getOrderID());
+        return pay.payByCash(orderId);
     }
 
     @Override

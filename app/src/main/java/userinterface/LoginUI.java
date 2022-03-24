@@ -10,27 +10,39 @@ import login.Signup;
 public class LoginUI {
 
     private static User user;
+    private static String userType = "Customer";
     
     public static int run(Console console){
-        System.out.println("\n####################################################");
-        System.out.println("#     Welcome to the Hotel Reservation System      #");
-        System.out.println("####################################################\n");
-        System.out.println("Please select one of the following options:");
-        System.out.println("1. \t Login");
-        System.out.println("2. \t Sign-up");
-        System.out.println("3. \t Exit");
-        System.out.println("\n####################################################\n");
-        System.out.println("Enter option here:");
-        int option = Integer.parseInt(console.readLine());
-        switch (option) {
-            case 1:
-                return login(console);
-            case 2: 
-                return signup(console);
-            case 3:  
-                return UI.EXIT;
-            default:
+        if(userType.equals("Staff")) {
+            return signup(console);
+        }
+        else {
+            System.out.println("\n####################################################");
+            System.out.println("#     Welcome to the Hotel Reservation System      #");
+            System.out.println("####################################################\n");
+            System.out.println("Please select one of the following options:");
+            System.out.println("1. \t Login");
+            System.out.println("2. \t Sign-up");
+            System.out.println("3. \t Exit");
+            System.out.println("\n####################################################\n");
+            System.out.println("Enter option here:");
+            int option = -1;
+            try {
+                option = Integer.parseInt(console.readLine());
+            } catch (Exception e) {
+                System.out.println("Invalid Input: Please try again!");
                 return UI.LOGIN_STATE;
+            }
+            switch (option) {
+                case 1:
+                    return login(console);
+                case 2: 
+                    return signup(console);
+                case 3:  
+                    return UI.EXIT;
+                default:
+                    return UI.LOGIN_STATE;
+            }
         }
     }
 
@@ -50,7 +62,7 @@ public class LoginUI {
             }
         }
         else{
-            System.out.println("Invalid User \nPlease try logging in again \n \n");
+            System.out.println("Invalid User \nPlease try logging in again \n");
             return login(console);
         }
         return UI.LOGIN_STATE;
@@ -65,14 +77,22 @@ public class LoginUI {
         String password = String.valueOf(console.readPassword());
         LoginAdapter signup = new LoginAdapter(new Signup());
         signup.setName(username);
+        signup.setType(userType);
         signup.login(email, password);
         user = signup.returnUser();
-        if(user.getClass().getSimpleName().equals("Customer")){
-            return UI.MENU_STATE;
+        signup.twoFactorAuth(email);
+        System.out.println("Please enter Auth Code sent to email");
+        int authKey = Integer.parseInt(console.readLine());
+        if (signup.checkAuth(authKey)) {
+            System.out.println("Signed in");
+            if(user.getClass().getSimpleName().equals("Customer")){
+                return UI.MENU_STATE;
+            }
+            else if(user.getClass().getSimpleName().equals("Staff")){
+                return UI.STAFF_MENU;
+            }
         }
-        else if(user.getClass().getSimpleName().equals("Staff")){
-            return UI.STAFF_MENU;
-        }
+        System.out.println("Invalid Code, please try again");
         return UI.LOGIN_STATE;
     }
 
@@ -82,5 +102,9 @@ public class LoginUI {
 
     public static void setUser(User loggedInUser){
         user = loggedInUser;
+    }
+
+    public static void setType(String type){
+        userType = type;
     }
 }

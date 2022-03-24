@@ -21,7 +21,7 @@ class BillingTestCard {
         Order order = builder.getOrder();
         BillingCard bill = new BillingCard();
         String expected = "Date:\t\t" + order.getStartDate() + "-"+ order.getEndDate() + 
-                "\n" + "Description:\t\t" + "Room Charge\t" + 0.0  + bill.CouponPaid() +
+                "\n" + "Description:\t\t" + "Room Charge\t" + 0.0  + bill.AcceptCouponVisitor(bill.VisitorGet()) +
                 "\n" + "Total:\t\t" + 0.0 +
                 "\n" + "Paid By:\t\tCard";
         assertEquals(bill.Bill(order, 0),expected);

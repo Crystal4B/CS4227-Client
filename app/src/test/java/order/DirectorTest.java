@@ -1,23 +1,23 @@
 package order;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
+
+import hotelsystem.room.Standard;
 
 public class DirectorTest {
 
-    @Test void checkDirectorSetDates() {
+    @Test void checkDirectorSetDatesValid() {
         Director director = new Director();
 		OrderBuilder builder = new OrderBuilder();
-        director.setDates(builder, "2020-10-10", "2020-10-12");
-        String expected = "Rooms: \n" +
-        "\nNumber of Occupants: 0" +
-        "\nStart Date: 2020-10-10 12:00:00.0" +
-        "\nEnd Date: 2020-10-12 12:00:00.0" + 
-        "\nNumber of Days Booked: 2" + 
-        "\nRate Cost: EURO 0.0" + 
-        "\nTotal Cost: EURO 0.0" + 
-        "\n";
-        assertEquals(director.viewCart(builder), expected);
+        assertTrue(director.setDates(builder, "2020-10-10", "2020-10-12"));
+    }
+
+    @Test void checkDirectorSetDatesInvalid() {
+        Director director = new Director();
+		OrderBuilder builder = new OrderBuilder();
+        assertFalse(director.setDates(builder, "string", "2020-10-dd"));
     }
 
     @Test void checkDirectorViewCart() {
@@ -32,6 +32,15 @@ public class DirectorTest {
         "\nTotal Cost: EURO 0.0" + 
         "\n";
         assertEquals(director.viewCart(builder), expected);
+    }
+
+    @Test void checkViewRoomsInCart(){
+        Director director = new Director();
+		OrderBuilder builder = new OrderBuilder();
+        builder.addRoom(new Standard("Deluxe", -1, 2));
+        builder.addRoom(new Standard("VIP", -1, 2));
+        int size = director.viewRoomsInCart(builder);
+        assertEquals(size, 2);
     }
     
 }

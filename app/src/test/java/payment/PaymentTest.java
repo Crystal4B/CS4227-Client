@@ -1,5 +1,6 @@
 /**
  * @author Jordan Marshall
+ * @author Eoin McDonough
  */
 
 package payment;
@@ -18,9 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-// import org.junit.jupiter.api.Test;
-// import static org.junit.jupiter.api.Assertions.*;
 
 class PaymentTest {
 
@@ -69,7 +67,7 @@ class PaymentTest {
         Payment payment = new Payment();
         assertTrue(payment.isValid("cardDate", 1405));
     }
-    @Test void isValiddCSV(){
+    @Test void isValidCSV(){
         Payment payment = new Payment();
         assertTrue(payment.isValid("cardBack", 123));
     }

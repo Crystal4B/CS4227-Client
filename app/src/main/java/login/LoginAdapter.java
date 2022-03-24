@@ -29,4 +29,8 @@ public class LoginAdapter implements LoginInterface{
     public User returnUser() {
         return signup.returnUser();
     }
+
+    public void setType(String userType) {
+        signup.setType(userType);       
+    }
 }

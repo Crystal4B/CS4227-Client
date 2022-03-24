@@ -49,11 +49,14 @@ abstract class BillingTemplate {
    public String PercentConverter(double num){
       String temp = Double.toString(num);
       if(temp.length() < 3){
+         return "0";
+      } 
+      if(num < 1){
          temp = Character.toString(temp.charAt(0));
-         return temp + "00%";
+         return temp + "0%";
       } else {
          temp = Character.toString(temp.charAt(2));
-         return temp + "0%";
+         return temp + "00%";
       }
    }
 

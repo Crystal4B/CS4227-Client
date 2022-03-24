@@ -12,7 +12,7 @@ import order.OrderBuilder;
 
 public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 {
-    private static final String MUTATION = "updateReservationPaid";
+    private static final String MUTATION_NAME = "updateReservationPaid";
 
     private int id;
     private boolean paid;
@@ -27,13 +27,13 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
     public String createMessage(boolean undo)
     {
         boolean paidVal = undo ? !paid : paid;
-		return String.format("{\"query\":\"mutation{%s(input:{id: %d paid: %b}){id checkIn checkOut paid user{id type} guests{id firstName lastName room{id type}}}}\"}", MUTATION, id, paidVal);
+		return String.format("{\"query\":\"mutation{%s(input:{id: %d paid: %b}){id checkIn checkOut paid user{id type} guests{id firstName lastName room{id type}}}}\"}", MUTATION_NAME, id, paidVal);
     }
 
     @Override
     public void parseResponse(Map<?, ?> response)
     {
-        Map<?, ?> reservationData = (Map<?, ?>) response.get(MUTATION);
+        Map<?, ?> reservationData = (Map<?, ?>) response.get(MUTATION_NAME);
         OrderBuilder builder = new OrderBuilder();
 
         builder.setOrderID((String)reservationData.get("id"));

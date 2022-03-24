@@ -42,7 +42,7 @@ public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<R
 	@Override
 	public void parseResponse(Map<?, ?> response)
 	{
-		if (response.containsKey(QUERY_NAME))
+		if (!response.containsKey(QUERY_NAME))
 		{
 			return;
 		}

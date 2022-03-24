@@ -1,27 +1,47 @@
 package payment;
 
-import java.util.Random;
+
+import requestsystem.commands.CommandInvoker;
+import requestsystem.commands.UpdateReservationPaidCommand;
 
 public class Payment {
     private double finalCost;
     private boolean isPaid = false;
+    CommandInvoker invoker;
     
     public void setCost(double cost) {
         finalCost = cost;
     } 
 
     // On reservation made, notifies server that this reservation needs to be paid
-    public boolean payByCash() {
-        return true;
+    public boolean payByCash(int orderId) {
+        invoker = new CommandInvoker();
+        invoker.setCommand(new UpdateReservationPaidCommand(orderId, isPaid));
+        invoker.execute();
+            if(invoker.getResponse() == null) {
+                return false;
+            }
+            else {
+                return true;
+            }
     }
 
-    public boolean payCreditCard(String cardNo, String cardName, int cardDate, int cardBack){
+    public boolean payCreditCard(int orderId, String cardNo, String cardName, int cardDate, int cardBack){
+        invoker = new CommandInvoker();
         if (isValid("cardNo", cardNo) &&
         isValid("cardDate", cardDate) &&
         isValid("cardBack", cardBack) ) {
             finalCost = 0;
             isPaid = true;
-            return true;
+            invoker.setCommand(new UpdateReservationPaidCommand(orderId, isPaid));
+            invoker.execute();
+            if(invoker.getResponse() == null) {
+                return false;
+            }
+            else {
+                return true;
+            }
+            
         }
         else{
             return false;
@@ -48,7 +68,7 @@ public class Payment {
     public boolean isValid (String name, int toCheck) {
         switch (name) {
             case "cardDate":
-                if(String.valueOf(toCheck).length() == 4 ) {
+                if(String.valueOf(toCheck).length() == 4 || String.valueOf(toCheck).length() == 3 ) {
                     return true;
                     
                 }

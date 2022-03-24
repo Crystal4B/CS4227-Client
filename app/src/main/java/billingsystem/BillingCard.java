@@ -9,7 +9,8 @@ public class BillingCard extends BillingTemplate {
     public boolean PaymentSend(String num, String name, int date, int csv,Order order){
         Payment pay = new Payment();
         pay.setCost(BillCalc(order));
-        return pay.payCreditCard(num,name,date,csv);
+        int orderId = Integer.parseInt(order.getOrderID());
+        return pay.payCreditCard(orderId,num,name,date,csv);
     }
 
     @Override 

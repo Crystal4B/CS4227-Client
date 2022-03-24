@@ -18,11 +18,16 @@ public class Director {
     private Timestamp checkInTime;
     private Timestamp checkOutTime;
 
-    public void setDates(OrderBuilder builder, String in, String out){ 
-        this.checkInTime = Timestamp.valueOf(in + " 12:00:00");
-        this.checkOutTime = Timestamp.valueOf(out + " 12:00:00");
-        builder.setStartDate(this.checkInTime);
-        builder.setEndDate(this.checkOutTime);
+    public boolean setDates(OrderBuilder builder, String in, String out){
+        try {
+            this.checkInTime = Timestamp.valueOf(in + " 12:00:00");
+            this.checkOutTime = Timestamp.valueOf(out + " 12:00:00");
+            builder.setStartDate(this.checkInTime);
+            builder.setEndDate(this.checkOutTime);
+            return true;
+        } catch (Exception e) {
+            return false;
+        } 
     }
 
     public String getAvailableRooms(OrderBuilder builder){
@@ -85,13 +90,12 @@ public class Director {
         return builder.toString();
     }
 
-    public String viewRoomsInCart(OrderBuilder builder){
-        String roomsInCart = "";
+    public int viewRoomsInCart(OrderBuilder builder){
         for (int i=0; i < builder.getRoomsBuilder().size(); i++) 
         { 
-            roomsInCart += i + ".\t" + builder.getRoomsBuilder().get(i).toString() + "\n";
+            System.out.println(i + ".\t" + builder.getRoomsBuilder().get(i).toString() + "\n");
         }
-        return roomsInCart;
+        return builder.getRoomsBuilder().size();
     }
 
     public Order addReservation(Order order){

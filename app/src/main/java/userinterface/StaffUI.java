@@ -24,7 +24,13 @@ public class StaffUI {
         System.out.println("5. \t Exit");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = Integer.parseInt(console.readLine());
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return UI.STAFF_MENU;
+        }
         switch (option) {
             case 1:
                 return UI.RESERVATION_STATE;
@@ -40,12 +46,6 @@ public class StaffUI {
             case 4:  
                 return UI.STAFF_MENU;
             case 5:  
-                return UI.STAFF_MENU;
-            case 6:  
-                return UI.STAFF_MENU;
-            case 7:  
-                return UI.STAFF_MENU;
-            case 8:  
                 return UI.EXIT;
             default:
                 return UI.STAFF_MENU;
@@ -99,10 +99,16 @@ public class StaffUI {
         System.out.println("Please select one of the following rooms to add:");
         System.out.println("0. \t Back\n");
         System.out.println("1. \t Standard Room");
-        int roomOption = Integer.parseInt(console.readLine());
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return addRoom(console);
+        }
         System.out.println("\n####################################################\n");
-        System.out.println(roomOption);
-        switch (roomOption) {
+        System.out.println(option);
+        switch (option) {
             case 0:
                 return null;
             case 1:
@@ -122,14 +128,19 @@ public class StaffUI {
         {   
             System.out.println((i+1) + ".\t" + rooms.get(i).toString());
         }
-        int roomOption = Integer.parseInt(console.readLine())-1;
+        int option = -2;
+        try {
+            option = Integer.parseInt(console.readLine())-1;
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return addRoom(console);
+        }
         System.out.println("\n####################################################\n");
-        System.out.println(roomOption);
-        if(roomOption == -1){
+        if(option == -1){
             return null;
         }
-        else if(roomOption >= 0 && roomOption < rooms.size()){
-            return rooms.get(roomOption);
+        else if(option >= 0 && option < rooms.size()){
+            return rooms.get(option);
         }
         return removeRoom(console, rooms);
     }

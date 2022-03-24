@@ -21,7 +21,13 @@ public class LoginUI {
         System.out.println("3. \t Exit");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = Integer.parseInt(console.readLine());
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return UI.LOGIN_STATE;
+        }
         switch (option) {
             case 1:
                 return login(console);
@@ -50,7 +56,7 @@ public class LoginUI {
             }
         }
         else{
-            System.out.println("Invalid User \nPlease try logging in again \n \n");
+            System.out.println("Invalid User \nPlease try logging in again \n");
             return login(console);
         }
         return UI.LOGIN_STATE;

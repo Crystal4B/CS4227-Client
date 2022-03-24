@@ -50,13 +50,7 @@ public class Payment {
 
     // When guest pays at reception, accessible through staff menu
     public void payAtReception(double amount) {
-        double change;
-        if(amount>finalCost) {
-            change = amount - finalCost ;
-            finalCost = 0;
-            isPaid = true;
-        }
-        else if (amount < finalCost){
+        if (amount < finalCost){
             finalCost = finalCost - amount;
         }
         else {
@@ -82,27 +76,28 @@ public class Payment {
                 else{
                     break;
                 }
+            default:
+                return false;
         }
 		return false;
     }
 
     public boolean isValid (String name, String toCheck) {
-        switch (name) {
-            case "cardNo":    
-                    if(toCheck.length() == 16)  {
-                        return true;
-                    }
-                    else{
-                        break;
-                    }
+        if(name.equals("cardNo")) {   
+                if(toCheck.length() == 16)  {
+                    return true;
+                }
+                else{
+                    return false;
+                }
         }
-		return false;
+        else{
+		    return false;
+        }
     }
 
     public boolean isPaid() {
         return isPaid();
     }
-
-    //TODO: Get Order object, get Order.getfinalprice
 }
 

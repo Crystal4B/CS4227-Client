@@ -11,8 +11,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import order.Order;
-
 public class Email {
     public Email(String email, String subject, String emailMessage) {
         String to = email;
@@ -28,6 +26,7 @@ public class Email {
 
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 
+            @Override
             protected PasswordAuthentication getPasswordAuthentication() {
 
                 return new PasswordAuthentication("teamplatinumlimerick@gmail.com", "#Limerick22");
@@ -43,11 +42,6 @@ public class Email {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
             message.setSubject(subject);
-
-            /*String emailMessage = "";
-            emailMessage = "This is an automated message from Platinum Hotels to confirm your recent order.\n\n\n";
-            emailMessage += "You booked " + order.getRooms().size() + " room(s) from " + order.getStartDate() + " to " + order.getEndDate() + " . \n\n\n";
-            emailMessage += "Your cost is $" + order.getFinalCost(); */
             message.setText(emailMessage);
 
             System.out.println("sending...");

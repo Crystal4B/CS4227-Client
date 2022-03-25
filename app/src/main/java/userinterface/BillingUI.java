@@ -4,9 +4,12 @@ import java.io.Console;
 
 import billingsystem.BillingCard;
 import billingsystem.BillingCash;
+import billingsystem.BillingCashless;
+import billingsystem.CouponVisitor;
 import order.Order;
 
 public class BillingUI {
+    private static CouponVisitor a = new CouponVisitor();
 
     private static Order order;
 
@@ -38,8 +41,18 @@ public class BillingUI {
                 }
                 return returnToMenu();
             case 2:
-                return UI.BILLING_STATE;
+                while(true){
+                    if(VoucherCode(console)){
+                        break;
+                    }
+                }
+                return returnToMenu();
             case 3: 
+                while(true){
+                    if(CouponCode(console)){
+                        break;
+                    }
+                }
                 return UI.BILLING_STATE;
             case 4: 
             while(true){
@@ -52,6 +65,42 @@ public class BillingUI {
                 return returnToMenu();
             default:
                 return UI.BILLING_STATE;
+        }
+    }
+
+    public static Boolean CouponCode(Console console){
+        System.out.println("\n####################################################");
+        System.out.println("#     Welcome to the Hotel Reservation System      #");
+        System.out.println("####################################################\n");
+        System.out.println(" Voucher Code :");
+        String codeNum = console.readLine();
+        a.CodeSet(codeNum);
+        if (a.CouponInput()!=0.0) {
+            System.out.println(" Applying discount of :");
+            System.out.println(a.PercentConverter(a.CouponInput()) );
+            return true;
+        }
+        else {
+            System.out.println(" Invalid Coupon Code, Please Try Again");
+            return false;
+        }
+    }
+
+    public static Boolean VoucherCode(Console console){
+        System.out.println("\n####################################################");
+        System.out.println("#     Welcome to the Hotel Reservation System      #");
+        System.out.println("####################################################\n");
+        System.out.println(" Voucher Code :");
+        String codeNum = console.readLine();
+        BillingCashless bill = new BillingCashless();
+        a.CodeSet(codeNum);
+        if (bill.AcceptCouponVisitorCode(a)!=0.0) {
+            bill.SendEmail(order, bill.AcceptCouponVisitorCode(a));
+            return true;
+        }
+        else {
+            System.out.println(" Invalid Voucher Code, Please Try Again");
+            return false;
         }
     }
 
@@ -69,7 +118,7 @@ public class BillingUI {
         System.out.println("\n Reservation will be paid for at Reception");
         BillingCash bill = new BillingCash();
         bill.PaymentSend(order); 
-        bill.SendEmail(order, 0);
+        bill.SendEmail(order, bill.AcceptCouponVisitorCode(a));
         return true;
         
     }
@@ -88,7 +137,7 @@ public class BillingUI {
         int csv = Integer.parseInt(console.readLine());
         BillingCard bill = new BillingCard();
         if (bill.PaymentSend(cardNum, cardName, cardDate, csv, order)) {
-            bill.SendEmail(order, 0);
+            bill.SendEmail(order, bill.AcceptCouponVisitorCode(a));
             return true;
         }
         else {

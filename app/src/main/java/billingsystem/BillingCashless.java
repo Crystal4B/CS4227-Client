@@ -5,12 +5,9 @@ import order.*;
 public class BillingCashless extends BillingTemplate {
     
     @Override
-    public double VouchInput() {
-        if(code == "123"){
-            return 1;
-        } else {
-            return 0;
-        }
+    public double AcceptCouponVisitorCode(CouponVisitor a){
+        discount = a.VoucherInput();
+        return discount;
     }
 
     @Override 

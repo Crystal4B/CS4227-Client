@@ -14,11 +14,24 @@ public class BillingCash extends BillingTemplate {
     }
 
     @Override
+    public double VouchInput() {
+        if(code == "123"){
+            return 0.1;
+        } else if(code == "12345") {
+            return 0.2;
+        } else if(code == "Amogus"){
+            return 0.5;
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
     public String Bill(Order order, double num) {
-        temp = num;
+        discount = num;
         TempOrder = order;
         String bill = "Date:\t\t" + order.getStartDate() + "-"+ order.getEndDate() + 
-        "\n" + "Description:\t\t" + "Room Charge\t" + order.getFinalCost() + CouponPaid() +
+        "\n" + "Description:\t\t" + "Room Charge\t" + order.getFinalCost() + AcceptCouponVisitor(visitor) +
         "\n" + "Total:\t\t" + BillCalc(order) +
         "\n" + "Paid By:\t\tCash";
         return bill;

@@ -58,8 +58,11 @@ public class ReservationUI {
             case 4: 
                 Order order = builder.getOrder();
                 finalOrder = director.addReservation(order);
-                BillingUI.setFinalOrder(finalOrder);
-                return UI.BILLING_STATE;
+                if(finalOrder != null){
+                    BillingUI.setFinalOrder(finalOrder);
+                    return UI.BILLING_STATE;
+                }
+                return UI.RESERVATION_STATE;
             case 5: 
                 if(LoginUI.getUser().getUserType().equals("Customer")){
                     return UI.MENU_STATE;

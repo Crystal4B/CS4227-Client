@@ -18,18 +18,38 @@ public class Director {
     private Timestamp checkInTime;
     private Timestamp checkOutTime;
 
+
+    /**
+     * `setDates` takes in a string representing the check in and check out dates and converts them to a
+     * timestamp.
+     * 
+     * @param builder The builder object that will be used to create the order.
+     * @param in The date you want to check in.
+     * @param out The date you want to check out.
+     * @return If sucessful or not.
+     */
     public boolean setDates(OrderBuilder builder, String in, String out){
         try {
             this.checkInTime = Timestamp.valueOf(in + " 12:00:00");
             this.checkOutTime = Timestamp.valueOf(out + " 12:00:00");
-            builder.setStartDate(this.checkInTime);
-            builder.setEndDate(this.checkOutTime);
-            return true;
+            if(checkInTime.before(checkOutTime)){
+                builder.setStartDate(this.checkInTime);
+                builder.setEndDate(this.checkOutTime);
+                return true;
+            }
+            return false;
         } catch (Exception e) {
             return false;
         } 
     }
 
+    
+    /**
+     * Get a list of available rooms for the given check in and check out dates
+     * 
+     * @param builder The OrderBuilder object that is calling this method.
+     * @return The list of room types available.
+     */
     public String getAvailableRooms(OrderBuilder builder){
         if(rooms == null){
             CommandInvoker invoker = new CommandInvoker();
@@ -47,6 +67,13 @@ public class Director {
         return listOfRoomOptions;
     }
 
+    /**
+     * Add a room to the order builder
+     * 
+     * @param console The console object that is used for input.
+     * @param builder The OrderBuilder object that is being used to build the order.
+     * @param option The index of the room in the list of rooms.
+     */
     public void addRoom(Console console, OrderBuilder builder, int option){
 
         String roomKey = (String)rooms.keySet().toArray()[option];
@@ -66,6 +93,12 @@ public class Director {
         }
     }
 
+    /**
+     * Remove a room from the order builder and add it to the room list
+     * 
+     * @param builder The OrderBuilder object that is being used to build the order.
+     * @param option The index of the room in the order builder's list of rooms.
+     */
     public void removeRoom(OrderBuilder builder, int option){
         ArrayList<Standard> roomsInBuilder = builder.getRoomsBuilder();
         Room selectedRoom = roomsInBuilder.get(option);
@@ -86,6 +119,12 @@ public class Director {
     
     }
 
+    /**
+     * ViewCart gets details of the builder
+     * 
+     * @param builder The OrderBuilder object that is used to build the order.
+     * @return Builder string.
+     */
     public String viewCart(OrderBuilder builder){
         return builder.toString();
     }
@@ -98,10 +137,19 @@ public class Director {
         return builder.getRoomsBuilder().size();
     }
 
+    /**
+     * Add a reservation to the database
+     * 
+     * @param order The order that we want to add a reservation for.
+     * @return Order or null
+     */
     public Order addReservation(Order order){
         CommandInvoker invoker = new CommandInvoker();
-        invoker.setCommand(new CreateReservationCommand(order));
-        invoker.execute();
-        return invoker.getResponse();
+        if(order.getFinalCost() != 0 && order.getNumberOfDaysBooked() !=0){
+            invoker.setCommand(new CreateReservationCommand(order));
+            invoker.execute();
+            return invoker.getResponse();
+        }
+        return null;
     }
 }

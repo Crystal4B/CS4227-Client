@@ -3,9 +3,9 @@ package billingsystem;
 public interface CouponInterface {
     public String CouponPaid(BillingTemplate b);
 
-    public double CouponInput();
+    public double CouponInput(String code);
 
-    public double VoucherInput();
+    public double VoucherInput(String code);
 
     public double DiscountGet();
 

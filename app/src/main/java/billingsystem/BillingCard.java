@@ -14,16 +14,9 @@ public class BillingCard extends BillingTemplate {
     }
 
     @Override
-    public double VouchInput() {
-        if(code == "123"){
-            return 0.1;
-        } else if(code == "12345") {
-            return 0.2;
-        } else if(code == "Amogus"){
-            return 0.5;
-        } else {
-            return 0;
-        }
+    public double AcceptCouponVisitorCode(CouponVisitor a){
+        discount = a.CouponInput();
+        return discount ;
     }
 
     @Override 

@@ -6,13 +6,10 @@ import email.Email;
 
 abstract class BillingTemplate {
    double discount = 0.0;
-   String code = "";
    CouponVisitor visitor = new CouponVisitor();
    public double BillCalc(Order order) {
       return order.getFinalCost()*(1-discount);
    }
-
-   abstract public double VouchInput();
 
    public void SendEmail(Order order, double num ){
       User user = order.getUser();
@@ -20,10 +17,6 @@ abstract class BillingTemplate {
    }
 
    abstract public String Bill(Order order, double num);
-
-   public void SetCode(String setC){
-      code = setC;
-   }
 
    public CouponVisitor VisitorGet(){
       return visitor;
@@ -37,26 +30,14 @@ abstract class BillingTemplate {
       return discount;
    }
 
-   public String CodeGet(){
-      return code;
-   }
-
    public String AcceptCouponVisitor(CouponVisitor a){
       return a.CouponPaid(this);
    }
 
-   public String PercentConverter(double num){
-      String temp = Double.toString(num);
-      if(temp.length() < 3){
-         return "0";
-      } 
-      if(num < 1){
-         temp = Character.toString(temp.charAt(0));
-         return temp + "0%";
-      } else {
-         temp = Character.toString(temp.charAt(2));
-         return temp + "00%";
-      }
+   abstract public double AcceptCouponVisitorCode(CouponVisitor a);
+
+   public String PercentConverter(CouponVisitor a, double num){
+      return a.PercentConverter(num);
    }
 
    OrderBuilder builder = new OrderBuilder();

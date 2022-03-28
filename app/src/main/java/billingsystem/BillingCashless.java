@@ -5,16 +5,13 @@ import order.*;
 public class BillingCashless extends BillingTemplate {
     
     @Override
-    public double VouchInput() {
-        if(code == "123"){
-            return 1;
-        } else {
-            return 0;
-        }
+    public double AcceptCouponVisitorCode(CouponVisitor a){
+        discount = a.VoucherInput();
+        return discount;
     }
 
     @Override 
-    public String Bill(Order order, double num) {
+    public String Bill(Order order) {
         TempOrder = order;
         String bill = "Date:\t\t" + order.getStartDate() + "-"+ order.getEndDate() + 
         "\n" + "Description:\t\t" + "Room Charge\t" + order.getFinalCost() + 

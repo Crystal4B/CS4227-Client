@@ -15,8 +15,8 @@ abstract class BillingTemplate {
    abstract public double VouchInput();
 
    public void SendEmail(Order order, double num ){
-      UserFactory userFactory = order.getUser();
-      new Email(userFactory.getEmail(), "Platinum Hotels: Booking confirmation", Bill(order, num));
+      UserInterface userInterface = order.getUser();
+      new Email(userInterface.getEmail(), "Platinum Hotels: Booking confirmation", Bill(order, num));
    }
 
    abstract public String Bill(Order order, double num);

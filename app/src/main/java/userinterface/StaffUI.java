@@ -3,8 +3,8 @@ package userinterface;
 import java.io.Console;
 import java.util.ArrayList;
 
-import hotelsystem.roomFactory.RoomFactory;
-import hotelsystem.roomFactory.Standard;
+import hotelsystem.roomFactory.RoomInterface;
+import hotelsystem.roomFactory.Room;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.CreateRoomCommand;
 import requestsystem.commands.GetAllRoomsCommand;
@@ -57,7 +57,7 @@ public class StaffUI {
         CommandInvoker invoker = new CommandInvoker();
         invoker.setCommand(new GetAllRoomsCommand());
         invoker.execute();
-        ArrayList<RoomFactory> roomFactories = invoker.getResponse();
+        ArrayList<RoomInterface> roomFactories = invoker.getResponse();
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -69,9 +69,9 @@ public class StaffUI {
         System.out.println("\n####################################################\n");
         switch (option) {
             case 1:
-                RoomFactory selectedAddRoomFactory = (Standard)addRoom(console);
-                if(selectedAddRoomFactory != null){
-                    invoker.setCommand(new CreateRoomCommand((Standard) selectedAddRoomFactory));
+                RoomInterface selectedAddRoomInterface = (Room)addRoom(console);
+                if(selectedAddRoomInterface != null){
+                    invoker.setCommand(new CreateRoomCommand((Room) selectedAddRoomInterface));
                     invoker.execute();
                 }
                 break;
@@ -79,9 +79,9 @@ public class StaffUI {
                 if(roomFactories.size() == 0){
                     break;
                 }
-                RoomFactory selectedRemoveRoomFactory = (Standard)removeRoom(console, roomFactories);
-                if(selectedRemoveRoomFactory != null){
-                    invoker.setCommand(new RemoveRoomCommand((Standard) selectedRemoveRoomFactory));
+                RoomInterface selectedRemoveRoomInterface = (Room)removeRoom(console, roomFactories);
+                if(selectedRemoveRoomInterface != null){
+                    invoker.setCommand(new RemoveRoomCommand((Room) selectedRemoveRoomInterface));
                     invoker.execute();
                 }
                 break;
@@ -93,7 +93,7 @@ public class StaffUI {
         return false;
     }
 
-    public static RoomFactory addRoom(Console console){
+    public static RoomInterface addRoom(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -113,13 +113,13 @@ public class StaffUI {
             case 0:
                 return null;
             case 1:
-                return new Standard("Standard", -1, 2);
+                return new Room("Standard", -1, 2);
             default:
                 return addRoom(console);
         }
     }
 
-    public static RoomFactory removeRoom(Console console, ArrayList<RoomFactory> roomFactories){
+    public static RoomInterface removeRoom(Console console, ArrayList<RoomInterface> roomFactories){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");

@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import hotelsystem.roomFactory.RoomFactory;
-import hotelsystem.roomFactory.Standard;
+import hotelsystem.roomFactory.RoomInterface;
+import hotelsystem.roomFactory.Room;
 
-public class GetAllRoomsCommand extends CommandTemplate<Map<String, List<RoomFactory>>>
+public class GetAllRoomsCommand extends CommandTemplate<Map<String, List<RoomInterface>>>
 {
 	private static final String QUERY_NAME = "allRooms";
 
@@ -36,9 +36,9 @@ public class GetAllRoomsCommand extends CommandTemplate<Map<String, List<RoomFac
 			String id = (String) roomMap.get("id");
 			String type = (String) roomMap.get("type");
 			int numberOfBeds = (int) roomMap.get("numberOfBeds");
-			List<RoomFactory> roomFactories = responseObject.getOrDefault(type, new ArrayList<>());
-			roomFactories.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
-			responseObject.put(type, roomFactories);
+			List<RoomInterface> roomInterfaces = responseObject.getOrDefault(type, new ArrayList<>());
+			roomInterfaces.add(new Room(type, Integer.parseInt(id), numberOfBeds));
+			responseObject.put(type, roomInterfaces);
 		}
 	}
 }

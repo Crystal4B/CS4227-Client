@@ -11,16 +11,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.userFactory.UserFactory;
+import hotelsystem.userFactory.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
-import hotelsystem.roomFactory.Standard;
-import hotelsystem.userFactory.Customer;
-import hotelsystem.userFactory.Guest;
-import hotelsystem.userFactory.Staff;
+import hotelsystem.roomFactory.Room;
 import order.OrderBuilder;
 import requestsystem.commands.CancelReservationCommand;
 import requestsystem.commands.CommandInvoker;
@@ -44,17 +41,17 @@ public class CommandExecuteTest
 	static CommandInvoker invoker = new CommandInvoker();
 	static Customer customer = new Customer("testCustomer", "customer_password", "testCustomer@test.com");
 	static Staff staff = new Staff("testStaff", "staff_password", "testStaff@test.com");
-	static ArrayList<Standard> rooms = new ArrayList<>(Arrays.asList(
-		new Standard("Standard", 0, 2),
-		new Standard("Standard", 0, 2),
-		new Standard("Standard", 0, 2)
+	static ArrayList<Room> rooms = new ArrayList<>(Arrays.asList(
+		new Room("Room", 0, 2),
+		new Room("Room", 0, 2),
+		new Room("Room", 0, 2)
 	));
 
 	static order.Order reservation;
 
-	public boolean contains(ArrayList<Standard> list, Standard room)
+	public boolean contains(ArrayList<Room> list, Room room)
 	{
-		for (Standard roomStandard : list)
+		for (Room roomStandard : list)
 		{
 			if (roomStandard.getRoomNumber() == room.getRoomNumber())
 			{
@@ -73,7 +70,7 @@ public class CommandExecuteTest
 		invoker.execute();
 
 		// Retrieve response and assert
-		UserFactory result = invoker.getResponse();
+		UserInterface result = invoker.getResponse();
 		assertFalse(result instanceof Staff);
 		assertTrue(result instanceof Customer);
 		assertEquals(customer.getUserName(), result.getUserName());
@@ -94,7 +91,7 @@ public class CommandExecuteTest
 		invoker.execute();
 
 		// Retrieve response and assert
-		UserFactory result = invoker.getResponse();
+		UserInterface result = invoker.getResponse();
 		assertFalse(result instanceof Customer);
 		assertTrue(result instanceof Staff);
 		assertEquals(staff.getUserName(), result.getUserName());
@@ -141,7 +138,7 @@ public class CommandExecuteTest
 		invoker.execute();
 
 		// Retrieve data and assert
-		UserFactory result = invoker.getResponse();
+		UserInterface result = invoker.getResponse();
 		assertFalse(result instanceof Staff);
 		assertTrue(result instanceof Customer);
 		assertEquals(customer.getUserName(), result.getUserName());
@@ -159,7 +156,7 @@ public class CommandExecuteTest
 		invoker.execute();
 
 		// Retrieve data and assert
-		UserFactory result = invoker.getResponse();
+		UserInterface result = invoker.getResponse();
 		assertFalse(result instanceof Customer);
 		assertTrue(result instanceof Staff);
 		assertEquals(staff.getUserName(), result.getUserName());
@@ -215,7 +212,7 @@ public class CommandExecuteTest
 		invoker.execute();
 
 		// Retrieve response and assert
-		ArrayList<Standard> resultRooms = invoker.getResponse();
+		ArrayList<Room> resultRooms = invoker.getResponse();
 		assertEquals(rooms.size(), resultRooms.size());
 		for (int i = 0; i < rooms.size(); i++)
 		{
@@ -232,7 +229,7 @@ public class CommandExecuteTest
 	public void checkCreateReservationCommand()
 	{
 		// Create room for order
-		Standard room = rooms.get(0);
+		Room room = rooms.get(0);
 		room.addOccupant(new Guest("Joe", "Stephan", -1));
 
 		// Create order
@@ -257,21 +254,21 @@ public class CommandExecuteTest
 		assertEquals(order.getNumberOfOccupants(), resultOrder.getNumberOfOccupants());
 		assertFalse(resultOrder.getOrderID() == null);
 
-		ArrayList<Standard> rooms = order.getRooms();
-		ArrayList<Standard> resultRooms = resultOrder.getRooms();
+		ArrayList<Room> rooms = order.getRooms();
+		ArrayList<Room> resultRooms = resultOrder.getRooms();
 		assertEquals(rooms.size(), resultRooms.size());
 		for (int i = 0; i < rooms.size(); i++)
 		{
-			Standard roomStandard = rooms.get(i);
-			Standard resultRoomStandard = resultRooms.get(i);
+			Room roomStandard = rooms.get(i);
+			Room result = resultRooms.get(i);
 
-			assertEquals(roomStandard.getRoomNumber(), resultRoomStandard.getRoomNumber());
-			assertEquals(roomStandard.getRoomName(), resultRoomStandard.getRoomName());
-			assertEquals(roomStandard.getPerks(), resultRoomStandard.getPerks());
-			assertEquals(roomStandard.getPrice(), resultRoomStandard.getPrice());
+			assertEquals(roomStandard.getRoomNumber(), result.getRoomNumber());
+			assertEquals(roomStandard.getRoomName(), result.getRoomName());
+			assertEquals(roomStandard.getPerks(), result.getPerks());
+			assertEquals(roomStandard.getPrice(), result.getPrice());
 
-			ArrayList<UserFactory> occupants = roomStandard.getOccupants();
-			ArrayList<UserFactory> resultOccupants = resultRoomStandard.getOccupants();
+			ArrayList<UserInterface> occupants = roomStandard.getOccupants();
+			ArrayList<UserInterface> resultOccupants = result.getOccupants();
 			assertEquals(occupants.size(), resultOccupants.size());
 			for (int j = 0; j < occupants.size(); j++)
 			{
@@ -309,21 +306,21 @@ public class CommandExecuteTest
 		assertEquals(resultReservation.getFinalCost(), resultReservation.getFinalCost());
 		assertEquals(resultReservation.getNumberOfOccupants(), resultReservation.getNumberOfOccupants());
 
-		ArrayList<Standard> rooms = reservation.getRooms();
-		ArrayList<Standard> resultRooms = resultReservation.getRooms();
+		ArrayList<Room> rooms = reservation.getRooms();
+		ArrayList<Room> resultRooms = resultReservation.getRooms();
 		assertEquals(rooms.size(), resultRooms.size());
 		for (int i = 0; i < rooms.size(); i++)
 		{
-			Standard roomStandard = rooms.get(i);
-			Standard resultRoomStandard = resultRooms.get(i);
+			Room room = rooms.get(i);
+			Room result = resultRooms.get(i);
 
-			assertEquals(roomStandard.getRoomNumber(), resultRoomStandard.getRoomNumber());
-			assertEquals(roomStandard.getRoomName(), resultRoomStandard.getRoomName());
-			assertEquals(roomStandard.getPerks(), resultRoomStandard.getPerks());
-			assertEquals(roomStandard.getPrice(), resultRoomStandard.getPrice());
+			assertEquals(room.getRoomNumber(), result.getRoomNumber());
+			assertEquals(room.getRoomName(), result.getRoomName());
+			assertEquals(room.getPerks(), result.getPerks());
+			assertEquals(room.getPrice(), result.getPrice());
 
-			ArrayList<UserFactory> occupants = roomStandard.getOccupants();
-			ArrayList<UserFactory> resultOccupants = resultRoomStandard.getOccupants();
+			ArrayList<UserInterface> occupants = room.getOccupants();
+			ArrayList<UserInterface> resultOccupants = result.getOccupants();
 			assertEquals(occupants.size(), resultOccupants.size());
 			for (int j = 0; j < occupants.size(); j++)
 			{
@@ -347,7 +344,7 @@ public class CommandExecuteTest
 		// Weird behaviour I need to fix
 
 		// Retrieve Response and assert
-		Map<String, ArrayList<Standard>> availableRooms = invoker.getResponse();
+		Map<String, ArrayList<Room>> availableRooms = invoker.getResponse();
 
 		// Check for room reserved in Test 10 not being available
 		assertFalse(contains(availableRooms.get("Standard"), rooms.get(0)));
@@ -372,21 +369,21 @@ public class CommandExecuteTest
 		assertEquals(reservation.getNumberOfOccupants(), resultOrder.getNumberOfOccupants());
 		assertFalse(resultOrder.getOrderID() == null);
 
-		ArrayList<Standard> rooms = reservation.getRooms();
-		ArrayList<Standard> resultRooms = resultOrder.getRooms();
+		ArrayList<Room> rooms = reservation.getRooms();
+		ArrayList<Room> resultRooms = resultOrder.getRooms();
 		assertEquals(rooms.size(), resultRooms.size());
 		for (int i = 0; i < rooms.size(); i++)
 		{
-			Standard roomStandard = rooms.get(i);
-			Standard resultRoomStandard = resultRooms.get(i);
+			Room room = rooms.get(i);
+			Room result = resultRooms.get(i);
 
-			assertEquals(roomStandard.getRoomNumber(), resultRoomStandard.getRoomNumber());
-			assertEquals(roomStandard.getRoomName(), resultRoomStandard.getRoomName());
-			assertEquals(roomStandard.getPerks(), resultRoomStandard.getPerks());
-			assertEquals(roomStandard.getPrice(), resultRoomStandard.getPrice());
+			assertEquals(room.getRoomNumber(), result.getRoomNumber());
+			assertEquals(room.getRoomName(), result.getRoomName());
+			assertEquals(room.getPerks(), result.getPerks());
+			assertEquals(room.getPrice(), result.getPrice());
 
-			ArrayList<UserFactory> occupants = roomStandard.getOccupants();
-			ArrayList<UserFactory> resultOccupants = resultRoomStandard.getOccupants();
+			ArrayList<UserInterface> occupants = room.getOccupants();
+			ArrayList<UserInterface> resultOccupants = result.getOccupants();
 			assertEquals(occupants.size(), resultOccupants.size());
 			for (int j = 0; j < occupants.size(); j++)
 			{
@@ -409,7 +406,7 @@ public class CommandExecuteTest
 		invoker.execute();
 
 		// Retrieve response and assert
-		ArrayList<Standard> resultRooms = invoker.getResponse();
+		ArrayList<Room> resultRooms = invoker.getResponse();
 		assertEquals(rooms.size(), resultRooms.size());
 		for (int i = 0; i < rooms.size(); i++)
 		{
@@ -430,7 +427,7 @@ public class CommandExecuteTest
 		invoker.execute();
 
 		// Retrieve response and assert (NOTE: Removing user does not return username and password)
-		UserFactory result = invoker.getResponse();
+		UserInterface result = invoker.getResponse();
 		assertFalse(result instanceof Staff);
 		assertTrue(result instanceof Customer);
 		assertEquals(customer.getEmail(), result.getEmail());
@@ -446,7 +443,7 @@ public class CommandExecuteTest
 		invoker.execute();
 
 		// Retrieve response and assert (NOTE: Removing user does not return username and password)
-		UserFactory result = invoker.getResponse();
+		UserInterface result = invoker.getResponse();
 		assertFalse(result instanceof Customer);
 		assertTrue(result instanceof Staff);
 		assertEquals(staff.getEmail(), result.getEmail());

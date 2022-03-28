@@ -1,31 +1,27 @@
+/**
+ * @author Jakub Pažej
+ * FActory method for making different types of users.
+ */
 package hotelsystem.userFactory;
 
-public class UserFactory
+public class UserFactory implements FactoryInterface
 {
-    public static UserInterface createEmpty(String UserType)
-    {
-        if ( UserType.equals("customer") )
-            return new Customer();
-        else if ( UserType.equals("guest") )
-            return new Guest();
-        else if ( UserType.equals("staff") )
-            return new Staff();
-
-        return null;
+    public static UserInterface createStaff(){
+        return new Staff();
     }
-
-    public static UserInterface createFilled(String UserType, String userName, String password, String email)
-    {
-        if ( UserType.equals("customer") )
-            return new Customer(userName, password, email);
-        else if ( UserType.equals("staff") )
-            return new Staff(userName, password, email);
-
-        return null;
+    public static UserInterface createStaff(String userName, String password, String email){
+        return new Staff(userName, password, email);
     }
-
-    public static UserInterface createFilledGuest(String firstName, String lastName, int ID)
-    {
+    public static UserInterface createCustomer(){
+        return new Customer();
+    }
+    public static UserInterface createCustomer(String userName, String password, String email){
+        return new Customer(userName, password, email);
+    }
+    public static UserInterface createGuest(){
+        return new Staff();
+    }
+    public static UserInterface createGuest(String firstName, String lastName, int ID){
         return new Guest(firstName, lastName, ID);
     }
 }

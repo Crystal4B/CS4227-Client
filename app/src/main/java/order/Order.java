@@ -3,14 +3,14 @@ package order;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
-import hotelsystem.roomFactory.Standard;
-import hotelsystem.userFactory.UserFactory;
+import hotelsystem.roomFactory.Room;
+import hotelsystem.userFactory.UserInterface;
 
 public class Order {
 
     private final String orderID;
-    private final UserFactory userFactory;
-    private final ArrayList<Standard> rooms;
+    private final UserInterface userInterface;
+    private final ArrayList<Room> rooms;
     private final Timestamp startDate;
     private final Timestamp endDate;
     private final long numberOfDaysBooked;
@@ -18,9 +18,9 @@ public class Order {
     private final double finalCost;
     private final int numberOfOccupants;
     
-    public Order(String orderID, UserFactory userFactory, ArrayList<Standard> rooms, Timestamp startDate, Timestamp endDate, long numberOfDaysBooked, double rateCost, double finalCost, int numberOfOccupants){
+    public Order(String orderID, UserInterface userInterface, ArrayList<Room> rooms, Timestamp startDate, Timestamp endDate, long numberOfDaysBooked, double rateCost, double finalCost, int numberOfOccupants){
         this.orderID = orderID;
-        this.userFactory = userFactory;
+        this.userInterface = userInterface;
         this.rooms = rooms;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -34,11 +34,11 @@ public class Order {
         return orderID;
     }
 
-    public UserFactory getUser(){
-        return userFactory;
+    public UserInterface getUser(){
+        return userInterface;
     }
  
-    public ArrayList<Standard> getRooms(){
+    public ArrayList<Room> getRooms(){
         return rooms;
     }
 
@@ -69,7 +69,7 @@ public class Order {
     @Override
     public String toString() {
         String roomsDetails = "";
-        for(Standard r : this.rooms){
+        for(Room r : this.rooms){
             roomsDetails += "\t" + r.toString() + "\n";
         }
 
@@ -90,7 +90,7 @@ public class Order {
             Order order = (Order)obj;
             if(
                 this.orderID == order.getOrderID() &&
-                this.userFactory == order.getUser() &&
+                this.userInterface == order.getUser() &&
                 this.rooms == order.getRooms() &&
                 this.startDate == order.getStartDate() &&
                 this.endDate == order.getEndDate() &&

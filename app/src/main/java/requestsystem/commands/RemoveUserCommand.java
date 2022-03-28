@@ -5,26 +5,27 @@ import java.util.Map;
 import hotelsystem.userFactory.UserFactory;
 import hotelsystem.userFactory.Customer;
 import hotelsystem.userFactory.Staff;
+import hotelsystem.userFactory.UserInterface;
 
 /**
  * Command for removing a user from the system
  * @author Marcin Sęk
  * @apiNote Response type of User
  */
-public class RemoveUserCommand extends CommandTemplate<UserFactory>
+public class RemoveUserCommand extends CommandTemplate<UserInterface>
 {
 	private static final String MUTATION_NAME = "removeUser";
 	private static final String UNDO_MUTATION_NAME = "createUser";
 
-	private UserFactory userFactory;
+	private UserInterface userInterface;
 
 	/**
 	 * Simple constructor for command
-	 * @param userFactory being removed from the system
+	 * @param userInterface being removed from the system
 	 */
-	public RemoveUserCommand(UserFactory userFactory)
+	public RemoveUserCommand(UserInterface userInterface)
 	{
-		this.userFactory = userFactory;
+		this.userInterface = userInterface;
 	}
 
 	@Override
@@ -32,9 +33,9 @@ public class RemoveUserCommand extends CommandTemplate<UserFactory>
 	{
 		if (undo)
 		{
-			return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", UNDO_MUTATION_NAME, userFactory.getClass().getSimpleName(), userFactory.getEmail(), userFactory.getUserName(), userFactory.getPassword());
+			return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", UNDO_MUTATION_NAME, userInterface.getClass().getSimpleName(), userInterface.getEmail(), userInterface.getUserName(), userInterface.getPassword());
 		}
-		return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type email username password}}\"}", MUTATION_NAME, userFactory.getId());
+		return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type email username password}}\"}", MUTATION_NAME, userInterface.getId());
 	}
 
 	@Override
@@ -73,6 +74,6 @@ public class RemoveUserCommand extends CommandTemplate<UserFactory>
 		responseObject.setId(Integer.parseInt(id));
 	
 		// Make copy for undo command
-		this.userFactory = responseObject;
+		this.userInterface = responseObject;
 	}
 }

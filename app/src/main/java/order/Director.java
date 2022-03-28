@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.roomFactory.*;
+import hotelsystem.roomFactory.RoomInterface;
+import hotelsystem.roomFactory.Room;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.CreateReservationCommand;
 import requestsystem.commands.GetAvailableRoomsCommand;
@@ -14,7 +15,7 @@ import userinterface.ReservationUI;
 
 public class Director {
 
-    private Map<String, List<RoomFactory>> rooms;
+    private Map<String, List<RoomInterface>> rooms;
     private Timestamp checkInTime;
     private Timestamp checkOutTime;
 
@@ -77,19 +78,19 @@ public class Director {
     public void addRoom(Console console, OrderBuilder builder, int option){
 
         String roomKey = (String)rooms.keySet().toArray()[option];
-        List<RoomFactory> roomFactoryValue = rooms.get(roomKey);
+        List<RoomInterface> roomValue = rooms.get(roomKey);
 
-        int index = (int)Math.random()* roomFactoryValue.size();
-        RoomInterface selectedRoomFactory = roomFactoryValue.get(index);
-        selectedRoomFactory.addOccupants(ReservationUI.addGuests(console,((Standard) selectedRoomFactory).getNumberBeds()));
-        builder.addRoom((Standard) selectedRoomFactory);
+        int index = (int)Math.random()*roomValue.size();
+        RoomInterface selectedRoom = roomValue.get(index);
+        selectedRoom.addOccupants(ReservationUI.addGuests(console,((Room) selectedRoom).getNumberBeds()));
+        builder.addRoom((Room)selectedRoom);
         
-        roomFactoryValue.remove(index);
-        if(roomFactoryValue.size() == 0){
+        roomValue.remove(index);
+        if(roomValue.size() == 0){
             rooms.remove(roomKey);
         }
         else{
-            rooms.put(roomKey, roomFactoryValue);
+            rooms.put(roomKey, roomValue);
         }
     }
 
@@ -100,21 +101,21 @@ public class Director {
      * @param option The index of the room in the order builder's list of rooms.
      */
     public void removeRoom(OrderBuilder builder, int option){
-        ArrayList<Standard> roomsInBuilder = builder.getRoomsBuilder();
-        RoomFactory selectedRoomFactory = roomsInBuilder.get(option);
-        String roomKey = selectedRoomFactory.getRoomName();
+        ArrayList<Room> roomsInBuilder = builder.getRoomsBuilder();
+        RoomInterface selectedRoom = roomsInBuilder.get(option);
+        String roomKey = selectedRoom.getRoomName();
 
         builder.removeRoom(option);
 
         if(rooms.containsKey(roomKey)){
-            List<RoomFactory> roomFactoryValue = rooms.get(roomKey);
-            roomFactoryValue.add(selectedRoomFactory);
-            rooms.put(roomKey, roomFactoryValue);
+            List<RoomInterface> roomValue = rooms.get(roomKey);
+            roomValue.add(selectedRoom);
+            rooms.put(roomKey, roomValue);
         }
         else{
-            ArrayList<RoomFactory> newRoomFactories = new ArrayList<>();
-            newRoomFactories.add(selectedRoomFactory);
-            rooms.put(roomKey, newRoomFactories);
+            ArrayList<RoomInterface> newRooms = new ArrayList<>();
+            newRooms.add(selectedRoom);
+            rooms.put(roomKey, newRooms);
         }
     
     }

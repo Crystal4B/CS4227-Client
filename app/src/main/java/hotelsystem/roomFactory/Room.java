@@ -1,14 +1,15 @@
 /**
  * @author Jakub Pažej
- * Standard implementation of room
+ * Standard implementation of room.
  */
 package hotelsystem.roomFactory;
 
 import hotelsystem.userFactory.UserFactory;
+import hotelsystem.userFactory.UserInterface;
 
 import java.util.ArrayList;
 
-public class Standard implements RoomInterface
+public class Room implements RoomInterface
 {
     protected String roomName;                                     // Name of room as String
     protected int roomNumber;                                      // Room number and number of beds in it as int
@@ -16,9 +17,9 @@ public class Standard implements RoomInterface
     private boolean taken = false;
     private int numberBeds;
     private double price = 200.0;
-    private ArrayList<UserFactory> occupants = new ArrayList<UserFactory>();
+    private ArrayList<UserInterface> occupants = new ArrayList<UserInterface>();
 
-    public Standard(String roomName, int roomNumber, int numberBeds)
+    public Room(String roomName, int roomNumber, int numberBeds)
     {
         this.roomName = roomName;
         this.roomNumber = roomNumber;
@@ -58,44 +59,44 @@ public class Standard implements RoomInterface
     }
 
     @Override
-    public void addOccupant(UserFactory user) {
+    public void addOccupant(UserInterface user) {
         occupants.add(user);
     }
 
     @Override
-    public void addOccupants(UserFactory[] people) {
-        for (UserFactory userFactory : people)
+    public void addOccupants(UserInterface[] people) {
+        for (UserInterface userInterface : people)
         {
-            occupants.add(userFactory);
+            occupants.add(userInterface);
         }
     }
 
     @Override
-    public void addOccupants(ArrayList<UserFactory> people) {
-        for (UserFactory userFactory : people)
+    public void addOccupants(ArrayList<UserInterface> people) {
+        for (UserInterface userInterface : people)
         {
-            occupants.add(userFactory);
+            occupants.add(userInterface);
         }
     }
 
     @Override
-    public void removeOccupant(UserFactory userFactory) {
-        occupants.remove(userFactory);
+    public void removeOccupant(UserInterface userInterface) {
+        occupants.remove(userInterface);
     }
 
     @Override
-    public void removeOccupants(UserFactory[] people) {
-        for (UserFactory userFactory : people)
+    public void removeOccupants(UserInterface[] people) {
+        for (UserInterface userInterface : people)
         {
-            occupants.remove(userFactory);
+            occupants.remove(userInterface);
         }
     }
 
     @Override
-    public void removeOccupants(ArrayList<UserFactory> people) {
-        for (UserFactory userFactory : people)
+    public void removeOccupants(ArrayList<UserInterface> people) {
+        for (UserInterface userInterface : people)
         {
-            occupants.remove(userFactory);
+            occupants.remove(userInterface);
         }
     }
 
@@ -105,7 +106,7 @@ public class Standard implements RoomInterface
     }
 
     @Override
-    public ArrayList<UserFactory> getOccupants() {
+    public ArrayList<UserInterface> getOccupants() {
         return occupants;
     }
 

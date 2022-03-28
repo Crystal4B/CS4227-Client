@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.roomFactory.Standard;
+import hotelsystem.roomFactory.Room;
 
 /**
  * Command for removing rooms from the system
  * @author Marcin Sęk
  * @apiNote Response type of ArrayList[Standard]
  */
-public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
+public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Room>>
 {
 	private static final String MUTATION_NAME = "removeRooms";
 	private static final String UNDO_MUTATION_NAME = "createRooms";
 
-	private ArrayList<Standard> rooms;
+	private ArrayList<Room> rooms;
 
 	/**
 	 * Simple constructor for command
 	 * @param rooms ArrayList of rooms being removed from the system
 	 */
-	public RemoveRoomsCommand(ArrayList<Standard> rooms)
+	public RemoveRoomsCommand(ArrayList<Room> rooms)
 	{
 		this.rooms = rooms;
 	}
@@ -39,7 +39,7 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 		String message = String.format("{\"query\":\"mutation{%s(input:[", mutation);
 		for (int i = 0; i < rooms.size(); i++)
 		{
-			Standard room = rooms.get(i);
+			Room room = rooms.get(i);
 			if (undo)
 			{
 				message += String.format("{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}", room.getClass().getSimpleName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
@@ -86,7 +86,7 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Standard>>
 			String id = (String) roomMap.get("id");
 			String type = (String) roomMap.get("type");
 			int numberOfBeds = (int) roomMap.get("numberOfBeds");
-			responseObject.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
+			responseObject.add(new Room(type, Integer.parseInt(id), numberOfBeds));
 		}
 		
 		// Make a copy for undo

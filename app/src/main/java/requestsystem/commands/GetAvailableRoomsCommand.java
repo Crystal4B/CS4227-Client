@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import hotelsystem.roomFactory.RoomFactory;
-import hotelsystem.roomFactory.Standard;
+import hotelsystem.roomFactory.RoomInterface;
+import hotelsystem.roomFactory.Room;
 
 /**
  * Command for getting all available room for specified dates
  * @author Marcin Sęk
  * @apiNote Response type of Map[Type, List[Room]]
  */
-public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<RoomFactory>>>
+public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<RoomInterface>>>
 {
 	private static final String QUERY_NAME = "availableRoomsByDates";
 
@@ -56,9 +56,9 @@ public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<R
 			String id = (String) roomMap.get("id");
 			String type = (String) roomMap.get("type");
 			int numberOfBeds = (int) roomMap.get("numberOfBeds");
-			List<RoomFactory> roomFactories = responseObject.getOrDefault(type, new ArrayList<>());
-			roomFactories.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
-			responseObject.put(type, roomFactories);
+			List<RoomInterface> roomInterfaces = responseObject.getOrDefault(type, new ArrayList<>());
+			roomInterfaces.add(new Room(type, Integer.parseInt(id), numberOfBeds));
+			responseObject.put(type, roomInterfaces);
 		}
 	}
 }

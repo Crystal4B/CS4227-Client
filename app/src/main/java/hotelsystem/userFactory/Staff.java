@@ -1,6 +1,6 @@
 /**
  * @author Jakub Pažej
- * Staff class implementing the user abstract factory method.
+ * Staff class implementing the user.
  */
 package hotelsystem.userFactory;
 

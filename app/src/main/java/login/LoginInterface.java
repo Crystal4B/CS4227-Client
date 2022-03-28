@@ -1,10 +1,11 @@
 package login;
 
 import hotelsystem.userFactory.UserFactory;
+import hotelsystem.userFactory.UserInterface;
 
 public interface LoginInterface {
     public boolean login(String email, String password);
     public boolean isValidEmail(String email);
-    public UserFactory validatesUser(String email, String password);
-    public UserFactory returnUser();
+    public UserInterface validatesUser(String email, String password);
+    public UserInterface returnUser();
 }

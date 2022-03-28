@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.roomFactory.Standard;
-import hotelsystem.userFactory.UserFactory;
+import hotelsystem.roomFactory.Room;
+import hotelsystem.userFactory.UserInterface;
 import order.Order;
 import order.OrderBuilder;
 
@@ -38,19 +38,19 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id arrivalDate departureDate numberOfOccupants rooms{id type name perks numberOfBeds rate}}}\"}", UNDO_MUTATION_NAME, reservationOrder.getOrderID());
 		}
 
-		UserFactory creator = reservationOrder.getUser();
+		UserInterface creator = reservationOrder.getUser();
 
-		ArrayList<Standard> rooms = reservationOrder.getRooms();
+		ArrayList<Room> rooms = reservationOrder.getRooms();
 		String orderGuests = "";
 		for (int i = 0; i < rooms.size(); i++)
 		{
-			Standard room = rooms.get(i);
+			Room room = rooms.get(i);
 			int roomId = room.getRoomNumber();
 
-			List<UserFactory> occupants = room.getOccupants();
+			List<UserInterface> occupants = room.getOccupants();
 			for (int j = 0; j < occupants.size(); j++)
 			{
-				UserFactory occupant = occupants.get(j);
+				UserInterface occupant = occupants.get(j);
 
 				String firstName = occupant.getFirstName();
 				String lastName = occupant.getLastName();
@@ -95,7 +95,7 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 		builder.setEndDate(reservationOrder.getEndDate());
 		builder.setUser(reservationOrder.getUser());
 
-		List<Standard> rooms = reservationOrder.getRooms();
+		List<Room> rooms = reservationOrder.getRooms();
 
 		List<?> guestsList = (List<?>) reservationData.get("guests");
 		for (int i = 0; i < guestsList.size(); i++)
@@ -106,12 +106,12 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			String firstName = (String) guestMap.get("firstName");
 			String lastName = (String) guestMap.get("lastName");
 			
-			for (Standard room : rooms)
+			for (Room room : rooms)
 			{
 				boolean found = false;
 
-				List<UserFactory> guests = room.getOccupants();
-				for (UserFactory guest : guests)
+				List<UserInterface> guests = room.getOccupants();
+				for (UserInterface guest : guests)
 				{
 					if (guest.getFirstName().equals(firstName) && guest.getLastName().equals(lastName))
 					{
@@ -128,7 +128,7 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			}
 		}
 
-		builder.setRooms((ArrayList<Standard>) rooms);
+		builder.setRooms((ArrayList<Room>) rooms);
 
 		responseObject = builder.getOrder();
 

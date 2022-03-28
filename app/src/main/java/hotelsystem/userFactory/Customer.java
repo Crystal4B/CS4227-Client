@@ -1,6 +1,6 @@
 /**
  * @author Jakub Pažej
- * Customer class implementing the user abstract factory method.
+ * Customer class implementing the user.
  */
 package hotelsystem.userFactory;
 

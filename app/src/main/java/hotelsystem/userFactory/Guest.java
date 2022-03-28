@@ -1,6 +1,6 @@
 /**
  * @author Jakub Pažej
- * Guest class implementing the user abstract factory method.
+ * Guest class implementing the user.
  */
 package hotelsystem.userFactory;
 

@@ -17,7 +17,7 @@ class BillingTestCash {
 
     @Test void checkBillingCash() {
         OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Standard("Test Name", 123, 2));
+        builder.addRoom(new Room("Test Name", 123, 2));
         Order order = builder.getOrder();
         BillingCash bill = new BillingCash();
         String expected = "Date:\t\t" + order.getStartDate() + "-"+ order.getEndDate() + 

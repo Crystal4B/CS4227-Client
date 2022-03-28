@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.roomFactory.Standard;
+import hotelsystem.roomFactory.Room;
 import order.Order;
 import order.OrderBuilder;
 
@@ -59,7 +59,7 @@ public class SelectReservationCommand extends CommandTemplate<Order>
 				String roomId = (String) roomMap.get("id");
 				String type = (String) roomMap.get("type");
 				int numberOfBeds = (int) roomMap.get("numberOfBeds");
-				builder.addRoom(new Standard(type, Integer.parseInt(roomId), numberOfBeds));
+				builder.addRoom(new Room(type, Integer.parseInt(roomId), numberOfBeds));
 			}
 	
 			responseObject = builder.getOrder();

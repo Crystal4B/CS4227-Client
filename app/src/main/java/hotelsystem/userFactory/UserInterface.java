@@ -1,6 +1,6 @@
 /**
  * @author Jakub Pažej
- * Abstract factory method for users of the hotel system.
+ * Interface for user for abstract factory method implementation.
  */
 package hotelsystem.userFactory;
 

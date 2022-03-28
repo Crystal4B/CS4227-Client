@@ -2,20 +2,20 @@ package requestsystem.commands;
 
 import java.util.Map;
 
-import hotelsystem.roomFactory.Standard;
+import hotelsystem.roomFactory.Room;
 
-public class CreateRoomCommand extends CommandTemplate<Standard>
+public class CreateRoomCommand extends CommandTemplate<Room>
 {
 	private static final String MUTATION_NAME = "createRoom";
 	private static final String UNDO_MUTATION_NAME = "roomRoom";
 
-	private Standard room;
+	private Room room;
 
 	/**
 	 * Simple constructor for command
-	 * @param rooms room being removed from the system
+	 * @param room being removed from the system
 	 */
-	public CreateRoomCommand(Standard room)
+	public CreateRoomCommand(Room room)
 	{
 		this.room = room;
 	}
@@ -56,7 +56,7 @@ public class CreateRoomCommand extends CommandTemplate<Standard>
 		switch(type)
 		{
 			case "Standard":
-			responseObject = new Standard(type, Integer.parseInt(id), numberOfBeds);
+			responseObject = new Room(type, Integer.parseInt(id), numberOfBeds);
 			break;
 		}
 		

@@ -4,7 +4,7 @@
 
 package order;
 
-import hotelsystem.roomFactory.Standard;
+import hotelsystem.roomFactory.Room;
 import hotelsystem.userFactory.Customer;
 
 import org.junit.jupiter.api.Test;
@@ -34,22 +34,22 @@ class OrderTest {
 
     @Test void checkOrderGetRooms() {
 		OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Standard("Test Name", 123, 2));
-        builder.addRoom(new Standard("Test Name", 123, 2));
+        builder.addRoom(new Room("Test Name", 123, 2));
+        builder.addRoom(new Room("Test Name", 123, 2));
 		Order order = builder.getOrder();
         assertEquals(order.getRooms().size(), 2);
     }
 
     @Test void checkOrderRateCost() {
 		OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Standard("Test Name", 123, 2));
+        builder.addRoom(new Room("Test Name", 123, 2));
 		Order order = builder.getOrder();
         assertEquals(order.getRateCost(), 200);
     }
 
     @Test void checkOrderFinalCost() {
         OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Standard("Test Name", 123, 2));
+        builder.addRoom(new Room("Test Name", 123, 2));
         builder.setStartDate(Timestamp.valueOf("2020-10-10 12:00:00"));
         builder.setEndDate(Timestamp.valueOf("2020-10-12 12:00:00"));
         Order order = builder.getOrder();
@@ -72,7 +72,7 @@ class OrderTest {
 
     @Test void checkOrderToString(){
         OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Standard("Test Name", 123, 2));
+        builder.addRoom(new Room("Test Name", 123, 2));
         builder.setStartDate(Timestamp.valueOf("2020-10-10 12:00:00"));
         builder.setEndDate(Timestamp.valueOf("2020-10-12 12:00:00"));
         Order order = builder.getOrder();
@@ -90,13 +90,13 @@ class OrderTest {
 
     @Test void checkOrderEquals(){
         OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Standard("Test Name", 123, 2));
+        builder.addRoom(new Room("Test Name", 123, 2));
         builder.setStartDate(Timestamp.valueOf("2020-10-10 12:00:00"));
         builder.setEndDate(Timestamp.valueOf("2020-10-12 12:00:00"));
         Order order = builder.getOrder();
 
         OrderBuilder builder2 = new OrderBuilder();
-        builder2.addRoom(new Standard("Test Name", 123, 2));
+        builder2.addRoom(new Room("Test Name", 123, 2));
         Order order2 = builder2.getOrder();
 
         assertTrue(order.equals(order));

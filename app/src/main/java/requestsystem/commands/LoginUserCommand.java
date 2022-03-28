@@ -3,6 +3,7 @@ package requestsystem.commands;
 import hotelsystem.userFactory.Customer;
 import hotelsystem.userFactory.Staff;
 import hotelsystem.userFactory.UserFactory;
+import hotelsystem.userFactory.UserInterface;
 
 import java.util.Map;
 
@@ -11,26 +12,26 @@ import java.util.Map;
  * @author Marcin Sęk
  * @apiNote Response type of User
  */
-public class LoginUserCommand extends CommandTemplate<UserFactory>
+public class LoginUserCommand extends CommandTemplate<UserInterface>
 {
 	private static final String QUERY_NAME = "loginUser";
 
-	private UserFactory userFactory;
+	private UserInterface userInterface;
 
 	/**
 	 * Simple constructor for command
-	 * @param userFactory attempting to login
+	 * @param userInterface attempting to login
 	 */
-	public LoginUserCommand(UserFactory userFactory)
+	public LoginUserCommand(UserInterface userInterface)
 	{
-		this.userFactory = userFactory;
+		this.userInterface = userInterface;
 	}
 
 	@Override
 	public String createMessage(boolean undo)
 	{
 		// Undo does not apply to requests of type query
-		return String.format("{\"query\":\"query{%s(input:{email: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", QUERY_NAME, userFactory.getEmail(), userFactory.getPassword());
+		return String.format("{\"query\":\"query{%s(input:{email: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", QUERY_NAME, userInterface.getEmail(), userInterface.getPassword());
 	}
 
 	@Override

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.roomFactory.Standard;
+import hotelsystem.roomFactory.Room;
 import hotelsystem.userFactory.Guest;
-import hotelsystem.userFactory.UserFactory;
+import hotelsystem.userFactory.UserInterface;
 import order.Order;
 import order.OrderBuilder;
 
@@ -15,18 +15,18 @@ public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 {
 	private static final String QUERY_NAME = "reservationsByUser";
 
-	private UserFactory userFactory;
+	private UserInterface userInterface;
 
-	public GetReservationsByUserCommand(UserFactory userFactory)
+	public GetReservationsByUserCommand(UserInterface userInterface)
 	{
-		this.userFactory = userFactory;
+		this.userInterface = userInterface;
 	}
 
 	@Override
 	public String createMessage(boolean undo)
 	{
 		// Undo does not apply to query messages
-		return "{\"query\":\"query{" + QUERY_NAME + "(input: {id: " + userFactory.getId() + " type: \\\"" + userFactory.getClass().getSimpleName() + "\\\" email: \\\"" + userFactory.getEmail() + "\\\"}){id checkIn checkOut user{id type} guests{id firstName lastName room{id type numberOfBeds}}}}\"}";
+		return "{\"query\":\"query{" + QUERY_NAME + "(input: {id: " + userInterface.getId() + " type: \\\"" + userInterface.getClass().getSimpleName() + "\\\" email: \\\"" + userInterface.getEmail() + "\\\"}){id checkIn checkOut user{id type} guests{id firstName lastName room{id type numberOfBeds}}}}\"}";
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 			builder.setStartDate(Timestamp.valueOf((String) reservationMap.get("checkIn")));
 			builder.setEndDate(Timestamp.valueOf((String) reservationMap.get("checkOut")));
 
-			ArrayList<Standard> rooms = new ArrayList<>();
+			ArrayList<Room> rooms = new ArrayList<>();
 
 			List<?> guestList = (List<?>) reservationMap.get("guests");
 			for (int j = 0; j < guestList.size(); j++)
@@ -54,10 +54,10 @@ public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 				Map<?, ?> roomMap = (Map<?, ?>) guestMap.get("room");
 
 				int id = Integer.parseInt((String) roomMap.get("id"));
-				Standard standardRoom = null;
+				Room standardRoom = null;
 
 				boolean found = false;
-				for (Standard room : rooms)
+				for (Room room : rooms)
 				{
 					if (room.getRoomNumber() == id)
 					{
@@ -71,7 +71,7 @@ public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 				{
 					String type = (String) roomMap.get("type");
 					int numberOfBeds = (int) roomMap.get("numberOfBeds");
-					standardRoom = new Standard(type, id, numberOfBeds);
+					standardRoom = new Room(type, id, numberOfBeds);
 					rooms.add(standardRoom);
 				}
 

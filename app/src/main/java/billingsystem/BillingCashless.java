@@ -5,8 +5,9 @@ import order.*;
 public class BillingCashless extends BillingTemplate {
     
     @Override
-    public double AcceptCouponVisitorCode(CouponVisitor a, String code){
-        return a.VoucherInput(code);
+    public double AcceptCouponVisitorCode(CouponVisitor a){
+        discount = a.VoucherInput();
+        return discount;
     }
 
     @Override 

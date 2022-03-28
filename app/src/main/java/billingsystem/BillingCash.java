@@ -14,8 +14,9 @@ public class BillingCash extends BillingTemplate {
     }
 
     @Override
-    public double AcceptCouponVisitorCode(CouponVisitor a, String code){
-        return  a.CouponInput(code);
+    public double AcceptCouponVisitorCode(CouponVisitor a){
+        discount = a.CouponInput();
+        return discount;
     }
 
     @Override

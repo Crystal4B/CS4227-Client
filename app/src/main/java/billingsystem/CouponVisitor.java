@@ -11,7 +11,7 @@ public class CouponVisitor implements CouponInterface {
         }
      }
 
-   public double CouponInput(String code) {
+   public double CouponInput() {
       if(code == "123"){
          discount = 0.1; 
          return discount;
@@ -26,7 +26,7 @@ public class CouponVisitor implements CouponInterface {
       }
   }
 
-   public double VoucherInput(String code) {
+   public double VoucherInput() {
       if(code == "123"){
          discount = 1.0; 
          return discount;

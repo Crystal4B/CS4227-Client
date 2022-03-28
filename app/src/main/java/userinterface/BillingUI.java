@@ -9,7 +9,7 @@ import billingsystem.CouponVisitor;
 import order.Order;
 
 public class BillingUI {
-    private static CouponVisitor discountStore = new CouponVisitor();
+    private static CouponVisitor a = new CouponVisitor();
 
     private static Order order;
 
@@ -74,10 +74,10 @@ public class BillingUI {
         System.out.println("####################################################\n");
         System.out.println(" Voucher Code :");
         String codeNum = console.readLine();
-        discountStore.CodeSet(codeNum);
-        if (discountStore.CouponInput(codeNum)!=0.0) {
+        a.CodeSet(codeNum);
+        if (a.CouponInput()!=0.0) {
             System.out.println(" Applying discount of :");
-            System.out.println(discountStore.PercentConverter(discountStore.CouponInput(codeNum)) );
+            System.out.println(a.PercentConverter(a.CouponInput()) );
             return true;
         }
         else {
@@ -93,10 +93,9 @@ public class BillingUI {
         System.out.println(" Voucher Code :");
         String codeNum = console.readLine();
         BillingCashless bill = new BillingCashless();
-        discountStore.CodeSet(codeNum);
-        bill.SetDiscount(bill.AcceptCouponVisitorCode(discountStore, codeNum));
-        if (bill.AcceptCouponVisitorCode(discountStore, codeNum)!=0.0) {
-            bill.SendEmail(order, bill.AcceptCouponVisitorCode(discountStore, codeNum));
+        a.CodeSet(codeNum);
+        if (bill.AcceptCouponVisitorCode(a)!=0.0) {
+            bill.SendEmail(order, bill.AcceptCouponVisitorCode(a));
             return true;
         }
         else {
@@ -119,7 +118,7 @@ public class BillingUI {
         System.out.println("\n Reservation will be paid for at Reception");
         BillingCash bill = new BillingCash();
         bill.PaymentSend(order); 
-        bill.SendEmail(order, bill.DiscountGet());
+        bill.SendEmail(order, bill.AcceptCouponVisitorCode(a));
         return true;
         
     }
@@ -138,7 +137,7 @@ public class BillingUI {
         int csv = Integer.parseInt(console.readLine());
         BillingCard bill = new BillingCard();
         if (bill.PaymentSend(cardNum, cardName, cardDate, csv, order)) {
-            bill.SendEmail(order, bill.DiscountGet());
+            bill.SendEmail(order, bill.AcceptCouponVisitorCode(a));
             return true;
         }
         else {

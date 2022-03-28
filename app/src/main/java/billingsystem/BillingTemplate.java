@@ -34,7 +34,7 @@ abstract class BillingTemplate {
       return a.CouponPaid(this);
    }
 
-   abstract public double AcceptCouponVisitorCode(CouponVisitor a, String code);
+   abstract public double AcceptCouponVisitorCode(CouponVisitor a);
 
    public String PercentConverter(CouponVisitor a, double num){
       return a.PercentConverter(num);

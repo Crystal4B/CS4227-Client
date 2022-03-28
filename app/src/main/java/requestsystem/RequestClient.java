@@ -9,6 +9,7 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,16 +41,19 @@ public class RequestClient
 
 			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
-			System.out.println(response.body());
-
 			Map<?, ?> mapping = new ObjectMapper().readValue(response.body(), HashMap.class);
+			if (mapping.containsKey("errors"))
+			{
+				List<?> errorList = (List<?>) mapping.get("errors");
+				for (int i = 0; i < errorList.size(); i++)
+				{
+					Map<?, ?> errorMap = (Map<?, ?>) errorList.get(i);
+					System.out.println((String) errorMap.get("message"));
+				}
+			}
 			if (mapping.containsKey("data"))
 			{
 				return (Map<?, ?>) mapping.get("data");
-			}
-			else if(mapping.containsKey("errors"))
-			{
-				// TODO: handle errors
 			}
 		}
 		catch(URISyntaxException | IOException | InterruptedException e)

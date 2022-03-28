@@ -5,7 +5,7 @@
 package order;
 
 import org.junit.jupiter.api.Test;
-import hotelsystem.room.Standard;
+import hotelsystem.roomFactory.Standard;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 

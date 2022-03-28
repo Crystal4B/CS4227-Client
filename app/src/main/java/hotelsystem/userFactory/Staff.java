@@ -1,30 +1,38 @@
 /**
  * @author Jakub Pažej
- * Customer class implementing the user abstract factory method.
+ * Staff class implementing the user abstract factory method.
  */
-package hotelsystem.user;
+package hotelsystem.userFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Customer extends User
+public class Staff implements UserInterface
 {
-    final String type = "Customer";
+    protected String userName, password, email, firstName, lastName;
+    protected int id;                                                        // ID for better database implementation and security reasons
+    final String type = "Staff";
     final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
+            "CancelReservation",
             "CreateReservation",
+            "CreateRooms",
             "GetAvailableRooms",
             "LoginUser",
-            "RegisterUser"
+            "MacroReservation",
+            "RegisterUser",
+            "ReservationInvoker",
+            "SelectReservation"
     ));
-    private boolean paid;
+    private double salary;
+    private int holidayDaysAvailable;
 
-    public Customer(){}
+    public Staff(){}
 
-    public Customer(String userName, String password, String email)
+    public Staff(String userName, String password, String email)
     {
-      this.userName=userName;
-      this.password=password;
-      this.email=email;
+        this.userName=userName;
+        this.password=password;
+        this.email=email;
     }
 
     @Override
@@ -107,13 +115,28 @@ public class Customer extends User
         return firstName+" "+lastName;
     }
 
-    public void setPaid(boolean bool)
+    public void setSalary(double salary)
     {
-        this.paid=bool;
+        this.salary=salary;
     }
 
-    public boolean getPaid()
+    public double getSalary()
     {
-        return paid;
+        return salary;
+    }
+
+    public void setHolidays(int days)
+    {
+        this.holidayDaysAvailable=days;
+    }
+
+    public void addHolidays(int days)
+    {
+        this.holidayDaysAvailable+=days;
+    }
+
+    public int getHolidays()
+    {
+        return holidayDaysAvailable;
     }
 }

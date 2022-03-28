@@ -1,8 +1,8 @@
 package requestsystem.commands;
 
-import hotelsystem.user.User;
-import hotelsystem.user.Customer;
-import hotelsystem.user.Staff;
+import hotelsystem.userFactory.UserFactory;
+import hotelsystem.userFactory.Customer;
+import hotelsystem.userFactory.Staff;
 
 import java.util.Map;
 
@@ -11,20 +11,20 @@ import java.util.Map;
  * @author Marcin Sęk
  * @apiNote Response type of User
  */
-public class RegisterUserCommand extends CommandTemplate<User>
+public class RegisterUserCommand extends CommandTemplate<UserFactory>
 {
 	private static final String MUTATION_NAME = "createUser";
 	private static final String UNDO_MUTATION_NAME = "removeUser";
 
-	private User user;
+	private UserFactory userFactory;
 
 	/**
 	 * Simple constructor for command
-	 * @param user being registered with the system
+	 * @param userFactory being registered with the system
 	 */
-	public RegisterUserCommand(User user)
+	public RegisterUserCommand(UserFactory userFactory)
 	{
-		this.user = user;
+		this.userFactory = userFactory;
 	}
 
 	@Override
@@ -32,9 +32,9 @@ public class RegisterUserCommand extends CommandTemplate<User>
 	{
 		if (undo)
 		{
-			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type email username password}}\"}", UNDO_MUTATION_NAME, user.getId());
+			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type email username password}}\"}", UNDO_MUTATION_NAME, userFactory.getId());
 		}
-		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", MUTATION_NAME, user.getClass().getSimpleName(), user.getEmail(), user.getUserName(), user.getPassword());
+		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", MUTATION_NAME, userFactory.getClass().getSimpleName(), userFactory.getEmail(), userFactory.getUserName(), userFactory.getPassword());
 	}
 
 	@Override
@@ -78,6 +78,6 @@ public class RegisterUserCommand extends CommandTemplate<User>
 		responseObject.setId(Integer.parseInt(id));
 	
 		// Make copy for undo command
-		this.user = responseObject;
+		this.userFactory = responseObject;
 	}
 }

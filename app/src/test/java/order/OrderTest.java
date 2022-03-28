@@ -4,8 +4,8 @@
 
 package order;
 
-import hotelsystem.room.Standard;
-import hotelsystem.user.Customer;
+import hotelsystem.roomFactory.Standard;
+import hotelsystem.userFactory.Customer;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

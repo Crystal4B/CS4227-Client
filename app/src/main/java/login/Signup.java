@@ -1,10 +1,10 @@
 package login;
 
-import hotelsystem.user.User;
+import hotelsystem.userFactory.UserFactory;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.RegisterUserCommand;
-import hotelsystem.user.Customer;
-import hotelsystem.user.Staff;
+import hotelsystem.userFactory.Customer;
+import hotelsystem.userFactory.Staff;
 
 import java.util.regex.Pattern;
 
@@ -15,7 +15,7 @@ import java.util.Random;
 public class Signup implements SignupInterface{
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     public String type = "Customer";
-    public User person;
+    public UserFactory person;
     public int authKey;
     private String username;
     CommandInvoker invoker;
@@ -53,16 +53,7 @@ public class Signup implements SignupInterface{
         return true;
     }
 
-    public User createsUser(String email,String username, String password) {
-        person.setEmail(email);
-        person.setUserName(username);
-        person.setPassword(password);
-
-        return person;
-
-    }
-
-    public User returnUser() {
+    public UserFactory returnUser() {
         return person;
     }
 	@Override

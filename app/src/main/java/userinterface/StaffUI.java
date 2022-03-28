@@ -3,8 +3,8 @@ package userinterface;
 import java.io.Console;
 import java.util.ArrayList;
 
-import hotelsystem.room.Room;
-import hotelsystem.room.Standard;
+import hotelsystem.roomFactory.RoomFactory;
+import hotelsystem.roomFactory.Standard;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.CreateRoomCommand;
 import requestsystem.commands.GetAllRoomsCommand;
@@ -57,7 +57,7 @@ public class StaffUI {
         CommandInvoker invoker = new CommandInvoker();
         invoker.setCommand(new GetAllRoomsCommand());
         invoker.execute();
-        ArrayList<Room> rooms = invoker.getResponse();
+        ArrayList<RoomFactory> roomFactories = invoker.getResponse();
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -69,19 +69,19 @@ public class StaffUI {
         System.out.println("\n####################################################\n");
         switch (option) {
             case 1:
-                Room selectedAddRoom = (Standard)addRoom(console);
-                if(selectedAddRoom != null){
-                    invoker.setCommand(new CreateRoomCommand((Standard)selectedAddRoom));
+                RoomFactory selectedAddRoomFactory = (Standard)addRoom(console);
+                if(selectedAddRoomFactory != null){
+                    invoker.setCommand(new CreateRoomCommand((Standard) selectedAddRoomFactory));
                     invoker.execute();
                 }
                 break;
             case 2:
-                if(rooms.size() == 0){
+                if(roomFactories.size() == 0){
                     break;
                 }
-                Room selectedRemoveRoom = (Standard)removeRoom(console, rooms);
-                if(selectedRemoveRoom != null){
-                    invoker.setCommand(new RemoveRoomCommand((Standard)selectedRemoveRoom));
+                RoomFactory selectedRemoveRoomFactory = (Standard)removeRoom(console, roomFactories);
+                if(selectedRemoveRoomFactory != null){
+                    invoker.setCommand(new RemoveRoomCommand((Standard) selectedRemoveRoomFactory));
                     invoker.execute();
                 }
                 break;
@@ -93,7 +93,7 @@ public class StaffUI {
         return false;
     }
 
-    public static Room addRoom(Console console){
+    public static RoomFactory addRoom(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -119,15 +119,15 @@ public class StaffUI {
         }
     }
 
-    public static Room removeRoom(Console console, ArrayList<Room> rooms){
+    public static RoomFactory removeRoom(Console console, ArrayList<RoomFactory> roomFactories){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println("Please select one of the following rooms to remove:");
         System.out.println("\n0.\t Back\n");
-        for (int i=0; i < rooms.size(); i++) 
+        for (int i = 0; i < roomFactories.size(); i++)
         {   
-            System.out.println((i+1) + ".\t" + rooms.get(i).toString());
+            System.out.println((i+1) + ".\t" + roomFactories.get(i).toString());
         }
         int option = -2;
         try {
@@ -140,9 +140,9 @@ public class StaffUI {
         if(option == -1){
             return null;
         }
-        else if(option >= 0 && option < rooms.size()){
-            return rooms.get(option);
+        else if(option >= 0 && option < roomFactories.size()){
+            return roomFactories.get(option);
         }
-        return removeRoom(console, rooms);
+        return removeRoom(console, roomFactories);
     }
 }

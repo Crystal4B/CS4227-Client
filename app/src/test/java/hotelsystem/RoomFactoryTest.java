@@ -4,18 +4,14 @@
 
 package hotelsystem;
 
-import hotelsystem.room.Standard;
-import hotelsystem.room.roomBuilder;
-import hotelsystem.user.Customer;
-import hotelsystem.user.Guest;
-import hotelsystem.user.Staff;
-import hotelsystem.user.User;
+import hotelsystem.roomFactory.Standard;
+import hotelsystem.userFactory.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
-class RoomTest {
+class RoomFactoryTest {
 
     // Standard Room Unit Tests
 
@@ -54,7 +50,8 @@ class RoomTest {
 
     @Test
     void checkStandardAddOccupantsArray() {
-        User[] occupants = {
+        UserFactory uf = new UserFactory();
+        UserInterface[] occupants = {
                 new Staff(),
                 new Customer(),
                 new Guest()
@@ -67,7 +64,7 @@ class RoomTest {
 
     @Test
     void checkStandardAddOccupantsArrayList() {
-        ArrayList<User> occupants = new ArrayList<>();
+        ArrayList<UserFactory> occupants = new ArrayList<>();
         occupants.add(new Staff());
         occupants.add(new Customer());
         occupants.add(new Guest());
@@ -93,7 +90,7 @@ class RoomTest {
 
     @Test
     void checkStandardRemoveOccupants() {
-        User[] occupants = {
+        UserFactory[] occupants = {
                 new Staff(),
                 new Customer(),
                 new Guest()
@@ -176,7 +173,7 @@ class RoomTest {
 
     @Test
     void checkDeluxeAddOccupantsArray() {
-        User[] occupants = {
+        UserFactory[] occupants = {
                 new Staff(),
                 new Customer(),
                 new Guest()
@@ -189,7 +186,7 @@ class RoomTest {
 
     @Test
     void checkVIPAddOccupantsArray() {
-        User[] occupants = {
+        UserFactory[] occupants = {
                 new Staff(),
                 new Customer(),
                 new Guest()
@@ -202,7 +199,7 @@ class RoomTest {
 
     @Test
     void checkDeluxeAddOccupantsArrayList() {
-        ArrayList<User> occupants = new ArrayList<>();
+        ArrayList<UserFactory> occupants = new ArrayList<>();
         occupants.add(new Staff());
         occupants.add(new Customer());
         occupants.add(new Guest());
@@ -214,7 +211,7 @@ class RoomTest {
 
     @Test
     void checkVIPAddOccupantsArrayList() {
-        ArrayList<User> occupants = new ArrayList<>();
+        ArrayList<UserFactory> occupants = new ArrayList<>();
         occupants.add(new Staff());
         occupants.add(new Customer());
         occupants.add(new Guest());
@@ -254,7 +251,7 @@ class RoomTest {
 
     @Test
     void checkDeluxeRemoveOccupants() {
-        User[] occupants = {
+        UserFactory[] occupants = {
                 new Staff(),
                 new Customer(),
                 new Guest()
@@ -268,7 +265,7 @@ class RoomTest {
 
     @Test
     void checkVIPRemoveOccupants() {
-        User[] occupants = {
+        UserFactory[] occupants = {
                 new Staff(),
                 new Customer(),
                 new Guest()

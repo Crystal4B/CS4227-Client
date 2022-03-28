@@ -2,19 +2,21 @@
  * @author Jakub Pažej
  * Standard implementation of room
  */
-package hotelsystem.room;
+package hotelsystem.roomFactory;
 
-import hotelsystem.user.User;
+import hotelsystem.userFactory.UserFactory;
 
 import java.util.ArrayList;
 
-public class Standard extends Room
+public class Standard implements RoomInterface
 {
+    protected String roomName;                                     // Name of room as String
+    protected int roomNumber;                                      // Room number and number of beds in it as int
     private String perks = "WiFi, TV, Toilet, Shower";
     private boolean taken = false;
     private int numberBeds;
     private double price = 200.0;
-    private ArrayList<User> occupants = new ArrayList<User>();
+    private ArrayList<UserFactory> occupants = new ArrayList<UserFactory>();
 
     public Standard(String roomName, int roomNumber, int numberBeds)
     {
@@ -56,44 +58,44 @@ public class Standard extends Room
     }
 
     @Override
-    public void addOccupant(User user) {
+    public void addOccupant(UserFactory user) {
         occupants.add(user);
     }
 
     @Override
-    public void addOccupants(User[] people) {
-        for (User user : people)
+    public void addOccupants(UserFactory[] people) {
+        for (UserFactory userFactory : people)
         {
-            occupants.add(user);
+            occupants.add(userFactory);
         }
     }
 
     @Override
-    public void addOccupants(ArrayList<User> people) {
-        for (User user : people)
+    public void addOccupants(ArrayList<UserFactory> people) {
+        for (UserFactory userFactory : people)
         {
-            occupants.add(user);
+            occupants.add(userFactory);
         }
     }
 
     @Override
-    public void removeOccupant(User user) {
-        occupants.remove(user);
+    public void removeOccupant(UserFactory userFactory) {
+        occupants.remove(userFactory);
     }
 
     @Override
-    public void removeOccupants(User[] people) {
-        for (User user : people)
+    public void removeOccupants(UserFactory[] people) {
+        for (UserFactory userFactory : people)
         {
-            occupants.remove(user);
+            occupants.remove(userFactory);
         }
     }
 
     @Override
-    public void removeOccupants(ArrayList<User> people) {
-        for (User user : people)
+    public void removeOccupants(ArrayList<UserFactory> people) {
+        for (UserFactory userFactory : people)
         {
-            occupants.remove(user);
+            occupants.remove(userFactory);
         }
     }
 
@@ -103,7 +105,7 @@ public class Standard extends Room
     }
 
     @Override
-    public ArrayList<User> getOccupants() {
+    public ArrayList<UserFactory> getOccupants() {
         return occupants;
     }
 

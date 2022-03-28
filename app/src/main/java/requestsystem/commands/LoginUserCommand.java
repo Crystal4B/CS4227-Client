@@ -1,8 +1,8 @@
 package requestsystem.commands;
 
-import hotelsystem.user.Customer;
-import hotelsystem.user.Staff;
-import hotelsystem.user.User;
+import hotelsystem.userFactory.Customer;
+import hotelsystem.userFactory.Staff;
+import hotelsystem.userFactory.UserFactory;
 
 import java.util.Map;
 
@@ -11,26 +11,26 @@ import java.util.Map;
  * @author Marcin Sęk
  * @apiNote Response type of User
  */
-public class LoginUserCommand extends CommandTemplate<User>
+public class LoginUserCommand extends CommandTemplate<UserFactory>
 {
 	private static final String QUERY_NAME = "loginUser";
 
-	private User user;
+	private UserFactory userFactory;
 
 	/**
 	 * Simple constructor for command
-	 * @param user attempting to login
+	 * @param userFactory attempting to login
 	 */
-	public LoginUserCommand(User user)
+	public LoginUserCommand(UserFactory userFactory)
 	{
-		this.user = user;
+		this.userFactory = userFactory;
 	}
 
 	@Override
 	public String createMessage(boolean undo)
 	{
 		// Undo does not apply to requests of type query
-		return String.format("{\"query\":\"query{%s(input:{email: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", QUERY_NAME, user.getEmail(), user.getPassword());
+		return String.format("{\"query\":\"query{%s(input:{email: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", QUERY_NAME, userFactory.getEmail(), userFactory.getPassword());
 	}
 
 	@Override

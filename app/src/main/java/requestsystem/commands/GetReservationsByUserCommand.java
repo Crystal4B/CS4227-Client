@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.room.Standard;
-import hotelsystem.user.Guest;
-import hotelsystem.user.User;
+import hotelsystem.roomFactory.Standard;
+import hotelsystem.userFactory.Guest;
+import hotelsystem.userFactory.UserFactory;
 import order.Order;
 import order.OrderBuilder;
 
@@ -15,18 +15,18 @@ public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 {
 	private static final String QUERY_NAME = "reservationsByUser";
 
-	private User user;
+	private UserFactory userFactory;
 
-	public GetReservationsByUserCommand(User user)
+	public GetReservationsByUserCommand(UserFactory userFactory)
 	{
-		this.user = user;
+		this.userFactory = userFactory;
 	}
 
 	@Override
 	public String createMessage(boolean undo)
 	{
 		// Undo does not apply to query messages
-		return "{\"query\":\"query{" + QUERY_NAME + "(input: {id: " + user.getId() + " type: \\\"" + user.getClass().getSimpleName() + "\\\" email: \\\"" + user.getEmail() + "\\\"}){id checkIn checkOut user{id type} guests{id firstName lastName room{id type numberOfBeds}}}}\"}";
+		return "{\"query\":\"query{" + QUERY_NAME + "(input: {id: " + userFactory.getId() + " type: \\\"" + userFactory.getClass().getSimpleName() + "\\\" email: \\\"" + userFactory.getEmail() + "\\\"}){id checkIn checkOut user{id type} guests{id firstName lastName room{id type numberOfBeds}}}}\"}";
 	}
 
 	@Override

@@ -1,16 +1,16 @@
 package login;
 
-import hotelsystem.user.User;
+import hotelsystem.userFactory.UserFactory;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.LoginUserCommand;
-import hotelsystem.user.Customer;
+import hotelsystem.userFactory.Customer;
 import java.util.regex.Pattern;
 
 
 public class Login implements LoginInterface {
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     CommandInvoker invoker;
-    public User user;
+    public UserFactory userFactory;
 
     public boolean login(String email, String password) {
         invoker = new CommandInvoker();
@@ -36,24 +36,24 @@ public class Login implements LoginInterface {
         return true;
     }
 
-    public User validatesUser(String email, String password) {
+    public UserFactory validatesUser(String email, String password) {
 
-        user = new Customer();
-        user.setEmail(email);
-        user.setPassword(password);
-        invoker.setCommand(new LoginUserCommand(user));
+        userFactory = new Customer();
+        userFactory.setEmail(email);
+        userFactory.setPassword(password);
+        invoker.setCommand(new LoginUserCommand(userFactory));
         invoker.execute();
         if(invoker.getResponse() == null) {
             return null;
         }
         else {
-            this.user = invoker.getResponse();
-            return this.user;
+            this.userFactory = invoker.getResponse();
+            return this.userFactory;
         }
         
     }
 
-    public User returnUser() {
-        return user;
+    public UserFactory returnUser() {
+        return userFactory;
     }
 }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.room.Standard;
-import hotelsystem.user.User;
+import hotelsystem.roomFactory.Standard;
+import hotelsystem.userFactory.UserFactory;
 import order.Order;
 import order.OrderBuilder;
 
@@ -38,7 +38,7 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id arrivalDate departureDate numberOfOccupants rooms{id type name perks numberOfBeds rate}}}\"}", UNDO_MUTATION_NAME, reservationOrder.getOrderID());
 		}
 
-		User creator = reservationOrder.getUser();
+		UserFactory creator = reservationOrder.getUser();
 
 		ArrayList<Standard> rooms = reservationOrder.getRooms();
 		String orderGuests = "";
@@ -47,10 +47,10 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			Standard room = rooms.get(i);
 			int roomId = room.getRoomNumber();
 
-			List<User> occupants = room.getOccupants();
+			List<UserFactory> occupants = room.getOccupants();
 			for (int j = 0; j < occupants.size(); j++)
 			{
-				User occupant = occupants.get(j);
+				UserFactory occupant = occupants.get(j);
 
 				String firstName = occupant.getFirstName();
 				String lastName = occupant.getLastName();
@@ -110,8 +110,8 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 			{
 				boolean found = false;
 
-				List<User> guests = room.getOccupants();
-				for (User guest : guests)
+				List<UserFactory> guests = room.getOccupants();
+				for (UserFactory guest : guests)
 				{
 					if (guest.getFirstName().equals(firstName) && guest.getLastName().equals(lastName))
 					{

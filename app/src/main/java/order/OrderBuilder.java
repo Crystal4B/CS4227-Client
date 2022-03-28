@@ -4,13 +4,13 @@ import java.sql.Timestamp;
 import java.time.Duration;
 import java.util.ArrayList;
 
-import hotelsystem.room.Standard;
-import hotelsystem.user.User;
+import hotelsystem.roomFactory.Standard;
+import hotelsystem.userFactory.UserFactory;
 
 public class OrderBuilder implements Builder{
 
     private String orderID;
-    private User user;
+    private UserFactory userFactory;
     private ArrayList<Standard> rooms = new ArrayList<>();
     private Timestamp startDate;
     private Timestamp endDate;
@@ -25,8 +25,8 @@ public class OrderBuilder implements Builder{
     }
 
     @Override
-    public void setUser(User user){
-        this.user = user;
+    public void setUser(UserFactory userFactory){
+        this.userFactory = userFactory;
     }
 
     @Override
@@ -123,7 +123,7 @@ public class OrderBuilder implements Builder{
     }
 
     public Order getOrder(){
-        return new Order(orderID, user, rooms, startDate, endDate, numberOfDaysBooked, rateCost, finalCost, numberOfOccupants);
+        return new Order(orderID, userFactory, rooms, startDate, endDate, numberOfDaysBooked, rateCost, finalCost, numberOfOccupants);
     }
     
 }

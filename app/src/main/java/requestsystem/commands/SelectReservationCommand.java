@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.room.Standard;
+import hotelsystem.roomFactory.Standard;
 import order.Order;
 import order.OrderBuilder;
 

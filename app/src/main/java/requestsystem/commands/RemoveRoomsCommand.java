@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.room.Standard;
+import hotelsystem.roomFactory.Standard;
 
 /**
  * Command for removing rooms from the system

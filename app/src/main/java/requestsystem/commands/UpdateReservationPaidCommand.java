@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.room.Standard;
-import hotelsystem.user.Guest;
+import hotelsystem.roomFactory.Standard;
+import hotelsystem.userFactory.Guest;
 import order.Order;
 import order.OrderBuilder;
 

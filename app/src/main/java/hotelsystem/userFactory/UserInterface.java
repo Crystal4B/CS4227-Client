@@ -2,13 +2,10 @@
  * @author Jakub Pažej
  * Abstract factory method for users of the hotel system.
  */
-package hotelsystem.user;
+package hotelsystem.userFactory;
 
-public abstract class User
+public interface UserInterface
 {
-    protected String userName, password, email, firstName, lastName;
-    protected int id;                                                        // ID for better database implementation and security reasons
-
     public abstract void setUserName(String userName);
     public abstract String getUserName();
     public abstract void setPassword(String password);

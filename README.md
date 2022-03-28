@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/Crystal4B/CS4227-Client/branch/main/graph/badge.svg?token=HZGEIPDLJV)](https://codecov.io/gh/Crystal4B/CS4227-Client)
 
 ## About
-Hotel reservation system is a Java project designed to show effective and efficient use of design patterns and architectural patterns. The applications allows users to book and reserve different rooms. The user specifies a check-in and check-out date and the system then checks if a room is available. A room can accommodate multiple guests specified by the user. The system can be used by multiple types of users including a customer and staff members.
+Hotel reservation system is a Java project designed to show effective and efficient use of design patterns and architectural patterns. The applications allows users to book and reserve different roomFactories. The userFactory specifies a check-in and check-out date and the system then checks if a room is available. A room can accommodate multiple guests specified by the userFactory. The system can be used by multiple types of users including a customer and staff members.
 
 ## Structure and Design
 The hotel reservation system is designed using multiple technolgies/tools. It operates on a client-server design. The following are the technologies/tools used:

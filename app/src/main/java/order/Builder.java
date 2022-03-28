@@ -2,12 +2,12 @@ package order;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
-import hotelsystem.room.Standard;
-import hotelsystem.user.User;
+import hotelsystem.roomFactory.Standard;
+import hotelsystem.userFactory.UserFactory;
 
 public interface Builder {
     void setOrderID(String orderID);
-    void setUser(User user);
+    void setUser(UserFactory userFactory);
     void setRooms(ArrayList<Standard> rooms);
     void addRoom(Standard room);
     void removeRoom(int room);

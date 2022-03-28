@@ -4,13 +4,13 @@
 
 package hotelsystem;
 
-import hotelsystem.user.Customer;
-import hotelsystem.user.Guest;
-import hotelsystem.user.Staff;
+import hotelsystem.userFactory.Customer;
+import hotelsystem.userFactory.Guest;
+import hotelsystem.userFactory.Staff;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserTest {
+class UserFactoryTest {
 
     // Customer Unit Tests
 

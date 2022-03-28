@@ -7,9 +7,9 @@ package payment;
 
 import org.junit.jupiter.api.Test;
 
-import hotelsystem.room.Standard;
-import hotelsystem.user.Customer;
-import hotelsystem.user.Guest;
+import hotelsystem.roomFactory.Standard;
+import hotelsystem.userFactory.Customer;
+import hotelsystem.userFactory.Guest;
 import order.OrderBuilder;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.CreateReservationCommand;

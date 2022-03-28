@@ -1,7 +1,7 @@
 package billingsystem;
 
 import order.*;
-import hotelsystem.user.*;
+import hotelsystem.userFactory.*;
 import email.Email;
 
 abstract class BillingTemplate {
@@ -15,8 +15,8 @@ abstract class BillingTemplate {
    abstract public double VouchInput();
 
    public void SendEmail(Order order, double num ){
-      User user = order.getUser();
-      new Email(user.getEmail(), "Platinum Hotels: Booking confirmation", Bill(order, num));
+      UserFactory userFactory = order.getUser();
+      new Email(userFactory.getEmail(), "Platinum Hotels: Booking confirmation", Bill(order, num));
    }
 
    abstract public String Bill(Order order, double num);

@@ -1,26 +1,32 @@
 /**
  * @author Jakub Pažej
- * Guest class implementing the user abstract factory method.
+ * Customer class implementing the user abstract factory method.
  */
-package hotelsystem.user;
+package hotelsystem.userFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Guest extends User
+public class Customer implements UserInterface
 {
-    final String type = "Guest";
+    protected String userName, password, email, firstName, lastName;
+    protected int id;                                                        // ID for better database implementation and security reasons
+    final String type = "Customer";
     final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
+            "CreateReservation",
+            "GetAvailableRooms",
+            "LoginUser",
             "RegisterUser"
     ));
+    private boolean paid;
 
-    public Guest() {
-    }
+    public Customer(){}
 
-    public Guest(String firstName, String lastName, int ID) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.id = ID;
+    public Customer(String userName, String password, String email)
+    {
+      this.userName=userName;
+      this.password=password;
+      this.email=email;
     }
 
     @Override
@@ -64,7 +70,7 @@ public class Guest extends User
 
     @Override
     public void setId(int id) {
-        this.id = id;
+        this.id=id;
     }
 
     @Override
@@ -74,7 +80,7 @@ public class Guest extends User
 
     @Override
     public void setFirstName(String name) {
-        this.firstName = name;
+        this.firstName=name;
     }
 
     @Override
@@ -84,7 +90,7 @@ public class Guest extends User
 
     @Override
     public void setLastName(String name) {
-        this.lastName = name;
+        this.lastName=name;
     }
 
     @Override
@@ -94,12 +100,22 @@ public class Guest extends User
 
     @Override
     public void setLegalName(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName=firstName;
+        this.lastName=lastName;
     }
 
     @Override
     public String getLegalName() {
-        return firstName + " " + lastName;
+        return firstName+" "+lastName;
+    }
+
+    public void setPaid(boolean bool)
+    {
+        this.paid=bool;
+    }
+
+    public boolean getPaid()
+    {
+        return paid;
     }
 }

@@ -6,7 +6,7 @@ package billingsystem;
 
 import org.junit.jupiter.api.Test;
 
-import hotelsystem.room.*;
+import hotelsystem.roomFactory.*;
 import order.*;
 
 import static org.junit.jupiter.api.Assertions.*;

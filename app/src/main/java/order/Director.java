@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.room.*;
+import hotelsystem.roomFactory.*;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.CreateReservationCommand;
 import requestsystem.commands.GetAvailableRoomsCommand;
@@ -14,7 +14,7 @@ import userinterface.ReservationUI;
 
 public class Director {
 
-    private Map<String, List<Room>> rooms;
+    private Map<String, List<RoomFactory>> rooms;
     private Timestamp checkInTime;
     private Timestamp checkOutTime;
 
@@ -77,19 +77,19 @@ public class Director {
     public void addRoom(Console console, OrderBuilder builder, int option){
 
         String roomKey = (String)rooms.keySet().toArray()[option];
-        List<Room> roomValue = rooms.get(roomKey);
+        List<RoomFactory> roomFactoryValue = rooms.get(roomKey);
 
-        int index = (int)Math.random()*roomValue.size();
-        Room selectedRoom = roomValue.get(index);
-        selectedRoom.addOccupants(ReservationUI.addGuests(console,((Standard) selectedRoom).getNumberBeds()));
-        builder.addRoom((Standard)selectedRoom);
+        int index = (int)Math.random()* roomFactoryValue.size();
+        RoomInterface selectedRoomFactory = roomFactoryValue.get(index);
+        selectedRoomFactory.addOccupants(ReservationUI.addGuests(console,((Standard) selectedRoomFactory).getNumberBeds()));
+        builder.addRoom((Standard) selectedRoomFactory);
         
-        roomValue.remove(index);
-        if(roomValue.size() == 0){
+        roomFactoryValue.remove(index);
+        if(roomFactoryValue.size() == 0){
             rooms.remove(roomKey);
         }
         else{
-            rooms.put(roomKey, roomValue);
+            rooms.put(roomKey, roomFactoryValue);
         }
     }
 
@@ -101,20 +101,20 @@ public class Director {
      */
     public void removeRoom(OrderBuilder builder, int option){
         ArrayList<Standard> roomsInBuilder = builder.getRoomsBuilder();
-        Room selectedRoom = roomsInBuilder.get(option);
-        String roomKey = selectedRoom.getRoomName();
+        RoomFactory selectedRoomFactory = roomsInBuilder.get(option);
+        String roomKey = selectedRoomFactory.getRoomName();
 
         builder.removeRoom(option);
 
         if(rooms.containsKey(roomKey)){
-            List<Room> roomValue = rooms.get(roomKey);
-            roomValue.add(selectedRoom);
-            rooms.put(roomKey, roomValue);
+            List<RoomFactory> roomFactoryValue = rooms.get(roomKey);
+            roomFactoryValue.add(selectedRoomFactory);
+            rooms.put(roomKey, roomFactoryValue);
         }
         else{
-            ArrayList<Room> newRooms = new ArrayList<>();
-            newRooms.add(selectedRoom);
-            rooms.put(roomKey, newRooms);
+            ArrayList<RoomFactory> newRoomFactories = new ArrayList<>();
+            newRoomFactories.add(selectedRoomFactory);
+            rooms.put(roomKey, newRoomFactories);
         }
     
     }

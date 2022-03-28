@@ -1,17 +1,17 @@
 package order;
 
+import hotelsystem.roomFactory.Room;
+import hotelsystem.userFactory.UserInterface;
+
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.util.ArrayList;
 
-import hotelsystem.room.Standard;
-import hotelsystem.user.User;
-
 public class OrderBuilder implements Builder{
 
     private String orderID;
-    private User user;
-    private ArrayList<Standard> rooms = new ArrayList<>();
+    private UserInterface user;
+    private ArrayList<Room> rooms = new ArrayList<>();
     private Timestamp startDate;
     private Timestamp endDate;
     private long numberOfDaysBooked;
@@ -25,18 +25,18 @@ public class OrderBuilder implements Builder{
     }
 
     @Override
-    public void setUser(User user){
+    public void setUser(UserInterface user){
         this.user = user;
     }
 
     @Override
-    public void setRooms(ArrayList<Standard> rooms) {
+    public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
         update();
     }
 
     @Override
-    public void addRoom(Standard room){
+    public void addRoom(Room room){
         this.rooms.add(room);
         update();
     }
@@ -69,7 +69,7 @@ public class OrderBuilder implements Builder{
     @Override
     public void setRateCost() {
         double totalCost = 0.0;
-        for(Standard r : this.rooms){
+        for(Room r : this.rooms){
             totalCost += r.getPrice();
         }
         this.rateCost = totalCost;
@@ -83,7 +83,7 @@ public class OrderBuilder implements Builder{
     @Override
     public void setNumberOfOccupants() {
         int totalOccupants = 0;
-        for(Standard r : this.rooms){
+        for(Room r : this.rooms){
             totalOccupants += r.getOccupants().size();
         }
         this.numberOfOccupants = totalOccupants;
@@ -99,22 +99,22 @@ public class OrderBuilder implements Builder{
     @Override
     public String toString() {
         String roomsDetails = "";
-        for(Standard r : this.rooms){
+        for(Room r : this.rooms){
             roomsDetails += "\t" + r.toString() + "\n";
         }
 
         return  "Rooms: \n" +
                 roomsDetails +
-                "\nNumber of Occupants: " + this.numberOfOccupants + 
-                "\nStart Date: " + this.startDate + 
-                "\nEnd Date: " + this.endDate + 
-                "\nNumber of Days Booked: " + this.numberOfDaysBooked + 
-                "\nRate Cost: EURO " + this.rateCost + 
-                "\nTotal Cost: EURO " + this.finalCost + 
+                "\nNumber of Occupants: " + this.numberOfOccupants +
+                "\nStart Date: " + this.startDate +
+                "\nEnd Date: " + this.endDate +
+                "\nNumber of Days Booked: " + this.numberOfDaysBooked +
+                "\nRate Cost: EURO " + this.rateCost +
+                "\nTotal Cost: EURO " + this.finalCost +
                 "\n";
     }
 
-    public ArrayList<Standard> getRoomsBuilder(){
+    public ArrayList<Room> getRoomsBuilder(){
         return this.rooms;
     }
 
@@ -125,5 +125,5 @@ public class OrderBuilder implements Builder{
     public Order getOrder(){
         return new Order(orderID, user, rooms, startDate, endDate, numberOfDaysBooked, rateCost, finalCost, numberOfOccupants);
     }
-    
+
 }

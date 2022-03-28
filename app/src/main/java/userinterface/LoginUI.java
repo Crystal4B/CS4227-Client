@@ -2,14 +2,14 @@ package userinterface;
 
 import java.io.Console;
 
-import hotelsystem.user.User;
+import hotelsystem.userFactory.UserInterface;
 import login.Login;
 import login.LoginAdapter;
 import login.Signup;
 
 public class LoginUI {
 
-    private static User user;
+    private static UserInterface userInterface;
     private static String userType = "Customer";
     
     public static int run(Console console){
@@ -54,10 +54,10 @@ public class LoginUI {
         Login login = new Login();
         if(login.login(email, password)) {
             setUser(login.returnUser());
-            if(user.getClass().getSimpleName().equals("Customer")){
+            if(userInterface.getClass().getSimpleName().equals("Customer")){
                 return UI.MENU_STATE;
             }
-            else if(user.getClass().getSimpleName().equals("Staff")){
+            else if(userInterface.getClass().getSimpleName().equals("Staff")){
                 return UI.STAFF_MENU;
             }
         }
@@ -79,16 +79,16 @@ public class LoginUI {
         signup.setName(username);
         signup.setType(userType);
         signup.login(email, password);
-        user = signup.returnUser();
+        userInterface = signup.returnUser();
         signup.twoFactorAuth(email);
         System.out.println("Please enter Auth Code sent to email");
         int authKey = Integer.parseInt(console.readLine());
         if (signup.checkAuth(authKey)) {
             System.out.println("Signed in");
-            if(user.getClass().getSimpleName().equals("Customer")){
+            if(userInterface.getClass().getSimpleName().equals("Customer")){
                 return UI.MENU_STATE;
             }
-            else if(user.getClass().getSimpleName().equals("Staff")){
+            else if(userInterface.getClass().getSimpleName().equals("Staff")){
                 return UI.STAFF_MENU;
             }
         }
@@ -96,12 +96,12 @@ public class LoginUI {
         return UI.LOGIN_STATE;
     }
 
-    public static User getUser(){
-        return user;
+    public static UserInterface getUser(){
+        return userInterface;
     }
 
-    public static void setUser(User loggedInUser){
-        user = loggedInUser;
+    public static void setUser(UserInterface loggedInUser){
+        userInterface = loggedInUser;
     }
 
     public static void setType(String type){

@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.room.Standard;
+import hotelsystem.roomFactory.Room;
 
 /**
  * Command for adding new rooms into the system
  * @author Marcin Sęk
  * @apiNote Response of type List[Room]
  */
-public class CreateRoomsCommand extends CommandTemplate<List<Standard>>
+public class CreateRoomsCommand extends CommandTemplate<List<Room>>
 {
 	private static final String MUTATION_NAME = "createRooms";
 	private static final String UNDO_MUTATION_NAME = "removeRooms";
 
-	private List<Standard> rooms;
+	private List<Room> rooms;
 
 	/**
 	 * Simple constructor for command
 	 * @param rooms List of rooms being added to the system
 	 */
-	public CreateRoomsCommand(List<Standard> rooms)
+	public CreateRoomsCommand(List<Room> rooms)
 	{
 		this.rooms = rooms;
 	}
@@ -39,7 +39,7 @@ public class CreateRoomsCommand extends CommandTemplate<List<Standard>>
 		String message = String.format("{\"query\":\"mutation{%s(input:[", mutation);
 		for (int i = 0; i < rooms.size(); i++)
 		{
-			Standard room = rooms.get(i);
+			Room room = rooms.get(i);
 			if (undo)
 			{
 				message += String.format("{id: \\\"%s\\\"}", room.getRoomNumber());
@@ -88,8 +88,8 @@ public class CreateRoomsCommand extends CommandTemplate<List<Standard>>
 			int numberOfBeds = (int) roomsMap.get("numberOfBeds");
 			switch(type)
 			{
-			case "Standard":
-				responseObject.add(new Standard(type, Integer.parseInt(id), numberOfBeds));
+			case "Room":
+				responseObject.add(new Room(type, Integer.parseInt(id), numberOfBeds));
 				break;
 			}
 		}

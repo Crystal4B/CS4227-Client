@@ -1,7 +1,7 @@
 package billingsystem;
 
 import order.*;
-import hotelsystem.user.*;
+import hotelsystem.userFactory.*;
 import email.Email;
 
 abstract class BillingTemplate {
@@ -12,7 +12,7 @@ abstract class BillingTemplate {
    }
 
    public void SendEmail(Order order){
-      User user = order.getUser();
+      UserInterface user = order.getUser();
       new Email(user.getEmail(), "Platinum Hotels: Booking confirmation", Bill(order));
    }
 

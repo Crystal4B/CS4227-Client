@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.room.Standard;
-import hotelsystem.user.Guest;
+import hotelsystem.roomFactory.Room;
+import hotelsystem.userFactory.Guest;
 import order.Order;
 import order.OrderBuilder;
 
@@ -40,7 +40,7 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 		builder.setStartDate(Timestamp.valueOf((String)reservationData.get("checkIn")));
 		builder.setEndDate(Timestamp.valueOf((String)reservationData.get("checkOut")));
 
-		ArrayList<Standard> rooms = new ArrayList<>();
+		ArrayList<Room> rooms = new ArrayList<>();
 		
 		List<?> guestsList = (List<?>) reservationData.get("guests");
 		for (int i = 0; i < guestsList.size(); i++)
@@ -50,10 +50,10 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 
 			int id = Integer.parseInt((String) roomMap.get("id"));
 
-			Standard standardRoom = null;
+			Room standardRoom = null;
 
 			boolean found = false;
-			for (Standard room : rooms)
+			for (Room room : rooms)
 			{
 				if (room.getRoomNumber() == id)
 				{
@@ -67,7 +67,7 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 			{
 				String type = (String) roomMap.get("type");
 				int numberOfBeds = Integer.parseInt((String) roomMap.get("numberOfBeds"));
-				standardRoom = new Standard(type, id, numberOfBeds);
+				standardRoom = new Room(type, id, numberOfBeds);
 			}
 
 			int guestId = Integer.parseInt((String) guestMap.get("id"));

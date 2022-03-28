@@ -6,7 +6,7 @@ package billingsystem;
 
 import org.junit.jupiter.api.Test;
 
-import hotelsystem.room.*;
+import hotelsystem.roomFactory.*;
 import order.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +17,7 @@ class BillingTest {
 
     @Test void checkBillingCashless() {
         OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Standard("Test Name", 123, 2));
+        builder.addRoom(new Room("Test Name", 123, 2));
         Order order = builder.getOrder();
         BillingCashless bill = new BillingCashless();
         String expected = "Date:\t\t" + order.getStartDate() + "-"+ order.getEndDate() + 

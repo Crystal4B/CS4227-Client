@@ -1,36 +1,28 @@
 /**
  * @author Jakub Pažej
- * Staff class implementing the user abstract factory method.
+ * Guest class implementing the user.
  */
-package hotelsystem.user;
+package hotelsystem.userFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Staff extends User
+public class Guest implements UserInterface
 {
-    final String type = "Staff";
+    protected String userName, password, email, firstName, lastName;
+    protected int id;                                                        // ID for better database implementation and security reasons
+    final String type = "Guest";
     final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
-            "CancelReservation",
-            "CreateReservation",
-            "CreateRooms",
-            "GetAvailableRooms",
-            "LoginUser",
-            "MacroReservation",
-            "RegisterUser",
-            "ReservationInvoker",
-            "SelectReservation"
+            "RegisterUser"
     ));
-    private double salary;
-    private int holidayDaysAvailable;
 
-    public Staff(){}
+    public Guest() {
+    }
 
-    public Staff(String userName, String password, String email)
-    {
-        this.userName=userName;
-        this.password=password;
-        this.email=email;
+    public Guest(String firstName, String lastName, int ID) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = ID;
     }
 
     @Override
@@ -74,7 +66,7 @@ public class Staff extends User
 
     @Override
     public void setId(int id) {
-        this.id=id;
+        this.id = id;
     }
 
     @Override
@@ -84,7 +76,7 @@ public class Staff extends User
 
     @Override
     public void setFirstName(String name) {
-        this.firstName=name;
+        this.firstName = name;
     }
 
     @Override
@@ -94,7 +86,7 @@ public class Staff extends User
 
     @Override
     public void setLastName(String name) {
-        this.lastName=name;
+        this.lastName = name;
     }
 
     @Override
@@ -104,37 +96,12 @@ public class Staff extends User
 
     @Override
     public void setLegalName(String firstName, String lastName) {
-        this.firstName=firstName;
-        this.lastName=lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     @Override
     public String getLegalName() {
-        return firstName+" "+lastName;
-    }
-
-    public void setSalary(double salary)
-    {
-        this.salary=salary;
-    }
-
-    public double getSalary()
-    {
-        return salary;
-    }
-
-    public void setHolidays(int days)
-    {
-        this.holidayDaysAvailable=days;
-    }
-
-    public void addHolidays(int days)
-    {
-        this.holidayDaysAvailable+=days;
-    }
-
-    public int getHolidays()
-    {
-        return holidayDaysAvailable;
+        return firstName + " " + lastName;
     }
 }

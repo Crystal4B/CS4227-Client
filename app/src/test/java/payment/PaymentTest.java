@@ -7,9 +7,9 @@ package payment;
 
 import org.junit.jupiter.api.Test;
 
-import hotelsystem.room.Standard;
-import hotelsystem.user.Customer;
-import hotelsystem.user.Guest;
+import hotelsystem.roomFactory.Room;
+import hotelsystem.userFactory.Customer;
+import hotelsystem.userFactory.Guest;
 import order.OrderBuilder;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.CreateReservationCommand;
@@ -32,11 +32,11 @@ class PaymentTest {
 
     @Test void payCreditCard(){
         Payment payment = new Payment();
-        ArrayList<Standard> rooms = new ArrayList<>();
-        rooms.add(new Standard("Test Name", 123, 2));
+        ArrayList<Room> rooms = new ArrayList<>();
+        rooms.add(new Room("Test Name", 123, 2));
         
 
-        Standard room = rooms.get(0);
+        Room room = rooms.get(0);
 		room.addOccupant(new Guest("Joe", "Stephan", -1));
 
 		// Create order

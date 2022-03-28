@@ -3,8 +3,8 @@ package userinterface;
 import java.io.Console;
 import java.util.ArrayList;
 
-import hotelsystem.user.Guest;
-import hotelsystem.user.User;
+import hotelsystem.userFactory.Guest;
+import hotelsystem.userFactory.UserInterface;
 import order.*;
 
 public class ReservationUI {
@@ -147,8 +147,8 @@ public class ReservationUI {
         }
     }
 
-    public static ArrayList<User> addGuests(Console console, int roomSize){
-        ArrayList<User> guests = new ArrayList<>();
+    public static ArrayList<UserInterface> addGuests(Console console, int roomSize){
+        ArrayList<UserInterface> guests = new ArrayList<>();
         for(int i=0; i < roomSize; i++){
             System.out.println("Please the first name of guest " + (i+1));
             String firstName = console.readLine();

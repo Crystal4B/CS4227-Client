@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.room.*;
+import hotelsystem.roomFactory.RoomInterface;
+import hotelsystem.roomFactory.Room;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.CreateReservationCommand;
 import requestsystem.commands.GetAvailableRoomsCommand;
@@ -14,7 +15,7 @@ import userinterface.ReservationUI;
 
 public class Director {
 
-    private Map<String, List<Room>> rooms;
+    private Map<String, List<RoomInterface>> rooms;
     private Timestamp checkInTime;
     private Timestamp checkOutTime;
 
@@ -77,12 +78,12 @@ public class Director {
     public void addRoom(Console console, OrderBuilder builder, int option){
 
         String roomKey = (String)rooms.keySet().toArray()[option];
-        List<Room> roomValue = rooms.get(roomKey);
+        List<RoomInterface> roomValue = rooms.get(roomKey);
 
         int index = (int)Math.random()*roomValue.size();
-        Room selectedRoom = roomValue.get(index);
-        selectedRoom.addOccupants(ReservationUI.addGuests(console,((Standard) selectedRoom).getNumberBeds()));
-        builder.addRoom((Standard)selectedRoom);
+        RoomInterface selectedRoom = roomValue.get(index);
+        selectedRoom.addOccupants(ReservationUI.addGuests(console,((Room) selectedRoom).getNumberBeds()));
+        builder.addRoom((Room)selectedRoom);
         
         roomValue.remove(index);
         if(roomValue.size() == 0){
@@ -100,19 +101,19 @@ public class Director {
      * @param option The index of the room in the order builder's list of rooms.
      */
     public void removeRoom(OrderBuilder builder, int option){
-        ArrayList<Standard> roomsInBuilder = builder.getRoomsBuilder();
-        Room selectedRoom = roomsInBuilder.get(option);
+        ArrayList<Room> roomsInBuilder = builder.getRoomsBuilder();
+        RoomInterface selectedRoom = roomsInBuilder.get(option);
         String roomKey = selectedRoom.getRoomName();
 
         builder.removeRoom(option);
 
         if(rooms.containsKey(roomKey)){
-            List<Room> roomValue = rooms.get(roomKey);
+            List<RoomInterface> roomValue = rooms.get(roomKey);
             roomValue.add(selectedRoom);
             rooms.put(roomKey, roomValue);
         }
         else{
-            ArrayList<Room> newRooms = new ArrayList<>();
+            ArrayList<RoomInterface> newRooms = new ArrayList<>();
             newRooms.add(selectedRoom);
             rooms.put(roomKey, newRooms);
         }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.room.Standard;
-import hotelsystem.user.User;
+import hotelsystem.roomFactory.Room;
+import hotelsystem.userFactory.UserInterface;
 import order.Order;
 import order.OrderBuilder;
 
@@ -35,19 +35,19 @@ public class CancelReservationCommand extends CommandTemplate<Order>
 	{
 		if (undo)
 		{
-			User creator = orderCancelation.getUser();
+			UserInterface creator = orderCancelation.getUser();
 
-			ArrayList<Standard> rooms = orderCancelation.getRooms();
+			ArrayList<Room> rooms = orderCancelation.getRooms();
 			String orderGuests = "";
 			for (int i = 0; i < rooms.size(); i++)
 			{
-				Standard room = rooms.get(i);
+				Room room = rooms.get(i);
 				int roomId = room.getRoomNumber();
 	
-				List<User> occupants = room.getOccupants();
+				List<UserInterface> occupants = room.getOccupants();
 				for (int j = 0; j < rooms.size(); j++)
 				{
-					User occupant = occupants.get(j);
+					UserInterface occupant = occupants.get(j);
 	
 					String firstName = occupant.getFirstName();
 					String lastName = occupant.getLastName();
@@ -95,9 +95,9 @@ public class CancelReservationCommand extends CommandTemplate<Order>
 		builder.setEndDate(orderCancelation.getEndDate());
 		builder.setUser(orderCancelation.getUser());
 
-		List<Standard> rooms = orderCancelation.getRooms();
+		List<Room> rooms = orderCancelation.getRooms();
 
-		builder.setRooms((ArrayList<Standard>) rooms);
+		builder.setRooms((ArrayList<Room>) rooms);
 
 		responseObject = builder.getOrder();
 

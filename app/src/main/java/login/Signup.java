@@ -1,10 +1,10 @@
 package login;
 
-import hotelsystem.user.User;
+import hotelsystem.userFactory.Customer;
+import hotelsystem.userFactory.Staff;
+import hotelsystem.userFactory.UserInterface;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.RegisterUserCommand;
-import hotelsystem.user.Customer;
-import hotelsystem.user.Staff;
 
 import java.util.regex.Pattern;
 
@@ -15,7 +15,7 @@ import java.util.Random;
 public class Signup implements SignupInterface{
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     public String type = "Customer";
-    public User person;
+    public UserInterface person;
     public int authKey;
     private String username;
     CommandInvoker invoker;
@@ -31,7 +31,7 @@ public class Signup implements SignupInterface{
         else {
             person = new Customer();
         }
-        person = this.createsUser(email, username, password); 
+        person = this.createsUser(email, username, password);
         invoker.setCommand(new RegisterUserCommand(person));
         invoker.execute();
         return true;
@@ -43,7 +43,7 @@ public class Signup implements SignupInterface{
         this.type = type;
     }
     public boolean isValidEmail(String email) {
-        
+
         Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
 
         if(!pattern.matcher(email).matches()) {
@@ -53,7 +53,7 @@ public class Signup implements SignupInterface{
         return true;
     }
 
-    public User createsUser(String email,String username, String password) {
+    public UserInterface createsUser(String email,String username, String password) {
         person.setEmail(email);
         person.setUserName(username);
         person.setPassword(password);
@@ -62,26 +62,26 @@ public class Signup implements SignupInterface{
 
     }
 
-    public User returnUser() {
+    public UserInterface returnUser() {
         return person;
     }
-	@Override
-	public void twoFactorAuth(String email) {
-		Random rand = new Random();
-		authKey = rand.nextInt(10000);
+    @Override
+    public void twoFactorAuth(String email) {
+        Random rand = new Random();
+        authKey = rand.nextInt(10000);
         String emailToSend = "Thank you for signing up to Platinum Hotels \n Your confirmation code is: " + authKey;
         new Email(email, "Platinum Hotels Signup Confirmation", emailToSend);
         //TODO Remove next line before release
         System.out.println("AUTHKEY FOR DEVELOPMENT PURPOSES //// TO BE REMOVED   : " + authKey);
-	}
-	@Override
-	public boolean checkAuth(int num) {
-		if(num == authKey){
+    }
+    @Override
+    public boolean checkAuth(int num) {
+        if(num == authKey){
             return true;
         }
         else{
             return false;
         }
-		
-	}
+
+    }
 }

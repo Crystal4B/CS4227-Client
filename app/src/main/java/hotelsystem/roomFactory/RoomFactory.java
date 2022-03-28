@@ -1,14 +1,16 @@
 /**
  * @author Jakub Pažej
- * Standard implementation of room
+ * Factory method for creating different types of rooms.
  */
-package hotelsystem.room;
+package hotelsystem.roomFactory;
 
-public class roomBuilder
-{
-    private static Standard room = new Standard("", 0,0);
+public class RoomFactory implements FactoryInterface {
+    public static Room createStandard(String roomName, int roomNumber, int numberBeds) {
+        return new Room(roomName, roomNumber, numberBeds);
+    }
 
-    public static Standard buildDeluxe(String roomName, int roomNumber, int numberBeds){
+    public static Room createDeluxe(String roomName, int roomNumber, int numberBeds) {
+        Room room = new Room(roomName, roomNumber, numberBeds);
         room.removeAllOccupants();
         room.setRoomName(roomName);
         room.setRoomNumber(roomNumber);
@@ -18,7 +20,8 @@ public class roomBuilder
         return room;
     }
 
-    public static Standard buildVIP(String roomName, int roomNumber, int numberBeds){
+    public static Room createVIP(String roomName, int roomNumber, int numberBeds) {
+        Room room = new Room(roomName, roomNumber, numberBeds);
         room.removeAllOccupants();
         room.setRoomName(roomName);
         room.setRoomNumber(roomNumber);

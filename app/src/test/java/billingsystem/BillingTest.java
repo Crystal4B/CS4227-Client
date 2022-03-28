@@ -24,6 +24,6 @@ class BillingTest {
                 "\n" + "Description:\t\t" + "Room Charge\t" + 0.0 +
                 "\n" + "Total:\t\t" + 0.0 +
                 "\n" + "Paid By:\t\tVoucher";
-        assertEquals(bill.Bill(order, 0),expected);
+        assertEquals(bill.Bill(order),expected);
     }
 }

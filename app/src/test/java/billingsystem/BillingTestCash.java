@@ -24,6 +24,6 @@ class BillingTestCash {
                 "\n" + "Description:\t\t" + "Room Charge\t" + 0.0  + bill.AcceptCouponVisitor(bill.VisitorGet()) +
                 "\n" + "Total:\t\t" + 0.0 +
                 "\n" + "Paid By:\t\tCash";
-        assertEquals(bill.Bill(order,0),expected);
+        assertEquals(bill.Bill(order),expected);
     }
 }

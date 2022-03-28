@@ -95,7 +95,7 @@ public class BillingUI {
         BillingCashless bill = new BillingCashless();
         a.CodeSet(codeNum);
         if (bill.AcceptCouponVisitorCode(a)!=0.0) {
-            bill.SendEmail(order, bill.AcceptCouponVisitorCode(a));
+            bill.SendEmail(order);
             return true;
         }
         else {
@@ -118,7 +118,7 @@ public class BillingUI {
         System.out.println("\n Reservation will be paid for at Reception");
         BillingCash bill = new BillingCash();
         bill.PaymentSend(order); 
-        bill.SendEmail(order, bill.AcceptCouponVisitorCode(a));
+        bill.SendEmail(order);
         return true;
         
     }
@@ -137,7 +137,7 @@ public class BillingUI {
         int csv = Integer.parseInt(console.readLine());
         BillingCard bill = new BillingCard();
         if (bill.PaymentSend(cardNum, cardName, cardDate, csv, order)) {
-            bill.SendEmail(order, bill.AcceptCouponVisitorCode(a));
+            bill.SendEmail(order);
             return true;
         }
         else {

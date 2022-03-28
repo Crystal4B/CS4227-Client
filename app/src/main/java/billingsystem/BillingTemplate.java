@@ -11,12 +11,12 @@ abstract class BillingTemplate {
       return order.getFinalCost()*(1-discount);
    }
 
-   public void SendEmail(Order order, double num ){
+   public void SendEmail(Order order){
       User user = order.getUser();
-      new Email(user.getEmail(), "Platinum Hotels: Booking confirmation", Bill(order, num));
+      new Email(user.getEmail(), "Platinum Hotels: Booking confirmation", Bill(order));
    }
 
-   abstract public String Bill(Order order, double num);
+   abstract public String Bill(Order order);
 
    public CouponVisitor VisitorGet(){
       return visitor;
@@ -50,7 +50,7 @@ abstract class BillingTemplate {
 
    public String GetBill(Order order){
       String temp = "";
-      temp = Bill(order, 0);
+      temp = Bill(order);
       return temp;
    }
 

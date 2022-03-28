@@ -11,11 +11,9 @@ abstract class BillingTemplate {
       return order.getFinalCost()*(1-discount);
    }
 
-   abstract public double VouchInput();
-
-   public void SendEmail(Order order, double num ){
-      UserInterface userInterface = order.getUser();
-      new Email(userInterface.getEmail(), "Platinum Hotels: Booking confirmation", Bill(order, num));
+   public void SendEmail(Order order){
+      UserInterface user = order.getUser();
+      new Email(user.getEmail(), "Platinum Hotels: Booking confirmation", Bill(order));
    }
 
    abstract public String Bill(Order order);

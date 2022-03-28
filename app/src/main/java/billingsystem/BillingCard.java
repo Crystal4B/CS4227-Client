@@ -19,13 +19,13 @@ public class BillingCard extends BillingTemplate {
         return discount ;
     }
 
-    @Override 
+    @Override
     public String Bill(Order order) {
         TempOrder = order;
-        String bill = "Date:\t\t" + order.getStartDate() + "-"+ order.getEndDate() + 
-        "\n" + "Description:\t\t" + "Room Charge\t" + order.getFinalCost() + AcceptCouponVisitor(visitor) +
-        "\n" + "Total:\t\t" + BillCalc(order) +
-        "\n" + "Paid By:\t\tCard";
+        String bill = "Date:\t\t" + order.getStartDate() + "-"+ order.getEndDate() +
+                "\n" + "Description:\t\t" + "Room Charge\t" + order.getFinalCost() + AcceptCouponVisitor(visitor) +
+                "\n" + "Total:\t\t" + BillCalc(order) +
+                "\n" + "Paid By:\t\tCard";
         return bill;
     }
 }

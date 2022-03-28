@@ -18,10 +18,10 @@ public class BillingUI {
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println("Please select one of the following options:");
-        System.out.println("1. Pay with Card");
-        System.out.println("2. Use Voucher");
-        System.out.println("3. Use Coupon Code");
-        System.out.println("4. Pay on Arrival");
+        System.out.println("1. \tPay with Card");
+        System.out.println("2. \tUse Voucher");
+        System.out.println("3. \tUse Coupon Code");
+        System.out.println("4. \tPay on Arrival");
         System.out.println("5. \t Back");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
@@ -72,7 +72,7 @@ public class BillingUI {
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
-        System.out.println(" Voucher Code :");
+        System.out.println(" Please enter coupon code :");
         String codeNum = console.readLine();
         a.CodeSet(codeNum);
         if (a.CouponInput()!=0.0) {
@@ -90,7 +90,7 @@ public class BillingUI {
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
-        System.out.println(" Voucher Code :");
+        System.out.println(" Please enter voucher code :");
         String codeNum = console.readLine();
         BillingCashless bill = new BillingCashless();
         a.CodeSet(codeNum);

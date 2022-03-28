@@ -24,6 +24,6 @@ class BillingTestCard {
                 "\n" + "Description:\t\t" + "Room Charge\t" + 0.0  + bill.AcceptCouponVisitor(bill.VisitorGet()) +
                 "\n" + "Total:\t\t" + 0.0 +
                 "\n" + "Paid By:\t\tCard";
-        assertEquals(bill.Bill(order, 0),expected);
+        assertEquals(bill.Bill(order),expected);
     }
 }

@@ -12,13 +12,13 @@ public class CouponVisitor implements CouponInterface {
      }
 
    public double CouponInput() {
-      if(code == "123"){
+      if(code.equals("123")){
          discount = 0.1; 
          return discount;
-      } else if(code == "12345") {
+      } else if(code.equals("12345")) {
          discount = 0.2; 
          return discount;
-      } else if(code == "Amogus"){
+      } else if(code.equals("Amogus")){
          discount = 0.5; 
          return discount;
       } else {
@@ -27,7 +27,7 @@ public class CouponVisitor implements CouponInterface {
   }
 
    public double VoucherInput() {
-      if(code == "123"){
+      if(code.equals("123")){
          discount = 1.0; 
          return discount;
       } else {

@@ -100,7 +100,6 @@ public class BillingUI {
             return true;
         }
         else {
-            System.out.println(discountStore.CodeGet());
             System.out.println(" Invalid Voucher Code, Please Try Again");
             return false;
         }

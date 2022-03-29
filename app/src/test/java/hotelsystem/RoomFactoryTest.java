@@ -1,37 +1,51 @@
-/**
- * @author Jordan Marshall
- */
-
 package hotelsystem;
 
 import hotelsystem.roomFactory.RoomFactory;
 import hotelsystem.roomFactory.Room;
 import hotelsystem.userFactory.*;
+
+import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
+/**
+ * @author Jordan Marshall
+ */
 
 class RoomFactoryTest {
 
-    // Standard Room Unit Tests
+    // Room Unit Tests
 
     @Test
-    void checkStandardRoomName() {
+    void checkSetRoomName() {
         Room room = new Room("Test Name", 123, 2);
         assertEquals(room.getRoomName(), "Test Name");
     }
 
     @Test
-    void checkStandardRoomNumber() {
+    void checkSetRoomNumber() {
         Room room = new Room("Test Name", 123, 2);
         assertEquals(room.getRoomNumber(), 123);
     }
 
     @Test
-    void checkStandardRoomNumberOfBeds() {
+    void checkSetRoomNumberOfBeds() {
         Room room = new Room("Test Name", 123, 2);
         assertEquals(room.getNumberBeds(), 2);
+    }
+
+    @Test
+    void checkSetPerks() {
+        Room room = new Room("Test Name", 123, 2);
+        room.setPerks("test perks");
+        assertEquals(room.getPerks(), "test perks");
+    }
+
+    @Test
+    void checkSetPrice() {
+        Room room = new Room("Test Name", 123, 2);
+        room.setPrice(666.66);
+        assertEquals(room.getPrice(), 666.66);
     }
 
     @Test
@@ -51,7 +65,6 @@ class RoomFactoryTest {
 
     @Test
     void checkStandardAddOccupantsArray() {
-        UserFactory uf = new UserFactory();
         UserInterface[] occupants = {
                 new Staff(),
                 new Customer(),
@@ -103,48 +116,136 @@ class RoomFactoryTest {
         assertEquals(room.getOccupants().size(), 0);
     }
 
-    // Builder Room Unit Tests
+    @Test
+    void checkRemoveStandardOccupantsArrayList() {
+        ArrayList<UserInterface> occupants = new ArrayList<>();
+        occupants.add(new Staff());
+        occupants.add(new Customer());
+        occupants.add(new Guest());
+
+        Room room = new Room("Test Name", 123, 2);
+        room.addOccupants(occupants);
+        room.removeOccupants(occupants);
+        assertEquals(room.getOccupants().size(), 0);
+    }
+
+    @Test
+    void checkStandardToString() {
+        Room room = new Room("Test Name", 123, 2);
+        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false");
+    }
+
+    // Factory Room Unit Tests
+
+    @Test
+    void checkRoomName() {
+        Room room = RoomFactory.createStandard("Deluxe Room", 123, 2);
+        assertEquals(room.getRoomName(), "Deluxe Room");
+    }
 
     @Test
     void checkDeluxeRoomName() {
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createDeluxe("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe("Deluxe Room", 123, 2);
         assertEquals(room.getRoomName(), "Deluxe Room");
     }
 
     @Test
     void checkVIPRoomName() {
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
         assertEquals(room.getRoomName(), "VIP Room");
     }
 
     @Test
+    void checkRoomNumber() {
+        Room room = RoomFactory.createStandard( "Deluxe Room", 123, 2);
+        assertEquals(room.getRoomNumber(), 123);
+    }
+
+    @Test
     void checkDeluxeRoomNumber() {
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createDeluxe( "Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe( "Deluxe Room", 123, 2);
         assertEquals(room.getRoomNumber(), 123);
     }
 
     @Test
     void checkVIPRoomNumber() {
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
         assertEquals(room.getRoomNumber(), 123);
     }
 
     @Test
+    void checkRoomNumberOfBeds() {
+        Room room = RoomFactory.createStandard("Deluxe Room", 123, 2);
+        assertEquals(room.getNumberBeds(), 2);
+    }
+
+    @Test
     void checkDeluxeRoomNumberOfBeds() {
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createDeluxe("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe("Deluxe Room", 123, 2);
         assertEquals(room.getNumberBeds(), 2);
     }
 
     @Test
     void checkVIPRoomNumberOfBeds() {
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
         assertEquals(room.getNumberBeds(), 2);
+    }
+
+    @Test
+    void checkSetRoomPerks() {
+        Room room = RoomFactory.createStandard("test perks", 123, 2);
+        room.setPerks("test perks");
+        assertEquals(room.getPerks(), "test perks");
+    }
+
+    @Test
+    void checkSetDeluxePerks() {
+        Room room = RoomFactory.createDeluxe("test perks", 123, 2);
+        room.setPerks("test perks");
+        assertEquals(room.getPerks(), "test perks");
+    }
+
+    @Test
+    void checkSetVIPPerks() {
+        Room room = RoomFactory.createVIP("test perks", 123, 2);
+        room.setPerks("test perks");
+        assertEquals(room.getPerks(), "test perks");
+    }
+
+    @Test
+    void checkSetRoomPrice() {
+        Room room = RoomFactory.createStandard("Test Name", 123, 2);
+        room.setPrice(666.66);
+        assertEquals(room.getPrice(), 666.66);
+    }
+
+    @Test
+    void checkSetDeluxePrice() {
+        Room room = RoomFactory.createDeluxe("Test Name", 123, 2);
+        room.setPrice(666.66);
+        assertEquals(room.getPrice(), 666.66);
+    }
+
+    @Test
+    void checkSetVIPPrice() {
+        Room room = RoomFactory.createVIP("Test Name", 123, 2);
+        room.setPrice(666.66);
+        assertEquals(room.getPrice(), 666.66);
+    }
+
+    @Test
+    void checkAddOccupant() {
+        Customer user = new Customer();
+        user.setEmail("test@test.com");
+        user.setPassword("#Password123");
+        user.setUserName("Johndoe2525");
+        user.setLegalName("John", "Doe");
+        user.setPaid(true);
+
+        Room room = RoomFactory.createStandard("Deluxe Room", 123, 2);
+        room.addOccupant(user);
+        assertEquals(room.getOccupants().size(), 1);
+        assertEquals(room.getOccupants().get(0).getLegalName(), "John Doe");
     }
 
     @Test
@@ -156,8 +257,7 @@ class RoomFactoryTest {
         user.setLegalName("John", "Doe");
         user.setPaid(true);
 
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createDeluxe("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe("Deluxe Room", 123, 2);
         room.addOccupant(user);
         assertEquals(room.getOccupants().size(), 1);
         assertEquals(room.getOccupants().get(0).getLegalName(), "John Doe");
@@ -172,12 +272,24 @@ class RoomFactoryTest {
         user.setLegalName("John", "Doe");
         user.setPaid(true);
 
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
         room.addOccupant(user);
         System.out.println(room.getOccupants());
         assertEquals(room.getOccupants().size(), 1);
         assertEquals(room.getOccupants().get(0).getLegalName(), "John Doe");
+    }
+
+    @Test
+    void checkAddOccupantsArray() {
+        UserInterface[] occupants = {
+                new Staff(),
+                new Customer(),
+                new Guest()
+        };
+
+        Room room = RoomFactory.createStandard("Deluxe Room", 123, 2);
+        room.addOccupants(occupants);
+        assertEquals(room.getOccupants().size(), 3);
     }
 
     @Test
@@ -188,8 +300,7 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createDeluxe("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe("Deluxe Room", 123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
     }
@@ -202,8 +313,19 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
+        room.addOccupants(occupants);
+        assertEquals(room.getOccupants().size(), 3);
+    }
+
+    @Test
+    void checkAddOccupantsArrayList() {
+        ArrayList<UserInterface> occupants = new ArrayList<>();
+        occupants.add(new Staff());
+        occupants.add(new Customer());
+        occupants.add(new Guest());
+
+        Room room = RoomFactory.createStandard( "Deluxe Room", 123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
     }
@@ -215,8 +337,7 @@ class RoomFactoryTest {
         occupants.add(new Customer());
         occupants.add(new Guest());
 
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createDeluxe( "Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe( "Deluxe Room", 123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
     }
@@ -228,10 +349,23 @@ class RoomFactoryTest {
         occupants.add(new Customer());
         occupants.add(new Guest());
 
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
+    }
+
+    @Test
+    void checkRemoveOccupant() {
+        Customer user = new Customer();
+        user.setEmail("test@test.com");
+        user.setPassword("#Password123");
+        user.setUserName("John Doe");
+        user.setPaid(true);
+
+        Room room = RoomFactory.createStandard( "Deluxe Room", 123, 2);
+        room.addOccupant(user);
+        room.removeOccupant(user);
+        assertEquals(room.getOccupants().size(), 0);
     }
 
     @Test
@@ -242,8 +376,7 @@ class RoomFactoryTest {
         user.setUserName("John Doe");
         user.setPaid(true);
 
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createDeluxe( "Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe( "Deluxe Room", 123, 2);
         room.addOccupant(user);
         room.removeOccupant(user);
         assertEquals(room.getOccupants().size(), 0);
@@ -257,10 +390,23 @@ class RoomFactoryTest {
         user.setUserName("John Doe");
         user.setPaid(true);
 
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
         room.addOccupant(user);
         room.removeOccupant(user);
+        assertEquals(room.getOccupants().size(), 0);
+    }
+
+    @Test
+    void checkRemoveOccupants() {
+        UserInterface[] occupants = {
+                new Staff(),
+                new Customer(),
+                new Guest()
+        };
+
+        Room room = RoomFactory.createStandard("Deluxe Room", 123, 2);
+        room.addOccupants(occupants);
+        room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
     }
 
@@ -272,8 +418,7 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createDeluxe("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe("Deluxe Room", 123, 2);
         room.addOccupants(occupants);
         room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
@@ -287,10 +432,66 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        RoomFactory rf = new RoomFactory();
-        Room room = rf.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
         room.addOccupants(occupants);
         room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
+    }
+
+    @Test
+    void checkRemoveOccupantsArrayList() {
+        ArrayList<UserInterface> occupants = new ArrayList<>();
+        occupants.add(new Staff());
+        occupants.add(new Customer());
+        occupants.add(new Guest());
+
+        Room room = RoomFactory.createStandard("VIP Room", 123, 2);
+        room.addOccupants(occupants);
+        room.removeOccupants(occupants);
+        assertEquals(room.getOccupants().size(), 0);
+    }
+
+    @Test
+    void checkRemoveDeluxeOccupantsArrayList() {
+        ArrayList<UserInterface> occupants = new ArrayList<>();
+        occupants.add(new Staff());
+        occupants.add(new Customer());
+        occupants.add(new Guest());
+
+        Room room = RoomFactory.createDeluxe("VIP Room", 123, 2);
+        room.addOccupants(occupants);
+        room.removeOccupants(occupants);
+        assertEquals(room.getOccupants().size(), 0);
+    }
+
+    @Test
+    void checkRemoveVIPOccupantsArrayList() {
+        ArrayList<UserInterface> occupants = new ArrayList<>();
+        occupants.add(new Staff());
+        occupants.add(new Customer());
+        occupants.add(new Guest());
+
+        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
+        room.addOccupants(occupants);
+        room.removeOccupants(occupants);
+        assertEquals(room.getOccupants().size(), 0);
+    }
+
+    @Test
+    void checkRoomToString() {
+        Room room = RoomFactory.createStandard("Test Name", 123, 2);
+        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false");
+    }
+
+    @Test
+    void checkDeluxeToString() {
+        Room room = RoomFactory.createDeluxe("Test Name", 123, 2);
+        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 500.0 ; Taken - false");
+    }
+
+    @Test
+    void checkVIPToString() {
+        Room room = RoomFactory.createVIP("Test Name", 123, 2);
+        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 1000.0 ; Taken - false");
     }
 }

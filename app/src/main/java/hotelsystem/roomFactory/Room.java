@@ -1,13 +1,14 @@
+package hotelsystem.roomFactory;
+
+import hotelsystem.userFactory.UserInterface;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  * @author Jakub Pažej
  * Standard implementation of room.
  */
-package hotelsystem.roomFactory;
-
-import hotelsystem.userFactory.UserFactory;
-import hotelsystem.userFactory.UserInterface;
-
-import java.util.ArrayList;
 
 public class Room implements RoomInterface
 {
@@ -17,7 +18,7 @@ public class Room implements RoomInterface
     private boolean taken = false;
     private int numberBeds;
     private double price = 200.0;
-    private ArrayList<UserInterface> occupants = new ArrayList<UserInterface>();
+    private ArrayList<UserInterface> occupants = new ArrayList<>();
 
     public Room(String roomName, int roomNumber, int numberBeds)
     {
@@ -65,18 +66,12 @@ public class Room implements RoomInterface
 
     @Override
     public void addOccupants(UserInterface[] people) {
-        for (UserInterface userInterface : people)
-        {
-            occupants.add(userInterface);
-        }
+        Collections.addAll(occupants, people);
     }
 
     @Override
     public void addOccupants(ArrayList<UserInterface> people) {
-        for (UserInterface userInterface : people)
-        {
-            occupants.add(userInterface);
-        }
+        occupants.addAll(people);
     }
 
     @Override

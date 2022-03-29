@@ -1,8 +1,9 @@
+package hotelsystem.userFactory;
+
 /**
  * @author Jakub Pažej
- * FActory method for making different types of users.
+ * Factory method for making different types of users.
  */
-package hotelsystem.userFactory;
 
 public class UserFactory implements FactoryInterface
 {

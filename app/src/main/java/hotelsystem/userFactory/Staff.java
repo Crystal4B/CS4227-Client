@@ -1,30 +1,17 @@
+package hotelsystem.userFactory;
+
 /**
  * @author Jakub Pažej
  * Staff class implementing the user.
  */
-package hotelsystem.userFactory;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Staff implements UserInterface
 {
     protected String userName, password, email, firstName, lastName;
-    protected int id;                                                        // ID for better database implementation and security reasons
-    final String type = "Staff";
-    final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
-            "CancelReservation",
-            "CreateReservation",
-            "CreateRooms",
-            "GetAvailableRooms",
-            "LoginUser",
-            "MacroReservation",
-            "RegisterUser",
-            "ReservationInvoker",
-            "SelectReservation"
-    ));
-    private double salary;
+    protected int id;// ID for better database implementation and security reasons
     private int holidayDaysAvailable;
+    private double salary;
+    final static String type = "Staff";
 
     public Staff(){}
 

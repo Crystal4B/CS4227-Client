@@ -97,7 +97,7 @@ public class Payment {
     }
 
     public boolean isPaid() {
-        return isPaid();
+        return isPaid;
     }
 }
 

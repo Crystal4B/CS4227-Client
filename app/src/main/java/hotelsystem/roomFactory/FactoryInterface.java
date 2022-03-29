@@ -1,8 +1,9 @@
+package hotelsystem.roomFactory;
+
 /**
  * @author Jakub Pažej
  * Interface for factory for abstract factory implementation.
  */
-package hotelsystem.roomFactory;
 
 public interface FactoryInterface
 {

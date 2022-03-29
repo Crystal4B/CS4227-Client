@@ -1,24 +1,25 @@
+package hotelsystem.userFactory;
+
 /**
  * @author Jakub Pažej
  * Interface for user for abstract factory method implementation.
  */
-package hotelsystem.userFactory;
 
 public interface UserInterface
 {
-    public abstract void setUserName(String userName);
-    public abstract String getUserName();
-    public abstract void setPassword(String password);
-    public abstract String getPassword();
-    public abstract void setEmail(String email);
-    public abstract String getEmail();
-    public abstract String getUserType();
-    public abstract void setId(int id);
-    public abstract int getId();
-    public abstract void setFirstName(String name);
-    public abstract String getFirstName();
-    public abstract void setLastName(String name);
-    public abstract String getLastName();
-    public abstract void setLegalName(String firstName, String lastName);
-    public abstract String getLegalName();
+    void setUserName(String userName);
+    String getUserName();
+    void setPassword(String password);
+    String getPassword();
+    void setEmail(String email);
+    String getEmail();
+    String getUserType();
+    void setId(int id);
+    int getId();
+    void setFirstName(String name);
+    String getFirstName();
+    void setLastName(String name);
+    String getLastName();
+    void setLegalName(String firstName, String lastName);
+    String getLegalName();
 }

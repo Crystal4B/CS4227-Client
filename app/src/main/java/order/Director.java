@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import hotelsystem.roomFactory.RoomInterface;
 import hotelsystem.roomFactory.Room;
@@ -61,11 +62,11 @@ public class Director {
         
         Object[] roomTypes = rooms.keySet().toArray();
         
-        String listOfRoomOptions = "";
+        StringBuilder listOfRoomOptions = new StringBuilder();
         for(int i=0; i < roomTypes.length; i++){
-            listOfRoomOptions += i + ".\t" + roomTypes[i] + "\n";
+            listOfRoomOptions.append(i).append(".\t").append(roomTypes[i]).append("\n");
         }
-        return listOfRoomOptions;
+        return listOfRoomOptions.toString();
     }
 
     /**
@@ -75,12 +76,13 @@ public class Director {
      * @param builder The OrderBuilder object that is being used to build the order.
      * @param option The index of the room in the list of rooms.
      */
+
     public void addRoom(Console console, OrderBuilder builder, int option){
 
         String roomKey = (String)rooms.keySet().toArray()[option];
         List<RoomInterface> roomValue = rooms.get(roomKey);
 
-        int index = (int)Math.random()*roomValue.size();
+        int index = new Random().nextInt(roomValue.size());
         RoomInterface selectedRoom = roomValue.get(index);
         selectedRoom.addOccupants(ReservationUI.addGuests(console,((Room) selectedRoom).getNumberBeds()));
         builder.addRoom((Room)selectedRoom);

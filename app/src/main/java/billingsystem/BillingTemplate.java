@@ -40,8 +40,6 @@ abstract class BillingTemplate {
       return a.PercentConverter(num);
    }
 
-   OrderBuilder builder = new OrderBuilder();
-
    Order TempOrder;
 
    public Order GetOrder(){
@@ -49,9 +47,7 @@ abstract class BillingTemplate {
    }
 
    public String GetBill(Order order){
-      String temp = "";
-      temp = Bill(order);
-      return temp;
+      return Bill(order);
    }
 
 }

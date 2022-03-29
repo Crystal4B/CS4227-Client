@@ -1,20 +1,15 @@
+package hotelsystem.userFactory;
+
 /**
  * @author Jakub Pažej
  * Guest class implementing the user.
  */
-package hotelsystem.userFactory;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Guest implements UserInterface
 {
     protected String userName, password, email, firstName, lastName;
-    protected int id;                                                        // ID for better database implementation and security reasons
+    protected int id;// ID for better database implementation and security reasons
     final static String type = "Guest";
-    final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
-            "RegisterUser"
-    ));
 
     public Guest() {
     }

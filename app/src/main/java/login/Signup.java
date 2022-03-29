@@ -46,11 +46,7 @@ public class Signup implements SignupInterface{
 
         Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
 
-        if(!pattern.matcher(email).matches()) {
-            return false;
-        }
-
-        return true;
+        return pattern.matcher(email).matches();
     }
 
     public UserInterface createsUser(String email,String username, String password) {
@@ -67,8 +63,7 @@ public class Signup implements SignupInterface{
     }
     @Override
     public void twoFactorAuth(String email) {
-        Random rand = new Random();
-        authKey = rand.nextInt(10000);
+        authKey = new Random().nextInt(10000);
         String emailToSend = "Thank you for signing up to Platinum Hotels \n Your confirmation code is: " + authKey;
         new Email(email, "Platinum Hotels Signup Confirmation", emailToSend);
         //TODO Remove next line before release
@@ -76,12 +71,6 @@ public class Signup implements SignupInterface{
     }
     @Override
     public boolean checkAuth(int num) {
-        if(num == authKey){
-            return true;
-        }
-        else{
-            return false;
-        }
-
+        return num == authKey;
     }
 }

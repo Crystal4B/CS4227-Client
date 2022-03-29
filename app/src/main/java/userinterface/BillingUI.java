@@ -42,14 +42,14 @@ public class BillingUI {
                 return returnToMenu();
             case 2:
                 while(true){
-                    if(VoucherCode(console)){
+                    if(voucherCode(console)){
                         break;
                     }
                 }
                 return returnToMenu();
             case 3: 
                 while(true){
-                    if(CouponCode(console)){
+                    if(couponCode(console)){
                         break;
                     }
                 }
@@ -68,7 +68,7 @@ public class BillingUI {
         }
     }
 
-    public static Boolean CouponCode(Console console){
+    public static Boolean couponCode(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -86,7 +86,7 @@ public class BillingUI {
         }
     }
 
-    public static Boolean VoucherCode(Console console){
+    public static Boolean voucherCode(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");

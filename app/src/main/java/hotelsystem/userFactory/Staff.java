@@ -11,7 +11,7 @@ public class Staff implements UserInterface
 {
     protected String userName, password, email, firstName, lastName;
     protected int id;                                                        // ID for better database implementation and security reasons
-    final String type = "Staff";
+    final static String type = "Staff";
     final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
             "CancelReservation",
             "CreateReservation",

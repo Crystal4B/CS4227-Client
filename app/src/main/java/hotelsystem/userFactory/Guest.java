@@ -11,7 +11,7 @@ public class Guest implements UserInterface
 {
     protected String userName, password, email, firstName, lastName;
     protected int id;                                                        // ID for better database implementation and security reasons
-    final String type = "Guest";
+    final static String type = "Guest";
     final ArrayList<String> permissions = new ArrayList<>(Arrays.asList(
             "RegisterUser"
     ));

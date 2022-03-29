@@ -1,7 +1,3 @@
-/**
- * @author Jordan Marshall
- */
-
 package hotelsystem;
 
 import hotelsystem.userFactory.Customer;
@@ -10,20 +6,26 @@ import hotelsystem.userFactory.Staff;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Jordan Marshall
+ */
+
 class UserFactoryTest {
 
     // Customer Unit Tests
 
-    @Test void checkCustomerEmail() {
+    @Test void checkCustomer() {
         Customer person = new Customer();
-        person.setEmail("test@test.com");
-        assertEquals(person.getEmail(), "test@test.com");
+        assertNull(person.getUserName());
+        assertNull(person.getPassword());
+        assertNull(person.getEmail());
     }
 
-    @Test void checkCustomerPassword() {
-        Customer person = new Customer();
-        person.setPassword("#Password123");
-        assertEquals(person.getPassword(), "#Password123");
+    @Test void checkCustomerFilled() {
+        Customer person = new Customer("TestUsername", "TestPassword", "test@test.com");
+        assertEquals(person.getUserName(), "TestUsername");
+        assertEquals(person.getPassword(), "TestPassword");
+        assertEquals(person.getEmail(), "test@test.com");
     }
 
     @Test void checkCustomerUsername() {
@@ -32,10 +34,16 @@ class UserFactoryTest {
         assertEquals(person.getUserName(), "John Doe");
     }
 
-    @Test void checkCustomerPaid() {
+    @Test void checkCustomerPassword() {
         Customer person = new Customer();
-        person.setPaid(true);
-        assertEquals(person.getPaid(), true);
+        person.setPassword("#Password123");
+        assertEquals(person.getPassword(), "#Password123");
+    }
+
+    @Test void checkCustomerEmail() {
+        Customer person = new Customer();
+        person.setEmail("test@test.com");
+        assertEquals(person.getEmail(), "test@test.com");
     }
 
     @Test void checkCustomerType() {
@@ -61,19 +69,38 @@ class UserFactoryTest {
         assertEquals(person.getLastName(), "Doe");
     }
 
+    @Test void checkCustomerLegalName() {
+        Customer person = new Customer();
+        person.setLegalName("John","Doe");
+        assertEquals(person.getLegalName(), "John Doe");
+    }
+
+    @Test void checkCustomerPaid() {
+        Customer person = new Customer();
+        person.setPaid(true);
+        assertTrue(person.getPaid());
+    }
+
     // Staff Unit Tests
 
     @Test void checkStaff() {
+        Staff person = new Staff();
+        assertNull(person.getUserName());
+        assertNull(person.getPassword());
+        assertNull(person.getEmail());
+    }
+
+    @Test void checkStaffFilled() {
         Staff person = new Staff("TestUsername", "TestPassword", "test@test.com");
         assertEquals(person.getUserName(), "TestUsername");
         assertEquals(person.getPassword(), "TestPassword");
         assertEquals(person.getEmail(), "test@test.com");
-    } 
+    }
 
-    @Test void checkStaffEmail() {
+    @Test void checkStaffUserName() {
         Staff person = new Staff();
-        person.setEmail("test@test.com");
-        assertEquals(person.getEmail(), "test@test.com");
+        person.setUserName("John Doe");
+        assertEquals(person.getUserName(), "John Doe");
     }
 
     @Test void checkStaffPassword() {
@@ -82,10 +109,10 @@ class UserFactoryTest {
         assertEquals(person.getPassword(), "#Password123");
     }
 
-    @Test void checkStaffUserName() {
+    @Test void checkStaffEmail() {
         Staff person = new Staff();
-        person.setUserName("John Doe");
-        assertEquals(person.getUserName(), "John Doe");
+        person.setEmail("test@test.com");
+        assertEquals(person.getEmail(), "test@test.com");
     }
 
     @Test void checkStaffType() {
@@ -111,6 +138,12 @@ class UserFactoryTest {
         assertEquals(person.getLastName(), "Doe");
     }
 
+    @Test void checkStaffLegalName() {
+        Staff person = new Staff();
+        person.setLegalName("John","Doe");
+        assertEquals(person.getLegalName(), "John Doe");
+    }
+
     @Test void checkStaffSalary() {
         Staff person = new Staff();
         person.setSalary(30000);
@@ -127,16 +160,23 @@ class UserFactoryTest {
     // Guest Unit Tests
 
     @Test void checkGuest() {
-        Guest person = new Guest("firstName", "lastName", 1234);
-        assertEquals(person.getFirstName(), "firstName");
-        assertEquals(person.getLastName(), "lastName");
-        assertEquals(person.getId(), 1234);
+        Guest person = new Guest();
+        assertNull(person.getFirstName());
+        assertNull(person.getLastName());
+        assertEquals(person.getId(), 0);
     }
 
-    @Test void checkGuestEmail() {
+    @Test void checkGuestFilled() {
+        Guest person = new Guest("John", "Doe", 123);
+        assertEquals(person.getFirstName(), "John");
+        assertEquals(person.getLastName(), "Doe");
+        assertEquals(person.getId(), 123);
+    }
+
+    @Test void checkGuestUserName() {
         Guest person = new Guest();
-        person.setEmail("test@test.com");
-        assertEquals(person.getEmail(), "test@test.com");
+        person.setUserName("John Doe");
+        assertEquals(person.getUserName(), "John Doe");
     }
 
     @Test void checkGuestPassword() {
@@ -145,10 +185,10 @@ class UserFactoryTest {
         assertEquals(person.getPassword(), "#Password123");
     }
 
-    @Test void checkGuestUserName() {
+    @Test void checkGuestEmail() {
         Guest person = new Guest();
-        person.setUserName("John Doe");
-        assertEquals(person.getUserName(), "John Doe");
+        person.setEmail("test@test.com");
+        assertEquals(person.getEmail(), "test@test.com");
     }
 
     @Test void checkGuestType() {
@@ -172,5 +212,11 @@ class UserFactoryTest {
         Guest person = new Guest();
         person.setLastName("Doe");
         assertEquals(person.getLastName(), "Doe");
+    }
+
+    @Test void checkGuestLegalName() {
+        Guest person = new Guest();
+        person.setLegalName("John","Doe");
+        assertEquals(person.getLegalName(), "John Doe");
     }
 }

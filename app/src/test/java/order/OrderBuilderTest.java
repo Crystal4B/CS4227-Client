@@ -1,13 +1,13 @@
-/**
- * @author Jordan Marshall
- */
-
 package order;
 
 import org.junit.jupiter.api.Test;
 import hotelsystem.roomFactory.Room;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
+
+/**
+ * @author Jordan Marshall
+ */
 
 class OrderBuilderTest {
 
@@ -58,15 +58,17 @@ class OrderBuilderTest {
         ArrayList<Room> rooms = new ArrayList<>();
         rooms.add(new Room("Test Name", 123, 2));
         builder.setRooms(rooms);
-        String expected = "Rooms: \n" +
-        "\tRoom Name: Test Name ; Room Number: 123 ; Beds: 2 ; Price: 200.0 ; Taken?: false\n" +
-        "\nNumber of Occupants: 0" +
-        "\nStart Date: null" +
-        "\nEnd Date: null" + 
-        "\nNumber of Days Booked: 0" + 
-        "\nRate Cost: EURO 200.0" + 
-        "\nTotal Cost: EURO 0.0" + 
-        "\n";
+        String expected = """
+                Rooms:\s
+                \tRoom Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false
+
+                Number of Occupants: 0
+                Start Date: null
+                End Date: null
+                Number of Days Booked: 0
+                Rate Cost: EURO 200.0
+                Total Cost: EURO 0.0
+                """;
         assertEquals(builder.toString(), expected);
     }
 }

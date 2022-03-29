@@ -107,7 +107,7 @@ public class Room implements RoomInterface
 
     @Override
     public String toString() {
-        return "Room Name: "+roomName+" ; Room Number: "+roomNumber+" ; Beds: "+numberBeds+" ; Price: "+price+" ; Taken?: "+taken;
+        return "Room Name - "+roomName+" ; Room Number - "+roomNumber+" ; Beds - "+numberBeds+" ; Price - "+price+" ; Taken - "+taken;
     }
 
     public void setPerks(String perks)

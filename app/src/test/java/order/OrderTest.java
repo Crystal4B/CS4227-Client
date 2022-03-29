@@ -1,7 +1,3 @@
-/**
- * @author Jordan Marshall
- */
-
 package order;
 
 import hotelsystem.roomFactory.Room;
@@ -11,6 +7,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Timestamp;
+
+/**
+ * @author Jordan Marshall
+ */
 
 class OrderTest {
 
@@ -76,15 +76,17 @@ class OrderTest {
         builder.setStartDate(Timestamp.valueOf("2020-10-10 12:00:00"));
         builder.setEndDate(Timestamp.valueOf("2020-10-12 12:00:00"));
         Order order = builder.getOrder();
-        String expected = "Rooms: \n" +
-        "\tRoom Name: Test Name ; Room Number: 123 ; Beds: 2 ; Price: 200.0 ; Taken?: false\n" +
-        "\nNumber of Occupants: 0" +
-        "\nStart Date: 2020-10-10 12:00:00.0" +
-        "\nEnd Date: 2020-10-12 12:00:00.0" + 
-        "\nNumber of Days Booked: 2" + 
-        "\nRate Cost: EURO 200.0" + 
-        "\nTotal Cost: EURO 400.0" + 
-        "\n";
+        String expected = """
+                Rooms:\s
+                \tRoom Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false
+
+                Number of Occupants: 0
+                Start Date: 2020-10-10 12:00:00.0
+                End Date: 2020-10-12 12:00:00.0
+                Number of Days Booked: 2
+                Rate Cost: EURO 200.0
+                Total Cost: EURO 400.0
+                """;
         assertEquals(order.toString(), expected);
     }
 
@@ -99,7 +101,7 @@ class OrderTest {
         builder2.addRoom(new Room("Test Name", 123, 2));
         Order order2 = builder2.getOrder();
 
-        assertTrue(order.equals(order));
-        assertFalse(order.equals(order2));
+        assertEquals(order, order);
+        assertNotEquals(order, order2);
     }
 }

@@ -24,7 +24,7 @@ public class CreateVoucherCommand extends CommandTemplate<CouponVisitor> {
 			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type amount available{id}}}\"}", UNDO_MUTATION_NAME, couponvisitor.CodeGet());
 		}
 
-		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" amount: %d creator: %d}){id type issue_date expiry_date amount creator{id}}}\"}", MUTATION_NAME, couponvisitor.TypeGet(), couponvisitor.DiscountGet(), LoginUI.getUser());
+		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" amount: %f creator{id: %d}}){id type issue_date expiry_date amount creator{id}}}\"}", MUTATION_NAME, couponvisitor.TypeGet(), couponvisitor.DiscountGet(), LoginUI.getUser().getId());
     }
 
     @Override
@@ -49,7 +49,7 @@ public class CreateVoucherCommand extends CommandTemplate<CouponVisitor> {
 		String type = (String) voucherData.get("type");
 		double amount = (double) voucherData.get("amount");
 		Map<?,?> reservationData = (Map<?, ?>) voucherData.get("available");
-		if(reservationData.containsKey("id") && reservationData.get("id") != null){
+		if(reservationData != null && reservationData.containsKey("id") && reservationData.get("id") != null){
 			responseObject = new CouponVisitor(id, type, amount, true);
 		} else {
 			responseObject = new CouponVisitor(id, type, amount, false);

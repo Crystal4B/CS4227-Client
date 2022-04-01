@@ -1,8 +1,9 @@
-package requestsystem.commands;
+package requestsystem.commands.rooms;
 
 import java.util.Map;
 
 import hotelsystem.roomFactory.Room;
+import requestsystem.commands.CommandTemplate;
 
 public class RemoveRoomCommand extends CommandTemplate<Room>
 {

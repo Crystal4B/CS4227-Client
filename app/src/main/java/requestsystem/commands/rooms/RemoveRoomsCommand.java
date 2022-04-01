@@ -1,10 +1,11 @@
-package requestsystem.commands;
+package requestsystem.commands.rooms;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import hotelsystem.roomFactory.Room;
+import requestsystem.commands.CommandTemplate;
 
 /**
  * Command for removing rooms from the system

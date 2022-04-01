@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import hotelsystem.roomFactory.RoomInterface;
 import hotelsystem.roomFactory.Room;
 import requestsystem.commands.CommandInvoker;
-import requestsystem.commands.CreateRoomCommand;
-import requestsystem.commands.GetAllRoomsCommand;
-import requestsystem.commands.RemoveRoomCommand;
+import requestsystem.commands.rooms.CreateRoomCommand;
+import requestsystem.commands.rooms.GetAllRoomsCommand;
+import requestsystem.commands.rooms.RemoveRoomCommand;
 
 public class StaffUI {
     

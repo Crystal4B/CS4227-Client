@@ -10,8 +10,8 @@ import java.util.Random;
 import hotelsystem.roomFactory.RoomInterface;
 import hotelsystem.roomFactory.Room;
 import requestsystem.commands.CommandInvoker;
-import requestsystem.commands.CreateReservationCommand;
-import requestsystem.commands.GetAvailableRoomsCommand;
+import requestsystem.commands.reservations.CreateReservationCommand;
+import requestsystem.commands.rooms.GetAvailableRoomsCommand;
 import userinterface.ReservationUI;
 
 public class Director {

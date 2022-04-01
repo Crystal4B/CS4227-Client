@@ -1,4 +1,4 @@
-package requestsystem.commands;
+package requestsystem.commands.reservations;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import hotelsystem.userFactory.Guest;
 import hotelsystem.userFactory.UserInterface;
 import order.Order;
 import order.OrderBuilder;
+import requestsystem.commands.CommandTemplate;
 
 public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 {

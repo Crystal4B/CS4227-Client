@@ -2,7 +2,7 @@ package payment;
 
 
 import requestsystem.commands.CommandInvoker;
-import requestsystem.commands.UpdateReservationPaidCommand;
+import requestsystem.commands.reservations.UpdateReservationPaidCommand;
 
 public class Payment {
     private double finalCost;

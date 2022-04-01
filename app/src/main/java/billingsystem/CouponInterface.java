@@ -7,6 +7,14 @@ public interface CouponInterface {
 
     public double VoucherInput();
 
+    public void TypeSet(String type);
+
+    public String TypeGet();
+
+    public void AvailableSet(boolean available);
+
+    public boolean AvailableGet();
+
     public double DiscountGet();
 
     public void DiscountSet(double num);

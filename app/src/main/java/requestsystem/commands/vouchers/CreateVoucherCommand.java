@@ -4,16 +4,27 @@ import java.util.Map;
 
 import billingsystem.CouponVisitor;
 import requestsystem.commands.CommandTemplate;
+import userinterface.LoginUI;
 
 public class CreateVoucherCommand extends CommandTemplate<CouponVisitor> {
 
 	private static final String MUTATION_NAME = "createVoucher";
-	private static final String UNDO_MUTATION_NAME = "roomRoom";
+	private static final String UNDO_MUTATION_NAME = "removeVoucher";
+	private CouponVisitor couponvisitor;
+
+	public CreateVoucherCommand(CouponVisitor couponvisitor){
+		this.couponvisitor = couponvisitor;
+	}
 
     @Override
     public String createMessage(boolean undo) {
-        // TODO Auto-generated method stub
-        return null;
+        
+		if (undo)
+		{
+			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type amount available{id}}}\"}", UNDO_MUTATION_NAME, couponvisitor.CodeGet());
+		}
+
+		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" amount: %d creator: %d}){id type issue_date expiry_date amount creator{id}}}\"}", MUTATION_NAME, couponvisitor.TypeGet(), couponvisitor.DiscountGet(), LoginUI.getUser());
     }
 
     @Override
@@ -33,20 +44,18 @@ public class CreateVoucherCommand extends CommandTemplate<CouponVisitor> {
 			return;
 		}
 
-		Map<?, ?> roomsData = (Map<?, ?>) response.get(mutation);
-		String id = (String) roomsData.get("id");
-		String type = (String) roomsData.get("type");
-		int numberOfBeds = (int) roomsData.get("numberOfBeds");
-		switch(type)
-		{
-			case "Standard":
-			responseObject = new Room(type, Integer.parseInt(id), numberOfBeds);
-			break;
-		}
+		Map<?, ?> voucherData = (Map<?, ?>) response.get(mutation);
+		String id = (String) voucherData.get("id");
+		String type = (String) voucherData.get("type");
+		double amount = (double) voucherData.get("amount");
+		Map<?,?> reservationData = (Map<?, ?>) voucherData.get("available");
+		if(reservationData.containsKey("id") && reservationData.get("id") != null){
+			responseObject = new CouponVisitor(id, type, amount, true);
+		} else {
+			responseObject = new CouponVisitor(id, type, amount, false);
+		}		
 		
 		// Make a copy for undo
-		this.room = responseObject;
-        
+		this.couponvisitor = responseObject;  
     }
-    
 }

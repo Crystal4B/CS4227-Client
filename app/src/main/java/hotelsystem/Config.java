@@ -3,8 +3,6 @@ package hotelsystem;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.google.common.io.Resources;
-
 /**
  * Config class to load config.properties into the application
  * @author Marcin Sęk
@@ -28,7 +26,7 @@ public class Config
 			properties = new Properties();
 			String propFileName = "config.properties";
 
-			InputStream inputStream = Resources.getResource(propFileName).openStream();
+			InputStream inputStream = Config.class.getClassLoader().getResourceAsStream(propFileName);
 			properties.load(inputStream);
 			inputStream.close();
 

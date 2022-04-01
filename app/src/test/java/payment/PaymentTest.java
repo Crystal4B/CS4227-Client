@@ -12,7 +12,7 @@ import hotelsystem.userFactory.Customer;
 import hotelsystem.userFactory.Guest;
 import order.OrderBuilder;
 import requestsystem.commands.CommandInvoker;
-import requestsystem.commands.CreateReservationCommand;
+import requestsystem.commands.reservations.CreateReservationCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
 

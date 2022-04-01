@@ -1,4 +1,4 @@
-package requestsystem.commands;
+package requestsystem.commands.reservations;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.Map;
 import hotelsystem.roomFactory.Room;
 import order.Order;
 import order.OrderBuilder;
+import requestsystem.commands.CommandTemplate;
 
 /**
  * A Select Reservation Command for selecting reservation data from the API

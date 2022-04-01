@@ -3,7 +3,7 @@ package login;
 import hotelsystem.userFactory.UserFactory;
 import hotelsystem.userFactory.UserInterface;
 import requestsystem.commands.CommandInvoker;
-import requestsystem.commands.LoginUserCommand;
+import requestsystem.commands.users.LoginUserCommand;
 import hotelsystem.userFactory.Customer;
 import java.util.regex.Pattern;
 

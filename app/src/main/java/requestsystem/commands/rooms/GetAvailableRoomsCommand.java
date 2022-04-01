@@ -1,22 +1,43 @@
-package requestsystem.commands;
+package requestsystem.commands.rooms;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import hotelsystem.roomFactory.RoomInterface;
+import requestsystem.commands.CommandTemplate;
 import hotelsystem.roomFactory.Room;
 
-public class GetAllRoomsCommand extends CommandTemplate<Map<String, List<RoomInterface>>>
+/**
+ * Command for getting all available room for specified dates
+ * @author Marcin Sęk
+ * @apiNote Response type of Map[Type, List[Room]]
+ */
+public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<RoomInterface>>>
 {
-	private static final String QUERY_NAME = "allRooms";
+	private static final String QUERY_NAME = "availableRoomsByDates";
+
+	private Timestamp checkIn;
+	private Timestamp checkOut;
+
+	/**
+	 * Simple constructor for command
+	 * @param checkIn desired date for check-in
+	 * @param checkOut desired date for check-out
+	 */
+	public GetAvailableRoomsCommand(Timestamp checkIn, Timestamp checkOut)
+	{
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+	}
 
 	@Override
 	public String createMessage(boolean undo)
 	{
 		// Undo doesn't apply to requests of type query
-		return String.format("{\"query\":\"query{%s{id type numberOfBeds}}\"}", QUERY_NAME);
+		return String.format("{\"query\":\"query{%s(checkIn: \\\"%s\\\" checkOut: \\\"%s\\\"){id type numberOfBeds}}\"}", QUERY_NAME, checkIn, checkOut);
 	}
 
 	@Override

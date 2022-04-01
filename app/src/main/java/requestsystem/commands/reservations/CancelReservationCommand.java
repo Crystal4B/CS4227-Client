@@ -1,4 +1,4 @@
-package requestsystem.commands;
+package requestsystem.commands.reservations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import hotelsystem.roomFactory.Room;
 import hotelsystem.userFactory.UserInterface;
 import order.Order;
 import order.OrderBuilder;
+import requestsystem.commands.CommandTemplate;
 
 /**
  * A Cancel Reservation Command for canceling an exiting reservation in the system

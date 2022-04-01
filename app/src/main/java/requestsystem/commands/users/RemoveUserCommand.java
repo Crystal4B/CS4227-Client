@@ -1,29 +1,29 @@
-package requestsystem.commands;
-
-import hotelsystem.userFactory.UserFactory;
-import hotelsystem.userFactory.Customer;
-import hotelsystem.userFactory.Staff;
-import hotelsystem.userFactory.UserInterface;
+package requestsystem.commands.users;
 
 import java.util.Map;
 
+import hotelsystem.userFactory.Customer;
+import hotelsystem.userFactory.Staff;
+import hotelsystem.userFactory.UserInterface;
+import requestsystem.commands.CommandTemplate;
+
 /**
- * Command for adding a new user into the system
+ * Command for removing a user from the system
  * @author Marcin Sęk
  * @apiNote Response type of User
  */
-public class RegisterUserCommand extends CommandTemplate<UserInterface>
+public class RemoveUserCommand extends CommandTemplate<UserInterface>
 {
-	private static final String MUTATION_NAME = "createUser";
-	private static final String UNDO_MUTATION_NAME = "removeUser";
+	private static final String MUTATION_NAME = "removeUser";
+	private static final String UNDO_MUTATION_NAME = "createUser";
 
 	private UserInterface userInterface;
 
 	/**
 	 * Simple constructor for command
-	 * @param userInterface being registered with the system
+	 * @param userInterface being removed from the system
 	 */
-	public RegisterUserCommand(UserInterface userInterface)
+	public RemoveUserCommand(UserInterface userInterface)
 	{
 		this.userInterface = userInterface;
 	}
@@ -33,9 +33,9 @@ public class RegisterUserCommand extends CommandTemplate<UserInterface>
 	{
 		if (undo)
 		{
-			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type email username password}}\"}", UNDO_MUTATION_NAME, userInterface.getId());
+			return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", UNDO_MUTATION_NAME, userInterface.getClass().getSimpleName(), userInterface.getEmail(), userInterface.getUserName(), userInterface.getPassword());
 		}
-		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", MUTATION_NAME, userInterface.getClass().getSimpleName(), userInterface.getEmail(), userInterface.getUserName(), userInterface.getPassword());
+		return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type email username password}}\"}", MUTATION_NAME, userInterface.getId());
 	}
 
 	@Override
@@ -56,22 +56,16 @@ public class RegisterUserCommand extends CommandTemplate<UserInterface>
 		}
 
 		Map<?, ?> userData = (Map<?, ?>) response.get(mutation);
-		if (userData == null)
-		{
-			return;
-		}
-
 		String id = (String) userData.get("id");
 		String type = (String) userData.get("type");
 		String email = (String) userData.get("email");
 		String username = (String) userData.get("username");
 		String password = (String) userData.get("password");
-
-		UserFactory uf = new UserFactory();
+	
 		switch(type)
 		{
 		case "Customer":
-			responseObject = uf.createCustomer(username, password, email);
+			responseObject = new Customer(username, password, email);
 			break;
 		case "Staff":
 			responseObject = new Staff(username, password, email);

@@ -4,7 +4,7 @@ import hotelsystem.userFactory.Customer;
 import hotelsystem.userFactory.Staff;
 import hotelsystem.userFactory.UserInterface;
 import requestsystem.commands.CommandInvoker;
-import requestsystem.commands.RegisterUserCommand;
+import requestsystem.commands.users.RegisterUserCommand;
 
 import java.util.regex.Pattern;
 

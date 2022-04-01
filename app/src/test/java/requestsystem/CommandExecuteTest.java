@@ -19,16 +19,16 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import hotelsystem.roomFactory.Room;
 import order.OrderBuilder;
-import requestsystem.commands.CancelReservationCommand;
 import requestsystem.commands.CommandInvoker;
-import requestsystem.commands.CreateReservationCommand;
-import requestsystem.commands.CreateRoomsCommand;
-import requestsystem.commands.GetAvailableRoomsCommand;
-import requestsystem.commands.GetReservationsByUserCommand;
-import requestsystem.commands.LoginUserCommand;
-import requestsystem.commands.RegisterUserCommand;
-import requestsystem.commands.RemoveRoomsCommand;
-import requestsystem.commands.RemoveUserCommand;
+import requestsystem.commands.reservations.CancelReservationCommand;
+import requestsystem.commands.reservations.CreateReservationCommand;
+import requestsystem.commands.reservations.GetReservationsByUserCommand;
+import requestsystem.commands.rooms.CreateRoomsCommand;
+import requestsystem.commands.rooms.GetAvailableRoomsCommand;
+import requestsystem.commands.rooms.RemoveRoomsCommand;
+import requestsystem.commands.users.LoginUserCommand;
+import requestsystem.commands.users.RegisterUserCommand;
+import requestsystem.commands.users.RemoveUserCommand;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CommandExecuteTest

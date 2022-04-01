@@ -1,4 +1,4 @@
-package requestsystem.commands;
+package requestsystem.commands.reservations;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import hotelsystem.roomFactory.Room;
 import hotelsystem.userFactory.Guest;
 import order.Order;
 import order.OrderBuilder;
+import requestsystem.commands.CommandTemplate;
 
 public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 {

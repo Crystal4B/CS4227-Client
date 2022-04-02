@@ -89,7 +89,7 @@ public class ReservationUI {
         }
         System.out.println("Please select one of the following options:");
         if(!director.getAvailableRooms(builder)){
-            System.out.println("No Rooms Available");
+            System.out.println("No Rooms Available, Please try another date");
             return true;
         }
         int option = -1;

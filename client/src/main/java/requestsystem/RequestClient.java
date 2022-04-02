@@ -41,8 +41,6 @@ public class RequestClient
 
 			HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
-			System.out.println(response.body());
-
 			Map<?, ?> mapping = new ObjectMapper().readValue(response.body(), HashMap.class);
 			if (mapping.containsKey("errors"))
 			{

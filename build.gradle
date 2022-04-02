@@ -1,0 +1,19 @@
+// rootProject build.gradle
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'pmd'
+
+	repositories {
+		mavenCentral()
+	}
+
+	test {
+		testLogging {
+			events 'passed', 'skipped', 'failed'
+		}
+	}
+
+	pmd {
+		ignoreFailures = true
+	}
+}

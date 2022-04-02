@@ -30,10 +30,10 @@ import requestsystem.commands.rooms.RemoveRoomsCommand;
 import requestsystem.commands.users.LoginUserCommand;
 import requestsystem.commands.users.RegisterUserCommand;
 import requestsystem.commands.users.RemoveUserCommand;
-import requestsystem.commands.vouchers.CreateVoucherCommand;
-import requestsystem.commands.vouchers.RemoveVoucherCommand;
-import requestsystem.commands.vouchers.ValidateVoucherCommand;
-import userinterface.LoginUI;
+// import requestsystem.commands.vouchers.CreateVoucherCommand;
+// import requestsystem.commands.vouchers.RemoveVoucherCommand;
+// import requestsystem.commands.vouchers.ValidateVoucherCommand;
+// import userinterface.LoginUI;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CommandExecuteTest
@@ -231,47 +231,47 @@ public class CommandExecuteTest
 		rooms = resultRooms;
 	}
 
-	@Test
-	@Order(10)
-	public void checkCreateVoucherCommand()
-	{
-		// Create voucher for user
-		CouponVisitor visitor = new CouponVisitor();
-		visitor.TypeSet("Voucher");
-		visitor.DiscountSet(2.5);
-		LoginUI.setUser(staff);
+	// @Test
+	// @Order(10)
+	// public void checkCreateVoucherCommand()
+	// {
+	// 	// Create voucher for user
+	// 	CouponVisitor visitor = new CouponVisitor();
+	// 	visitor.TypeSet("Voucher");
+	// 	visitor.DiscountSet(2.5);
+	// 	LoginUI.setUser(staff);
 
-		// Send request
-		invoker.setCommand(new CreateVoucherCommand(visitor));
-		invoker.execute();
+	// 	// Send request
+	// 	invoker.setCommand(new CreateVoucherCommand(visitor));
+	// 	invoker.execute();
 
-		// Retrieve response and assert
-		CouponVisitor result = invoker.getResponse();
-		assertEquals(visitor.TypeGet(), result.TypeGet());
-		assertEquals(visitor.DiscountGet(), result.DiscountGet());
-		assertFalse(result.CodeGet().equals(""));
+	// 	// Retrieve response and assert
+	// 	CouponVisitor result = invoker.getResponse();
+	// 	assertEquals(visitor.TypeGet(), result.TypeGet());
+	// 	assertEquals(visitor.DiscountGet(), result.DiscountGet());
+	// 	assertFalse(result.CodeGet().equals(""));
 
 		
-		coupan = result;
-		System.out.println(coupan.CodeGet());
-	}
+	// 	coupan = result;
+	// 	System.out.println(coupan.CodeGet());
+	// }
 
-	@Test
-	@Order(11)
-	public void checkValidateVoucherCommand()
-	{
-		// Send request
-		invoker.setCommand(new ValidateVoucherCommand(coupan));
-		invoker.execute();
+	// @Test
+	// @Order(11)
+	// public void checkValidateVoucherCommand()
+	// {
+	// 	// Send request
+	// 	invoker.setCommand(new ValidateVoucherCommand(coupan));
+	// 	invoker.execute();
 
-		System.out.println(coupan.CodeGet());
+	// 	System.out.println(coupan.CodeGet());
 
-		// Retrieve response and assert
-		CouponVisitor result = invoker.getResponse();
-		assertEquals(coupan.TypeGet(), result.TypeGet());
-		assertEquals(coupan.DiscountGet(), result.DiscountGet());
-		assertEquals(coupan.CodeGet(), result.CodeGet());
-	}
+	// 	// Retrieve response and assert
+	// 	CouponVisitor result = invoker.getResponse();
+	// 	assertEquals(coupan.TypeGet(), result.TypeGet());
+	// 	assertEquals(coupan.DiscountGet(), result.DiscountGet());
+	// 	assertEquals(coupan.CodeGet(), result.CodeGet());
+	// }
 
 	@Test
 	@Order(12)
@@ -404,17 +404,17 @@ public class CommandExecuteTest
 
 	// @Test
 	// @Order(14)
-	public void checkRemoveVoucherCommand()
-	{
-		invoker.setCommand(new RemoveVoucherCommand(coupan));
-		invoker.execute();
+	// public void checkRemoveVoucherCommand()
+	// {
+	// 	invoker.setCommand(new RemoveVoucherCommand(coupan));
+	// 	invoker.execute();
 
-		// Retrieve response and assert
-		CouponVisitor result = invoker.getResponse();
-		assertEquals(coupan.CodeGet(), result.CodeGet());
-		assertEquals(coupan.TypeGet(), result.TypeGet());
-		assertEquals(coupan.DiscountGet(), result.DiscountGet());
-	}
+	// 	// Retrieve response and assert
+	// 	CouponVisitor result = invoker.getResponse();
+	// 	assertEquals(coupan.CodeGet(), result.CodeGet());
+	// 	assertEquals(coupan.TypeGet(), result.TypeGet());
+	// 	assertEquals(coupan.DiscountGet(), result.DiscountGet());
+	// }
 
 	@Test
 	@Order(14)

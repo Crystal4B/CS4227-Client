@@ -40,5 +40,5 @@ We used multiple design and architecture patterns as part of the project. The fo
 
 ## Links
 - Overall Repository: https://github.com/Crystal4B/CS4227-Software-Design-And-Architecture
-- Client files: [here] (/client)
-- Server files: [here] (/server)
+- Client files: [here](/client)
+- Server files: [here](/server)

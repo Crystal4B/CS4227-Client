@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.fasterxml.jackson.databind.node.BooleanNode;
+
 import hotelsystem.roomFactory.RoomInterface;
 import hotelsystem.roomFactory.Room;
 import requestsystem.commands.CommandInvoker;
@@ -52,7 +54,7 @@ public class Director {
      * @param builder The OrderBuilder object that is calling this method.
      * @return The list of room types available.
      */
-    public String getAvailableRooms(OrderBuilder builder){
+    public boolean getAvailableRooms(OrderBuilder builder){
         if(rooms == null){
             CommandInvoker invoker = new CommandInvoker();
             invoker.setCommand(new GetAvailableRoomsCommand(this.checkInTime, this.checkOutTime));
@@ -62,11 +64,13 @@ public class Director {
         
         Object[] roomTypes = rooms.keySet().toArray();
         
-        StringBuilder listOfRoomOptions = new StringBuilder();
-        for(int i=0; i < roomTypes.length; i++){
-            listOfRoomOptions.append(i).append(".\t").append(roomTypes[i]).append("\n");
+        if(roomTypes.length > 0){
+            for(int i=0; i < roomTypes.length; i++){
+                System.out.println(i + ".\t" +roomTypes[i]);
+            }
+            return true;
         }
-        return listOfRoomOptions.toString();
+        return false;
     }
 
     /**

@@ -88,7 +88,10 @@ public class ReservationUI {
             return false;
         }
         System.out.println("Please select one of the following options:");
-        System.out.println(director.getAvailableRooms(builder));
+        if(!director.getAvailableRooms(builder)){
+            System.out.println("No Rooms Available");
+            return true;
+        }
         int option = -1;
         try {
             option = Integer.parseInt(console.readLine());

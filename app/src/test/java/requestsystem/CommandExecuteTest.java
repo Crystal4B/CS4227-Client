@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+import billingsystem.CouponVisitor;
 import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
 import order.OrderBuilder;
@@ -27,6 +28,7 @@ import requestsystem.commands.reservations.GetReservationsByUserCommand;
 import requestsystem.commands.rooms.CreateRoomsCommand;
 import requestsystem.commands.rooms.GetAvailableRoomsCommand;
 import requestsystem.commands.rooms.RemoveRoomsCommand;
+import requestsystem.commands.users.ChangeUserPasswordCommand;
 import requestsystem.commands.users.LoginUserCommand;
 import requestsystem.commands.users.RegisterUserCommand;
 import requestsystem.commands.users.RemoveUserCommand;
@@ -106,6 +108,46 @@ public class CommandExecuteTest
 
 	@Test
 	@Order(3)
+	public void checkChangeUserPasswordCommandOnCustomer()
+	{
+		// Send request
+		invoker.setCommand(new ChangeUserPasswordCommand(customer.getId(), "new password"));
+		invoker.execute();
+
+		// Retrieve response and assert
+		UserInterface result = invoker.getResponse();
+		assertTrue(result instanceof Customer);
+		assertFalse(result instanceof Staff);
+		assertEquals(customer.getId(), result.getId());
+		assertEquals(customer.getUserName(), result.getUserName());
+		assertEquals("new password", result.getPassword());
+		assertEquals(customer.getEmail(), result.getEmail());
+
+		customer = (Customer) result;
+	}
+
+	@Test
+	@Order(4)
+	public void checkChangeUserPasswordCommandOnStaff()
+	{
+		// Send request
+		invoker.setCommand(new ChangeUserPasswordCommand(staff.getId(), "new password"));
+		invoker.execute();
+
+		// Retrieve response and assert
+		UserInterface result = invoker.getResponse();
+		assertFalse(result instanceof Customer);
+		assertTrue(result instanceof Staff);
+		assertEquals(staff.getId(), result.getId());
+		assertEquals(staff.getUserName(), result.getUserName());
+		assertEquals("new password", result.getPassword());
+		assertEquals(staff.getEmail(), result.getEmail());
+
+		staff = (Staff) result;
+	}
+
+	@Test
+	@Order(5)
 	public void checkIncorrectRegisterCommandOnCustomer()
 	{
 		// Send new customer request
@@ -118,7 +160,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(4)
+	@Order(6)
 	public void checkIncorrectRegisterCommandOnStaff()
 	{
 		// Send new customer request
@@ -131,7 +173,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(5)
+	@Order(7)
 	public void checkCorrectLoginUserCommandOnCustomer()
 	{
 		// Send new login command
@@ -149,7 +191,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(6)
+	@Order(8)
 	public void checkCorrectLoginUserCommandOnStaff()
 	{
 		// Send new login command
@@ -167,7 +209,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(7)
+	@Order(9)
 	public void checkIncorrectLoginUserCommandCustomer()
 	{
 		// Set incorrect password
@@ -186,7 +228,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(8)
+	@Order(10)
 	public void checkIncorrectLoginUserCommandStaff()
 	{
 		// Set incorrect password
@@ -205,7 +247,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(9)
+	@Order(11)
 	public void checkCreateRoomsCommand()
 	{
 		// Send new createRooms request
@@ -225,8 +267,9 @@ public class CommandExecuteTest
 		rooms = resultRooms;
 	}
 
+
 	@Test
-	@Order(10)
+	@Order(12)
 	public void checkCreateReservationCommand()
 	{
 		// Create room for order
@@ -355,7 +398,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(12)
+	@Order(13)
 	public void checkCancelReservationCommand()
 	{
 		invoker.setCommand(new CancelReservationCommand(reservation));
@@ -399,7 +442,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(13)
+	@Order(14)
 	public void checkRemoveRoomsCommand()
 	{
 		// Send new createRooms request
@@ -420,7 +463,7 @@ public class CommandExecuteTest
 	}
 	
 	@Test
-	@Order(14)
+	@Order(15)
 	public void checkRemoveUserCommandOnCustomer()
 	{
 		// Send new customer request
@@ -436,7 +479,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(15)
+	@Order(16)
 	public void checkRemoveUserCommandOnStaff()
 	{
 		// Send new customer request

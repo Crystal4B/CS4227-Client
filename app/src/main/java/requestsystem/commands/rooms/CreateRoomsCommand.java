@@ -6,6 +6,7 @@ import java.util.Map;
 
 import hotelsystem.roomFactory.Room;
 import requestsystem.commands.CommandTemplate;
+import hotelsystem.roomFactory.RoomFactory;
 
 /**
  * Command for adding new rooms into the system
@@ -47,7 +48,7 @@ public class CreateRoomsCommand extends CommandTemplate<List<Room>>
 			}
 			else
 			{
-				message += String.format("{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}", room.getClass().getSimpleName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
+				message += String.format("{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}", room.getRoomName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
 			}
 
 			if (i < rooms.size() - 1)
@@ -84,14 +85,19 @@ public class CreateRoomsCommand extends CommandTemplate<List<Room>>
 		{
 			Map<?, ?> roomsMap = (Map<?, ?>) roomsList.get(i);
 
-			String id = (String) roomsMap.get("id");
+			int id = Integer.parseInt((String) roomsMap.get("id"));
 			String type = (String) roomsMap.get("type");
 			int numberOfBeds = (int) roomsMap.get("numberOfBeds");
 			switch(type)
 			{
-			case "Room":
-				responseObject.add(new Room(type, Integer.parseInt(id), numberOfBeds));
+			case "Standard":
+				responseObject.add(RoomFactory.createStandard(id, numberOfBeds));
 				break;
+			case "Deluxe":
+				responseObject.add(RoomFactory.createDeluxe(id, numberOfBeds));
+				break;
+			case "VIP":
+			responseObject.add(RoomFactory.createVIP(id, numberOfBeds));
 			}
 		}
 		

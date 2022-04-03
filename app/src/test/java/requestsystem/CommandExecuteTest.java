@@ -19,6 +19,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import billingsystem.CouponVisitor;
 import hotelsystem.roomFactory.Room;
+import hotelsystem.roomFactory.RoomFactory;
 import order.OrderBuilder;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.reservations.CancelReservationCommand;
@@ -47,9 +48,9 @@ public class CommandExecuteTest
 	static Customer customer = new Customer("testCustomer", "customer_password", "testCustomer@test.com");
 	static Staff staff = new Staff("testStaff", "staff_password", "testStaff@test.com");
 	static ArrayList<Room> rooms = new ArrayList<>(Arrays.asList(
-		new Room("Room", 0, 2),
-		new Room("Room", 0, 2),
-		new Room("Room", 0, 2)
+		RoomFactory.createStandard(0, 2),
+		RoomFactory.createDeluxe(0, 2),
+		RoomFactory.createVIP(0, 2)
 	));
 
 	static order.Order reservation;

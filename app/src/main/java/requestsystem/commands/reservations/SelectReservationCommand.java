@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import hotelsystem.roomFactory.Room;
+import hotelsystem.roomFactory.RoomFactory;
 import order.Order;
 import order.OrderBuilder;
 import requestsystem.commands.CommandTemplate;
@@ -57,10 +58,20 @@ public class SelectReservationCommand extends CommandTemplate<Order>
 			{
 				Map<?, ?> roomMap = (Map<?, ?>) roomsList.get(i);
 
-				String roomId = (String) roomMap.get("id");
 				String type = (String) roomMap.get("type");
+				int roomId = Integer.parseInt((String) roomMap.get("id"));
 				int numberOfBeds = (int) roomMap.get("numberOfBeds");
-				builder.addRoom(new Room(type, Integer.parseInt(roomId), numberOfBeds));
+				switch(type)
+				{
+				case "Standard":
+					builder.addRoom(RoomFactory.createStandard(roomId, numberOfBeds));
+					break;
+				case "Deluxe":
+					builder.addRoom(RoomFactory.createDeluxe(roomId, numberOfBeds));
+					break;
+				case "VIP":
+					builder.addRoom(RoomFactory.createVIP(roomId, numberOfBeds));
+				}
 			}
 	
 			responseObject = builder.getOrder();

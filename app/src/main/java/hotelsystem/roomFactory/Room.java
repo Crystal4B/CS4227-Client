@@ -20,9 +20,8 @@ public class Room implements RoomInterface
     private double price = 200.0;
     private ArrayList<UserInterface> occupants = new ArrayList<>();
 
-    public Room(String roomName, int roomNumber, int numberBeds)
+    public Room(int roomNumber, int numberBeds)
     {
-        this.roomName = roomName;
         this.roomNumber = roomNumber;
         this.numberBeds = numberBeds;
     }

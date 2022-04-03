@@ -18,32 +18,32 @@ class RoomFactoryTest {
 
     @Test
     void checkSetRoomName() {
-        Room room = new Room("Test Name", 123, 2);
-        assertEquals(room.getRoomName(), "Test Name");
+        Room room = new Room(123, 2);
+        assertEquals(room.getRoomName(), null);
     }
 
     @Test
     void checkSetRoomNumber() {
-        Room room = new Room("Test Name", 123, 2);
+        Room room = new Room(123, 2);
         assertEquals(room.getRoomNumber(), 123);
     }
 
     @Test
     void checkSetRoomNumberOfBeds() {
-        Room room = new Room("Test Name", 123, 2);
+        Room room = new Room( 123, 2);
         assertEquals(room.getNumberBeds(), 2);
     }
 
     @Test
     void checkSetPerks() {
-        Room room = new Room("Test Name", 123, 2);
+        Room room = new Room( 123, 2);
         room.setPerks("test perks");
         assertEquals(room.getPerks(), "test perks");
     }
 
     @Test
     void checkSetPrice() {
-        Room room = new Room("Test Name", 123, 2);
+        Room room = new Room( 123, 2);
         room.setPrice(666.66);
         assertEquals(room.getPrice(), 666.66);
     }
@@ -57,7 +57,7 @@ class RoomFactoryTest {
         user.setLegalName("John", "Doe");
         user.setPaid(true);
 
-        Room room = new Room("Test Name", 123, 2);
+        Room room = new Room( 123, 2);
         room.addOccupant(user);
         assertEquals(room.getOccupants().size(), 1);
         assertEquals(room.getOccupants().get(0).getLegalName(), "John Doe");
@@ -71,7 +71,7 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        Room room = new Room("Test Name", 123, 2);
+        Room room = new Room( 123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
     }
@@ -83,7 +83,7 @@ class RoomFactoryTest {
         occupants.add(new Customer());
         occupants.add(new Guest());
 
-        Room room = new Room("Test Name", 123, 2);
+        Room room = new Room( 123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
     }
@@ -96,7 +96,7 @@ class RoomFactoryTest {
         user.setUserName("John Doe");
         user.setPaid(true);
 
-        Room room = new Room("Test Name", 123, 2);
+        Room room = new Room( 123, 2);
         room.addOccupant(user);
         room.removeOccupant(user);
         assertEquals(room.getOccupants().size(), 0);
@@ -110,7 +110,7 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        Room room = new Room("Test Name", 123, 2);
+        Room room = new Room( 123, 2);
         room.addOccupants(occupants);
         room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
@@ -123,7 +123,7 @@ class RoomFactoryTest {
         occupants.add(new Customer());
         occupants.add(new Guest());
 
-        Room room = new Room("Test Name", 123, 2);
+        Room room = new Room( 123, 2);
         room.addOccupants(occupants);
         room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
@@ -131,104 +131,104 @@ class RoomFactoryTest {
 
     @Test
     void checkStandardToString() {
-        Room room = new Room("Test Name", 123, 2);
-        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false");
+        Room room = new Room( 123, 2);
+        assertEquals(room.toString(),"Room Name - null ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false");
     }
 
     // Factory Room Unit Tests
 
     @Test
     void checkRoomName() {
-        Room room = RoomFactory.createStandard("Deluxe Room", 123, 2);
-        assertEquals(room.getRoomName(), "Deluxe Room");
+        Room room = RoomFactory.createStandard(123, 2);
+        assertEquals(room.getRoomName(), "Standard");
     }
 
     @Test
     void checkDeluxeRoomName() {
-        Room room = RoomFactory.createDeluxe("Deluxe Room", 123, 2);
-        assertEquals(room.getRoomName(), "Deluxe Room");
+        Room room = RoomFactory.createDeluxe(123, 2);
+        assertEquals(room.getRoomName(), "Deluxe");
     }
 
     @Test
     void checkVIPRoomName() {
-        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
-        assertEquals(room.getRoomName(), "VIP Room");
+        Room room = RoomFactory.createVIP(123, 2);
+        assertEquals(room.getRoomName(), "VIP");
     }
 
     @Test
     void checkRoomNumber() {
-        Room room = RoomFactory.createStandard( "Deluxe Room", 123, 2);
+        Room room = RoomFactory.createStandard(123, 2);
         assertEquals(room.getRoomNumber(), 123);
     }
 
     @Test
     void checkDeluxeRoomNumber() {
-        Room room = RoomFactory.createDeluxe( "Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe(123, 2);
         assertEquals(room.getRoomNumber(), 123);
     }
 
     @Test
     void checkVIPRoomNumber() {
-        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP(123, 2);
         assertEquals(room.getRoomNumber(), 123);
     }
 
     @Test
     void checkRoomNumberOfBeds() {
-        Room room = RoomFactory.createStandard("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createStandard(123, 2);
         assertEquals(room.getNumberBeds(), 2);
     }
 
     @Test
     void checkDeluxeRoomNumberOfBeds() {
-        Room room = RoomFactory.createDeluxe("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe(123, 2);
         assertEquals(room.getNumberBeds(), 2);
     }
 
     @Test
     void checkVIPRoomNumberOfBeds() {
-        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP(123, 2);
         assertEquals(room.getNumberBeds(), 2);
     }
 
     @Test
     void checkSetRoomPerks() {
-        Room room = RoomFactory.createStandard("test perks", 123, 2);
+        Room room = RoomFactory.createStandard(123, 2);
         room.setPerks("test perks");
         assertEquals(room.getPerks(), "test perks");
     }
 
     @Test
     void checkSetDeluxePerks() {
-        Room room = RoomFactory.createDeluxe("test perks", 123, 2);
+        Room room = RoomFactory.createDeluxe(123, 2);
         room.setPerks("test perks");
         assertEquals(room.getPerks(), "test perks");
     }
 
     @Test
     void checkSetVIPPerks() {
-        Room room = RoomFactory.createVIP("test perks", 123, 2);
+        Room room = RoomFactory.createVIP(123, 2);
         room.setPerks("test perks");
         assertEquals(room.getPerks(), "test perks");
     }
 
     @Test
     void checkSetRoomPrice() {
-        Room room = RoomFactory.createStandard("Test Name", 123, 2);
+        Room room = RoomFactory.createStandard(123, 2);
         room.setPrice(666.66);
         assertEquals(room.getPrice(), 666.66);
     }
 
     @Test
     void checkSetDeluxePrice() {
-        Room room = RoomFactory.createDeluxe("Test Name", 123, 2);
+        Room room = RoomFactory.createDeluxe(123, 2);
         room.setPrice(666.66);
         assertEquals(room.getPrice(), 666.66);
     }
 
     @Test
     void checkSetVIPPrice() {
-        Room room = RoomFactory.createVIP("Test Name", 123, 2);
+        Room room = RoomFactory.createVIP(123, 2);
         room.setPrice(666.66);
         assertEquals(room.getPrice(), 666.66);
     }
@@ -242,7 +242,7 @@ class RoomFactoryTest {
         user.setLegalName("John", "Doe");
         user.setPaid(true);
 
-        Room room = RoomFactory.createStandard("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createStandard(123, 2);
         room.addOccupant(user);
         assertEquals(room.getOccupants().size(), 1);
         assertEquals(room.getOccupants().get(0).getLegalName(), "John Doe");
@@ -257,7 +257,7 @@ class RoomFactoryTest {
         user.setLegalName("John", "Doe");
         user.setPaid(true);
 
-        Room room = RoomFactory.createDeluxe("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe(123, 2);
         room.addOccupant(user);
         assertEquals(room.getOccupants().size(), 1);
         assertEquals(room.getOccupants().get(0).getLegalName(), "John Doe");
@@ -272,7 +272,7 @@ class RoomFactoryTest {
         user.setLegalName("John", "Doe");
         user.setPaid(true);
 
-        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP(123, 2);
         room.addOccupant(user);
         System.out.println(room.getOccupants());
         assertEquals(room.getOccupants().size(), 1);
@@ -287,7 +287,7 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        Room room = RoomFactory.createStandard("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createStandard(123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
     }
@@ -300,7 +300,7 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        Room room = RoomFactory.createDeluxe("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe(123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
     }
@@ -313,7 +313,7 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP(123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
     }
@@ -325,7 +325,7 @@ class RoomFactoryTest {
         occupants.add(new Customer());
         occupants.add(new Guest());
 
-        Room room = RoomFactory.createStandard( "Deluxe Room", 123, 2);
+        Room room = RoomFactory.createStandard(123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
     }
@@ -337,7 +337,7 @@ class RoomFactoryTest {
         occupants.add(new Customer());
         occupants.add(new Guest());
 
-        Room room = RoomFactory.createDeluxe( "Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe(123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
     }
@@ -349,7 +349,7 @@ class RoomFactoryTest {
         occupants.add(new Customer());
         occupants.add(new Guest());
 
-        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP(123, 2);
         room.addOccupants(occupants);
         assertEquals(room.getOccupants().size(), 3);
     }
@@ -362,7 +362,7 @@ class RoomFactoryTest {
         user.setUserName("John Doe");
         user.setPaid(true);
 
-        Room room = RoomFactory.createStandard( "Deluxe Room", 123, 2);
+        Room room = RoomFactory.createStandard(123, 2);
         room.addOccupant(user);
         room.removeOccupant(user);
         assertEquals(room.getOccupants().size(), 0);
@@ -376,7 +376,7 @@ class RoomFactoryTest {
         user.setUserName("John Doe");
         user.setPaid(true);
 
-        Room room = RoomFactory.createDeluxe( "Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe(123, 2);
         room.addOccupant(user);
         room.removeOccupant(user);
         assertEquals(room.getOccupants().size(), 0);
@@ -390,7 +390,7 @@ class RoomFactoryTest {
         user.setUserName("John Doe");
         user.setPaid(true);
 
-        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP(123, 2);
         room.addOccupant(user);
         room.removeOccupant(user);
         assertEquals(room.getOccupants().size(), 0);
@@ -404,7 +404,7 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        Room room = RoomFactory.createStandard("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createStandard(123, 2);
         room.addOccupants(occupants);
         room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
@@ -418,7 +418,7 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        Room room = RoomFactory.createDeluxe("Deluxe Room", 123, 2);
+        Room room = RoomFactory.createDeluxe(123, 2);
         room.addOccupants(occupants);
         room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
@@ -432,7 +432,7 @@ class RoomFactoryTest {
                 new Guest()
         };
 
-        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP(123, 2);
         room.addOccupants(occupants);
         room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
@@ -445,7 +445,7 @@ class RoomFactoryTest {
         occupants.add(new Customer());
         occupants.add(new Guest());
 
-        Room room = RoomFactory.createStandard("VIP Room", 123, 2);
+        Room room = RoomFactory.createStandard(123, 2);
         room.addOccupants(occupants);
         room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
@@ -458,7 +458,7 @@ class RoomFactoryTest {
         occupants.add(new Customer());
         occupants.add(new Guest());
 
-        Room room = RoomFactory.createDeluxe("VIP Room", 123, 2);
+        Room room = RoomFactory.createDeluxe(123, 2);
         room.addOccupants(occupants);
         room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
@@ -471,7 +471,7 @@ class RoomFactoryTest {
         occupants.add(new Customer());
         occupants.add(new Guest());
 
-        Room room = RoomFactory.createVIP("VIP Room", 123, 2);
+        Room room = RoomFactory.createVIP(123, 2);
         room.addOccupants(occupants);
         room.removeOccupants(occupants);
         assertEquals(room.getOccupants().size(), 0);
@@ -479,19 +479,19 @@ class RoomFactoryTest {
 
     @Test
     void checkRoomToString() {
-        Room room = RoomFactory.createStandard("Test Name", 123, 2);
-        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false");
+        Room room = RoomFactory.createStandard(123, 2);
+        assertEquals(room.toString(),"Room Name - Standard ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false");
     }
 
     @Test
     void checkDeluxeToString() {
-        Room room = RoomFactory.createDeluxe("Test Name", 123, 2);
-        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 500.0 ; Taken - false");
+        Room room = RoomFactory.createDeluxe(123, 2);
+        assertEquals(room.toString(),"Room Name - Deluxe ; Room Number - 123 ; Beds - 2 ; Price - 500.0 ; Taken - false");
     }
 
     @Test
     void checkVIPToString() {
-        Room room = RoomFactory.createVIP("Test Name", 123, 2);
-        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 1000.0 ; Taken - false");
+        Room room = RoomFactory.createVIP(123, 2);
+        assertEquals(room.toString(),"Room Name - VIP ; Room Number - 123 ; Beds - 2 ; Price - 1000.0 ; Taken - false");
     }
 }

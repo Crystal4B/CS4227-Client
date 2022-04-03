@@ -24,4 +24,8 @@ public interface CouponInterface {
     public String CodeGet();
 
     public String PercentConverter(double num);
+    
+    public void ReservationSet(int reservationId);
+
+    public int ReservationGet();
 }

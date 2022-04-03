@@ -8,6 +8,7 @@ public class CouponVisitor implements CouponInterface {
    Double discount = 0.0;
    String code = "";
    String type = "";
+   int reservationId;
    boolean available = true;
    UserFactory creator;
    
@@ -19,6 +20,14 @@ public class CouponVisitor implements CouponInterface {
       this.type = type;
       this.discount = discount;
       this.available = available;
+   }
+
+   public CouponVisitor(String code, String type, double discount, boolean available, int reservationId){
+      this.code = code;
+      this.type = type;
+      this.discount = discount;
+      this.available = available;
+      this.reservationId = reservationId;
    }
    
    public String CouponPaid(BillingTemplate b){
@@ -63,6 +72,14 @@ public class CouponVisitor implements CouponInterface {
       } else {
          return 0.0;
       }
+   }
+
+   public void ReservationSet(int reservationId){
+      this.reservationId = reservationId;
+   }
+
+   public int ReservationGet(){
+      return reservationId;
    }
 
    public void TypeSet(String type){

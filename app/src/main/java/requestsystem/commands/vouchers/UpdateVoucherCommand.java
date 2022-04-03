@@ -4,12 +4,14 @@ import java.util.Map;
 
 import billingsystem.CouponVisitor;
 import requestsystem.commands.CommandTemplate;
+import userinterface.LoginUI;
 
 public class UpdateVoucherCommand extends CommandTemplate<CouponVisitor> {
 
-    private static final String MUTATION_NAME = "removeVoucher";
-	private static final String UNDO_MUTATION_NAME = "createVoucher";
+    private static final String MUTATION_NAME = "updateVoucher";
+	private static final String UNDO_MUTATION_NAME = "updateVoucher";
 	private CouponVisitor couponvisitor;
+	CouponVisitor newcouponvisitor = new CouponVisitor();
 
     public UpdateVoucherCommand(CouponVisitor couponvisitor){
 		this.couponvisitor = couponvisitor;
@@ -17,8 +19,12 @@ public class UpdateVoucherCommand extends CommandTemplate<CouponVisitor> {
     
     @Override
     public String createMessage(boolean undo) {
-        // TODO Auto-generated method stub
-        return null;
+		if (undo)
+		{
+			return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" amount: %f creator:{id: %d} available: %d}){id type issue_date expiry_date amount creator{id}}}\"}", UNDO_MUTATION_NAME, couponvisitor.TypeGet(), couponvisitor.DiscountGet(), LoginUI.getUser().getId(), couponvisitor.ReservationGet());
+		}
+
+		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" amount: %f creator:{id: %d} available: %d}){id type issue_date expiry_date amount creator{id}}}\"}", MUTATION_NAME, newcouponvisitor.TypeGet(), newcouponvisitor.DiscountGet(), LoginUI.getUser().getId(), newcouponvisitor.ReservationGet());
     }
 
     @Override
@@ -43,12 +49,13 @@ public class UpdateVoucherCommand extends CommandTemplate<CouponVisitor> {
 		String type = (String) voucherData.get("type");
 		double amount = (double) voucherData.get("amount");
 		Map<?,?> reservationData = (Map<?, ?>) voucherData.get("available");
-		if(reservationData.containsKey("id") && reservationData.get("id") != null){
-			responseObject = new CouponVisitor(id, type, amount, true);
+		int reservationId = Integer.parseInt((String) reservationData.get("id"));
+		if(reservationData != null && reservationData.containsKey("id") && reservationData.get("id") != null){
+			responseObject = new CouponVisitor(id, type, amount, true, reservationId);
 		} else {
 			responseObject = new CouponVisitor(id, type, amount, false);
 		}		
 		// Make a copy for undo
-		this.couponvisitor = responseObject;
+		newcouponvisitor = responseObject;
     }
 }

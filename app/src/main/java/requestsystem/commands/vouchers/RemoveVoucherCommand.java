@@ -43,7 +43,7 @@ public class RemoveVoucherCommand extends CommandTemplate<CouponVisitor> {
 		String type = (String) voucherData.get("type");
 		double amount = (double) voucherData.get("amount");
         Map<?,?> reservationData = (Map<?, ?>) voucherData.get("available");
-		if(reservationData.containsKey("id") && reservationData.get("id") != null){
+		if(reservationData != null && reservationData.containsKey("id") && reservationData.get("id") != null){
 			responseObject = new CouponVisitor(id, type, amount, true);
 		} else {
 			responseObject = new CouponVisitor(id, type, amount, false);

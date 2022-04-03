@@ -24,7 +24,7 @@ public class CreateVoucherCommand extends CommandTemplate<CouponVisitor> {
 			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type amount available{id}}}\"}", UNDO_MUTATION_NAME, couponvisitor.CodeGet());
 		}
 
-		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" amount: %f creator{id: %d}}){id type issue_date expiry_date amount creator{id}}}\"}", MUTATION_NAME, couponvisitor.TypeGet(), couponvisitor.DiscountGet(), LoginUI.getUser().getId());
+		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" amount: %f creator:{id: %d}}){id type issue_date expiry_date amount creator{id}}}\"}", MUTATION_NAME, couponvisitor.TypeGet(), couponvisitor.DiscountGet(), LoginUI.getUser().getId());
     }
 
     @Override

@@ -1,45 +1,42 @@
 package requestsystem.commands.users;
 
+import java.util.Map;
+
 import hotelsystem.userFactory.Customer;
 import hotelsystem.userFactory.Staff;
 import hotelsystem.userFactory.UserInterface;
 import requestsystem.commands.CommandTemplate;
 
-import java.util.Map;
-
-/**
- * Command for logging into the system
- * @author Marcin Sęk
- * @apiNote Response type of User
- */
-public class LoginUserCommand extends CommandTemplate<UserInterface>
+public class ChangeUserPasswordCommand extends CommandTemplate<UserInterface>
 {
-	private static final String QUERY_NAME = "loginUser";
+	private static final String MUTATION_NAME = "changeUserPassword";
 
-	private UserInterface userInterface;
+	private int id;
+	private String password;
 
 	/**
 	 * Simple constructor for command
 	 * @param userInterface attempting to login
 	 */
-	public LoginUserCommand(UserInterface userInterface)
+	public ChangeUserPasswordCommand(int id, String password)
 	{
-		this.userInterface = userInterface;
+		this.id = id;
+		this.password = password;
 	}
 
 	@Override
 	public String createMessage(boolean undo)
 	{
 		// Undo does not apply to requests of type query
-		return String.format("{\"query\":\"query{%s(input:{email: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password defaultPassword}}\"}", QUERY_NAME, userInterface.getEmail(), userInterface.getPassword());
+		return String.format("{\"query\":\"mutation{%s(input:{id: %d password: \\\"%s\\\"}){id type email username password defaultPassword}}\"}", MUTATION_NAME, id, password);
 	}
 
 	@Override
 	public void parseResponse(Map<?, ?> response)
 	{
-		if (response.containsKey(QUERY_NAME))
+		if (response.containsKey(MUTATION_NAME))
 		{
-			Map<?, ?> userData = (Map<?, ?>) response.get(QUERY_NAME);
+			Map<?, ?> userData = (Map<?, ?>) response.get(MUTATION_NAME);
 			if (userData == null)
 			{
 				return;

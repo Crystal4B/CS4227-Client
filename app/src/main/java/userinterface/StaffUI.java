@@ -2,8 +2,10 @@ package userinterface;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-import hotelsystem.roomFactory.RoomInterface;
+import hotelsystem.roomFactory.RoomFactory;
 import hotelsystem.roomFactory.Room;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.rooms.CreateRoomCommand;
@@ -57,7 +59,7 @@ public class StaffUI {
         CommandInvoker invoker = new CommandInvoker();
         invoker.setCommand(new GetAllRoomsCommand());
         invoker.execute();
-        ArrayList<RoomInterface> roomFactories = invoker.getResponse();
+        Map<String,List<Room>> rooms = invoker.getResponse();
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -69,19 +71,16 @@ public class StaffUI {
         System.out.println("\n####################################################\n");
         switch (option) {
             case 1:
-                RoomInterface selectedAddRoomInterface = (Room)addRoom(console);
+                Room selectedAddRoomInterface = addRoom(console);
                 if(selectedAddRoomInterface != null){
-                    invoker.setCommand(new CreateRoomCommand((Room) selectedAddRoomInterface));
+                    invoker.setCommand(new CreateRoomCommand(selectedAddRoomInterface));
                     invoker.execute();
                 }
                 break;
             case 2:
-                if(roomFactories.size() == 0){
-                    break;
-                }
-                RoomInterface selectedRemoveRoomInterface = (Room)removeRoom(console, roomFactories);
+                Room selectedRemoveRoomInterface = removeRoom(console, rooms);
                 if(selectedRemoveRoomInterface != null){
-                    invoker.setCommand(new RemoveRoomCommand((Room) selectedRemoveRoomInterface));
+                    invoker.setCommand(new RemoveRoomCommand(selectedRemoveRoomInterface));
                     invoker.execute();
                 }
                 break;
@@ -93,13 +92,15 @@ public class StaffUI {
         return false;
     }
 
-    public static RoomInterface addRoom(Console console){
+    public static Room addRoom(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println("Please select one of the following rooms to add:");
         System.out.println("0. \t Back\n");
         System.out.println("1. \t Standard Room");
+        System.out.println("2. \t Deluxe Room");
+        System.out.println("3. \t VIP Room");
         int option = -1;
         try {
             option = Integer.parseInt(console.readLine());
@@ -108,27 +109,33 @@ public class StaffUI {
             return addRoom(console);
         }
         System.out.println("\n####################################################\n");
-        System.out.println(option);
         switch (option) {
             case 0:
                 return null;
             case 1:
-                return new Room("Standard", -1, 2);
+                Room test = RoomFactory.createStandard("Standard", -1, 2);
+                test.setRoomName("TesterRoom");
+                return test;
+            case 2:
+                return RoomFactory.createDeluxe("Deluxe", -1, 2);
+            case 3:
+                return RoomFactory.createVIP("VIP", -1, 2);
             default:
                 return addRoom(console);
         }
     }
 
-    public static RoomInterface removeRoom(Console console, ArrayList<RoomInterface> roomFactories){
+    public static Room removeRoom(Console console, Map<String,List<Room>> rooms){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println("Please select one of the following rooms to remove:");
         System.out.println("\n0.\t Back\n");
-        for (int i = 0; i < roomFactories.size(); i++)
-        {   
-            System.out.println((i+1) + ".\t" + roomFactories.get(i).toString());
-        }
+        rooms.forEach((key, value) -> System.out.println(key + ":" + value.get(value.size()-1).getRoomName()));
+        // for (int i = 0; i < roomFactories.size(); i++)
+        // {   
+        //     System.out.println((i+1) + ".\t" + roomFactories.get(i).toString());
+        // }
         int option = -2;
         try {
             option = Integer.parseInt(console.readLine())-1;
@@ -140,9 +147,9 @@ public class StaffUI {
         if(option == -1){
             return null;
         }
-        else if(option >= 0 && option < roomFactories.size()){
-            return roomFactories.get(option);
-        }
-        return removeRoom(console, roomFactories);
+        // else if(option >= 0 && option < rooms.size()){
+        //     return rooms.get(option);
+        // }
+        return removeRoom(console, rooms);
     }
 }

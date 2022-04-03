@@ -22,7 +22,7 @@ public class StaffUI {
         System.out.println("1. \t Create Reservation");
         System.out.println("2. \t View Reservations");
         System.out.println("3. \t Manage Rooms");
-        System.out.println("4. \t Manage Staff");
+        System.out.println("4. \t Add Staff Account");
         System.out.println("5. \t Exit");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");

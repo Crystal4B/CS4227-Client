@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import hotelsystem.roomFactory.Room;
+import hotelsystem.roomFactory.RoomFactory;
 import requestsystem.commands.CommandTemplate;
 
 /**
@@ -84,10 +85,20 @@ public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Room>>
 		{
 			Map<?, ?> roomMap = (Map<?, ?>) roomsList.get(i);
 
-			String id = (String) roomMap.get("id");
 			String type = (String) roomMap.get("type");
+			int id = Integer.parseInt((String) roomMap.get("id"));
 			int numberOfBeds = (int) roomMap.get("numberOfBeds");
-			responseObject.add(new Room(type, Integer.parseInt(id), numberOfBeds));
+			switch(type)
+			{
+			case "Standard":
+				responseObject.add(RoomFactory.createStandard(id, numberOfBeds));
+				break;
+			case "Deluxe":
+				responseObject.add(RoomFactory.createDeluxe(id, numberOfBeds));
+				break;
+			case "VIP":
+				responseObject.add(RoomFactory.createVIP(id, numberOfBeds));
+			}
 		}
 		
 		// Make a copy for undo

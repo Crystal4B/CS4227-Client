@@ -13,37 +13,34 @@ public class LoginUI {
     private static String userType = "Customer";
     
     public static int run(Console console){
-        if(userType.equals("Staff")) {
-            return signup(console);
+        
+        System.out.println("\n####################################################");
+        System.out.println("#     Welcome to the Hotel Reservation System      #");
+        System.out.println("####################################################\n");
+        System.out.println("Please select one of the following options:");
+        System.out.println("1. \t Login");
+        System.out.println("2. \t Sign-up");
+        System.out.println("3. \t Exit");
+        System.out.println("\n####################################################\n");
+        System.out.println("Enter option here:");
+        int option = -1;
+        try {
+            option = Integer.parseInt(console.readLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return UI.LOGIN_STATE;
         }
-        else {
-            System.out.println("\n####################################################");
-            System.out.println("#     Welcome to the Hotel Reservation System      #");
-            System.out.println("####################################################\n");
-            System.out.println("Please select one of the following options:");
-            System.out.println("1. \t Login");
-            System.out.println("2. \t Sign-up");
-            System.out.println("3. \t Exit");
-            System.out.println("\n####################################################\n");
-            System.out.println("Enter option here:");
-            int option = -1;
-            try {
-                option = Integer.parseInt(console.readLine());
-            } catch (Exception e) {
-                System.out.println("Invalid Input: Please try again!");
+        switch (option) {
+            case 1:
+                return login(console);
+            case 2: 
+                return signup(console);
+            case 3:  
+                return UI.EXIT;
+            default:
                 return UI.LOGIN_STATE;
-            }
-            switch (option) {
-                case 1:
-                    return login(console);
-                case 2: 
-                    return signup(console);
-                case 3:  
-                    return UI.EXIT;
-                default:
-                    return UI.LOGIN_STATE;
-            }
         }
+        
     }
 
     public static int login(Console console) {

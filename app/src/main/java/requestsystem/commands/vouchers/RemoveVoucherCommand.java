@@ -4,6 +4,7 @@ import java.util.Map;
 
 import billingsystem.CouponVisitor;
 import requestsystem.commands.CommandTemplate;
+import userinterface.LoginUI;
 
 public class RemoveVoucherCommand extends CommandTemplate<CouponVisitor> {
 
@@ -17,8 +18,12 @@ public class RemoveVoucherCommand extends CommandTemplate<CouponVisitor> {
     
     @Override
     public String createMessage(boolean undo) {
-        // TODO Auto-generated method stub
-        return null;
+		if (undo)
+		{
+			return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" amount: %f creator:{id: %d}}){id type issue_date expiry_date amount creator{id}}}\"}", UNDO_MUTATION_NAME, couponvisitor.TypeGet(), couponvisitor.DiscountGet(), LoginUI.getUser().getId());
+		}
+
+		return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type amount available{id}}}\"}", MUTATION_NAME, couponvisitor.CodeGet());
     }
 
     @Override

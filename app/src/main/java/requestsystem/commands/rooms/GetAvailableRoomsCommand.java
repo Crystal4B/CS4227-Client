@@ -11,7 +11,7 @@ import requestsystem.commands.CommandTemplate;
 import hotelsystem.roomFactory.Room;
 
 /**
- * Command for getting all available room for specified dates
+ * Command for getting all available rooms for specified dates
  * @author Marcin Sęk
  * @apiNote Response type of Map[Type, List[Room]]
  */

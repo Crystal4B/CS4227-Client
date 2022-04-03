@@ -12,12 +12,21 @@ import order.Order;
 import order.OrderBuilder;
 import requestsystem.commands.CommandTemplate;
 
+/**
+ * A Get Reservation Command for retrieving reservations visible to a specific user
+ * @author Marcin Sęk
+ * @apiNote Response of type List[Order]
+ */
 public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 {
 	private static final String QUERY_NAME = "reservationsByUser";
 
 	private UserInterface userInterface;
 
+	/**
+	 * Simple constructor for command
+	 * @param userInterface the user which is attempting to view their reservations
+	 */
 	public GetReservationsByUserCommand(UserInterface userInterface)
 	{
 		this.userInterface = userInterface;

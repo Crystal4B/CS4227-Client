@@ -5,6 +5,11 @@ import java.util.Map;
 import hotelsystem.roomFactory.Room;
 import requestsystem.commands.CommandTemplate;
 
+/**
+ * A Create Room Command for creating a singular room in the hotel
+ * @author Marcin Sęk
+ * @apiNote Response of type Room
+ */
 public class CreateRoomCommand extends CommandTemplate<Room>
 {
 	private static final String MUTATION_NAME = "createRoom";
@@ -14,7 +19,7 @@ public class CreateRoomCommand extends CommandTemplate<Room>
 
 	/**
 	 * Simple constructor for command
-	 * @param room being removed from the system
+	 * @param room being added to the system
 	 */
 	public CreateRoomCommand(Room room)
 	{

@@ -9,6 +9,11 @@ import hotelsystem.roomFactory.RoomInterface;
 import requestsystem.commands.CommandTemplate;
 import hotelsystem.roomFactory.Room;
 
+/**
+ * A Get Rooms Command for fetching all the rooms in the hotel
+ * @author Marcin Sęk
+ * @apiNote Response of type Map[String, List[Room]]
+ */
 public class GetAllRoomsCommand extends CommandTemplate<Map<String, List<RoomInterface>>>
 {
 	private static final String QUERY_NAME = "allRooms";

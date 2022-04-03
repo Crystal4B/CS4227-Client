@@ -23,12 +23,8 @@ public class ValidateVoucherCommand extends CommandTemplate<CouponVisitor> {
     @Override
     public void parseResponse(Map<?, ?> response) {
         String mutation;
-		if (!response.containsKey(QUERY_NAME))
-		{
-			// Break if no acceptable response is returned
-			return;
-		}
-
+		// Break if no acceptable response is returned
+		mutation = QUERY_NAME;
 		Map<?, ?> voucherData = (Map<?, ?>) response.get(mutation);
 		String id = (String) voucherData.get("id");
 		String type = (String) voucherData.get("type");

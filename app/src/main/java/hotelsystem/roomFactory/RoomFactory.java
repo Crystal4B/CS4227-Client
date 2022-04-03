@@ -8,7 +8,7 @@ package hotelsystem.roomFactory;
 public class RoomFactory implements FactoryInterface {
     public static Room createStandard(int roomNumber, int numberBeds) {
         Room room = new Room(roomNumber, numberBeds);
-        room.setRoomName("Deluxe");
+        room.setRoomName("Standard");
         return room;
     }
 

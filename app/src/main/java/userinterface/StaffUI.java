@@ -7,6 +7,7 @@ import hotelsystem.roomFactory.RoomInterface;
 import login.LoginAdapter;
 import login.Signup;
 import hotelsystem.roomFactory.Room;
+import hotelsystem.roomFactory.RoomFactory;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.rooms.CreateRoomCommand;
 import requestsystem.commands.rooms.GetAllRoomsCommand;
@@ -119,7 +120,7 @@ public class StaffUI {
             case 0:
                 return null;
             case 1:
-                return new Room("Standard", -1, 2);
+                return RoomFactory.createStandard(-1, 2);
             default:
                 return addRoom(console);
         }

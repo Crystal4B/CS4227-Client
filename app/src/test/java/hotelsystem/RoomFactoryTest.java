@@ -19,7 +19,7 @@ class RoomFactoryTest {
     @Test
     void checkSetRoomName() {
         Room room = new Room(123, 2);
-        assertEquals(room.getRoomName(), "Standard");
+        assertEquals(room.getRoomName(), null);
     }
 
     @Test
@@ -132,7 +132,7 @@ class RoomFactoryTest {
     @Test
     void checkStandardToString() {
         Room room = new Room( 123, 2);
-        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false");
+        assertEquals(room.toString(),"Room Name - null ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false");
     }
 
     // Factory Room Unit Tests
@@ -140,19 +140,19 @@ class RoomFactoryTest {
     @Test
     void checkRoomName() {
         Room room = RoomFactory.createStandard(123, 2);
-        assertEquals(room.getRoomName(), "Deluxe Room");
+        assertEquals(room.getRoomName(), "Standard");
     }
 
     @Test
     void checkDeluxeRoomName() {
         Room room = RoomFactory.createDeluxe(123, 2);
-        assertEquals(room.getRoomName(), "Deluxe Room");
+        assertEquals(room.getRoomName(), "Deluxe");
     }
 
     @Test
     void checkVIPRoomName() {
         Room room = RoomFactory.createVIP(123, 2);
-        assertEquals(room.getRoomName(), "VIP Room");
+        assertEquals(room.getRoomName(), "VIP");
     }
 
     @Test
@@ -480,18 +480,18 @@ class RoomFactoryTest {
     @Test
     void checkRoomToString() {
         Room room = RoomFactory.createStandard(123, 2);
-        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false");
+        assertEquals(room.toString(),"Room Name - Standard ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false");
     }
 
     @Test
     void checkDeluxeToString() {
         Room room = RoomFactory.createDeluxe(123, 2);
-        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 500.0 ; Taken - false");
+        assertEquals(room.toString(),"Room Name - Deluxe ; Room Number - 123 ; Beds - 2 ; Price - 500.0 ; Taken - false");
     }
 
     @Test
     void checkVIPToString() {
         Room room = RoomFactory.createVIP(123, 2);
-        assertEquals(room.toString(),"Room Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 1000.0 ; Taken - false");
+        assertEquals(room.toString(),"Room Name - VIP ; Room Number - 123 ; Beds - 2 ; Price - 1000.0 ; Taken - false");
     }
 }

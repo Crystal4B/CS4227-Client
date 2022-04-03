@@ -11,6 +11,11 @@ import order.Order;
 import order.OrderBuilder;
 import requestsystem.commands.CommandTemplate;
 
+/**
+ * A Update Reservation Paid Command for changing the Reservations paid status
+ * @author Marcin Sęk
+ * @apiNote Response of type Order
+ */
 public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 {
 	private static final String MUTATION_NAME = "updateReservationPaid";
@@ -18,6 +23,11 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 	private int id;
 	private boolean paid;
 
+	/**
+	 * Simple constructor for command
+	 * @param id of the reservation being updated
+	 * @param paid the new paid status for the reservation
+	 */
 	public UpdateReservationPaidCommand(int id, boolean paid)
 	{
 		this.id = id;

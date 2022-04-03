@@ -4,6 +4,8 @@ import java.io.Console;
 import java.util.ArrayList;
 
 import hotelsystem.roomFactory.RoomInterface;
+import login.LoginAdapter;
+import login.Signup;
 import hotelsystem.roomFactory.Room;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.rooms.CreateRoomCommand;
@@ -20,7 +22,7 @@ public class StaffUI {
         System.out.println("1. \t Create Reservation");
         System.out.println("2. \t View Reservations");
         System.out.println("3. \t Manage Rooms");
-        System.out.println("4. \t Manage Staff");
+        System.out.println("4. \t Add Staff Account");
         System.out.println("5. \t Exit");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
@@ -44,8 +46,12 @@ public class StaffUI {
                 }
                 return UI.STAFF_MENU;
             case 4:  
-                LoginUI.setType("Staff");
-                return UI.LOGIN_STATE;
+                while(true){
+                    if(signupStaffAccount(console)) {
+                        break;
+                    }
+                }
+                return UI.STAFF_MENU;
             case 5:  
                 return UI.EXIT;
             default:
@@ -144,5 +150,19 @@ public class StaffUI {
             return roomFactories.get(option);
         }
         return removeRoom(console, roomFactories);
+    }
+
+    public static boolean signupStaffAccount(Console console) {
+        System.out.println("Please enter email for new User");
+        String email = console.readLine();
+        System.out.println("Please enter username for new User");
+        String username = console.readLine();
+        System.out.println("Please enter temporary password");
+        String password = String.valueOf(console.readPassword());
+        LoginAdapter signup = new LoginAdapter(new Signup());
+        signup.setName(username);
+        signup.setType("Staff");
+        signup.login(email, password);
+        return true;
     }
 }

@@ -11,6 +11,8 @@ import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.rooms.CreateRoomCommand;
 import requestsystem.commands.rooms.GetAllRoomsCommand;
 import requestsystem.commands.rooms.RemoveRoomCommand;
+import requestsystem.commands.users.RemoveUserCommand;
+import hotelsystem.userFactory.UserInterface;
 
 public class StaffUI {
     
@@ -152,6 +154,35 @@ public class StaffUI {
         return removeRoom(console, roomFactories);
     }
 
+    public static boolean manageStaffAccount(Console console) {
+        System.out.println("\n####################################################");
+        System.out.println("#     Welcome to the Hotel Reservation System      #");
+        System.out.println("####################################################\n");
+        System.out.println("Please select one of the following options:");
+        System.out.println("1. \t Add Staff");
+        System.out.println("2. \t Remove Staff");
+        System.out.println("3. \t Back");
+        int option = Integer.parseInt(console.readLine());
+        System.out.println("\n####################################################\n");
+        switch (option) {
+            case 1:
+                while(true){
+                    if(signupStaffAccount(console)) {
+                        break;
+                    }
+                }
+                return true;
+            case 2:
+                while(true){
+                    if(removeStaffAccount(console)) {
+                        break;
+                    }
+                }
+                return true;
+
+        }
+    }
+
     public static boolean signupStaffAccount(Console console) {
         System.out.println("Please enter email for new User");
         String email = console.readLine();
@@ -163,6 +194,17 @@ public class StaffUI {
         signup.setName(username);
         signup.setType("Staff");
         signup.login(email, password);
+        return true;
+    }
+
+    public static boolean removeStaffAccount(Console console) {
+        CommandInvoker invoker = new CommandInvoker();
+        System.out.println("Please enter email of User to remove");
+        String email = console.readLine();
+        UserInterface user;
+        invoker.setCommand(new RemoveUserCommand(user));
+		invoker.execute();
+
         return true;
     }
 }

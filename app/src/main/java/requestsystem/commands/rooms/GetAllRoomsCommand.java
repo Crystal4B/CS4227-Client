@@ -7,7 +7,7 @@ import java.util.TreeMap;
 
 import hotelsystem.roomFactory.RoomInterface;
 import requestsystem.commands.CommandTemplate;
-import hotelsystem.roomFactory.Room;
+import hotelsystem.roomFactory.RoomFactory;
 
 public class GetAllRoomsCommand extends CommandTemplate<Map<String, List<RoomInterface>>>
 {
@@ -34,11 +34,21 @@ public class GetAllRoomsCommand extends CommandTemplate<Map<String, List<RoomInt
 		{
 			Map<?, ?> roomMap = (Map<?, ?>) roomsList.get(i);
 
-			String id = (String) roomMap.get("id");
 			String type = (String) roomMap.get("type");
+			int id = Integer.parseInt((String) roomMap.get("id"));
 			int numberOfBeds = (int) roomMap.get("numberOfBeds");
 			List<RoomInterface> roomInterfaces = responseObject.getOrDefault(type, new ArrayList<>());
-			roomInterfaces.add(new Room(type, Integer.parseInt(id), numberOfBeds));
+			switch(type)
+			{
+			case "Standard":
+				roomInterfaces.add(RoomFactory.createStandard(id, numberOfBeds));
+				break;
+			case "Deluxe":
+				roomInterfaces.add(RoomFactory.createDeluxe(id, numberOfBeds));
+				break;
+			case "VIP":
+				roomInterfaces.add(RoomFactory.createVIP(id, numberOfBeds));
+			}
 			responseObject.put(type, roomInterfaces);
 		}
 	}

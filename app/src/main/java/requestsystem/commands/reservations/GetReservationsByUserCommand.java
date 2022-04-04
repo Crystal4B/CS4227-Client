@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import hotelsystem.roomFactory.Room;
+import hotelsystem.roomFactory.RoomFactory;
 import hotelsystem.userFactory.Guest;
 import hotelsystem.userFactory.UserInterface;
 import order.Order;
@@ -72,7 +73,17 @@ public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 				{
 					String type = (String) roomMap.get("type");
 					int numberOfBeds = (int) roomMap.get("numberOfBeds");
-					standardRoom = new Room(type, id, numberOfBeds);
+					switch(type)
+					{
+					case "Standard":
+						standardRoom = (RoomFactory.createStandard(id, numberOfBeds));
+						break;
+					case "Deluxe":
+						standardRoom = (RoomFactory.createDeluxe(id, numberOfBeds));
+						break;
+					case "VIP":
+						standardRoom = (RoomFactory.createVIP(id, numberOfBeds));
+					}
 					rooms.add(standardRoom);
 				}
 

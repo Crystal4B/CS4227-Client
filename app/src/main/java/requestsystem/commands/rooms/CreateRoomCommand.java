@@ -4,6 +4,7 @@ import java.util.Map;
 
 import hotelsystem.roomFactory.Room;
 import requestsystem.commands.CommandTemplate;
+import hotelsystem.roomFactory.RoomFactory;
 
 public class CreateRoomCommand extends CommandTemplate<Room>
 {
@@ -29,7 +30,7 @@ public class CreateRoomCommand extends CommandTemplate<Room>
 			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type perks numberOfBeds rate}}\"}", UNDO_MUTATION_NAME, room.getRoomNumber());
 		}
 		
-		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}){id type perks numberOfBeds rate}}\"}", MUTATION_NAME, room.getClass().getSimpleName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
+		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}){id type perks numberOfBeds rate}}\"}", MUTATION_NAME, room.getRoomName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
 	}
 
 	@Override
@@ -51,14 +52,19 @@ public class CreateRoomCommand extends CommandTemplate<Room>
 		}
 
 		Map<?, ?> roomsData = (Map<?, ?>) response.get(mutation);
-		String id = (String) roomsData.get("id");
+		int id = Integer.parseInt((String) roomsData.get("id"));
 		String type = (String) roomsData.get("type");
 		int numberOfBeds = (int) roomsData.get("numberOfBeds");
 		switch(type)
 		{
-			case "Standard":
-			responseObject = new Room(type, Integer.parseInt(id), numberOfBeds);
+		case "Standard":
+			responseObject = RoomFactory.createStandard(id, numberOfBeds);
 			break;
+		case "Deluxe":
+			responseObject = RoomFactory.createDeluxe(id, numberOfBeds);
+			break;
+		case "VIP":
+			responseObject = RoomFactory.createVIP(id, numberOfBeds);
 		}
 		
 		// Make a copy for undo

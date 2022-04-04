@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import hotelsystem.roomFactory.Room;
+import hotelsystem.roomFactory.RoomFactory;
 import hotelsystem.userFactory.Guest;
 import order.Order;
 import order.OrderBuilder;
@@ -68,7 +69,17 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 			{
 				String type = (String) roomMap.get("type");
 				int numberOfBeds = Integer.parseInt((String) roomMap.get("numberOfBeds"));
-				standardRoom = new Room(type, id, numberOfBeds);
+				switch(type)
+				{
+				case "Standard":
+					standardRoom = (RoomFactory.createStandard(id, numberOfBeds));
+					break;
+				case "Deluxe":
+					standardRoom = (RoomFactory.createDeluxe(id, numberOfBeds));
+					break;
+				case "VIP":
+					standardRoom = (RoomFactory.createVIP(id, numberOfBeds));
+				}
 			}
 
 			int guestId = Integer.parseInt((String) guestMap.get("id"));

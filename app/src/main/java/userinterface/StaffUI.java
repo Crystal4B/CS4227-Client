@@ -1,7 +1,6 @@
 package userinterface;
 
 import java.io.Console;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -113,13 +112,11 @@ public class StaffUI {
             case 0:
                 return null;
             case 1:
-                Room test = RoomFactory.createStandard("Standard", -1, 2);
-                test.setRoomName("TesterRoom");
-                return test;
+                return RoomFactory.createStandard(-1, 2);
             case 2:
-                return RoomFactory.createDeluxe("Deluxe", -1, 2);
+                return RoomFactory.createDeluxe(-1, 2);
             case 3:
-                return RoomFactory.createVIP("VIP", -1, 2);
+                return RoomFactory.createVIP(-1, 2);
             default:
                 return addRoom(console);
         }

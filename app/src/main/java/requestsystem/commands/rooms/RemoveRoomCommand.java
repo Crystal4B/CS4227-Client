@@ -3,6 +3,7 @@ package requestsystem.commands.rooms;
 import java.util.Map;
 
 import hotelsystem.roomFactory.Room;
+import hotelsystem.roomFactory.RoomFactory;
 import requestsystem.commands.CommandTemplate;
 
 public class RemoveRoomCommand extends CommandTemplate<Room>
@@ -51,14 +52,19 @@ public class RemoveRoomCommand extends CommandTemplate<Room>
 		}
 
 		Map<?, ?> roomsData = (Map<?, ?>) response.get(mutation);
-		String id = (String) roomsData.get("id");
 		String type = (String) roomsData.get("type");
+		int id = Integer.parseInt((String) roomsData.get("id"));
 		int numberOfBeds = (int) roomsData.get("numberOfBeds");
 		switch(type)
 		{
-			case "Standard":
-			responseObject = new Room(type, Integer.parseInt(id), numberOfBeds);
+		case "Standard":
+			responseObject = RoomFactory.createStandard(id, numberOfBeds);
 			break;
+		case "Deluxe":
+			responseObject = (RoomFactory.createDeluxe(id, numberOfBeds));
+			break;
+		case "VIP":
+			responseObject = (RoomFactory.createVIP(id, numberOfBeds));
 		}
 		
 		// Make a copy for undo

@@ -30,7 +30,7 @@ public class BillingUI {
         System.out.println("5. \t Back");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = -1;
+        int option;
         try {
             option = Integer.parseInt(console.readLine());
         } catch (Exception e) {

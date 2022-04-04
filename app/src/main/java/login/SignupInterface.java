@@ -15,20 +15,20 @@ public interface SignupInterface {
      * @param password Password of user
      * @return Validation of user existing
      */
-    public boolean signup(String email, String password);
+    boolean signup(String email, String password);
     /**
      * Sets username
      * 
      * @param username Username of user
      */
-    public void setName(String username);
+    void setName(String username);
     /**
      * Validates Email
      * 
      * @param email Email address of user
      * @return Validation of email
      */
-    public boolean isValidEmail(String email);
+    boolean isValidEmail(String email);
     /**
      * Registers user in database
      * 
@@ -37,17 +37,17 @@ public interface SignupInterface {
      * @param password Password of user
      * @return Returns user
      */
-    public UserInterface createsUser(String email, String username, String password);
+    UserInterface createsUser(String email, String username, String password);
     /**
      * Gets User
      * 
      * @return User thats logged in
      */
-    public UserInterface returnUser();
+    UserInterface returnUser();
     /**
      * Sets Type
      * 
      * @param type Type of user
      */
-    public void setType(String type);
+    void setType(String type);
 }

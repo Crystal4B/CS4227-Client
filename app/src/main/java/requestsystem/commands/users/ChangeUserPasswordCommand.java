@@ -16,7 +16,6 @@ public class ChangeUserPasswordCommand extends CommandTemplate<UserInterface>
 
 	/**
 	 * Simple constructor for command
-	 * @param userInterface attempting to login
 	 */
 	public ChangeUserPasswordCommand(int id, String password)
 	{
@@ -47,15 +46,11 @@ public class ChangeUserPasswordCommand extends CommandTemplate<UserInterface>
 			String email = (String) userData.get("email");
 			String username = (String) userData.get("username");
 			String password = (String) userData.get("password");
-	
-			switch(type)
-			{
-			case "Customer":
-				responseObject = new Customer(username, password, email);
-				break;
-			case "Staff":
-				responseObject = new Staff(username, password, email);
-				break;
+
+			switch (type) {
+				case "Customer" -> responseObject = new Customer(username, password, email);
+				case "Staff" -> responseObject = new Staff(username, password, email);
+				default -> System.out.println("Unknown user type!");
 			}
 			responseObject.setId(Integer.parseInt(id));
 		}

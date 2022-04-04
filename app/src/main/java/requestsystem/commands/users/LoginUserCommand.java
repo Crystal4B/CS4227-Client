@@ -49,15 +49,11 @@ public class LoginUserCommand extends CommandTemplate<UserInterface>
 			String email = (String) userData.get("email");
 			String username = (String) userData.get("username");
 			String password = (String) userData.get("password");
-	
-			switch(type)
-			{
-			case "Customer":
-				responseObject = UserFactory.createCustomer(username, password, email);
-				break;
-			case "Staff":
-				responseObject = UserFactory.createStaff(username, password, email);
-				break;
+
+			switch (type) {
+				case "Customer" -> responseObject = UserFactory.createCustomer(username, password, email);
+				case "Staff" -> responseObject = UserFactory.createStaff(username, password, email);
+				default -> System.out.println("Unknown user type!");
 			}
 			responseObject.setId(Integer.parseInt(id));
 		}

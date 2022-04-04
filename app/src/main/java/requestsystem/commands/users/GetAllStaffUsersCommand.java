@@ -35,26 +35,24 @@ public class GetAllStaffUsersCommand extends CommandTemplate<List<UserInterface>
 				return;
 			}
 			responseObject = new ArrayList<>();
-			for (int i = 0; i < userList.size(); i++)
-			{
-				Map<?, ?> userData = (Map<?, ?>) userList.get(i);
+			for (Object o : userList) {
+				Map<?, ?> userData = (Map<?, ?>) o;
 
 				String id = (String) userData.get("id");
 				String type = (String) userData.get("type");
 				String email = (String) userData.get("email");
 				String username = (String) userData.get("username");
-		
-				UserInterface user = null;
-				switch(type)
-				{
-				case "Customer":
-					user = UserFactory.createCustomer();
-					break;
-				case "Staff":
-					user = UserFactory.createStaff();
-					break;
-				default:
-					continue;
+
+				UserInterface user;
+				switch (type) {
+					case "Customer":
+						user = UserFactory.createCustomer();
+						break;
+					case "Staff":
+						user = UserFactory.createStaff();
+						break;
+					default:
+						continue;
 				}
 
 				user.setId(Integer.parseInt(id));

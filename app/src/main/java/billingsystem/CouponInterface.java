@@ -1,31 +1,31 @@
 package billingsystem;
 
 public interface CouponInterface {
-    public String CouponPaid(BillingTemplate b);
+    String CouponPaid(BillingTemplate b);
 
-    public double CouponInput();
+    double CouponInput();
 
-    public double VoucherInput();
+    double VoucherInput();
 
-    public void TypeSet(String type);
+    void TypeSet(String type);
 
-    public String TypeGet();
+    String TypeGet();
 
-    public void AvailableSet(boolean available);
+    void AvailableSet(boolean available);
 
-    public boolean AvailableGet();
+    boolean AvailableGet();
 
-    public double DiscountGet();
+    double DiscountGet();
 
-    public void DiscountSet(double num);
+    void DiscountSet(double num);
 
-    public void CodeSet(String setC);
+    void CodeSet(String setC);
 
-    public String CodeGet();
+    String CodeGet();
 
-    public String PercentConverter(double num);
+    String PercentConverter(double num);
     
-    public void ReservationSet(int reservationId);
+    void ReservationSet(int reservationId);
 
-    public int ReservationGet();
+    int ReservationGet();
 }

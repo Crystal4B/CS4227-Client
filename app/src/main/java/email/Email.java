@@ -13,7 +13,6 @@ import javax.mail.internet.MimeMessage;
 
 public class Email {
     public Email(String email, String subject, String emailMessage) {
-        String to = email;
         String from = "teamplatinumlimerick@gmail.com";
         String host = "smtp.gmail.com";
 
@@ -39,7 +38,7 @@ public class Email {
         try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 
             message.setSubject(subject);
             message.setText(emailMessage);

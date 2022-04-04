@@ -49,7 +49,7 @@ public class OrderBuilder implements Builder{
 
     /**
      * Add a room to order builder.
-     * @param rooms A room object.
+     * @param room A room object.
      */
     @Override
     public void addRoom(Room room){
@@ -59,7 +59,7 @@ public class OrderBuilder implements Builder{
 
     /**
      * Remove a room to order builder.
-     * @param rooms An integer option of room to remove from rooms list.
+     * @param room An integer option of room to remove from rooms list.
      */
     @Override
     public void removeRoom(int room){
@@ -145,9 +145,9 @@ public class OrderBuilder implements Builder{
      */
     @Override
     public String toString() {
-        String roomsDetails = "";
+        StringBuilder roomsDetails = new StringBuilder();
         for(Room r : this.rooms){
-            roomsDetails += "\t" + r.toString() + "\n";
+            roomsDetails.append("\t").append(r.toString()).append("\n");
         }
 
         return  "Rooms: \n" +

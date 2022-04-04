@@ -46,10 +46,9 @@ public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 		List<?> reservationList = (List<?>) response.get(QUERY_NAME);
 
 		responseObject = new ArrayList<>();
-		for (int i = 0; i < reservationList.size(); i++)
-		{
-			Map<?, ?> reservationMap = (Map<?,?>) reservationList.get(i);
-					
+		for (Object o : reservationList) {
+			Map<?, ?> reservationMap = (Map<?, ?>) o;
+
 			OrderBuilder builder = new OrderBuilder();
 
 			builder.setOrderID((String) reservationMap.get("id"));
@@ -59,39 +58,31 @@ public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 			ArrayList<Room> rooms = new ArrayList<>();
 
 			List<?> guestList = (List<?>) reservationMap.get("guests");
-			for (int j = 0; j < guestList.size(); j++)
-			{
-				Map<?, ?> guestMap = (Map<?, ?>) guestList.get(j);
+
+			for (Object value : guestList) {
+				Map<?, ?> guestMap = (Map<?, ?>) value;
 				Map<?, ?> roomMap = (Map<?, ?>) guestMap.get("room");
 
 				int id = Integer.parseInt((String) roomMap.get("id"));
 				Room standardRoom = null;
 
 				boolean found = false;
-				for (Room room : rooms)
-				{
-					if (room.getRoomNumber() == id)
-					{
+				for (Room room : rooms) {
+					if (room.getRoomNumber() == id) {
 						standardRoom = room;
 						found = true;
 						break;
 					}
 				}
 
-				if (!found)
-				{
+				if (!found) {
 					String type = (String) roomMap.get("type");
 					int numberOfBeds = (int) roomMap.get("numberOfBeds");
-					switch(type)
-					{
-					case "Standard":
-						standardRoom = (RoomFactory.createStandard(id, numberOfBeds));
-						break;
-					case "Deluxe":
-						standardRoom = (RoomFactory.createDeluxe(id, numberOfBeds));
-						break;
-					case "VIP":
-						standardRoom = (RoomFactory.createVIP(id, numberOfBeds));
+					switch (type) {
+						case "Standard" -> standardRoom = (RoomFactory.createStandard(id, numberOfBeds));
+						case "Deluxe" -> standardRoom = (RoomFactory.createDeluxe(id, numberOfBeds));
+						case "VIP" -> standardRoom = (RoomFactory.createVIP(id, numberOfBeds));
+						default -> System.out.println("Unknown type of Room!");
 					}
 					rooms.add(standardRoom);
 				}

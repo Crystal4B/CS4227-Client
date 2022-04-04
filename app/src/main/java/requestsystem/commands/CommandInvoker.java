@@ -11,7 +11,7 @@ public class CommandInvoker
 
 	/**
 	 * function for setting the command in the invoker
-	 * @param newCommand
+	 * @param newCommand is the newCommand to be set
 	 */
 	public void setCommand(CommandTemplate<?> newCommand)
 	{

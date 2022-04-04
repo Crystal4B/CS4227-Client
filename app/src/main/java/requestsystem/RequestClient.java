@@ -22,7 +22,7 @@ import hotelsystem.Config;
  */
 public class RequestClient
 {
-	private static HttpClient client = HttpClient.newHttpClient();
+	private static final HttpClient client = HttpClient.newHttpClient();
 
 	/**
 	 * Function for sending and receiving requests from the GraphQL server
@@ -45,9 +45,8 @@ public class RequestClient
 			if (mapping.containsKey("errors"))
 			{
 				List<?> errorList = (List<?>) mapping.get("errors");
-				for (int i = 0; i < errorList.size(); i++)
-				{
-					Map<?, ?> errorMap = (Map<?, ?>) errorList.get(i);
+				for (Object o : errorList) {
+					Map<?, ?> errorMap = (Map<?, ?>) o;
 					System.out.println((String) errorMap.get("message"));
 				}
 			}

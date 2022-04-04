@@ -15,14 +15,14 @@ public interface LoginInterface {
      * @param password Password of user
      * @return Validation of user existing
      */
-    public boolean login(String email, String password);
+    boolean login(String email, String password);
     /**
      * Validates Email
      * 
      * @param email Email address of user
      * @return Validation of email
      */
-    public boolean isValidEmail(String email);
+    boolean isValidEmail(String email);
     /**
      * Validates that user Exists and logs in
      * 
@@ -30,11 +30,11 @@ public interface LoginInterface {
      * @param password Password of user
      * @return Returns user
      */
-    public UserInterface validatesUser(String email, String password);
+    UserInterface validatesUser(String email, String password);
     /**
      * Gets User
      * 
      * @return User thats logged in
      */
-    public UserInterface returnUser();
+    UserInterface returnUser();
 }

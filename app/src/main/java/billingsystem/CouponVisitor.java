@@ -1,6 +1,5 @@
 package billingsystem;
 
-import hotelsystem.userFactory.UserFactory;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.vouchers.ValidateVoucherCommand;
 
@@ -10,7 +9,6 @@ public class CouponVisitor implements CouponInterface {
    String type = "";
    int reservationId;
    boolean available = true;
-   UserFactory creator;
    
    public CouponVisitor(){
    }
@@ -47,7 +45,7 @@ public class CouponVisitor implements CouponInterface {
       ValidateVoucherCommand commandBoi = new ValidateVoucherCommand(this);
       commandInvoker.setCommand(commandBoi);
       commandInvoker.execute();
-      CouponVisitor couponBoi = this;
+      CouponVisitor couponBoi;
       couponBoi = commandInvoker.getResponse();
       if(couponBoi.TypeGet().equalsIgnoreCase("coupon")){
          if(couponBoi.AvailableGet()){
@@ -65,7 +63,7 @@ public class CouponVisitor implements CouponInterface {
       ValidateVoucherCommand commandBoi = new ValidateVoucherCommand(this);
       commandInvoker.setCommand(commandBoi);
       commandInvoker.execute();
-      CouponVisitor couponBoi = this;
+      CouponVisitor couponBoi;
       couponBoi = commandInvoker.getResponse();
       if(couponBoi.TypeGet().equalsIgnoreCase("voucher")){
          if(couponBoi.AvailableGet()){

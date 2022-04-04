@@ -26,7 +26,7 @@ public class MenuUI {
         System.out.println("4. \t Exit");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = -1;
+        int option;
         try {
             option = Integer.parseInt(console.readLine());
         } catch (Exception e) {
@@ -60,7 +60,6 @@ public class MenuUI {
     /**
      * View list of reservations for user.
      * @param console Used to read user input.
-     * @return
      */
     public static Boolean viewReservations(Console console){
         System.out.println("\n####################################################");
@@ -71,19 +70,14 @@ public class MenuUI {
         getUserReservations();      
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = -1;
+        int option;
         try {
             option = Integer.parseInt(console.readLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;
         }
-        switch (option) {
-            case 0:
-                return true;
-            default:
-                return false;
-        }
+        return option == 0;
     }
 
     /**
@@ -117,7 +111,7 @@ public class MenuUI {
         List<Order> reservations = getUserReservations();
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = -1;
+        int option;
         try {
             option = Integer.parseInt(console.readLine());
         } catch (Exception e) {

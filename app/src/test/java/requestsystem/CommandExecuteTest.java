@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
-import billingsystem.CouponVisitor;
 import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
 import order.OrderBuilder;
@@ -28,13 +27,11 @@ import requestsystem.commands.reservations.GetReservationsByUserCommand;
 import requestsystem.commands.rooms.CreateRoomsCommand;
 import requestsystem.commands.rooms.GetAvailableRoomsCommand;
 import requestsystem.commands.rooms.RemoveRoomsCommand;
+import requestsystem.commands.users.ChangeUserPasswordCommand;
+import requestsystem.commands.users.GetAllStaffUsersCommand;
 import requestsystem.commands.users.LoginUserCommand;
 import requestsystem.commands.users.RegisterUserCommand;
 import requestsystem.commands.users.RemoveUserCommand;
-import requestsystem.commands.vouchers.CreateVoucherCommand;
-import requestsystem.commands.vouchers.RemoveVoucherCommand;
-import requestsystem.commands.vouchers.ValidateVoucherCommand;
-import userinterface.LoginUI;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CommandExecuteTest
@@ -54,8 +51,6 @@ public class CommandExecuteTest
 	));
 
 	static order.Order reservation;
-
-	static CouponVisitor coupan = new CouponVisitor();
 
 	public boolean contains(ArrayList<Room> list, Room room)
 	{
@@ -113,6 +108,46 @@ public class CommandExecuteTest
 
 	@Test
 	@Order(3)
+	public void checkChangeUserPasswordCommandOnCustomer()
+	{
+		// Send request
+		invoker.setCommand(new ChangeUserPasswordCommand(customer.getId(), "new password"));
+		invoker.execute();
+
+		// Retrieve response and assert
+		UserInterface result = invoker.getResponse();
+		assertTrue(result instanceof Customer);
+		assertFalse(result instanceof Staff);
+		assertEquals(customer.getId(), result.getId());
+		assertEquals(customer.getUserName(), result.getUserName());
+		assertEquals("new password", result.getPassword());
+		assertEquals(customer.getEmail(), result.getEmail());
+
+		customer = (Customer) result;
+	}
+
+	@Test
+	@Order(4)
+	public void checkChangeUserPasswordCommandOnStaff()
+	{
+		// Send request
+		invoker.setCommand(new ChangeUserPasswordCommand(staff.getId(), "new password"));
+		invoker.execute();
+
+		// Retrieve response and assert
+		UserInterface result = invoker.getResponse();
+		assertFalse(result instanceof Customer);
+		assertTrue(result instanceof Staff);
+		assertEquals(staff.getId(), result.getId());
+		assertEquals(staff.getUserName(), result.getUserName());
+		assertEquals("new password", result.getPassword());
+		assertEquals(staff.getEmail(), result.getEmail());
+
+		staff = (Staff) result;
+	}
+
+	@Test
+	@Order(5)
 	public void checkIncorrectRegisterCommandOnCustomer()
 	{
 		// Send new customer request
@@ -125,7 +160,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(4)
+	@Order(6)
 	public void checkIncorrectRegisterCommandOnStaff()
 	{
 		// Send new customer request
@@ -138,7 +173,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(5)
+	@Order(7)
 	public void checkCorrectLoginUserCommandOnCustomer()
 	{
 		// Send new login command
@@ -156,7 +191,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(6)
+	@Order(8)
 	public void checkCorrectLoginUserCommandOnStaff()
 	{
 		// Send new login command
@@ -174,7 +209,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(7)
+	@Order(9)
 	public void checkIncorrectLoginUserCommandCustomer()
 	{
 		// Set incorrect password
@@ -193,7 +228,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(8)
+	@Order(10)
 	public void checkIncorrectLoginUserCommandStaff()
 	{
 		// Set incorrect password
@@ -212,7 +247,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(9)
+	@Order(11)
 	public void checkCreateRoomsCommand()
 	{
 		// Send new createRooms request
@@ -233,7 +268,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(10)
+	@Order(12)
 	public void checkCreateVoucherCommand()
 	{
 		// Create voucher for user
@@ -252,13 +287,13 @@ public class CommandExecuteTest
 		assertEquals(visitor.DiscountGet(), result.DiscountGet());
 		assertFalse(result.CodeGet().equals(""));
 
-		
+
 		coupan = result;
 		System.out.println(coupan.CodeGet());
 	}
 
 	@Test
-	@Order(11)
+	@Order(13)
 	public void checkValidateVoucherCommand()
 	{
 		// Send request
@@ -274,8 +309,9 @@ public class CommandExecuteTest
 		assertEquals(coupan.CodeGet(), result.CodeGet());
 	}
 
+
 	@Test
-	@Order(12)
+	@Order(14)
 	public void checkCreateReservationCommand()
 	{
 		// Create room for order
@@ -418,7 +454,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(14)
+	@Order(15)
 	public void checkCancelReservationCommand()
 	{
 		invoker.setCommand(new CancelReservationCommand(reservation));
@@ -462,7 +498,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(15)
+	@Order(16)
 	public void checkRemoveRoomsCommand()
 	{
 		// Send new createRooms request
@@ -483,7 +519,7 @@ public class CommandExecuteTest
 	}
 	
 	@Test
-	@Order(16)
+	@Order(17)
 	public void checkRemoveUserCommandOnCustomer()
 	{
 		// Send new customer request
@@ -499,7 +535,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(17)
+	@Order(18)
 	public void checkRemoveUserCommandOnStaff()
 	{
 		// Send new customer request
@@ -512,5 +548,22 @@ public class CommandExecuteTest
 		assertTrue(result instanceof Staff);
 		assertEquals(staff.getEmail(), result.getEmail());
 		assertEquals(staff.getId(), result.getId());
+	}
+
+	@Test
+	@Order(19)
+	public void checkGetAllStaffUsersCommand()
+	{
+		// Send new request
+		invoker.setCommand(new GetAllStaffUsersCommand());
+		invoker.execute();
+
+		// Retrieve response and assert
+		List<UserInterface> result = invoker.getResponse();
+		assertTrue(result.size() > 0);
+		for (UserInterface user : result)
+		{
+			assertTrue(user.getUserType().equals("Staff"));
+		}
 	}
 }

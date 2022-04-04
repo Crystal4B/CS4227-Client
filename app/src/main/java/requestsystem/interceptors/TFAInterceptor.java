@@ -1,23 +1,17 @@
 package requestsystem.interceptors;
 
-import org.checkerframework.checker.units.qual.C;
-
 import email.Email;
-import requestsystem.commands.CommandInvoker;
-import requestsystem.commands.users.ChangeUserPasswordCommand;
 
 import java.io.Console;
 import java.util.Map;
 import java.util.Random;
-import java.util.Scanner;
+
 
 public class TFAInterceptor implements InterceptorInterface{
 	public void preHandle(String command){
-
 	}
 
 	public void postHandle(Map<?, ?> response, String command){
-		System.out.println("ENTERING TFA INTERCEPTOR");
 		Map<?, ?> userData = (Map<?, ?>) response.get(command);
 		if (userData == null)
 		{

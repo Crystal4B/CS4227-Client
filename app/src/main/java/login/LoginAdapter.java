@@ -1,6 +1,5 @@
 package login;
 
-import hotelsystem.userFactory.UserFactory;
 import hotelsystem.userFactory.Customer;
 import hotelsystem.userFactory.UserInterface;
 

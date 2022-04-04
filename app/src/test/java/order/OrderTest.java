@@ -1,6 +1,5 @@
 package order;
 
-import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
 import hotelsystem.userFactory.Customer;
 

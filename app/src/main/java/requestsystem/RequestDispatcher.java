@@ -45,7 +45,7 @@ public class RequestDispatcher
 	public static void register(String event, InterceptorInterface interceptor)
 	{
 		List<InterceptorInterface> interceptorList = commandToInterceptorMap.getOrDefault(event, new ArrayList<>());
-		if(!interceptorList.isEmpty()) {
+		if(!interceptorList.contains(interceptor)) {
 			interceptorList.add(interceptor);
 			commandToInterceptorMap.put(event, interceptorList);
 		}
@@ -54,7 +54,7 @@ public class RequestDispatcher
 	public static void remove(String event, InterceptorInterface interceptor)
 	{
 		List<InterceptorInterface> interceptorList = commandToInterceptorMap.getOrDefault(event, new ArrayList<>());
-		if(!interceptorList.isEmpty()) {
+		if(!interceptorList.contains(interceptor)) {
 			interceptorList.remove(interceptor);
 			commandToInterceptorMap.put(event, interceptorList);
 		}

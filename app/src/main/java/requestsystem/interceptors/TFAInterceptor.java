@@ -6,6 +6,10 @@ import java.io.Console;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * @author Eoin McDonough
+ * Payment class to handle payment states
+ */
 
 public class TFAInterceptor implements InterceptorInterface{
 	public void preHandle(String command){

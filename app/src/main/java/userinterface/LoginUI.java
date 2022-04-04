@@ -12,6 +12,11 @@ public class LoginUI {
     private static UserInterface userInterface;
     private static String userType = "Customer";
     
+    /**
+     * Run function of current state.
+     * @param console Used to read user input.
+     * @return The next state.
+     */
     public static int run(Console console){
         
         System.out.println("\n####################################################");

@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
 import order.Order;
 import order.OrderBuilder;
@@ -17,7 +16,7 @@ import requestsystem.commands.CommandTemplate;
  */
 public class SelectReservationCommand extends CommandTemplate<Order>
 {
-	private static final String QUERY_NAME = "reservationById";
+	public static final String QUERY_NAME = "reservationById";
 
 	private String id;
 

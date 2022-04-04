@@ -1,7 +1,6 @@
 package requestsystem.commands.users;
 
 import hotelsystem.userFactory.UserFactory;
-import hotelsystem.userFactory.Staff;
 import hotelsystem.userFactory.UserInterface;
 import requestsystem.commands.CommandTemplate;
 
@@ -14,10 +13,11 @@ import java.util.Map;
  */
 public class RegisterUserCommand extends CommandTemplate<UserInterface>
 {
-	private static final String MUTATION_NAME = "createUser";
-	private static final String UNDO_MUTATION_NAME = "removeUser";
+	public static final String MUTATION_NAME = "createUser";
+	public static final String UNDO_MUTATION_NAME = "removeUser";
 
 	private UserInterface userInterface;
+	private boolean defaultPassword;
 
 	/**
 	 * Simple constructor for command
@@ -26,6 +26,17 @@ public class RegisterUserCommand extends CommandTemplate<UserInterface>
 	public RegisterUserCommand(UserInterface userInterface)
 	{
 		this.userInterface = userInterface;
+		this.defaultPassword = false;
+	}
+
+	/**
+	 * Simple constructor for command
+	 * @param userInterface being registered with the system
+	 */
+	public RegisterUserCommand(UserInterface userInterface, boolean defaultPassword)
+	{
+		this.userInterface = userInterface;
+		this.defaultPassword = defaultPassword;
 	}
 
 	@Override
@@ -35,7 +46,7 @@ public class RegisterUserCommand extends CommandTemplate<UserInterface>
 		{
 			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type email username password}}\"}", UNDO_MUTATION_NAME, userInterface.getId());
 		}
-		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", MUTATION_NAME, userInterface.getClass().getSimpleName(), userInterface.getEmail(), userInterface.getUserName(), userInterface.getPassword());
+		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\" defaultPassword: %b}){id type email username password}}\"}", MUTATION_NAME, userInterface.getClass().getSimpleName(), userInterface.getEmail(), userInterface.getUserName(), userInterface.getPassword(), defaultPassword);
 	}
 
 	@Override
@@ -73,7 +84,7 @@ public class RegisterUserCommand extends CommandTemplate<UserInterface>
 			responseObject = UserFactory.createCustomer(username, password, email);
 			break;
 		case "Staff":
-			responseObject = new Staff(username, password, email);
+			responseObject = UserFactory.createStaff(username, password, email);
 			break;
 		}
 		responseObject.setId(Integer.parseInt(id));

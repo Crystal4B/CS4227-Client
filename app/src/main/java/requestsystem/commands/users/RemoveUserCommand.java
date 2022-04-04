@@ -2,8 +2,7 @@ package requestsystem.commands.users;
 
 import java.util.Map;
 
-import hotelsystem.userFactory.Customer;
-import hotelsystem.userFactory.Staff;
+import hotelsystem.userFactory.UserFactory;
 import hotelsystem.userFactory.UserInterface;
 import requestsystem.commands.CommandTemplate;
 
@@ -14,8 +13,8 @@ import requestsystem.commands.CommandTemplate;
  */
 public class RemoveUserCommand extends CommandTemplate<UserInterface>
 {
-	private static final String MUTATION_NAME = "removeUser";
-	private static final String UNDO_MUTATION_NAME = "createUser";
+	public static final String MUTATION_NAME = "removeUser";
+	public static final String UNDO_MUTATION_NAME = "createUser";
 
 	private UserInterface userInterface;
 
@@ -65,10 +64,10 @@ public class RemoveUserCommand extends CommandTemplate<UserInterface>
 		switch(type)
 		{
 		case "Customer":
-			responseObject = new Customer(username, password, email);
+			responseObject = UserFactory.createCustomer(username, password, email);
 			break;
 		case "Staff":
-			responseObject = new Staff(username, password, email);
+			responseObject = UserFactory.createStaff(username, password, email);
 			break;
 		}
 		responseObject.setId(Integer.parseInt(id));

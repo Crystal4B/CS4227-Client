@@ -1,7 +1,6 @@
 package requestsystem.commands.users;
 
-import hotelsystem.userFactory.Customer;
-import hotelsystem.userFactory.Staff;
+import hotelsystem.userFactory.UserFactory;
 import hotelsystem.userFactory.UserInterface;
 import requestsystem.commands.CommandTemplate;
 
@@ -14,7 +13,7 @@ import java.util.Map;
  */
 public class LoginUserCommand extends CommandTemplate<UserInterface>
 {
-	private static final String QUERY_NAME = "loginUser";
+	public static final String QUERY_NAME = "loginUser";
 
 	private UserInterface userInterface;
 
@@ -31,7 +30,7 @@ public class LoginUserCommand extends CommandTemplate<UserInterface>
 	public String createMessage(boolean undo)
 	{
 		// Undo does not apply to requests of type query
-		return String.format("{\"query\":\"query{%s(input:{email: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", QUERY_NAME, userInterface.getEmail(), userInterface.getPassword());
+		return String.format("{\"query\":\"query{%s(input:{email: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password defaultPassword}}\"}", QUERY_NAME, userInterface.getEmail(), userInterface.getPassword());
 	}
 
 	@Override
@@ -54,14 +53,13 @@ public class LoginUserCommand extends CommandTemplate<UserInterface>
 			switch(type)
 			{
 			case "Customer":
-				responseObject = new Customer(username, password, email);
+				responseObject = UserFactory.createCustomer(username, password, email);
 				break;
 			case "Staff":
-				responseObject = new Staff(username, password, email);
+				responseObject = UserFactory.createStaff(username, password, email);
 				break;
 			}
 			responseObject.setId(Integer.parseInt(id));
 		}
 	}
-	
 }

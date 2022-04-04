@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import hotelsystem.roomFactory.RoomInterface;
 import requestsystem.commands.CommandTemplate;
@@ -13,11 +12,11 @@ import hotelsystem.roomFactory.RoomFactory;
 /**
  * Command for getting all available rooms for specified dates
  * @author Marcin Sęk
- * @apiNote Response type of Map[Type, List[Room]]
+ * @apiNote Response type of List[Room]
  */
-public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<RoomInterface>>>
+public class GetAvailableRoomsCommand extends CommandTemplate<List<RoomInterface>>
 {
-	private static final String QUERY_NAME = "availableRoomsByDates";
+	public static final String QUERY_NAME = "availableRoomsByDates";
 
 	private Timestamp checkIn;
 	private Timestamp checkOut;
@@ -47,9 +46,9 @@ public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<R
 		{
 			return;
 		}
+		responseObject = new ArrayList<>();
 
 		List<?> roomsList = (List<?>) response.get(QUERY_NAME);
-		responseObject = new TreeMap<>();
 		for (int i = 0; i < roomsList.size(); i++)
 		{
 			Map<?, ?> roomMap = (Map<?, ?>) roomsList.get(i);
@@ -57,20 +56,17 @@ public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<R
 			String type = (String) roomMap.get("type");
 			int id = Integer.parseInt((String) roomMap.get("id"));
 			int numberOfBeds = (int) roomMap.get("numberOfBeds");
-			List<RoomInterface> roomInterfaces = responseObject.getOrDefault(type, new ArrayList<>());
 			switch(type)
 			{
 			case "Standard":
-				roomInterfaces.add(RoomFactory.createStandard(id, numberOfBeds));
+				responseObject.add(RoomFactory.createStandard(id, numberOfBeds));
 				break;
 			case "Deluxe":
-				roomInterfaces.add(RoomFactory.createDeluxe(id, numberOfBeds));
+				responseObject.add(RoomFactory.createDeluxe(id, numberOfBeds));
 				break;
 			case "VIP":
-				roomInterfaces.add(RoomFactory.createVIP(id, numberOfBeds));
-			}
-
-			responseObject.put(type, roomInterfaces);
+				responseObject.add(RoomFactory.createVIP(id, numberOfBeds));
+			};
 		}
 	}
 }

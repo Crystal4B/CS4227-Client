@@ -2,7 +2,7 @@ package requestsystem.commands;
 
 import java.util.Map;
 
-import requestsystem.RequestClient;
+import requestsystem.RequestDispatcher;
 
 /**
  * interface representing commands in the reservation system
@@ -19,9 +19,10 @@ public abstract class CommandTemplate<T>
 	public void execute()
 	{
 		String message = createMessage(false);
-		Map<?, ?> response = RequestClient.sendRequest(message);
+		Map<?, ?> response = RequestDispatcher.sendRequest(message);
 		parseResponse(response);
-	};
+		RequestDispatcher.runAfterCompletions(RequestDispatcher.getRequest(message));
+	}
 
 	/**
 	 * template undo function for commands
@@ -29,7 +30,7 @@ public abstract class CommandTemplate<T>
 	public void undo()
 	{
 		String message = createMessage(true);
-		Map<?, ?> response = RequestClient.sendRequest(message);
+		Map<?, ?> response = RequestDispatcher.sendRequest(message);
 		parseResponse(response);
 	}
 

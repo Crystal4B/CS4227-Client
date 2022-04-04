@@ -1,23 +1,31 @@
 package requestsystem.interceptors;
 
-import org.checkerframework.checker.units.qual.C;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.users.ChangeUserPasswordCommand;
 
 import java.io.Console;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * @author Jakub Pažej
- * Interface for reservation System handling HttpClient requests and responses
+ * Interceptor that prompts the user to change from default password
  */
 
 public class LoginInterceptor implements InterceptorInterface{
+
+	/**
+	 * Function that runs after user send message but before passing it to server
+	 * @param command the command being sent to the server
+	 */
 	public void preHandle(String command){
 
 	}
 
+	/**
+	 * Function that runs after server sends a response but before passing it to the user
+	 * @param command the command sent to the server
+	 * @param response the response from server
+	 */
 	public void postHandle(Map<?, ?> response, String command){
 		Map<?, ?> userData = (Map<?, ?>) response.get(command);
 		if (userData == null)
@@ -37,6 +45,9 @@ public class LoginInterceptor implements InterceptorInterface{
 		}
 	}
 
+	/**
+	 * Function that runs after passing the message from server back to the user
+	 */
 	public void afterCompletion(){
 
 	}

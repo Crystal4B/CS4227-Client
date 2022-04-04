@@ -13,6 +13,11 @@ public class BillingUI {
 
     private static Order order;
 
+    /**
+     * Run function of current state.
+     * @param console Used to read user input.
+     * @return The next state.
+     */
     public static int run(Console console) {
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");

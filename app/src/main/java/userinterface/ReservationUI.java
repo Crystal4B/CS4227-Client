@@ -13,6 +13,11 @@ public class ReservationUI {
     private static Director director = new Director();
     private static Order finalOrder;
     
+    /**
+     * Run function of current state.
+     * @param console Used to read user input.
+     * @return The next state.
+     */
     public static int run(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -75,6 +80,11 @@ public class ReservationUI {
         }
     }
 
+    /**
+     * Add room to order builder.
+     * @param console Used to read user input.
+     * @return If operation is sucessful. Changes current state in run function.
+     */
     public static Boolean addRoomToCart(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -104,6 +114,11 @@ public class ReservationUI {
         return true;
     }
 
+    /**
+     * Removes room from order builder.
+     * @param console Used to read user input.
+     * @return If operation is sucessful. Changes current state in run function.
+     */
     public static Boolean removeRoomFromCart(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -126,6 +141,11 @@ public class ReservationUI {
 
     }
 
+    /**
+     * View preview of order being built.
+     * @param console Used to read user input.
+     * @return If operation is sucessful. Changes current state in run function.
+     */
     public static Boolean viewOrder(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -150,6 +170,12 @@ public class ReservationUI {
         }
     }
 
+    /**
+     * Add guests to room object.
+     * @param console Used to read user input.
+     * @param roomSize Number of occupants in room.
+     * @return A list of users
+     */
     public static ArrayList<UserInterface> addGuests(Console console, int roomSize){
         ArrayList<UserInterface> guests = new ArrayList<>();
         for(int i=0; i < roomSize; i++){

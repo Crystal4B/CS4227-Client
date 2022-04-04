@@ -19,7 +19,7 @@ The hotel reservation system is designed using multiple technolgies/tools. It op
 | SQLite          | Used as a datebase to store data.                   | Marcin Sęk                            |
 | Jacoco          | Used to generate code coverage reports.             | Jordan Marshall                       |
 | CodeCov         | Analyse code coverage reports                       | Jordan Marshall                       |
-| SpotBugs        |  static byte code analysis to look for bugs         | Jakub Pažej                           |
+| SpotBugs        | Static byte code analysis to look for bugs          | Jakub Pažej                           |
 
 We used multiple design and architecture patterns as part of the project. The following are the patterns we used, aswell as who implemented them:
 

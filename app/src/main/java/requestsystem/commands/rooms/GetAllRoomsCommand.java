@@ -16,7 +16,7 @@ import hotelsystem.roomFactory.RoomFactory;
  */
 public class GetAllRoomsCommand extends CommandTemplate<Map<String, List<RoomInterface>>>
 {
-	private static final String QUERY_NAME = "allRooms";
+	public static final String QUERY_NAME = "allRooms";
 
 	@Override
 	public String createMessage(boolean undo)

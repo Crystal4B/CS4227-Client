@@ -13,8 +13,8 @@ import hotelsystem.roomFactory.RoomFactory;
  */
 public class CreateRoomCommand extends CommandTemplate<Room>
 {
-	private static final String MUTATION_NAME = "createRoom";
-	private static final String UNDO_MUTATION_NAME = "roomRoom";
+	public static final String MUTATION_NAME = "createRoom";
+	public static final String UNDO_MUTATION_NAME = "roomRoom";
 
 	private Room room;
 

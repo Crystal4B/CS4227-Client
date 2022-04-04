@@ -16,7 +16,7 @@ import requestsystem.commands.CommandTemplate;
  */
 public class SelectReservationCommand extends CommandTemplate<Order>
 {
-	private static final String QUERY_NAME = "reservationById";
+	public static final String QUERY_NAME = "reservationById";
 
 	private String id;
 

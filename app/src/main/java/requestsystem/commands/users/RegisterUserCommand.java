@@ -14,7 +14,7 @@ import java.util.Map;
 public class RegisterUserCommand extends CommandTemplate<UserInterface>
 {
 	public static final String MUTATION_NAME = "createUser";
-	private static final String UNDO_MUTATION_NAME = "removeUser";
+	public static final String UNDO_MUTATION_NAME = "removeUser";
 
 	private UserInterface userInterface;
 

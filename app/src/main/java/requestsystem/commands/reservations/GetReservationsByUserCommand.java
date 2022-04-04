@@ -20,7 +20,7 @@ import requestsystem.commands.CommandTemplate;
  */
 public class GetReservationsByUserCommand extends CommandTemplate<List<Order>>
 {
-	private static final String QUERY_NAME = "reservationsByUser";
+	public static final String QUERY_NAME = "reservationsByUser";
 
 	private UserInterface userInterface;
 

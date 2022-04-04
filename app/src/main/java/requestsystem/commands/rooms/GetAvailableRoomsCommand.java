@@ -16,7 +16,7 @@ import hotelsystem.roomFactory.RoomFactory;
  */
 public class GetAvailableRoomsCommand extends CommandTemplate<List<RoomInterface>>
 {
-	private static final String QUERY_NAME = "availableRoomsByDates";
+	public static final String QUERY_NAME = "availableRoomsByDates";
 
 	private Timestamp checkIn;
 	private Timestamp checkOut;

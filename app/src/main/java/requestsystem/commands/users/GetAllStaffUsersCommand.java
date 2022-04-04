@@ -15,7 +15,7 @@ import requestsystem.commands.CommandTemplate;
  */
 public class GetAllStaffUsersCommand extends CommandTemplate<List<UserInterface>>
 {
-	private static final String QUERY_NAME = "allStaffUsers";
+	public static final String QUERY_NAME = "allStaffUsers";
 
 	@Override
 	public String createMessage(boolean undo)

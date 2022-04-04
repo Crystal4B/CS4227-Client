@@ -13,8 +13,8 @@ import requestsystem.commands.CommandTemplate;
  */
 public class RemoveUserCommand extends CommandTemplate<UserInterface>
 {
-	private static final String MUTATION_NAME = "removeUser";
-	private static final String UNDO_MUTATION_NAME = "createUser";
+	public static final String MUTATION_NAME = "removeUser";
+	public static final String UNDO_MUTATION_NAME = "createUser";
 
 	private UserInterface userInterface;
 

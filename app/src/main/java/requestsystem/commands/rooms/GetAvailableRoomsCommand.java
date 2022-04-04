@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import hotelsystem.roomFactory.RoomInterface;
 import requestsystem.commands.CommandTemplate;
@@ -14,7 +15,7 @@ import hotelsystem.roomFactory.RoomFactory;
  * @author Marcin Sęk
  * @apiNote Response type of List[Room]
  */
-public class GetAvailableRoomsCommand extends CommandTemplate<List<RoomInterface>>
+public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<RoomInterface>>>
 {
 	public static final String QUERY_NAME = "availableRoomsByDates";
 
@@ -46,9 +47,8 @@ public class GetAvailableRoomsCommand extends CommandTemplate<List<RoomInterface
 		{
 			return;
 		}
-		responseObject = new ArrayList<>();
-
 		List<?> roomsList = (List<?>) response.get(QUERY_NAME);
+		responseObject = new TreeMap<>();
 		for (int i = 0; i < roomsList.size(); i++)
 		{
 			Map<?, ?> roomMap = (Map<?, ?>) roomsList.get(i);
@@ -56,17 +56,20 @@ public class GetAvailableRoomsCommand extends CommandTemplate<List<RoomInterface
 			String type = (String) roomMap.get("type");
 			int id = Integer.parseInt((String) roomMap.get("id"));
 			int numberOfBeds = (int) roomMap.get("numberOfBeds");
+			List<RoomInterface> rooms = responseObject.getOrDefault(type, new ArrayList<>());
 			switch(type)
 			{
 			case "Standard":
-				responseObject.add(RoomFactory.createStandard(id, numberOfBeds));
+				rooms.add(RoomFactory.createStandard(id, numberOfBeds));
 				break;
 			case "Deluxe":
-				responseObject.add(RoomFactory.createDeluxe(id, numberOfBeds));
+				rooms.add(RoomFactory.createDeluxe(id, numberOfBeds));
 				break;
 			case "VIP":
-				responseObject.add(RoomFactory.createVIP(id, numberOfBeds));
+				rooms.add(RoomFactory.createVIP(id, numberOfBeds));
 			};
+
+			responseObject.put(type, rooms);
 		}
 	}
 }

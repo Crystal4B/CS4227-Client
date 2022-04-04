@@ -11,7 +11,6 @@ public class UpdateVoucherCommand extends CommandTemplate<CouponVisitor> {
     private static final String MUTATION_NAME = "updateVoucher";
 	private static final String UNDO_MUTATION_NAME = "updateVoucher";
 	private CouponVisitor couponvisitor;
-	CouponVisitor newcouponvisitor = new CouponVisitor();
 
     public UpdateVoucherCommand(CouponVisitor couponvisitor){
 		this.couponvisitor = couponvisitor;
@@ -19,12 +18,7 @@ public class UpdateVoucherCommand extends CommandTemplate<CouponVisitor> {
     
     @Override
     public String createMessage(boolean undo) {
-		if (undo)
-		{
-			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\" type: \\\"%s\\\" amount: %f creator:{id: %d} available: %d}){id type issue_date expiry_date amount creator{id}}}\"}", UNDO_MUTATION_NAME, couponvisitor.CodeGet(), couponvisitor.TypeGet(), couponvisitor.DiscountGet(), LoginUI.getUser().getId(), couponvisitor.ReservationGet());
-		}
-
-		return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\" type: \\\"%s\\\" amount: %f creator:{id: %d} available: %d}){id type issue_date expiry_date amount creator{id}}}\"}", MUTATION_NAME, newcouponvisitor.CodeGet(), newcouponvisitor.TypeGet(), newcouponvisitor.DiscountGet(), LoginUI.getUser().getId(), newcouponvisitor.ReservationGet());
+		return String.format("{\"query\":\"mutation{%s(id: \\\"%s\\\" voucher: {type: \\\"%s\\\" amount: %f creator:{id: %d} available:{id: %d}}){id type issue_date expiry_date amount creator{id}}}\"}", MUTATION_NAME, couponvisitor.CodeGet(), couponvisitor.TypeGet(), couponvisitor.DiscountGet(), LoginUI.getUser().getId(), couponvisitor.ReservationGet());
     }
 
     @Override
@@ -49,13 +43,13 @@ public class UpdateVoucherCommand extends CommandTemplate<CouponVisitor> {
 		String type = (String) voucherData.get("type");
 		double amount = (double) voucherData.get("amount");
 		Map<?,?> reservationData = (Map<?, ?>) voucherData.get("available");
-		int reservationId = Integer.parseInt((String) reservationData.get("id"));
 		if(reservationData != null && reservationData.containsKey("id") && reservationData.get("id") != null){
+			int reservationId = Integer.parseInt((String) reservationData.get("id"));
 			responseObject = new CouponVisitor(id, type, amount, true, reservationId);
 		} else {
 			responseObject = new CouponVisitor(id, type, amount, false);
 		}		
 		// Make a copy for undo
-		newcouponvisitor = responseObject;
+		couponvisitor = responseObject;
     }
 }

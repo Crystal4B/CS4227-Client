@@ -35,6 +35,7 @@ import requestsystem.commands.users.RegisterUserCommand;
 import requestsystem.commands.users.RemoveUserCommand;
 import requestsystem.commands.vouchers.CreateVoucherCommand;
 import requestsystem.commands.vouchers.RemoveVoucherCommand;
+import requestsystem.commands.vouchers.UpdateVoucherCommand;
 import requestsystem.commands.vouchers.ValidateVoucherCommand;
 import userinterface.LoginUI;
 
@@ -314,6 +315,7 @@ public class CommandExecuteTest
 		assertEquals(coupan.TypeGet(), result.TypeGet());
 		assertEquals(coupan.DiscountGet(), result.DiscountGet());
 		assertEquals(coupan.CodeGet(), result.CodeGet());
+		coupan = result;
 	}
 
 	@Test
@@ -321,19 +323,18 @@ public class CommandExecuteTest
 	public void checkUpdateVoucherCommand()
 	{
 		// Create voucher for user
-		CouponVisitor visitor = new CouponVisitor();
-		visitor.TypeSet("Voucher");
-		visitor.DiscountSet(2.5);
+		coupan.TypeSet("Coupan");
+		coupan.DiscountSet(0.5);
 		LoginUI.setUser(staff);
 
 		// Send request
-		invoker.setCommand(new CreateVoucherCommand(visitor));
+		invoker.setCommand(new UpdateVoucherCommand(coupan));
 		invoker.execute();
 
 		// Retrieve response and assert
 		CouponVisitor result = invoker.getResponse();
-		assertEquals(visitor.TypeGet(), result.TypeGet());
-		assertEquals(visitor.DiscountGet(), result.DiscountGet());
+		assertEquals(coupan.TypeGet(), result.TypeGet());
+		assertEquals(coupan.DiscountGet(), result.DiscountGet());
 		assertFalse(result.CodeGet().equals(""));
 
 

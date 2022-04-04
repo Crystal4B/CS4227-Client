@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 public class RequestDispatcher
 {
 	private static Map<String, List<InterceptorInterface>> commandToInterceptorMap;
-	private static Map<?, ?> response;
 
 	/**
 	 * Interceptor for sending and receiving requests from the GraphQL server
@@ -36,10 +35,9 @@ public class RequestDispatcher
 	public static Map<?, ?> sendRequest(String message)
 	{
 		String event = getRequest(message);
-		getRequest(message);
 		runPreHandles(event);
-		response = RequestClient.sendRequest(message);
-		runPostHandles(event);
+		Map<?, ?> response = RequestClient.sendRequest(message);
+		runPostHandles(event, response);
 		return response;
 	}
 
@@ -64,18 +62,18 @@ public class RequestDispatcher
 	private static void runPreHandles(String event){
 		List<InterceptorInterface> interceptorList = commandToInterceptorMap.get(event);
 		if(interceptorList!=null && !interceptorList.isEmpty()) {
-			for (int i = 0; i < interceptorList.size(); i++) {
-				interceptorList.get(i).preHandle(event);
+			for (InterceptorInterface i : interceptorList) {
+				i.preHandle(event);
 			}
 		}
 	}
 
-	private static void runPostHandles(String event)
+	private static void runPostHandles(String event, Map<?, ?> response)
 	{
 		List<InterceptorInterface> interceptorList = commandToInterceptorMap.get(event);
 		if(interceptorList!=null && !interceptorList.isEmpty()) {
-			for (int i = 0; i < interceptorList.size(); i++) {
-				interceptorList.get(i).postHandle(response, event);
+			for (InterceptorInterface i : interceptorList) {
+				i.postHandle(response, event);
 			}
 		}
 	}
@@ -84,8 +82,8 @@ public class RequestDispatcher
 	{
 		List<InterceptorInterface> interceptorList = commandToInterceptorMap.get(event);
 		if(interceptorList!=null && !interceptorList.isEmpty()) {
-			for (int i = 0; i < interceptorList.size(); i++) {
-				interceptorList.get(i).afterCompletion();
+			for (InterceptorInterface i : interceptorList) {
+				i.afterCompletion();
 			}
 		}
 	}

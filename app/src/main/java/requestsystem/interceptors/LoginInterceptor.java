@@ -4,6 +4,7 @@ import org.checkerframework.checker.units.qual.C;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.users.ChangeUserPasswordCommand;
 
+import java.io.Console;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -27,11 +28,11 @@ public class LoginInterceptor implements InterceptorInterface{
 		String id = (String) userData.get("id");
 		if (defaultPassword){
 			System.out.println("You typed in the default password please change your password");
-			Scanner userInput = new Scanner(System.in);
-			String input = userInput.nextLine();
+			Console console = System.console();
+			String password = String.valueOf(console.readPassword());
 			System.out.println("password has been changed.");
 			CommandInvoker invoker = new CommandInvoker();
-			invoker.setCommand(new ChangeUserPasswordCommand(Integer.parseInt(id),input));
+			invoker.setCommand(new ChangeUserPasswordCommand(Integer.parseInt(id),password));
 			invoker.execute();
 		}
 	}

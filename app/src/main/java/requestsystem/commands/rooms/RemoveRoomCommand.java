@@ -55,16 +55,11 @@ public class RemoveRoomCommand extends CommandTemplate<Room>
 		String type = (String) roomsData.get("type");
 		int id = Integer.parseInt((String) roomsData.get("id"));
 		int numberOfBeds = (int) roomsData.get("numberOfBeds");
-		switch(type)
-		{
-		case "Standard":
-			responseObject = RoomFactory.createStandard(id, numberOfBeds);
-			break;
-		case "Deluxe":
-			responseObject = (RoomFactory.createDeluxe(id, numberOfBeds));
-			break;
-		case "VIP":
-			responseObject = (RoomFactory.createVIP(id, numberOfBeds));
+		switch (type) {
+			case "Standard" -> responseObject = RoomFactory.createStandard(id, numberOfBeds);
+			case "Deluxe" -> responseObject = (RoomFactory.createDeluxe(id, numberOfBeds));
+			case "VIP" -> responseObject = (RoomFactory.createVIP(id, numberOfBeds));
+			default -> System.out.println("Unknown type of Room!");
 		}
 		
 		// Make a copy for undo

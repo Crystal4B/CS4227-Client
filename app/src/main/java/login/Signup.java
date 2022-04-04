@@ -8,10 +8,6 @@ import requestsystem.commands.users.RegisterUserCommand;
 
 import java.util.regex.Pattern;
 
-import email.Email;
-
-import java.util.Random;
-
 /**
  * @author Eoin McDonough
  * Payment class to handle payment states
@@ -21,7 +17,6 @@ public class Signup implements SignupInterface{
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     public String type = "Customer";
     public UserInterface person;
-    public int authKey;
     private String username;
     CommandInvoker invoker;
     boolean defaultPassword;

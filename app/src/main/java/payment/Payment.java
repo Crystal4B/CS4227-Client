@@ -34,12 +34,7 @@ public class Payment {
         invoker = new CommandInvoker();
         invoker.setCommand(new UpdateReservationPaidCommand(orderId, isPaid));
         invoker.execute();
-            if(invoker.getResponse() == null) {
-                return false;
-            }
-            else {
-                return true;
-            }
+        return invoker.getResponse() != null;
     }
 
     /**
@@ -62,12 +57,7 @@ public class Payment {
             isPaid = true;
             invoker.setCommand(new UpdateReservationPaidCommand(orderId, isPaid));
             invoker.execute();
-            if(invoker.getResponse() == null) {
-                return false;
-            }
-            else {
-                return true;
-            }
+            return invoker.getResponse() != null;
             
         }
         else{
@@ -80,7 +70,6 @@ public class Payment {
      * 
      * @param orderId Id of the order to be paid
      * @param amount Amount to be paid
-     * @return Sets paid state to true or false
      */
 
     public void payAtReception(int orderId, double amount) {
@@ -135,13 +124,8 @@ public class Payment {
      */
 
     public boolean isValid (String name, String toCheck) {
-        if(name.equals("cardNo")) {   
-                if(toCheck.length() == 16)  {
-                    return true;
-                }
-                else{
-                    return false;
-                }
+        if(name.equals("cardNo")) {
+            return toCheck.length() == 16;
         }
         else{
 		    return false;

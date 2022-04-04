@@ -3,6 +3,8 @@ package order;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
 import hotelsystem.roomFactory.Room;
 import hotelsystem.userFactory.UserInterface;
 
@@ -120,9 +122,9 @@ public class Order {
      */
     @Override
     public String toString() {
-        String roomsDetails = "";
+        StringBuilder roomsDetails = new StringBuilder();
         for(Room r : this.rooms){
-            roomsDetails += "\t" + r.toString() + "\n";
+            roomsDetails.append("\t").append(r.toString()).append("\n");
         }
 
         return  "Rooms: \n" +
@@ -141,21 +143,16 @@ public class Order {
      */
     @Override
     public boolean equals(Object obj){
-        if((obj instanceof Order)){
-            Order order = (Order)obj;
-            if(
-                this.orderID == order.getOrderID() &&
-                this.userInterface == order.getUser() &&
-                this.rooms == order.getRooms() &&
-                this.startDate == order.getStartDate() &&
-                this.endDate == order.getEndDate() &&
-                this.numberOfDaysBooked == order.getNumberOfDaysBooked() &&
-                this.rateCost == order.getRateCost() &&
-                this.finalCost == order.getFinalCost() &&
-                this.numberOfOccupants == order.getNumberOfOccupants()
-            ){
-            return true;
-            }
+        if((obj instanceof Order order)){
+            return Objects.equals(this.orderID, order.getOrderID()) &&
+                    this.userInterface == order.getUser() &&
+                    this.rooms == order.getRooms() &&
+                    this.startDate == order.getStartDate() &&
+                    this.endDate == order.getEndDate() &&
+                    this.numberOfDaysBooked == order.getNumberOfDaysBooked() &&
+                    this.rateCost == order.getRateCost() &&
+                    this.finalCost == order.getFinalCost() &&
+                    this.numberOfOccupants == order.getNumberOfOccupants();
         }
         return false;
     }

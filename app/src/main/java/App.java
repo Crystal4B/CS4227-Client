@@ -9,7 +9,7 @@ public class App
 {
 	/**
 	 * Main Java function. Runs UI state machine.
-	 * @param args List of arguements as strings.
+	 * @param args List of arguments as strings.
 	 */
 	public static void main(String[] args)
 	{

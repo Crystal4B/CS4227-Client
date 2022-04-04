@@ -28,23 +28,19 @@ public class LoginUI {
         System.out.println("3. \t Exit");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = -1;
+        int option;
         try {
             option = Integer.parseInt(console.readLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return UI.LOGIN_STATE;
         }
-        switch (option) {
-            case 1:
-                return login(console);
-            case 2: 
-                return signup(console);
-            case 3:  
-                return UI.EXIT;
-            default:
-                return UI.LOGIN_STATE;
-        }
+        return switch (option) {
+            case 1 -> login(console);
+            case 2 -> signup(console);
+            case 3 -> UI.EXIT;
+            default -> UI.LOGIN_STATE;
+        };
         
     }
 

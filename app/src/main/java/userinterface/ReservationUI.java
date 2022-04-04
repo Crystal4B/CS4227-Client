@@ -30,7 +30,7 @@ public class ReservationUI {
         System.out.println("5. \t Back");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = -1;
+        int option;
         try {
             option = Integer.parseInt(console.readLine());
         } catch (Exception e) {
@@ -102,7 +102,7 @@ public class ReservationUI {
             System.out.println("No Rooms Available, Please try another date");
             return true;
         }
-        int option = -1;
+        int option;
         try {
             option = Integer.parseInt(console.readLine());
         } catch (Exception e) {
@@ -125,7 +125,7 @@ public class ReservationUI {
         System.out.println("####################################################\n");
         System.out.println("Please select a room to remove:\n");
         int numberOfRoomsInCart = director.viewRoomsInCart(builder);
-        int option = -1;
+        int option;
         try {
             option = Integer.parseInt(console.readLine());
         } catch (Exception e) {
@@ -155,19 +155,14 @@ public class ReservationUI {
         System.out.println("1. \t Back");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = -1;
+        int option;
         try {
             option = Integer.parseInt(console.readLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;
         }
-        switch (option) {
-            case 1: 
-                return true;
-            default:
-                return false;
-        }
+        return option == 1;
     }
 
     /**

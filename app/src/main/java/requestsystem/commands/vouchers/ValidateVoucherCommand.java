@@ -25,7 +25,7 @@ public class ValidateVoucherCommand extends CommandTemplate<CouponVisitor> {
         String mutation;
 		if (response.containsKey(QUERY_NAME))
 		{
-			mutation = QUERY_NAME;;
+			mutation = QUERY_NAME;
 		}
 		else
 		{

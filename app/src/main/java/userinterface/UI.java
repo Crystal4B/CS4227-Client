@@ -20,24 +20,13 @@ public class UI {
         int state = 0;
         while(true){
             switch (state) {
-                case EXIT:    
-                    Runtime.getRuntime().exit(0);
-                case LOGIN_STATE:
-                    state = LoginUI.run(console);
-                    break;
-                case MENU_STATE:
-                    state = MenuUI.run(console);
-                    break;
-                case RESERVATION_STATE:
-                    state = ReservationUI.run(console);
-                    break;
-                case BILLING_STATE:
-                    state = BillingUI.run(console);
-                    break;
-                case STAFF_MENU:
-                    state = StaffUI.run(console);
-                    break;
-
+                case EXIT -> Runtime.getRuntime().exit(0);
+                case LOGIN_STATE -> state = LoginUI.run(console);
+                case MENU_STATE -> state = MenuUI.run(console);
+                case RESERVATION_STATE -> state = ReservationUI.run(console);
+                case BILLING_STATE -> state = BillingUI.run(console);
+                case STAFF_MENU -> state = StaffUI.run(console);
+                default -> System.out.println("Unknown state!");
             }
         }
     }

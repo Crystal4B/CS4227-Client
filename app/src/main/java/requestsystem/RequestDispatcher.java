@@ -34,7 +34,7 @@ public class RequestDispatcher
 	}
 
 	/**
-	 * Function that runs pre and post handles, afterCompletion is then ran in CommandTemplate
+	 * Function that runs pre- and post-handles, afterCompletion is then ran in CommandTemplate
 	 * after the server response is sent back to the user
 	 */
 	public static Map<?, ?> sendRequest(String message)

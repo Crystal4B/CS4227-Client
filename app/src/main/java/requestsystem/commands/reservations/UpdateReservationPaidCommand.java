@@ -38,7 +38,7 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 	@Override
 	public String createMessage(boolean undo)
 	{
-		boolean paidVal = undo ? !paid : paid;
+		boolean paidVal = paid != undo;
 		return String.format("{\"query\":\"mutation{%s(input:{id: %d paid: %b}){id checkIn checkOut paid user{id type} guests{id firstName lastName room{id type numberOfBeds}}}}\"}", MUTATION_NAME, id, paidVal);
 	}
 
@@ -55,9 +55,8 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 		ArrayList<Room> rooms = new ArrayList<>();
 		
 		List<?> guestsList = (List<?>) reservationData.get("guests");
-		for (int i = 0; i < guestsList.size(); i++)
-		{
-			Map<?, ?> guestMap = (Map<?, ?>) guestsList.get(i);
+		for (Object o : guestsList) {
+			Map<?, ?> guestMap = (Map<?, ?>) o;
 			Map<?, ?> roomMap = (Map<?, ?>) guestMap.get("room");
 
 			int id = Integer.parseInt((String) roomMap.get("id"));
@@ -65,30 +64,22 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 			Room standardRoom = null;
 
 			boolean found = false;
-			for (Room room : rooms)
-			{
-				if (room.getRoomNumber() == id)
-				{
+			for (Room room : rooms) {
+				if (room.getRoomNumber() == id) {
 					standardRoom = room;
 					found = true;
 					break;
 				}
 			}
 
-			if (!found)
-			{
+			if (!found) {
 				String type = (String) roomMap.get("type");
 				int numberOfBeds = Integer.parseInt((String) roomMap.get("numberOfBeds"));
-				switch(type)
-				{
-				case "Standard":
-					standardRoom = (RoomFactory.createStandard(id, numberOfBeds));
-					break;
-				case "Deluxe":
-					standardRoom = (RoomFactory.createDeluxe(id, numberOfBeds));
-					break;
-				case "VIP":
-					standardRoom = (RoomFactory.createVIP(id, numberOfBeds));
+				switch (type) {
+					case "Standard" -> standardRoom = (RoomFactory.createStandard(id, numberOfBeds));
+					case "Deluxe" -> standardRoom = (RoomFactory.createDeluxe(id, numberOfBeds));
+					case "VIP" -> standardRoom = (RoomFactory.createVIP(id, numberOfBeds));
+					default -> System.out.println("Unknown type of Room!");
 				}
 			}
 

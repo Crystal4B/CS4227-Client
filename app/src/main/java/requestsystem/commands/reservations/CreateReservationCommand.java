@@ -42,25 +42,21 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 		UserInterface creator = reservationOrder.getUser();
 
 		ArrayList<Room> rooms = reservationOrder.getRooms();
-		String orderGuests = "";
-		for (int i = 0; i < rooms.size(); i++)
-		{
-			Room room = rooms.get(i);
+		StringBuilder orderGuests = new StringBuilder();
+		for (Room room : rooms) {
 			int roomId = room.getRoomNumber();
 
 			List<UserInterface> occupants = room.getOccupants();
-			for (int j = 0; j < occupants.size(); j++)
-			{
+			for (int j = 0; j < occupants.size(); j++) {
 				UserInterface occupant = occupants.get(j);
 
 				String firstName = occupant.getFirstName();
 				String lastName = occupant.getLastName();
 
-				orderGuests += String.format("{firstName: \\\"%s\\\" lastName: \\\"%s\\\" roomId: \\\"%d\\\"}", firstName, lastName, roomId);
+				orderGuests.append(String.format("{firstName: \\\"%s\\\" lastName: \\\"%s\\\" roomId: \\\"%d\\\"}", firstName, lastName, roomId));
 
-				if (j < occupants.size() - 1)
-				{
-					orderGuests += ",";
+				if (j < occupants.size() - 1) {
+					orderGuests.append(",");
 				}
 			}
 		}
@@ -99,31 +95,26 @@ public class CreateReservationCommand extends CommandTemplate<Order>
 		List<Room> rooms = reservationOrder.getRooms();
 
 		List<?> guestsList = (List<?>) reservationData.get("guests");
-		for (int i = 0; i < guestsList.size(); i++)
-		{
-			Map<?, ?> guestMap = (Map<?, ?>) guestsList.get(i);
+		for (Object o : guestsList) {
+			Map<?, ?> guestMap = (Map<?, ?>) o;
 
 			String guestId = (String) guestMap.get("id");
 			String firstName = (String) guestMap.get("firstName");
 			String lastName = (String) guestMap.get("lastName");
-			
-			for (Room room : rooms)
-			{
+
+			for (Room room : rooms) {
 				boolean found = false;
 
 				List<UserInterface> guests = room.getOccupants();
-				for (UserInterface guest : guests)
-				{
-					if (guest.getFirstName().equals(firstName) && guest.getLastName().equals(lastName))
-					{
+				for (UserInterface guest : guests) {
+					if (guest.getFirstName().equals(firstName) && guest.getLastName().equals(lastName)) {
 						found = true;
 						guest.setId(Integer.parseInt(guestId));
 						break;
 					}
 				}
 
-				if (found)
-				{
+				if (found) {
 					break;
 				}
 			}

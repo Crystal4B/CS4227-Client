@@ -39,7 +39,7 @@ public class CancelReservationCommand extends CommandTemplate<Order>
 			UserInterface creator = orderCancelation.getUser();
 
 			ArrayList<Room> rooms = orderCancelation.getRooms();
-			String orderGuests = "";
+			StringBuilder orderGuests = new StringBuilder();
 			for (int i = 0; i < rooms.size(); i++)
 			{
 				Room room = rooms.get(i);
@@ -53,11 +53,11 @@ public class CancelReservationCommand extends CommandTemplate<Order>
 					String firstName = occupant.getFirstName();
 					String lastName = occupant.getLastName();
 	
-					orderGuests += String.format("{firstName: \\\"%s\\\" lastName: \\\"%s\\\" roomId: \\\"%d\\\"}", firstName, lastName, roomId);
+					orderGuests.append(String.format("{firstName: \\\"%s\\\" lastName: \\\"%s\\\" roomId: \\\"%d\\\"}", firstName, lastName, roomId));
 	
 					if (i < occupants.size() - 1)
 					{
-						orderGuests += ",";
+						orderGuests.append(",");
 					}
 				}
 			}

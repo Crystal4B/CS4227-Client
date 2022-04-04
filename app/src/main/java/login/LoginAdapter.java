@@ -1,12 +1,9 @@
 package login;
 
-import hotelsystem.userFactory.Customer;
 import hotelsystem.userFactory.UserInterface;
-
 
 public class LoginAdapter implements LoginInterface{
     private SignupInterface signup;
-    public Customer person;
     private String username;
     public LoginAdapter(SignupInterface signup) {
         this.signup = signup;
@@ -51,7 +48,7 @@ public class LoginAdapter implements LoginInterface{
     /**
      * Gets User
      * 
-     * @return User thats logged in
+     * @return User that's logged in
      */
     public UserInterface returnUser() {
         return signup.returnUser();
@@ -59,7 +56,7 @@ public class LoginAdapter implements LoginInterface{
     /**
      * Sets Type
      * 
-     * @param type Type of user
+     * @param userType Type of user
      */
     public void setType(String userType) {
         signup.setType(userType);       

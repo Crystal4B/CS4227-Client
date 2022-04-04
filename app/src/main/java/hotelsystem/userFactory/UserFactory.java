@@ -4,7 +4,6 @@ package hotelsystem.userFactory;
  * @author Jakub Pažej
  * Factory method for making different types of users.
  */
-
 public class UserFactory implements FactoryInterface
 {
     public static UserInterface createStaff(){

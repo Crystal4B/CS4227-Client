@@ -43,7 +43,7 @@ public class StaffUI {
         System.out.println("6. \t Exit");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
-        int option = -1;
+        int option;
         try {
             option = Integer.parseInt(console.readLine());
         } catch (Exception e) {
@@ -53,9 +53,7 @@ public class StaffUI {
         switch (option) {
             case 1:
                 return UI.RESERVATION_STATE;
-            case 2: 
-                return UI.STAFF_MENU;
-            case 3:  
+            case 3:
                 while(true){
                     if(manageRooms(console)){
                         break;
@@ -99,7 +97,7 @@ public class StaffUI {
         System.out.println("\n####################################################\n");
         switch (option) {
             case 1:
-                RoomInterface selectedAddRoomInterface = (Room)addRoom(console);
+                RoomInterface selectedAddRoomInterface = addRoom(console);
                 if(selectedAddRoomInterface != null){
                     invoker.setCommand(new CreateRoomCommand((Room) selectedAddRoomInterface));
                     invoker.execute();
@@ -109,7 +107,7 @@ public class StaffUI {
                 if(roomFactories.size() == 0){
                     break;
                 }
-                RoomInterface selectedRemoveRoomInterface = (Room)removeRoom(console, roomFactories);
+                RoomInterface selectedRemoveRoomInterface = removeRoom(console, roomFactories);
                 if(selectedRemoveRoomInterface != null){
                     invoker.setCommand(new RemoveRoomCommand((Room) selectedRemoveRoomInterface));
                     invoker.execute();
@@ -130,7 +128,7 @@ public class StaffUI {
         System.out.println("Please select one of the following rooms to add:");
         System.out.println("0. \t Back\n");
         System.out.println("1. \t Standard Room");
-        int option = -1;
+        int option;
         try {
             option = Integer.parseInt(console.readLine());
         } catch (Exception e) {
@@ -139,14 +137,11 @@ public class StaffUI {
         }
         System.out.println("\n####################################################\n");
         System.out.println(option);
-        switch (option) {
-            case 0:
-                return null;
-            case 1:
-                return RoomFactory.createStandard(-1, 2);
-            default:
-                return addRoom(console);
-        }
+        return switch (option) {
+            case 0 -> null;
+            case 1 -> RoomFactory.createStandard(-1, 2);
+            default -> addRoom(console);
+        };
     }
 
     public static RoomInterface removeRoom(Console console, ArrayList<RoomInterface> roomFactories){
@@ -159,7 +154,7 @@ public class StaffUI {
         {   
             System.out.println((i+1) + ".\t" + roomFactories.get(i).toString());
         }
-        int option = -2;
+        int option;
         try {
             option = Integer.parseInt(console.readLine())-1;
         } catch (Exception e) {

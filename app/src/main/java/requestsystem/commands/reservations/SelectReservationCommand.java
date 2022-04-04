@@ -52,24 +52,19 @@ public class SelectReservationCommand extends CommandTemplate<Order>
 			builder.setOrderID(reservationId);
 			builder.setStartDate(arrivalDate);
 			builder.setEndDate(departureDate);
-	
-			for (int i = 0; i < roomsList.size(); i++)
-			{
-				Map<?, ?> roomMap = (Map<?, ?>) roomsList.get(i);
+
+			for (Object o : roomsList) {
+				Map<?, ?> roomMap = (Map<?, ?>) o;
 
 				String type = (String) roomMap.get("type");
 				int roomId = Integer.parseInt((String) roomMap.get("id"));
 				int numberOfBeds = (int) roomMap.get("numberOfBeds");
-				switch(type)
-				{
-				case "Standard":
-					builder.addRoom(RoomFactory.createStandard(roomId, numberOfBeds));
-					break;
-				case "Deluxe":
-					builder.addRoom(RoomFactory.createDeluxe(roomId, numberOfBeds));
-					break;
-				case "VIP":
-					builder.addRoom(RoomFactory.createVIP(roomId, numberOfBeds));
+
+				switch (type) {
+					case "Standard" -> builder.addRoom(RoomFactory.createStandard(roomId, numberOfBeds));
+					case "Deluxe" -> builder.addRoom(RoomFactory.createDeluxe(roomId, numberOfBeds));
+					case "VIP" -> builder.addRoom(RoomFactory.createVIP(roomId, numberOfBeds));
+					default -> System.out.println("Unknown type of Room!");
 				}
 			}
 	

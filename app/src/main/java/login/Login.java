@@ -30,12 +30,7 @@ public class Login implements LoginInterface {
         if (!isValidEmail(email)) {
             return false;
         }
-        if(validatesUser(email,password) != null) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return validatesUser(email, password) != null;
         
     }
 
@@ -50,10 +45,7 @@ public class Login implements LoginInterface {
         
         Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
 
-        if(!pattern.matcher(email).matches()) {
-            return false;
-        }
-        return true;
+        return pattern.matcher(email).matches();
     }
 
     /**

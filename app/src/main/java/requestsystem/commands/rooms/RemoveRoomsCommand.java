@@ -3,6 +3,7 @@ package requestsystem.commands.rooms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
@@ -38,27 +39,27 @@ public class RemoveRoomsCommand extends CommandTemplate<List<Room>>
 			mutation = UNDO_MUTATION_NAME;
 		}
 
-		String message = String.format("{\"query\":\"mutation{%s(input:[", mutation);
+		StringBuilder message = Optional.ofNullable(String.format("{\"query\":\"mutation{%s(input:[", mutation)).map(StringBuilder::new).orElse(null);
 		for (int i = 0; i < rooms.size(); i++)
 		{
 			Room room = rooms.get(i);
 			if (undo)
 			{
-				message += String.format("{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}", room.getClass().getSimpleName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice());
+				message = (message == null ? new StringBuilder("null") : message).append(String.format("{type: \\\"%s\\\" perks: \\\"%s\\\" numberOfBeds: %d rate: %d}", room.getClass().getSimpleName(), room.getPerks(), room.getNumberBeds(), (int) room.getPrice()));
 			}
 			else
 			{
-				message += String.format("{id: \\\"%s\\\"}", room.getRoomNumber());
+				message = (message == null ? new StringBuilder("null") : message).append(String.format("{id: \\\"%s\\\"}", room.getRoomNumber()));
 			}
 
 			if (i < rooms.size() - 1)
 			{
-				message += ",";
+				message.append(",");
 			}
 		}
-		message += "]){id type perks numberOfBeds rate}}\"}";
+		message = (message == null ? new StringBuilder("null") : message).append("]){id type perks numberOfBeds rate}}\"}");
 
-		return message;
+		return message.toString();
 	}
 
 	@Override
@@ -81,23 +82,17 @@ public class RemoveRoomsCommand extends CommandTemplate<List<Room>>
 
 		List<?> roomsList = (List<?>) response.get(mutation);
 		responseObject = new ArrayList<>();
-		for (int i = 0; i < roomsList.size(); i++)
-		{
-			Map<?, ?> roomMap = (Map<?, ?>) roomsList.get(i);
+		for (Object o : roomsList) {
+			Map<?, ?> roomMap = (Map<?, ?>) o;
 
 			String type = (String) roomMap.get("type");
 			int id = Integer.parseInt((String) roomMap.get("id"));
 			int numberOfBeds = (int) roomMap.get("numberOfBeds");
-			switch(type)
-			{
-			case "Standard":
-				responseObject.add(RoomFactory.createStandard(id, numberOfBeds));
-				break;
-			case "Deluxe":
-				responseObject.add(RoomFactory.createDeluxe(id, numberOfBeds));
-				break;
-			case "VIP":
-				responseObject.add(RoomFactory.createVIP(id, numberOfBeds));
+			switch (type) {
+				case "Standard" -> responseObject.add(RoomFactory.createStandard(id, numberOfBeds));
+				case "Deluxe" -> responseObject.add(RoomFactory.createDeluxe(id, numberOfBeds));
+				case "VIP" -> responseObject.add(RoomFactory.createVIP(id, numberOfBeds));
+				default -> System.out.println("Unknown type of Room!");
 			}
 		}
 		

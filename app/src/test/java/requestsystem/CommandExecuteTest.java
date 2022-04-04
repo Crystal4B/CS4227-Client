@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+import billingsystem.CouponVisitor;
 import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
 import order.OrderBuilder;
@@ -32,6 +33,11 @@ import requestsystem.commands.users.GetAllStaffUsersCommand;
 import requestsystem.commands.users.LoginUserCommand;
 import requestsystem.commands.users.RegisterUserCommand;
 import requestsystem.commands.users.RemoveUserCommand;
+import requestsystem.commands.vouchers.CreateVoucherCommand;
+import requestsystem.commands.vouchers.RemoveVoucherCommand;
+import requestsystem.commands.vouchers.UpdateVoucherCommand;
+import requestsystem.commands.vouchers.ValidateVoucherCommand;
+import userinterface.LoginUI;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CommandExecuteTest
@@ -49,6 +55,8 @@ public class CommandExecuteTest
 		RoomFactory.createDeluxe(0, 2),
 		RoomFactory.createVIP(0, 2)
 	));
+
+	static CouponVisitor coupan;
 
 	static order.Order reservation;
 
@@ -267,9 +275,76 @@ public class CommandExecuteTest
 		rooms = resultRooms;
 	}
 
-
 	@Test
 	@Order(12)
+	public void checkCreateVoucherCommand()
+	{
+		// Create voucher for user
+		CouponVisitor visitor = new CouponVisitor();
+		visitor.TypeSet("Voucher");
+		visitor.DiscountSet(2.5);
+		LoginUI.setUser(staff);
+
+		// Send request
+		invoker.setCommand(new CreateVoucherCommand(visitor));
+		invoker.execute();
+
+		// Retrieve response and assert
+		CouponVisitor result = invoker.getResponse();
+		assertEquals(visitor.TypeGet(), result.TypeGet());
+		assertEquals(visitor.DiscountGet(), result.DiscountGet());
+		assertFalse(result.CodeGet().equals(""));
+
+
+		coupan = result;
+		System.out.println(coupan.CodeGet());
+	}
+
+	@Test
+	@Order(13)
+	public void checkValidateVoucherCommand()
+	{
+		// Send request
+		invoker.setCommand(new ValidateVoucherCommand(coupan));
+		invoker.execute();
+
+		System.out.println(coupan.CodeGet());
+
+		// Retrieve response and assert
+		CouponVisitor result = invoker.getResponse();
+		assertEquals(coupan.TypeGet(), result.TypeGet());
+		assertEquals(coupan.DiscountGet(), result.DiscountGet());
+		assertEquals(coupan.CodeGet(), result.CodeGet());
+		coupan = result;
+	}
+
+	@Test
+	@Order(14)
+	public void checkUpdateVoucherCommand()
+	{
+		// Create voucher for user
+		coupan.TypeSet("Coupan");
+		coupan.DiscountSet(0.5);
+		LoginUI.setUser(staff);
+
+		// Send request
+		invoker.setCommand(new UpdateVoucherCommand(coupan));
+		invoker.execute();
+
+		// Retrieve response and assert
+		CouponVisitor result = invoker.getResponse();
+		assertEquals(coupan.TypeGet(), result.TypeGet());
+		assertEquals(coupan.DiscountGet(), result.DiscountGet());
+		assertFalse(result.CodeGet().equals(""));
+
+
+		coupan = result;
+		System.out.println(coupan.CodeGet());
+	}
+
+
+	@Test
+	@Order(15)
 	public void checkCreateReservationCommand()
 	{
 		// Create room for order
@@ -397,8 +472,22 @@ public class CommandExecuteTest
 		assertTrue(contains(availableRooms.get("Standard"), rooms.get(2)));
 	}
 
+	// @Test
+	// @Order(14)
+	public void checkRemoveVoucherCommand()
+	{
+		invoker.setCommand(new RemoveVoucherCommand(coupan));
+		invoker.execute();
+
+		// Retrieve response and assert
+		CouponVisitor result = invoker.getResponse();
+		assertEquals(coupan.CodeGet(), result.CodeGet());
+		assertEquals(coupan.TypeGet(), result.TypeGet());
+		assertEquals(coupan.DiscountGet(), result.DiscountGet());
+	}
+
 	@Test
-	@Order(13)
+	@Order(16)
 	public void checkCancelReservationCommand()
 	{
 		invoker.setCommand(new CancelReservationCommand(reservation));
@@ -442,7 +531,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(14)
+	@Order(17)
 	public void checkRemoveRoomsCommand()
 	{
 		// Send new createRooms request
@@ -463,7 +552,7 @@ public class CommandExecuteTest
 	}
 	
 	@Test
-	@Order(15)
+	@Order(18)
 	public void checkRemoveUserCommandOnCustomer()
 	{
 		// Send new customer request
@@ -479,7 +568,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(16)
+	@Order(19)
 	public void checkRemoveUserCommandOnStaff()
 	{
 		// Send new customer request
@@ -495,7 +584,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(17)
+	@Order(20)
 	public void checkGetAllStaffUsersCommand()
 	{
 		// Send new request

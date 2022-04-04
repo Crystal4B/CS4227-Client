@@ -1,8 +1,39 @@
 package billingsystem;
 
+import hotelsystem.userFactory.UserFactory;
+import requestsystem.commands.CommandInvoker;
+import requestsystem.commands.vouchers.ValidateVoucherCommand;
+
 public class CouponVisitor implements CouponInterface {
    Double discount = 0.0;
    String code = "";
+   String type = "";
+   int reservationId;
+   boolean available = true;
+   UserFactory creator;
+   
+   public CouponVisitor(){
+   }
+
+   public CouponVisitor(String code){
+      this.code = code;
+   }
+
+   public CouponVisitor(String code, String type, double discount, boolean available){
+      this.code = code;
+      this.type = type;
+      this.discount = discount;
+      this.available = available;
+   }
+
+   public CouponVisitor(String code, String type, double discount, boolean available, int reservationId){
+      this.code = code;
+      this.type = type;
+      this.discount = discount;
+      this.available = available;
+      this.reservationId = reservationId;
+   }
+   
    public String CouponPaid(BillingTemplate b){
         if(b.DiscountGet() == 0.0){
            return "";
@@ -12,27 +43,63 @@ public class CouponVisitor implements CouponInterface {
      }
 
    public double CouponInput() {
-      if(code.equals("123")){
-         discount = 0.1; 
-         return discount;
-      } else if(code.equals("12345")) {
-         discount = 0.2; 
-         return discount;
-      } else if(code.equals("Amogus")){
-         discount = 0.5; 
-         return discount;
+      CommandInvoker commandInvoker = new CommandInvoker();
+      ValidateVoucherCommand commandBoi = new ValidateVoucherCommand(this);
+      commandInvoker.setCommand(commandBoi);
+      commandInvoker.execute();
+      CouponVisitor couponBoi = this;
+      couponBoi = commandInvoker.getResponse();
+      if(couponBoi.TypeGet().equalsIgnoreCase("coupon")){
+         if(couponBoi.AvailableGet()){
+            return couponBoi.DiscountGet();
+         } else {
+            return 0.0;
+         }
       } else {
-          return 0;
+         return 0.0;
       }
   }
 
    public double VoucherInput() {
-      if(code.equals("123")){
-         discount = 1.0; 
-         return discount;
+      CommandInvoker commandInvoker = new CommandInvoker();
+      ValidateVoucherCommand commandBoi = new ValidateVoucherCommand(this);
+      commandInvoker.setCommand(commandBoi);
+      commandInvoker.execute();
+      CouponVisitor couponBoi = this;
+      couponBoi = commandInvoker.getResponse();
+      if(couponBoi.TypeGet().equalsIgnoreCase("voucher")){
+         if(couponBoi.AvailableGet()){
+            return couponBoi.DiscountGet();
+         } else {
+            return 0.0;
+         }
       } else {
          return 0.0;
       }
+   }
+
+   public void ReservationSet(int reservationId){
+      this.reservationId = reservationId;
+   }
+
+   public int ReservationGet(){
+      return reservationId;
+   }
+
+   public void TypeSet(String type){
+      this.type = type;
+   }
+
+   public String TypeGet(){
+      return type;
+   }
+
+   public void AvailableSet(boolean available){
+      this.available = available;
+   }
+
+   public boolean AvailableGet(){
+      return available;
    }
 
    public void DiscountSet(double num){

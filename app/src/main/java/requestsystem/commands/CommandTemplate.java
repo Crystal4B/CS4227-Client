@@ -22,7 +22,8 @@ public abstract class CommandTemplate<T>
 		String message = createMessage(false);
 		Map<?, ?> response = RequestDispatcher.sendRequest(message);
 		parseResponse(response);
-	};
+		RequestDispatcher.runAfterCompletions(RequestDispatcher.getRequest(message));
+	}
 
 	/**
 	 * template undo function for commands

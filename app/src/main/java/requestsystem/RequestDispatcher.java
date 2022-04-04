@@ -5,6 +5,7 @@ import requestsystem.interceptors.InterceptorInterface;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class RequestDispatcher
 {
-	private static Map<String, List<InterceptorInterface>> commandToInterceptorMap;
+	private static Map<String, List<InterceptorInterface>> commandToInterceptorMap = new TreeMap<>();
 
 	/**
 	 * Interceptor for sending and receiving requests from the GraphQL server
@@ -78,7 +79,7 @@ public class RequestDispatcher
 		}
 	}
 
-	private static void runAfterCompletions(String event)
+	public static void runAfterCompletions(String event)
 	{
 		List<InterceptorInterface> interceptorList = commandToInterceptorMap.get(event);
 		if(interceptorList!=null && !interceptorList.isEmpty()) {

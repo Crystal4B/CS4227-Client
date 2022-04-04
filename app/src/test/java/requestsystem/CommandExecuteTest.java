@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
-import billingsystem.CouponVisitor;
 import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
 import order.OrderBuilder;
@@ -29,6 +28,7 @@ import requestsystem.commands.rooms.CreateRoomsCommand;
 import requestsystem.commands.rooms.GetAvailableRoomsCommand;
 import requestsystem.commands.rooms.RemoveRoomsCommand;
 import requestsystem.commands.users.ChangeUserPasswordCommand;
+import requestsystem.commands.users.GetAllStaffUsersCommand;
 import requestsystem.commands.users.LoginUserCommand;
 import requestsystem.commands.users.RegisterUserCommand;
 import requestsystem.commands.users.RemoveUserCommand;
@@ -492,5 +492,22 @@ public class CommandExecuteTest
 		assertTrue(result instanceof Staff);
 		assertEquals(staff.getEmail(), result.getEmail());
 		assertEquals(staff.getId(), result.getId());
+	}
+
+	@Test
+	@Order(17)
+	public void checkGetAllStaffUsersCommand()
+	{
+		// Send new request
+		invoker.setCommand(new GetAllStaffUsersCommand());
+		invoker.execute();
+
+		// Retrieve response and assert
+		List<UserInterface> result = invoker.getResponse();
+		assertTrue(result.size() > 0);
+		for (UserInterface user : result)
+		{
+			assertTrue(user.getUserType().equals("Staff"));
+		}
 	}
 }

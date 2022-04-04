@@ -1,12 +1,14 @@
 package requestsystem.commands.users;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import hotelsystem.userFactory.UserFactory;
 import hotelsystem.userFactory.UserInterface;
 import requestsystem.commands.CommandTemplate;
 
-public class GetAllStaffUsersCommand extends CommandTemplate<UserInterface>
+public class GetAllStaffUsersCommand extends CommandTemplate<List<UserInterface>>
 {
 	private static final String QUERY_NAME = "allStaffUsers";
 
@@ -14,7 +16,7 @@ public class GetAllStaffUsersCommand extends CommandTemplate<UserInterface>
 	public String createMessage(boolean undo)
 	{
 		// Undo does not apply to requests of type query
-		return String.format("{\"query\":\"query{%s(){id type email username}}\"}", QUERY_NAME);
+		return String.format("{\"query\":\"query{%s{id type email username}}\"}", QUERY_NAME);
 	}
 
 	@Override
@@ -22,29 +24,39 @@ public class GetAllStaffUsersCommand extends CommandTemplate<UserInterface>
 	{
 		if (response.containsKey(QUERY_NAME))
 		{
-			Map<?, ?> userData = (Map<?, ?>) response.get(QUERY_NAME);
-			if (userData == null)
+			List<?> userList = (List<?>) response.get(QUERY_NAME);
+			if (userList == null)
 			{
 				return;
 			}
-
-			String id = (String) userData.get("id");
-			String type = (String) userData.get("type");
-			String email = (String) userData.get("email");
-			String username = (String) userData.get("username");
-	
-			switch(type)
+			responseObject = new ArrayList<>();
+			for (int i = 0; i < userList.size(); i++)
 			{
-			case "Customer":
-				responseObject = UserFactory.createCustomer();
-				break;
-			case "Staff":
-				responseObject = UserFactory.createStaff();
-				break;
+				Map<?, ?> userData = (Map<?, ?>) userList.get(i);
+
+				String id = (String) userData.get("id");
+				String type = (String) userData.get("type");
+				String email = (String) userData.get("email");
+				String username = (String) userData.get("username");
+		
+				UserInterface user = null;
+				switch(type)
+				{
+				case "Customer":
+					user = UserFactory.createCustomer();
+					break;
+				case "Staff":
+					user = UserFactory.createStaff();
+					break;
+				default:
+					continue;
+				}
+
+				user.setId(Integer.parseInt(id));
+				user.setEmail(email);
+				user.setUserName(username);
+				responseObject.add(user);
 			}
-			responseObject.setId(Integer.parseInt(id));
-			responseObject.setEmail(email);
-			responseObject.setUserName(username);
 		}
 	}	
 }

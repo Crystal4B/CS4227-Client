@@ -21,10 +21,10 @@ public class UpdateVoucherCommand extends CommandTemplate<CouponVisitor> {
     public String createMessage(boolean undo) {
 		if (undo)
 		{
-			return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" amount: %f creator:{id: %d} available: %d}){id type issue_date expiry_date amount creator{id}}}\"}", UNDO_MUTATION_NAME, couponvisitor.TypeGet(), couponvisitor.DiscountGet(), LoginUI.getUser().getId(), couponvisitor.ReservationGet());
+			return String.format("{\"query\":\"mutation{%s(input:{id: %d type: \\\"%s\\\" amount: %f creator:{id: %d} available: %d}){id type issue_date expiry_date amount creator{id}}}\"}", UNDO_MUTATION_NAME, couponvisitor.CodeGet(), couponvisitor.TypeGet(), couponvisitor.DiscountGet(), LoginUI.getUser().getId(), couponvisitor.ReservationGet());
 		}
 
-		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" amount: %f creator:{id: %d} available: %d}){id type issue_date expiry_date amount creator{id}}}\"}", MUTATION_NAME, newcouponvisitor.TypeGet(), newcouponvisitor.DiscountGet(), LoginUI.getUser().getId(), newcouponvisitor.ReservationGet());
+		return String.format("{\"query\":\"mutation{%s(input:{id: %d type: \\\"%s\\\" amount: %f creator:{id: %d} available: %d}){id type issue_date expiry_date amount creator{id}}}\"}", MUTATION_NAME, newcouponvisitor.CodeGet(), newcouponvisitor.TypeGet(), newcouponvisitor.DiscountGet(), LoginUI.getUser().getId(), newcouponvisitor.ReservationGet());
     }
 
     @Override

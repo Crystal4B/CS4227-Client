@@ -1,7 +1,6 @@
 package requestsystem.commands.users;
 
-import hotelsystem.userFactory.Customer;
-import hotelsystem.userFactory.Staff;
+import hotelsystem.userFactory.UserFactory;
 import hotelsystem.userFactory.UserInterface;
 import requestsystem.commands.CommandTemplate;
 
@@ -54,10 +53,10 @@ public class LoginUserCommand extends CommandTemplate<UserInterface>
 			switch(type)
 			{
 			case "Customer":
-				responseObject = new Customer(username, password, email);
+				responseObject = UserFactory.createCustomer(username, password, email);
 				break;
 			case "Staff":
-				responseObject = new Staff(username, password, email);
+				responseObject = UserFactory.createStaff(username, password, email);
 				break;
 			}
 			responseObject.setId(Integer.parseInt(id));

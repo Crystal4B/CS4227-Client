@@ -1,12 +1,10 @@
 package requestsystem.interceptors;
 
-import org.checkerframework.checker.units.qual.C;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.users.ChangeUserPasswordCommand;
 
 import java.io.Console;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * @author Jakub Pažej

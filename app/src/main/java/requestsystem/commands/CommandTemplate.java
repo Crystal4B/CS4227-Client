@@ -2,7 +2,6 @@ package requestsystem.commands;
 
 import java.util.Map;
 
-import requestsystem.RequestClient;
 import requestsystem.RequestDispatcher;
 
 /**

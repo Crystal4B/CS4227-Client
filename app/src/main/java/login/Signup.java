@@ -24,6 +24,7 @@ public class Signup implements SignupInterface{
     public int authKey;
     private String username;
     CommandInvoker invoker;
+    boolean defaultPassword;
 
     /**
      * Signs in User
@@ -40,12 +41,13 @@ public class Signup implements SignupInterface{
         }
         if("Staff".equals(type)) {
             person = new Staff();
+            defaultPassword = true;
         }
         else {
             person = new Customer();
         }
         person = this.createsUser(email, username, password);
-        invoker.setCommand(new RegisterUserCommand(person));
+        invoker.setCommand(new RegisterUserCommand(person, defaultPassword));
         invoker.execute();
         return true;
     }

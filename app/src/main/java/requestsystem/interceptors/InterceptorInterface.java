@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  * @author Jakub Pažej
- * Interface for reservation System handling HttpClient requests and responses
+ * Interface for Interceptors
  */
 
 public interface InterceptorInterface {

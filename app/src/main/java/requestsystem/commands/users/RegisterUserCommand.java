@@ -17,6 +17,7 @@ public class RegisterUserCommand extends CommandTemplate<UserInterface>
 	public static final String UNDO_MUTATION_NAME = "removeUser";
 
 	private UserInterface userInterface;
+	private boolean defaultPassword;
 
 	/**
 	 * Simple constructor for command
@@ -25,6 +26,17 @@ public class RegisterUserCommand extends CommandTemplate<UserInterface>
 	public RegisterUserCommand(UserInterface userInterface)
 	{
 		this.userInterface = userInterface;
+		this.defaultPassword = false;
+	}
+
+	/**
+	 * Simple constructor for command
+	 * @param userInterface being registered with the system
+	 */
+	public RegisterUserCommand(UserInterface userInterface, boolean defaultPassword)
+	{
+		this.userInterface = userInterface;
+		this.defaultPassword = defaultPassword;
 	}
 
 	@Override
@@ -34,7 +46,7 @@ public class RegisterUserCommand extends CommandTemplate<UserInterface>
 		{
 			return String.format("{\"query\":\"mutation{%s(input:{id: \\\"%s\\\"}){id type email username password}}\"}", UNDO_MUTATION_NAME, userInterface.getId());
 		}
-		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\"}){id type email username password}}\"}", MUTATION_NAME, userInterface.getClass().getSimpleName(), userInterface.getEmail(), userInterface.getUserName(), userInterface.getPassword());
+		return String.format("{\"query\":\"mutation{%s(input:{type: \\\"%s\\\" email: \\\"%s\\\" username: \\\"%s\\\" password: \\\"%s\\\" defaultPassword: %b}){id type email username password}}\"}", MUTATION_NAME, userInterface.getClass().getSimpleName(), userInterface.getEmail(), userInterface.getUserName(), userInterface.getPassword(), defaultPassword);
 	}
 
 	@Override

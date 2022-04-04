@@ -15,6 +15,10 @@ public class CouponVisitor implements CouponInterface {
    public CouponVisitor(){
    }
 
+   public CouponVisitor(String code){
+      this.code = code;
+   }
+
    public CouponVisitor(String code, String type, double discount, boolean available){
       this.code = code;
       this.type = type;

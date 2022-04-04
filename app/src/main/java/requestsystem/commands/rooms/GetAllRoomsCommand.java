@@ -3,7 +3,6 @@ package requestsystem.commands.rooms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import hotelsystem.roomFactory.RoomInterface;
 import requestsystem.commands.CommandTemplate;
@@ -12,7 +11,7 @@ import hotelsystem.roomFactory.RoomFactory;
 /**
  * A Get Rooms Command for fetching all the rooms in the hotel
  * @author Marcin Sęk
- * @apiNote Response of type Map[String, List[Room]]
+ * @apiNote Response of type List[RoomInterface]
  */
 public class GetAllRoomsCommand extends CommandTemplate<List<RoomInterface>>
 {

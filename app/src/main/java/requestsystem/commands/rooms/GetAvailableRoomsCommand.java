@@ -13,7 +13,7 @@ import hotelsystem.roomFactory.RoomFactory;
 /**
  * Command for getting all available rooms for specified dates
  * @author Marcin Sęk
- * @apiNote Response type of List[Room]
+ * @apiNote Response type of Map[String, List[Room]]
  */
 public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<RoomInterface>>>
 {

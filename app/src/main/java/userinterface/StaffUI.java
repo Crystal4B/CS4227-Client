@@ -2,6 +2,8 @@ package userinterface;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import hotelsystem.roomFactory.RoomInterface;
 import login.LoginAdapter;
@@ -12,6 +14,7 @@ import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.rooms.CreateRoomCommand;
 import requestsystem.commands.rooms.GetAllRoomsCommand;
 import requestsystem.commands.rooms.RemoveRoomCommand;
+import requestsystem.commands.users.GetAllStaffUsersCommand;
 import requestsystem.commands.users.RemoveUserCommand;
 import hotelsystem.userFactory.UserInterface;
 
@@ -25,7 +28,7 @@ public class StaffUI {
         System.out.println("1. \t Create Reservation");
         System.out.println("2. \t View Reservations");
         System.out.println("3. \t Manage Rooms");
-        System.out.println("4. \t Add Staff Account");
+        System.out.println("4. \t Manage Staff");
         System.out.println("5. \t Exit");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
@@ -50,7 +53,7 @@ public class StaffUI {
                 return UI.STAFF_MENU;
             case 4:  
                 while(true){
-                    if(signupStaffAccount(console)) {
+                    if(manageStaffAccount(console)) {
                         break;
                     }
                 }
@@ -182,6 +185,7 @@ public class StaffUI {
                 return true;
 
         }
+        return false;
     }
 
     public static boolean signupStaffAccount(Console console) {
@@ -202,10 +206,17 @@ public class StaffUI {
         CommandInvoker invoker = new CommandInvoker();
         System.out.println("Please enter email of User to remove");
         String email = console.readLine();
-        UserInterface user;
-        invoker.setCommand(new RemoveUserCommand(user));
+        invoker.setCommand(new GetAllStaffUsersCommand());
 		invoker.execute();
-
+        List<UserInterface> result = invoker.getResponse();
+        for(UserInterface i : result) {
+            if(Objects.equals(i.getUserName(), email)) {
+                invoker.setCommand(new RemoveUserCommand(i));
+                invoker.execute();
+                System.out.println("User with email " + email + " has been removed.");
+                return true;
+            }
+        }
         return true;
     }
 }

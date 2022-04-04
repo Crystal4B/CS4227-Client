@@ -24,7 +24,7 @@ public class RequestDispatcher
 	 */
 	public static String getRequest(String message)
 	{
-		Pattern pattern = Pattern.compile("((?<=mutation)|(?<=query\\{)).\\w+");
+		Pattern pattern = Pattern.compile("((?<=mutation\\{)|(?<=query\\{)).\\w+");
 		Matcher matcher = pattern.matcher(message);
 		if (matcher.find())
 		{

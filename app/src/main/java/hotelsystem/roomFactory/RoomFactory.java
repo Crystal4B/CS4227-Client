@@ -4,7 +4,6 @@ package hotelsystem.roomFactory;
  * @author Jakub Pažej
  * Factory method for creating different types of rooms.
  */
-
 public class RoomFactory implements FactoryInterface {
     public static Room createStandard(int roomNumber, int numberBeds) {
         Room room = new Room(roomNumber, numberBeds);

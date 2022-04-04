@@ -4,7 +4,6 @@ package hotelsystem.userFactory;
  * @author Jakub Pažej
  * Staff class implementing the user.
  */
-
 public class Staff implements UserInterface
 {
     protected String userName, password, email, firstName, lastName;

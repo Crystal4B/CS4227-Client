@@ -9,7 +9,6 @@ import java.util.Collections;
  * @author Jakub Pažej
  * Standard implementation of room.
  */
-
 public class Room implements RoomInterface
 {
     protected String roomName;                                     // Name of room as String

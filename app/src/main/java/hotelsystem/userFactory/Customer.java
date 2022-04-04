@@ -4,7 +4,6 @@ package hotelsystem.userFactory;
  * @author Jakub Pažej
  * Customer class implementing the user.
  */
-
 public class Customer implements UserInterface
 {
     protected String userName, password, email, firstName, lastName;

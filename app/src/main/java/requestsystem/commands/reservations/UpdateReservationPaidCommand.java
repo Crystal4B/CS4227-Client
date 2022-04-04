@@ -19,7 +19,7 @@ import requestsystem.commands.CommandTemplate;
  */
 public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 {
-	private static final String MUTATION_NAME = "updateReservationPaid";
+	public static final String MUTATION_NAME = "updateReservationPaid";
 
 	private int id;
 	private boolean paid;

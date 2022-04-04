@@ -8,8 +8,8 @@ import requestsystem.commands.CommandTemplate;
 
 public class RemoveRoomCommand extends CommandTemplate<Room>
 {
-	private static final String MUTATION_NAME = "removeRoom";
-	private static final String UNDO_MUTATION_NAME = "createRoom";
+	public static final String MUTATION_NAME = "removeRoom";
+	public static final String UNDO_MUTATION_NAME = "createRoom";
 
 	private Room room;
 

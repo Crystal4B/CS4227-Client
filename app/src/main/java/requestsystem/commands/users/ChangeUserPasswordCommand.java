@@ -9,7 +9,7 @@ import requestsystem.commands.CommandTemplate;
 
 public class ChangeUserPasswordCommand extends CommandTemplate<UserInterface>
 {
-	private static final String MUTATION_NAME = "changeUserPassword";
+	public static final String MUTATION_NAME = "changeUserPassword";
 
 	private int id;
 	private String password;

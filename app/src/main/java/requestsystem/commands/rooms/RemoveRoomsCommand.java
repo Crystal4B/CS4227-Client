@@ -13,18 +13,18 @@ import requestsystem.commands.CommandTemplate;
  * @author Marcin Sęk
  * @apiNote Response type of ArrayList[Standard]
  */
-public class RemoveRoomsCommand extends CommandTemplate<ArrayList<Room>>
+public class RemoveRoomsCommand extends CommandTemplate<List<Room>>
 {
-	private static final String MUTATION_NAME = "removeRooms";
-	private static final String UNDO_MUTATION_NAME = "createRooms";
+	public static final String MUTATION_NAME = "removeRooms";
+	public static final String UNDO_MUTATION_NAME = "createRooms";
 
-	private ArrayList<Room> rooms;
+	private List<Room> rooms;
 
 	/**
 	 * Simple constructor for command
 	 * @param rooms ArrayList of rooms being removed from the system
 	 */
-	public RemoveRoomsCommand(ArrayList<Room> rooms)
+	public RemoveRoomsCommand(List<Room> rooms)
 	{
 		this.rooms = rooms;
 	}

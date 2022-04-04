@@ -1,6 +1,7 @@
 package order;
 
 import hotelsystem.roomFactory.Room;
+import hotelsystem.roomFactory.RoomFactory;
 import hotelsystem.userFactory.Customer;
 
 import org.junit.jupiter.api.Test;
@@ -34,22 +35,22 @@ class OrderTest {
 
     @Test void checkOrderGetRooms() {
 		OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Room("Test Name", 123, 2));
-        builder.addRoom(new Room("Test Name", 123, 2));
+        builder.addRoom(RoomFactory.createStandard(123, 2));
+        builder.addRoom(RoomFactory.createStandard(123, 2));
 		Order order = builder.getOrder();
         assertEquals(order.getRooms().size(), 2);
     }
 
     @Test void checkOrderRateCost() {
 		OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Room("Test Name", 123, 2));
+        builder.addRoom(RoomFactory.createStandard(123, 2));
 		Order order = builder.getOrder();
         assertEquals(order.getRateCost(), 200);
     }
 
     @Test void checkOrderFinalCost() {
         OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Room("Test Name", 123, 2));
+        builder.addRoom(RoomFactory.createStandard(123, 2));
         builder.setStartDate(Timestamp.valueOf("2020-10-10 12:00:00"));
         builder.setEndDate(Timestamp.valueOf("2020-10-12 12:00:00"));
         Order order = builder.getOrder();
@@ -72,13 +73,13 @@ class OrderTest {
 
     @Test void checkOrderToString(){
         OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Room("Test Name", 123, 2));
+        builder.addRoom(RoomFactory.createStandard(123, 2));
         builder.setStartDate(Timestamp.valueOf("2020-10-10 12:00:00"));
         builder.setEndDate(Timestamp.valueOf("2020-10-12 12:00:00"));
         Order order = builder.getOrder();
         String expected = """
                 Rooms:\s
-                \tRoom Name - Test Name ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false
+                \tRoom Name - Standard ; Room Number - 123 ; Beds - 2 ; Price - 200.0 ; Taken - false
 
                 Number of Occupants: 0
                 Start Date: 2020-10-10 12:00:00.0
@@ -92,13 +93,13 @@ class OrderTest {
 
     @Test void checkOrderEquals(){
         OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Room("Test Name", 123, 2));
+        builder.addRoom(RoomFactory.createStandard(123, 2));
         builder.setStartDate(Timestamp.valueOf("2020-10-10 12:00:00"));
         builder.setEndDate(Timestamp.valueOf("2020-10-12 12:00:00"));
         Order order = builder.getOrder();
 
         OrderBuilder builder2 = new OrderBuilder();
-        builder2.addRoom(new Room("Test Name", 123, 2));
+        builder2.addRoom(RoomFactory.createStandard(123, 2));
         Order order2 = builder2.getOrder();
 
         assertEquals(order, order);

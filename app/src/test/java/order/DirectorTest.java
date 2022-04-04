@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import hotelsystem.roomFactory.Room;
+import hotelsystem.roomFactory.RoomFactory;
 
 public class DirectorTest {
 
@@ -37,8 +38,8 @@ public class DirectorTest {
     @Test void checkViewRoomsInCart(){
         Director director = new Director();
 		OrderBuilder builder = new OrderBuilder();
-        builder.addRoom(new Room("Deluxe", -1, 2));
-        builder.addRoom(new Room("VIP", -1, 2));
+        builder.addRoom(RoomFactory.createDeluxe(-1, 2));
+        builder.addRoom(RoomFactory.createVIP(-1, 2));
         int size = director.viewRoomsInCart(builder);
         assertEquals(size, 2);
     }

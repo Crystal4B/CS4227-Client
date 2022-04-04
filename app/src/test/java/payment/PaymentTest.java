@@ -8,6 +8,7 @@ package payment;
 import org.junit.jupiter.api.Test;
 
 import hotelsystem.roomFactory.Room;
+import hotelsystem.roomFactory.RoomFactory;
 import hotelsystem.userFactory.Customer;
 import hotelsystem.userFactory.Guest;
 import order.OrderBuilder;
@@ -33,7 +34,7 @@ class PaymentTest {
     @Test void payCreditCard(){
         Payment payment = new Payment();
         ArrayList<Room> rooms = new ArrayList<>();
-        rooms.add(new Room("Test Name", 123, 2));
+        rooms.add(RoomFactory.createStandard(123, 2));
         
 
         Room room = rooms.get(0);

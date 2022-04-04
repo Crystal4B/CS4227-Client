@@ -1,6 +1,5 @@
 package login;
 
-import hotelsystem.userFactory.UserFactory;
 import hotelsystem.userFactory.UserInterface;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.users.LoginUserCommand;

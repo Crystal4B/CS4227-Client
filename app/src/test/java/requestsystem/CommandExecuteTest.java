@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+import billingsystem.CouponVisitor;
 import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
 import order.OrderBuilder;
@@ -32,6 +33,10 @@ import requestsystem.commands.users.GetAllStaffUsersCommand;
 import requestsystem.commands.users.LoginUserCommand;
 import requestsystem.commands.users.RegisterUserCommand;
 import requestsystem.commands.users.RemoveUserCommand;
+import requestsystem.commands.vouchers.CreateVoucherCommand;
+import requestsystem.commands.vouchers.RemoveVoucherCommand;
+import requestsystem.commands.vouchers.ValidateVoucherCommand;
+import userinterface.LoginUI;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CommandExecuteTest
@@ -49,6 +54,8 @@ public class CommandExecuteTest
 		RoomFactory.createDeluxe(0, 2),
 		RoomFactory.createVIP(0, 2)
 	));
+
+	static CouponVisitor coupan;
 
 	static order.Order reservation;
 

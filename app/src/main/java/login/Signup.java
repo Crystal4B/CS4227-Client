@@ -12,6 +12,11 @@ import email.Email;
 
 import java.util.Random;
 
+/**
+ * @author Eoin McDonough
+ * Payment class to handle payment states
+ */
+
 public class Signup implements SignupInterface{
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     public String type = "Customer";
@@ -19,6 +24,14 @@ public class Signup implements SignupInterface{
     public int authKey;
     private String username;
     CommandInvoker invoker;
+
+    /**
+     * Signs in User
+     * 
+     * @param email Email address of user
+     * @param password Password of user
+     * @return Validation of user existing
+     */
 
     public boolean signup(String email, String password) {
         invoker = new CommandInvoker();
@@ -36,18 +49,49 @@ public class Signup implements SignupInterface{
         invoker.execute();
         return true;
     }
+
+    /**
+     * Sets username
+     * 
+     * @param username Username of user
+     */
+
     public void setName(String username){
         this.username = username;
     }
+
+    /**
+     * Sets Type
+     * 
+     * @param type Type of user
+     */
+
     public void setType(String type){
         this.type = type;
     }
+
+    /**
+     * Validates Email
+     * 
+     * @param email Email address of user
+     * @return Validation of email
+     */
+
     public boolean isValidEmail(String email) {
 
         Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
 
         return pattern.matcher(email).matches();
     }
+
+    /**
+     * Registers user in database
+     * 
+     * @param email Email address of user
+     * @param username Username of user
+     * @param password Password of user
+     * @return Returns user
+     */
 
     public UserInterface createsUser(String email,String username, String password) {
         person.setEmail(email);
@@ -58,19 +102,13 @@ public class Signup implements SignupInterface{
 
     }
 
+    /**
+     * Gets User
+     * 
+     * @return User thats logged in
+     */
+
     public UserInterface returnUser() {
         return person;
-    }
-    @Override
-    public void twoFactorAuth(String email) {
-        authKey = new Random().nextInt(10000);
-        String emailToSend = "Thank you for signing up to Platinum Hotels \n Your confirmation code is: " + authKey;
-        new Email(email, "Platinum Hotels Signup Confirmation", emailToSend);
-        //TODO Remove next line before release
-        System.out.println("AUTHKEY FOR DEVELOPMENT PURPOSES //// TO BE REMOVED   : " + authKey);
-    }
-    @Override
-    public boolean checkAuth(int num) {
-        return num == authKey;
     }
 }

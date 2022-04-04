@@ -7,11 +7,24 @@ import requestsystem.commands.users.LoginUserCommand;
 import hotelsystem.userFactory.Customer;
 import java.util.regex.Pattern;
 
+/**
+ * @author Eoin McDonough
+ * Payment class to handle payment states
+ */
+
 
 public class Login implements LoginInterface {
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     CommandInvoker invoker;
     public UserInterface userInterface;
+
+    /**
+     * Logs in User
+     * 
+     * @param email Email address of user
+     * @param password Password of user
+     * @return Validation of user existing
+     */
 
     public boolean login(String email, String password) {
         invoker = new CommandInvoker();
@@ -27,6 +40,13 @@ public class Login implements LoginInterface {
         
     }
 
+    /**
+     * Validates Email
+     * 
+     * @param email Email address of user
+     * @return Validation of email
+     */
+
     public boolean isValidEmail(String email) {
         
         Pattern pattern = Pattern.compile(EMAIL_REGEX_PATTERN);
@@ -36,6 +56,14 @@ public class Login implements LoginInterface {
         }
         return true;
     }
+
+    /**
+     * Validates that user Exists and logs in
+     * 
+     * @param email Email address of user
+     * @param password Password of user
+     * @return Returns user
+     */
 
     public UserInterface validatesUser(String email, String password) {
 
@@ -53,6 +81,12 @@ public class Login implements LoginInterface {
         }
         
     }
+
+    /**
+     * Gets User
+     * 
+     * @return User thats logged in
+     */
 
     public UserInterface returnUser() {
         return userInterface;

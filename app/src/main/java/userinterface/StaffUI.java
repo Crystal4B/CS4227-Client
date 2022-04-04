@@ -22,6 +22,11 @@ import hotelsystem.userFactory.UserInterface;
 
 public class StaffUI {
     
+    /**
+     * Run function of current state.
+     * @param console Used to read user input.
+     * @return The next state.
+     */
     public static int run(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");

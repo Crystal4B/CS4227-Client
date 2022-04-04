@@ -10,6 +10,11 @@ import requestsystem.commands.reservations.GetReservationsByUserCommand;
 
 public class MenuUI {
 
+    /**
+     * Run function of current state.
+     * @param console Used to read user input.
+     * @return The next state.
+     */
     public static int run(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -52,6 +57,11 @@ public class MenuUI {
         }
     }
 
+    /**
+     * View list of reservations for user.
+     * @param console Used to read user input.
+     * @return
+     */
     public static Boolean viewReservations(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -76,6 +86,10 @@ public class MenuUI {
         }
     }
 
+    /**
+     * Get user reservations.
+     * @return A list of orders.
+     */
     public static List<Order> getUserReservations(){
         CommandInvoker invoker = new CommandInvoker();
         invoker.setCommand(new GetReservationsByUserCommand(LoginUI.getUser()));
@@ -89,6 +103,11 @@ public class MenuUI {
         
     }
 
+    /**
+     * Cancel user reservation from list.
+     * @param console Used to read user input.
+     * @return If operation is sucessful. Changes current state in run function.
+     */
     public static boolean cancelUserReservation(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");

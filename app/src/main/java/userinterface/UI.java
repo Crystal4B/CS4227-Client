@@ -13,6 +13,9 @@ public class UI {
     public final static int BILLING_STATE = 3;
     public final static int STAFF_MENU = 4;
 
+    /**
+     * State manager. Switches between different states. Called in main java file.
+     */
     public void run() {
         int state = 0;
         while(true){

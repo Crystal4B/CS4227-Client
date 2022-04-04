@@ -23,9 +23,9 @@ public class LoginInterceptor implements InterceptorInterface{
 		{
 			return;
 		}
-		String defaultPassword = (String) userData.get("defaultPassword");
+		boolean defaultPassword = (boolean) userData.get("defaultPassword");
 		String id = (String) userData.get("id");
-		if (Boolean.parseBoolean(defaultPassword)){
+		if (defaultPassword){
 			System.out.println("You typed in the default password please change your password");
 			Scanner userInput = new Scanner(System.in);
 			String input = userInput.nextLine();

@@ -2,6 +2,8 @@ package userinterface;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import hotelsystem.roomFactory.RoomInterface;
 import hotelsystem.roomFactory.Room;
@@ -10,6 +12,11 @@ import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.rooms.CreateRoomCommand;
 import requestsystem.commands.rooms.GetAllRoomsCommand;
 import requestsystem.commands.rooms.RemoveRoomCommand;
+import requestsystem.commands.users.GetAllStaffUsersCommand;
+import requestsystem.commands.users.RemoveUserCommand;
+import hotelsystem.userFactory.UserInterface;
+import login.LoginAdapter;
+import login.Signup;
 
 public class StaffUI {
     
@@ -45,8 +52,12 @@ public class StaffUI {
                 }
                 return UI.STAFF_MENU;
             case 4:  
-                LoginUI.setType("Staff");
-                return UI.LOGIN_STATE;
+                while(true){
+                    if(manageStaffAccount(console)) {
+                        break;
+                    }
+                }
+                return UI.STAFF_MENU;
             case 5:  
                 return UI.EXIT;
             default:
@@ -151,5 +162,67 @@ public class StaffUI {
             return rooms.get(option);
         }
         return removeRoom(console, rooms);
+    }
+
+    public static boolean manageStaffAccount(Console console) {
+        System.out.println("\n####################################################");
+        System.out.println("#     Welcome to the Hotel Reservation System      #");
+        System.out.println("####################################################\n");
+        System.out.println("Please select one of the following options:");
+        System.out.println("1. \t Add Staff");
+        System.out.println("2. \t Remove Staff");
+        System.out.println("3. \t Back");
+        int option = Integer.parseInt(console.readLine());
+        System.out.println("\n####################################################\n");
+        switch (option) {
+            case 1:
+                while(true){
+                    if(signupStaffAccount(console)) {
+                        break;
+                    }
+                }
+                return true;
+            case 2:
+                while(true){
+                    if(removeStaffAccount(console)) {
+                        break;
+                    }
+                }
+                return true;
+
+        }
+        return false;
+    }
+
+    public static boolean signupStaffAccount(Console console) {
+        System.out.println("Please enter email for new User");
+        String email = console.readLine();
+        System.out.println("Please enter username for new User");
+        String username = console.readLine();
+        System.out.println("Please enter temporary password");
+        String password = String.valueOf(console.readPassword());
+        LoginAdapter signup = new LoginAdapter(new Signup());
+        signup.setName(username);
+        signup.setType("Staff");
+        signup.login(email, password);
+        return true;
+    }
+
+    public static boolean removeStaffAccount(Console console) {
+        CommandInvoker invoker = new CommandInvoker();
+        System.out.println("Please enter email of User to remove");
+        String email = console.readLine();
+        invoker.setCommand(new GetAllStaffUsersCommand());
+		invoker.execute();
+        List<UserInterface> result = invoker.getResponse();
+        for(UserInterface i : result) {
+            if(Objects.equals(i.getUserName(), email)) {
+                invoker.setCommand(new RemoveUserCommand(i));
+                invoker.execute();
+                System.out.println("User with email " + email + " has been removed.");
+                return true;
+            }
+        }
+        return true;
     }
 }

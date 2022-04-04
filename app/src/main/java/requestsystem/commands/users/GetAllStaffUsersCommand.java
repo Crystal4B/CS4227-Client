@@ -8,6 +8,11 @@ import hotelsystem.userFactory.UserFactory;
 import hotelsystem.userFactory.UserInterface;
 import requestsystem.commands.CommandTemplate;
 
+/**
+ * Command for getting allStaffUsers of the hotel
+ * @author Marcin Sęk
+ * @apiNote Response type of List[UserInterface]
+ */
 public class GetAllStaffUsersCommand extends CommandTemplate<List<UserInterface>>
 {
 	private static final String QUERY_NAME = "allStaffUsers";

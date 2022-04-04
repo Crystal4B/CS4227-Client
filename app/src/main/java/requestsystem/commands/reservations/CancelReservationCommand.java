@@ -17,8 +17,8 @@ import requestsystem.commands.CommandTemplate;
  */
 public class CancelReservationCommand extends CommandTemplate<Order>
 {
-	private static final String MUTATION_NAME = "removeReservation";
-	private static final String UNDO_MUTATION_NAME = "createReservation";
+	public static final String MUTATION_NAME = "removeReservation";
+	public static final String UNDO_MUTATION_NAME = "createReservation";
 
 	private Order orderCancelation;
 

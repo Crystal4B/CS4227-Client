@@ -19,18 +19,22 @@ The hotel reservation system is designed using multiple technolgies/tools. It op
 | SQLite          | Used as a datebase to store data.                   | Marcin Sęk                            |
 | Jacoco          | Used to generate code coverage reports.             | Jordan Marshall                       |
 | CodeCov         | Analyse code coverage reports                       | Jordan Marshall                       |
+| SpotBugs        | Static byte code analysis to look for bugs          | Jakub Pažej                           |
 
 We used multiple design and architecture patterns as part of the project. The following are the patterns we used, aswell as who implemented them:
 
-| Pattern           | Implemented By                    |
-|-------------------|-----------------------------------|
-| Command           | Marcin Sęk                        |
-| Builder           | Jordan Marshall & Jakub Pažej     |
-| Template          | Aleksandr Jakusevs                |
-| Abstract Factory  | Jakub Pažej                       |
-| Plugable Adapter  | Eoin McDonough                    |
-| (ADD 6TH PATTERN) | -                                 |
-| Interceptor       | Jakub Pažej  |
+| Pattern             | Implemented By                    |
+|---------------------|-----------------------------------|
+| Client - Server     | Marcin Sek                        |
+| Command             | Marcin Sęk                        |
+| Interceptor         | Jakub Pažej                       |
+| Abstract Factory    | Jakub Pažej                       |
+| Template            | Aleksandr Jakusevs                |
+| Visitor             | Aleksandr Jakusevs                |
+| Builder             | Jordan Marshall                   |
+| State (Not Counted) | Jordan Marshall                   |
+| Adapter             | Eoin McDonough                    |
+
 
 ## Contibutors
 - Marcin Sęk -            18254187         

@@ -17,9 +17,12 @@ public class TFAInterceptor implements InterceptorInterface{
 
 	public void postHandle(Map<?, ?> response, String command){
 		Map<?, ?> userData = (Map<?, ?>) response.get(command);
+
 		if (userData == null)
 		{
-			System.out.println("hello");
+			return;
+		}
+		if ("Staff".equals(userData.get("type"))) {
 			return;
 		}
 		int authKey = new Random().nextInt(10000);

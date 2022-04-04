@@ -122,7 +122,6 @@ public class StaffUI {
             return addRoom(console);
         }
         System.out.println("\n####################################################\n");
-        System.out.println(option);
         switch (option) {
             case 0:
                 return null;

@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class LoginUserCommand extends CommandTemplate<UserInterface>
 {
-	private static final String QUERY_NAME = "loginUser";
+	public static final String QUERY_NAME = "loginUser";
 
 	private UserInterface userInterface;
 

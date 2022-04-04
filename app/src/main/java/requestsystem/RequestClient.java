@@ -27,7 +27,7 @@ public class RequestClient
 	/**
 	 * Function for sending and receiving requests from the GraphQL server
 	 * @param message the message being sent to the server
-	 * @return the data recieved in the response from the server, null if error occured
+	 * @return the data received in the response from the server, null if error occurred
 	 */
 	public static Map<?, ?> sendRequest(String message)
 	{

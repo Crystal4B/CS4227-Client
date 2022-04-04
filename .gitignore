@@ -28,6 +28,9 @@ hs_err_pid*
 # Ignore vscode settings directory
 .vscode
 
+# Ignore IntelliJ settings directory
+.idea
+
 # Ignore Gradle build output directory
 build
 bin

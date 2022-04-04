@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import billingsystem.CouponVisitor;
 import hotelsystem.roomFactory.RoomInterface;
 import login.LoginAdapter;
 import login.Signup;
@@ -16,6 +17,7 @@ import requestsystem.commands.rooms.GetAllRoomsCommand;
 import requestsystem.commands.rooms.RemoveRoomCommand;
 import requestsystem.commands.users.GetAllStaffUsersCommand;
 import requestsystem.commands.users.RemoveUserCommand;
+import requestsystem.commands.vouchers.CreateVoucherCommand;
 import hotelsystem.userFactory.UserInterface;
 
 public class StaffUI {
@@ -29,7 +31,8 @@ public class StaffUI {
         System.out.println("2. \t View Reservations");
         System.out.println("3. \t Manage Rooms");
         System.out.println("4. \t Manage Staff");
-        System.out.println("5. \t Exit");
+        System.out.println("5. \t Create Voucher");
+        System.out.println("6. \t Exit");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");
         int option = -1;
@@ -58,7 +61,14 @@ public class StaffUI {
                     }
                 }
                 return UI.STAFF_MENU;
-            case 5:  
+            case 5:
+                while(true){
+                    if(createVoucher(console)) {
+                        break;
+                    }
+                }
+                return UI.STAFF_MENU;
+            case 6:  
                 return UI.EXIT;
             default:
                 return UI.STAFF_MENU;
@@ -217,6 +227,24 @@ public class StaffUI {
                 return true;
             }
         }
+        return true;
+    }
+    
+    public static boolean createVoucher(Console console) {
+        CommandInvoker invoker = new CommandInvoker();
+        CouponVisitor visitor = new CouponVisitor();
+        visitor.TypeSet("Voucher");
+        System.out.println("Please enter voucher code");
+        String code = String.valueOf(console.readLine());
+        
+        System.out.println("Please enter discount amount");
+        double discount = Double.parseDouble(console.readLine());
+        visitor.CodeSet(code);
+        visitor.DiscountSet(discount);
+        invoker.setCommand(new CreateVoucherCommand(visitor));
+		invoker.execute();
+        CouponVisitor result = invoker.getResponse();
+        System.out.println(result.CodeGet());
         return true;
     }
 }

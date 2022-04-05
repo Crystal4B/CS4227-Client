@@ -23,7 +23,7 @@ class LoginTest {
 
     // Signup Unit Tests
     static CommandInvoker invoker = new CommandInvoker();
-    int prefix;
+    static int prefix;
 
 	@Order(1)
     @Test void checkSignup() {
@@ -42,8 +42,8 @@ class LoginTest {
     @Order(2)
     @Test void checkLogin(){
         Login login = new Login();
-        assertTrue(login.login("test@test.com", "#Password123"));
-        assertEquals(login.returnUser().getEmail(), "test@test.com");
+        assertTrue(login.login(prefix+"@test.com", "#Password123"));
+        assertEquals(login.returnUser().getEmail(), prefix+"@test.com");
     }
 
     @Test void checkLoginForUnsignedUser(){

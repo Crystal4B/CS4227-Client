@@ -25,6 +25,7 @@ import hotelsystem.requestsystem.commands.CommandInvoker;
 import hotelsystem.requestsystem.commands.reservations.CancelReservationCommand;
 import hotelsystem.requestsystem.commands.reservations.CreateReservationCommand;
 import hotelsystem.requestsystem.commands.reservations.GetReservationsByUserCommand;
+import hotelsystem.requestsystem.commands.reservations.UpdateReservationPaidCommand;
 import hotelsystem.requestsystem.commands.rooms.CreateRoomsCommand;
 import hotelsystem.requestsystem.commands.rooms.GetAvailableRoomsCommand;
 import hotelsystem.requestsystem.commands.rooms.RemoveRoomsCommand;
@@ -296,9 +297,7 @@ public class CommandExecuteTest
 		assertEquals(visitor.DiscountGet(), result.DiscountGet());
 		assertFalse(result.CodeGet().equals(""));
 
-
 		coupan = result;
-		System.out.println(coupan.CodeGet());
 	}
 
 	@Test
@@ -308,8 +307,6 @@ public class CommandExecuteTest
 		// Send request
 		invoker.setCommand(new ValidateVoucherCommand(coupan));
 		invoker.execute();
-
-		System.out.println(coupan.CodeGet());
 
 		// Retrieve response and assert
 		CouponVisitor result = invoker.getResponse();
@@ -338,9 +335,7 @@ public class CommandExecuteTest
 		assertEquals(coupan.DiscountGet(), result.DiscountGet());
 		assertFalse(result.CodeGet().equals(""));
 
-
 		coupan = result;
-		System.out.println(coupan.CodeGet());
 	}
 
 
@@ -401,7 +396,49 @@ public class CommandExecuteTest
 			}
 		}
 
+		System.out.println(resultOrder);
 		reservation = resultOrder;
+	}
+
+	@Test
+	@Order(16)
+	public void checkUpdateReservationPaidCommand()
+	{
+		invoker.setCommand(new UpdateReservationPaidCommand(Integer.parseInt(reservation.getOrderID()), true));
+		invoker.execute();
+
+		hotelsystem.order.Order result = invoker.getResponse();
+		assertEquals(reservation.getNumberOfDaysBooked(), result.getNumberOfDaysBooked());
+		assertEquals(reservation.getFinalCost(), result.getFinalCost());
+		assertEquals(reservation.getNumberOfOccupants(), result.getNumberOfOccupants());
+		assertEquals(reservation.getOrderID(), result.getOrderID());
+
+		ArrayList<Room> rooms = reservation.getRooms();
+		ArrayList<Room> resultRooms = result.getRooms();
+		assertEquals(rooms.size(), resultRooms.size());
+		for (int i = 0; i < rooms.size(); i++)
+		{
+			Room roomStandard = rooms.get(i);
+			Room resultRoom = resultRooms.get(i);
+
+			assertEquals(roomStandard.getRoomNumber(), resultRoom.getRoomNumber());
+			assertEquals(roomStandard.getRoomName(), resultRoom.getRoomName());
+			assertEquals(roomStandard.getPerks(), resultRoom.getPerks());
+			assertEquals(roomStandard.getPrice(), resultRoom.getPrice());
+
+			ArrayList<UserInterface> occupants = roomStandard.getOccupants();
+			ArrayList<UserInterface> resultOccupants = resultRoom.getOccupants();
+			assertEquals(occupants.size(), resultOccupants.size());
+			for (int j = 0; j < occupants.size(); j++)
+			{
+				Guest guest = (Guest) occupants.get(j);
+				Guest resultGuest = (Guest) resultOccupants.get(j);
+
+				assertEquals(guest.getFirstName(), resultGuest.getFirstName());
+				assertEquals(guest.getLastName(), resultGuest.getLastName());
+				assertFalse(resultGuest.getId() == -1);
+			}
+		}
 	}
 
 	// @Test
@@ -488,7 +525,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(16)
+	@Order(17)
 	public void checkCancelReservationCommand()
 	{
 		invoker.setCommand(new CancelReservationCommand(reservation));
@@ -532,7 +569,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(17)
+	@Order(18)
 	public void checkRemoveRoomsCommand()
 	{
 		// Send new createRooms request
@@ -553,7 +590,7 @@ public class CommandExecuteTest
 	}
 	
 	@Test
-	@Order(18)
+	@Order(19)
 	public void checkRemoveUserCommandOnCustomer()
 	{
 		// Send new customer request
@@ -569,7 +606,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(19)
+	@Order(20)
 	public void checkRemoveUserCommandOnStaff()
 	{
 		// Send new customer request
@@ -585,7 +622,7 @@ public class CommandExecuteTest
 	}
 
 	@Test
-	@Order(20)
+	@Order(21)
 	public void checkGetAllStaffUsersCommand()
 	{
 		// Send new request

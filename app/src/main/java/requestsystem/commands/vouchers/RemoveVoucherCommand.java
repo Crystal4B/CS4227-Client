@@ -6,12 +6,20 @@ import billingsystem.CouponVisitor;
 import requestsystem.commands.CommandTemplate;
 import userinterface.LoginUI;
 
+/**
+ * @author Aleksandr Jakusevs
+ * Command for removing a voucher from the system
+ */
 public class RemoveVoucherCommand extends CommandTemplate<CouponVisitor> {
 
     private static final String MUTATION_NAME = "removeVoucher";
 	private static final String UNDO_MUTATION_NAME = "createVoucher";
 	private CouponVisitor couponvisitor;
 
+	/**
+	 * Simple constructor for the RemoveVoucherCommand
+	 * @param Couponvisitor the voucher/coupan
+	 */
     public RemoveVoucherCommand(CouponVisitor couponvisitor){
 		this.couponvisitor = couponvisitor;
 	}

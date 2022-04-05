@@ -8,6 +8,12 @@ import billingsystem.BillingCashless;
 import billingsystem.CouponVisitor;
 import order.Order;
 
+/**
+ * @author Aleksandr Jakusevs
+ * @author Eoin McDonough
+ * @author Jordan Marshall
+ * UI for billing and payments
+ */
 public class BillingUI {
     private static CouponVisitor a = new CouponVisitor();
 
@@ -73,6 +79,11 @@ public class BillingUI {
         }
     }
 
+    /**
+     * Method to allow an input of a coupon code as well as checking of the coupon code
+     * @param console Used to read user input.
+     * @return boolean depending on the validity of the coupon.
+     */
     public static Boolean couponCode(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -91,6 +102,11 @@ public class BillingUI {
         }
     }
 
+    /**
+     * Method to allow an input of a voucher code as well as checking of the voucher code
+     * @param console Used to read user input.
+     * @return boolean depending on the validity of the voucher.
+     */
     public static Boolean voucherCode(Console console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");

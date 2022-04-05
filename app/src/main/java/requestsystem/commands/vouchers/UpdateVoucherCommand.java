@@ -6,12 +6,20 @@ import billingsystem.CouponVisitor;
 import requestsystem.commands.CommandTemplate;
 import userinterface.LoginUI;
 
+/**
+ * @author Aleksandr Jakusevs
+ * Command for updating a voucher within the system
+ */
 public class UpdateVoucherCommand extends CommandTemplate<CouponVisitor> {
 
     private static final String MUTATION_NAME = "updateVoucher";
 	private static final String UNDO_MUTATION_NAME = "updateVoucher";
 	private CouponVisitor couponvisitor;
 
+	/**
+	 * Simple constructor for the UpdateVoucherCommand
+	 * @param Couponvisitor the voucher/coupan
+	 */
     public UpdateVoucherCommand(CouponVisitor couponvisitor){
 		this.couponvisitor = couponvisitor;
 	}

@@ -12,8 +12,17 @@ public class Staff implements UserInterface
     private double salary;
     final static String type = "Staff";
 
+    /**
+     * Constructor for staff
+     */
     public Staff(){}
 
+    /**
+     * Constructor for staff
+     * @param userName  Username of staff user.
+     * @param password Password of staff user.
+     * @param email Email of staff user.
+     */
     public Staff(String userName, String password, String email)
     {
         this.userName=userName;
@@ -101,26 +110,44 @@ public class Staff implements UserInterface
         return firstName+" "+lastName;
     }
 
+    /**
+     * Set salary for staff
+     * @param salary The salary in Euro to be set 
+     */
     public void setSalary(double salary)
     {
         this.salary=salary;
     }
 
+    /**
+     * Get salary for staff
+     */
     public double getSalary()
     {
         return salary;
     }
 
+    /**
+     * Set holidays for staff.
+     * @param days Number of days to be set for holidays for staff.
+     */
     public void setHolidays(int days)
     {
         this.holidayDaysAvailable=days;
     }
 
+    /**
+     * Add holidays to staff.
+     * @param days Number of days to be added for holidays for staff.
+     */
     public void addHolidays(int days)
     {
         this.holidayDaysAvailable+=days;
     }
 
+    /**
+     * Get holidays for staff.
+     */
     public int getHolidays()
     {
         return holidayDaysAvailable;

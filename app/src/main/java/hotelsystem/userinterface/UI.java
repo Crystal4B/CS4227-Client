@@ -2,15 +2,44 @@ package hotelsystem.userinterface;
 
 import java.util.Scanner;
 
+/**
+ *  UI class
+ */
 public class UI {
 
+    /**
+     * Scanner used to get user input stream.
+     */
     private Scanner console = new Scanner(System.in);
 
+    /**
+     * Exit state to exit out of application
+     */
     public final static int EXIT = -1;
+
+    /**
+     * Login state
+     */
     public final static int LOGIN_STATE = 0;
+
+    /**
+     * Menu state
+     */
     public final static int MENU_STATE = 1;
+
+    /**
+     * Reservation state
+     */
     public final static int RESERVATION_STATE = 2;
+
+    /**
+     * Billing state
+     */
     public final static int BILLING_STATE = 3;
+
+    /**
+     * Staff menu state
+     */
     public final static int STAFF_MENU = 4;
 
     /**

@@ -7,13 +7,14 @@ package payment;
 
 import org.junit.jupiter.api.Test;
 
+import hotelsystem.order.OrderBuilder;
+import hotelsystem.payment.Payment;
+import hotelsystem.requestsystem.commands.CommandInvoker;
+import hotelsystem.requestsystem.commands.reservations.CreateReservationCommand;
 import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
 import hotelsystem.userFactory.Customer;
 import hotelsystem.userFactory.Guest;
-import order.OrderBuilder;
-import requestsystem.commands.CommandInvoker;
-import requestsystem.commands.reservations.CreateReservationCommand;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,14 +48,14 @@ class PaymentTest {
 		builder.addRoom(room);
 		builder.setUser(customer);
 
-		order.Order order = builder.getOrder();
+		hotelsystem.order.Order order = builder.getOrder();
 
 		// Send new createRooms request
 		invoker.setCommand(new CreateReservationCommand(order));
 		invoker.execute();
 
 		// Retrieve response and assert
-		order.Order resultOrder = invoker.getResponse();
+		hotelsystem.order.Order resultOrder = invoker.getResponse();
         
         int orderId = Integer.parseInt(resultOrder.getOrderID());
         assertTrue(payment.payCreditCard(orderId,"1123342534522342"," Eoin McDonough" ,0425,123));

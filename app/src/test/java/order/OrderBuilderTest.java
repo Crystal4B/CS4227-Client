@@ -1,6 +1,9 @@
 package order;
 
 import org.junit.jupiter.api.Test;
+
+import hotelsystem.order.Order;
+import hotelsystem.order.OrderBuilder;
 import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
 

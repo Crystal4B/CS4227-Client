@@ -32,6 +32,7 @@ public class RegisterUserCommand extends CommandTemplate<UserInterface>
 	/**
 	 * Simple constructor for command
 	 * @param userInterface being registered with the system
+	 * @param defaultPassword checks default password
 	 */
 	public RegisterUserCommand(UserInterface userInterface, boolean defaultPassword)
 	{

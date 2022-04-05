@@ -14,6 +14,10 @@ import hotelsystem.roomfactory.RoomFactory;
  * @author Marcin Sęk
  * @apiNote Response type of Order
  */
+
+ /**
+     * Default Constructor for command
+     */
 public class SelectReservationCommand extends CommandTemplate<Order>
 {
 	public static final String QUERY_NAME = "reservationById";

@@ -16,6 +16,10 @@ import hotelsystem.userfactory.Guest;
  * @author Marcin Sęk
  * @apiNote Response of type Order
  */
+
+ /**
+     * Default Constructor for command
+     */
 public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 {
 	public static final String MUTATION_NAME = "updateReservationPaid";

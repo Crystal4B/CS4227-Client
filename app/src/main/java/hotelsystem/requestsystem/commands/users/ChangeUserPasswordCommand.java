@@ -16,6 +16,8 @@ public class ChangeUserPasswordCommand extends CommandTemplate<UserInterface>
 
 	/**
 	 * Simple constructor for command
+	 * @param id Id of user
+	 * @param password new Password
 	 */
 	public ChangeUserPasswordCommand(int id, String password)
 	{

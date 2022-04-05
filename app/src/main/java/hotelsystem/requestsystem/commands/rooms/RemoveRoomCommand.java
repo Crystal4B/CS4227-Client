@@ -6,6 +6,9 @@ import hotelsystem.requestsystem.commands.CommandTemplate;
 import hotelsystem.roomfactory.Room;
 import hotelsystem.roomfactory.RoomFactory;
 
+/**
+     * Default Constructor for command
+     */
 public class RemoveRoomCommand extends CommandTemplate<Room>
 {
 	public static final String MUTATION_NAME = "removeRoom";

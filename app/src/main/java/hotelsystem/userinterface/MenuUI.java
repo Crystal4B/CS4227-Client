@@ -8,6 +8,10 @@ import hotelsystem.requestsystem.commands.CommandInvoker;
 import hotelsystem.requestsystem.commands.reservations.CancelReservationCommand;
 import hotelsystem.requestsystem.commands.reservations.GetReservationsByUserCommand;
 
+/**
+ * User interface. This is the main  menu. This provides functionality for  users to create and view reservations, pay and also exit the application.
+ * @author Jordan Marshall
+ */
 public class MenuUI {
 
     /**

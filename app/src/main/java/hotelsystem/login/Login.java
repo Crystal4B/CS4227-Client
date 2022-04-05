@@ -11,7 +11,9 @@ import java.util.regex.Pattern;
  * Payment class to handle payment states
  */
 
-
+    /**
+     * Logs in User
+     */
 public class Login implements LoginInterface {
     private static final String EMAIL_REGEX_PATTERN = "^(.+)@(.+).(.+)$";
     CommandInvoker invoker;
@@ -24,7 +26,6 @@ public class Login implements LoginInterface {
      * @param password Password of user
      * @return Validation of user existing
      */
-
     public boolean login(String email, String password) {
         invoker = new CommandInvoker();
         if (!isValidEmail(email)) {

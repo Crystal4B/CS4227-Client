@@ -14,6 +14,7 @@ public interface UserInterface
     void setUserName(String userName);
 
     /**
+     * Gets username
      * @return a username as String
      */
     String getUserName();
@@ -25,6 +26,7 @@ public interface UserInterface
     void setPassword(String password);
 
     /**
+     * Gets password
      * @return password as String
      */
     String getPassword();
@@ -36,11 +38,13 @@ public interface UserInterface
     void setEmail(String email);
 
     /**
+     * Gets email
      * @return email as String
      */
     String getEmail();
 
     /**
+     * Gets user type
      * @return User Type as String
      */
     String getUserType();
@@ -52,6 +56,7 @@ public interface UserInterface
     void setId(int id);
 
     /**
+     * Gets is
      * @return ID as int
      */
     int getId();
@@ -63,6 +68,7 @@ public interface UserInterface
     void setFirstName(String name);
 
     /**
+     * Gets first name
      * @return first name of user as String
      */
     String getFirstName();
@@ -74,6 +80,7 @@ public interface UserInterface
     void setLastName(String name);
 
     /**
+     * Gets last name
      * @return last name of user as String
      */
     String getLastName();
@@ -86,6 +93,7 @@ public interface UserInterface
     void setLegalName(String firstName, String lastName);
 
     /**
+     * Gets legal name
      * @return first and last name of user as String
      */
     String getLegalName();

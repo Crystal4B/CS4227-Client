@@ -14,6 +14,10 @@ import hotelsystem.roomfactory.RoomFactory;
  * @author Marcin Sęk
  * @apiNote Response of type List[Room]
  */
+
+ /**
+     * Default Constructor for command
+     */
 public class CreateRoomsCommand extends CommandTemplate<List<Room>>
 {
 	public static final String MUTATION_NAME = "createRooms";

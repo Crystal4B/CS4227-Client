@@ -14,6 +14,10 @@ import hotelsystem.roomfactory.RoomFactory;
  * @author Marcin Sęk
  * @apiNote Response type of ArrayList[Standard]
  */
+
+ /**
+     * Default Constructor for command
+     */
 public class RemoveRoomsCommand extends CommandTemplate<List<Room>>
 {
 	public static final String MUTATION_NAME = "removeRooms";

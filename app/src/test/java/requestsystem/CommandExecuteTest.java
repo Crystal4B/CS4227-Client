@@ -396,7 +396,6 @@ public class CommandExecuteTest
 			}
 		}
 
-		System.out.println(resultOrder);
 		reservation = resultOrder;
 	}
 
@@ -497,8 +496,6 @@ public class CommandExecuteTest
 	{
 		invoker.setCommand(new GetAvailableRoomsCommand(startDate, endDate));
 		invoker.execute();
-
-		// Weird behaviour I need to fix
 
 		// Retrieve Response and assert
 		Map<String, ArrayList<Room>> availableRooms = invoker.getResponse();

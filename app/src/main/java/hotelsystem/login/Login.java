@@ -1,9 +1,9 @@
 package hotelsystem.login;
 
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.userfactory.UserInterface;
 import hotelsystem.requestsystem.commands.CommandInvoker;
 import hotelsystem.requestsystem.commands.users.LoginUserCommand;
-import hotelsystem.userFactory.Customer;
+import hotelsystem.userfactory.Customer;
 import java.util.regex.Pattern;
 
 /**

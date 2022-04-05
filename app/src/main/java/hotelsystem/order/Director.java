@@ -7,12 +7,12 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
-import hotelsystem.roomFactory.RoomInterface;
+import hotelsystem.roomfactory.RoomInterface;
 import hotelsystem.userinterface.ReservationUI;
 import hotelsystem.requestsystem.commands.CommandInvoker;
 import hotelsystem.requestsystem.commands.reservations.CreateReservationCommand;
 import hotelsystem.requestsystem.commands.rooms.GetAvailableRoomsCommand;
-import hotelsystem.roomFactory.Room;
+import hotelsystem.roomfactory.Room;
 
 /**
  * Director class that defines steps of builder.

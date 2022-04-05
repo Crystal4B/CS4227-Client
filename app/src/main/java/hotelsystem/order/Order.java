@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import hotelsystem.roomFactory.Room;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.userfactory.UserInterface;
 
 /**
  * Order class provides get functions for order objects.

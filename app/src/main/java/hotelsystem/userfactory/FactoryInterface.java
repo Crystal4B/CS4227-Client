@@ -1,4 +1,4 @@
-package hotelsystem.userFactory;
+package hotelsystem.userfactory;
 
 /**
  * @author Jakub Pažej

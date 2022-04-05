@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.roomFactory.RoomInterface;
+import hotelsystem.roomfactory.RoomInterface;
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.roomFactory.RoomFactory;
+import hotelsystem.roomfactory.RoomFactory;
 
 /**
  * A Get Rooms Command for fetching all the rooms in the hotel

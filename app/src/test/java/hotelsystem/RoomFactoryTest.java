@@ -1,8 +1,8 @@
 package hotelsystem;
 
-import hotelsystem.roomFactory.RoomFactory;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.userFactory.*;
+import hotelsystem.roomfactory.RoomFactory;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.userfactory.*;
 
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;

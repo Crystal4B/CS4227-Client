@@ -3,8 +3,8 @@ package hotelsystem.requestsystem.commands.users;
 import java.util.Map;
 
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.userFactory.UserFactory;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.userfactory.UserFactory;
+import hotelsystem.userfactory.UserInterface;
 
 /**
  * Command for removing a user from the system

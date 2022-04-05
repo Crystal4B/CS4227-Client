@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import hotelsystem.order.Order;
 import hotelsystem.order.OrderBuilder;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.roomFactory.RoomFactory;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.roomfactory.RoomFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;

@@ -3,9 +3,9 @@ package hotelsystem.requestsystem.commands.users;
 import java.util.Map;
 
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.userFactory.Customer;
-import hotelsystem.userFactory.Staff;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.userfactory.Customer;
+import hotelsystem.userfactory.Staff;
+import hotelsystem.userfactory.UserInterface;
 
 public class ChangeUserPasswordCommand extends CommandTemplate<UserInterface>
 {

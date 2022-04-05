@@ -6,8 +6,8 @@ import java.util.Scanner;
 import hotelsystem.order.Director;
 import hotelsystem.order.Order;
 import hotelsystem.order.OrderBuilder;
-import hotelsystem.userFactory.Guest;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.userfactory.Guest;
+import hotelsystem.userfactory.UserInterface;
 
 public class ReservationUI {
 

@@ -44,6 +44,12 @@ public class LoginUI {
         
     }
 
+    /**
+     * This runs the login ui for user to login to account
+     * @param console Used to read user input.
+     * @return Returns correct menu for type of logged in user
+     */
+
     public static int login(Scanner console) {
         System.out.println("Please enter email");
         String email = console.nextLine();
@@ -65,6 +71,12 @@ public class LoginUI {
         }
         return UI.LOGIN_STATE;
     }
+
+    /**
+     * This runs the signup ui for users to create a new account
+     * @param console Used to read user input.
+     * @return Returns correct menu 
+     */
 
     public static int signup(Scanner console) {
         System.out.println("Please enter email");
@@ -89,14 +101,28 @@ public class LoginUI {
         }
     }
     
+    /**
+     * Returns the logged in user
+     * @return Returns logged in user
+     */
 
     public static UserInterface getUser(){
         return userInterface;
     }
 
+    /**
+     * Sets the logged in user
+     * @param loggedInUser User to be logged in
+     */
+
     public static void setUser(UserInterface loggedInUser){
         userInterface = loggedInUser;
     }
+
+    /**
+     * Sets the logged in users type
+     * @param type UserType to set
+     */
 
     public static void setType(String type){
         userType = type;

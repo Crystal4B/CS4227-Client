@@ -24,12 +24,16 @@ import hotelsystem.roomFactory.RoomFactory;
 import hotelsystem.roomFactory.RoomInterface;
 import hotelsystem.userFactory.UserInterface;
 
+/**
+ * Staff user interface. This is the main staff menu. This provides functionality for staff users to create and view reservations, manage rooms, staff and vouchers, and also exit the application.
+ * @author Jordan Marshall
+ */
 public class StaffUI {
-    
+
     /**
-     * Run function of current state.
+     * This runs the current state specified in UI.java and can also change sub-states.
      * @param console Used to read user input.
-     * @return The next state.
+     * @return Returns boolean to break loop and change state.
      */
     public static int run(Scanner console){
         System.out.println("\n####################################################");
@@ -82,6 +86,11 @@ public class StaffUI {
         }
     }
 
+    /**
+     * This is a function to manage rooms. This allows staff to add and remove available rooms for users in the database.
+     * @param console Used to read user input.
+     * @return Returns boolean to break loop and change state.
+     */
     public static Boolean manageRooms(Scanner console){
         CommandInvoker invoker = new CommandInvoker();
         invoker.setCommand(new GetAllRoomsCommand());
@@ -121,7 +130,12 @@ public class StaffUI {
         }
         return false;
     }
-
+    
+    /**
+     * This function allows staff users to add rooms for availability in the database.
+     * @param console Used to read user input.
+     * @return Returns room of chosen type by user.
+     */
     public static RoomInterface addRoom(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -129,6 +143,8 @@ public class StaffUI {
         System.out.println("Please select one of the following rooms to add:");
         System.out.println("0. \t Back\n");
         System.out.println("1. \t Standard Room");
+        System.out.println("2. \t Deluxe Room");
+        System.out.println("3. \t VIP Room");
         int option;
         try {
             option = console.nextInt();
@@ -141,10 +157,17 @@ public class StaffUI {
         return switch (option) {
             case 0 -> null;
             case 1 -> RoomFactory.createStandard(-1, 2);
+            case 2 -> RoomFactory.createDeluxe(-1, 2);
+            case 3 -> RoomFactory.createVIP(-1, 2);
             default -> addRoom(console);
         };
     }
 
+    /**
+     * This function allows staff users to remove rooms for availability in the database.
+     * @param console Used to read user input.
+     * @return Returns room of chosen type by user.
+     */
     public static RoomInterface removeRoom(Scanner console, ArrayList<RoomInterface> roomFactories){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -172,6 +195,11 @@ public class StaffUI {
         return removeRoom(console, roomFactories);
     }
 
+    /**
+     * This is a function to manage staff accounts. This allows staff to add and remove staff accounts in the database.
+     * @param console Used to read user input.
+     * @return Returns boolean to break loop and change state.
+     */
     public static boolean manageStaffAccount(Scanner console) {
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -212,6 +240,11 @@ public class StaffUI {
         return false;
     }
 
+    /**
+     * This is a function to signup a staff account. This can only be ran be a staff user.
+     * @param console Used to read user input.
+     * @return Returns boolean to break loop and change state.
+     */
     public static boolean signupStaffAccount(Scanner console) {
         System.out.println("Please enter email for new User");
         String email = console.nextLine();
@@ -226,6 +259,11 @@ public class StaffUI {
         return true;
     }
 
+    /**
+     * This is a function to remove a staff account. This allows staff to remove staff accounts in the database.
+     * @param console Used to read user input.
+     * @return Returns boolean to break loop and change state.
+     */
     public static boolean removeStaffAccount(Scanner console) {
         CommandInvoker invoker = new CommandInvoker();
         System.out.println("Please enter email of User to remove");
@@ -244,6 +282,11 @@ public class StaffUI {
         return true;
     }
 
+    /**
+     * This is a function to list all staff accounts rooms.
+     * @param console Used to read user input.
+     * @return Returns boolean to break loop and change state.
+     */
     public static boolean listStaff(Scanner console) {
         CommandInvoker invoker = new CommandInvoker();
         invoker.setCommand(new GetAllStaffUsersCommand());
@@ -255,6 +298,11 @@ public class StaffUI {
         return true;
     }
 
+    /**
+     * This is a function to manage vouchers. This allows staff to add and remove vouchers for users in the database.
+     * @param console Used to read user input.
+     * @return Returns boolean to break loop and change state.
+     */
     public static boolean manageVouchers(Scanner console) {
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -295,7 +343,11 @@ public class StaffUI {
         return false;
     }
 
-    
+    /**
+     * This is a function to create new vouchers. This allows staff to create new vouchers with specified code for users in the database.
+     * @param console Used to read user input.
+     * @return Returns boolean to break loop and change state.
+     */
     public static boolean createVoucher(Scanner console) {
         CommandInvoker invoker = new CommandInvoker();
         CouponVisitor visitor = new CouponVisitor();
@@ -310,6 +362,11 @@ public class StaffUI {
         return true;
     }
 
+    /**
+     * This is a function to removes vouchers. This allows staff to remove vouchers for users in the database.
+     * @param console Used to read user input.
+     * @return Returns boolean to break loop and change state.
+     */
     public static boolean removeVoucher(Scanner console) {
         CommandInvoker invoker = new CommandInvoker();
         System.out.println("Please enter voucher code to remove");
@@ -324,6 +381,11 @@ public class StaffUI {
         return true;
     }
 
+    /**
+     * This is a function to update vouchers. This allows staff to update already created vouchers for users in the database.
+     * @param console Used to read user input.
+     * @return Returns boolean to break loop and change state.
+     */
     public static boolean updateVoucher(Scanner console) {
         CommandInvoker invoker = new CommandInvoker();
         System.out.println("Please enter voucher code to update");

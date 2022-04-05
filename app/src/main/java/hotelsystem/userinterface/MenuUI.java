@@ -11,9 +11,9 @@ import hotelsystem.requestsystem.commands.reservations.GetReservationsByUserComm
 public class MenuUI {
 
     /**
-     * Run function of current state.
+     * This runs the current state specified in UI.java and can also change sub-states.
      * @param console Used to read user input.
-     * @return The next state.
+     * @return Returns boolean to break loop and change state.
      */
     public static int run(Scanner console){
         System.out.println("\n####################################################");
@@ -58,7 +58,7 @@ public class MenuUI {
     }
 
     /**
-     * View list of reservations for user.
+     * This is a function to view all reservations created by the user.
      * @param console Used to read user input.
      */
     public static Boolean viewReservations(Scanner console){
@@ -81,7 +81,7 @@ public class MenuUI {
     }
 
     /**
-     * Get user reservations.
+     * This is a function that gets all user reservations.
      * @return A list of orders.
      */
     public static List<Order> getUserReservations(){
@@ -98,7 +98,7 @@ public class MenuUI {
     }
 
     /**
-     * Cancel user reservation from list.
+     * This function allows a user to cancel a reservation from list.
      * @param console Used to read user input.
      * @return If operation is sucessful. Changes current state in run function.
      */

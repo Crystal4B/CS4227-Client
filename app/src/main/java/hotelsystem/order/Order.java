@@ -8,6 +8,10 @@ import java.util.Objects;
 import hotelsystem.roomFactory.Room;
 import hotelsystem.userFactory.UserInterface;
 
+/**
+ * Order class provides get functions for order objects.
+ * @author Jordan Marshall
+ */
 public class Order {
 
     private final String orderID;
@@ -22,15 +26,15 @@ public class Order {
     
     /**
      * Constructor for order object
-     * @param orderID
-     * @param userInterface
-     * @param rooms
-     * @param startDate
-     * @param endDate
-     * @param numberOfDaysBooked
-     * @param rateCost
-     * @param finalCost
-     * @param numberOfOccupants
+     * @param orderID  A string of charaters to make up an order ID.
+     * @param userInterface A user object that creates orders.
+     * @param rooms A list of rooms in order.
+     * @param startDate A check-in date for order.
+     * @param endDate A check-out date for order.
+     * @param numberOfDaysBooked The total amount of days booked for order. This is check-out minus check-in date.
+     * @param rateCost This is the rate cost of a single day of order.
+     * @param finalCost This is the final cost of the order.
+     * @param numberOfOccupants This is the total number of occupants staying as part of the order.
      */
     public Order(String orderID, UserInterface userInterface, ArrayList<Room> rooms, Timestamp startDate, Timestamp endDate, long numberOfDaysBooked, double rateCost, double finalCost, int numberOfOccupants){
         this.orderID = orderID;
@@ -45,7 +49,7 @@ public class Order {
     }   
 
     /**
-     * Get order ID.
+     * This is a function to get order ID of order object.
      * @return An order ID as string.
      */
     public String getOrderID(){
@@ -53,7 +57,7 @@ public class Order {
     }
 
     /**
-     * Get order user.
+     * This is a function to get the user that creates an order.
      * @return A user object.
      */
     public UserInterface getUser(){
@@ -61,7 +65,7 @@ public class Order {
     }
  
     /**
-     * Get list of rooms in order.
+     * This is a function that gets a list of rooms from the order object.
      * @return A list of rooms.
      */
     public ArrayList<Room> getRooms(){
@@ -69,7 +73,7 @@ public class Order {
     }
 
     /**
-     * Get start date.
+     * This is a function to get check-in date on order.
      * @return A start date timestamp object.
      */
     public Timestamp getStartDate(){
@@ -77,7 +81,7 @@ public class Order {
     }
 
     /**
-     * Get end date.
+     * This is a function to get check-out date on an order.
      * @return A end date timestamp object.
      */
     public Timestamp getEndDate(){
@@ -85,7 +89,7 @@ public class Order {
     }
 
     /**
-     * Get number of days booked.
+     * This is a function to get the total number of days booked on an order.
      * @return The total number of days booked as an integer.
      */
     public long getNumberOfDaysBooked(){
@@ -93,23 +97,23 @@ public class Order {
     }
 
     /**
-     * Get rate cost. Rate of a single day
-     * @return The rate cost as double.
+     * This is a function to get cost of a single day of the order. 
+     * @return The rate cost as double in EURO.
      */
     public double getRateCost(){
         return rateCost;
     }
 
     /**
-     * Get final cost. Cost of total stay.
-     * @return The final cost as double.
+     * This is a function to get totoal cost of the order. 
+     * @return The final cost as double in EURO.
      */
     public double getFinalCost(){
         return finalCost;
     }
 
     /**
-     * Get number of occupants.
+     * This is a function to get total number of occupants staying.
      * @return The total number of occupants as integer.
      */
     public int getNumberOfOccupants(){

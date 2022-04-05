@@ -3,8 +3,8 @@ package hotelsystem.requestsystem.commands.rooms;
 import java.util.Map;
 
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.roomFactory.RoomFactory;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.roomfactory.RoomFactory;
 
 /**
  * A Create Room Command for creating a singular room in the hotel

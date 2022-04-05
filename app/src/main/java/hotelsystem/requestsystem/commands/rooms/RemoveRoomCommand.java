@@ -3,8 +3,8 @@ package hotelsystem.requestsystem.commands.rooms;
 import java.util.Map;
 
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.roomFactory.RoomFactory;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.roomfactory.RoomFactory;
 
 public class RemoveRoomCommand extends CommandTemplate<Room>
 {

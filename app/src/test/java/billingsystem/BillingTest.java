@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import hotelsystem.billingsystem.BillingCashless;
 import hotelsystem.order.*;
-import hotelsystem.roomFactory.*;
+import hotelsystem.roomfactory.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

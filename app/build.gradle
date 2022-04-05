@@ -44,6 +44,14 @@ test {
 	}
 }
 
+jar {
+	manifest {
+		attributes(
+			'Main-Class': 'hotelsystem.App'
+		)
+	}
+}
+
 jacocoTestReport {
     reports {
         xml.required = true

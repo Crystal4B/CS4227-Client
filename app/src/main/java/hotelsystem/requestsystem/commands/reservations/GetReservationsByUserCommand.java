@@ -8,10 +8,10 @@ import java.util.Map;
 import hotelsystem.order.Order;
 import hotelsystem.order.OrderBuilder;
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.roomFactory.RoomFactory;
-import hotelsystem.userFactory.Guest;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.roomfactory.RoomFactory;
+import hotelsystem.userfactory.Guest;
+import hotelsystem.userfactory.UserInterface;
 
 /**
  * A Get Reservation Command for retrieving reservations visible to a specific user

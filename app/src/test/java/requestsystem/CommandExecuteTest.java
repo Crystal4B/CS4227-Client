@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import hotelsystem.userFactory.*;
+import hotelsystem.userfactory.*;
 import hotelsystem.userinterface.LoginUI;
 
 import org.junit.jupiter.api.Test;
@@ -37,8 +37,8 @@ import hotelsystem.requestsystem.commands.vouchers.CreateVoucherCommand;
 import hotelsystem.requestsystem.commands.vouchers.RemoveVoucherCommand;
 import hotelsystem.requestsystem.commands.vouchers.UpdateVoucherCommand;
 import hotelsystem.requestsystem.commands.vouchers.ValidateVoucherCommand;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.roomFactory.RoomFactory;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.roomfactory.RoomFactory;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CommandExecuteTest

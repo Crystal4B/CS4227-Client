@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import hotelsystem.order.Director;
 import hotelsystem.order.OrderBuilder;
-import hotelsystem.roomFactory.RoomFactory;
+import hotelsystem.roomfactory.RoomFactory;
 
 public class DirectorTest {
 

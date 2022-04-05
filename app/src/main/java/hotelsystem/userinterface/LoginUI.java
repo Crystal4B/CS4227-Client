@@ -5,7 +5,7 @@ import java.util.Scanner;
 import hotelsystem.login.Login;
 import hotelsystem.login.LoginAdapter;
 import hotelsystem.login.Signup;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.userfactory.UserInterface;
 
 public class LoginUI {
 

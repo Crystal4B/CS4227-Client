@@ -1,8 +1,8 @@
 package hotelsystem.requestsystem.commands.users;
 
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.userFactory.UserFactory;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.userfactory.UserFactory;
+import hotelsystem.userfactory.UserInterface;
 
 import java.util.Map;
 

@@ -11,10 +11,10 @@ import hotelsystem.order.OrderBuilder;
 import hotelsystem.payment.Payment;
 import hotelsystem.requestsystem.commands.CommandInvoker;
 import hotelsystem.requestsystem.commands.reservations.CreateReservationCommand;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.roomFactory.RoomFactory;
-import hotelsystem.userFactory.Customer;
-import hotelsystem.userFactory.Guest;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.roomfactory.RoomFactory;
+import hotelsystem.userfactory.Customer;
+import hotelsystem.userfactory.Guest;
 
 import static org.junit.jupiter.api.Assertions.*;
 

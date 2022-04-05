@@ -19,10 +19,10 @@ import hotelsystem.requestsystem.commands.vouchers.CreateVoucherCommand;
 import hotelsystem.requestsystem.commands.vouchers.RemoveVoucherCommand;
 import hotelsystem.requestsystem.commands.vouchers.UpdateVoucherCommand;
 import hotelsystem.requestsystem.commands.vouchers.ValidateVoucherCommand;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.roomFactory.RoomFactory;
-import hotelsystem.roomFactory.RoomInterface;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.roomfactory.RoomFactory;
+import hotelsystem.roomfactory.RoomInterface;
+import hotelsystem.userfactory.UserInterface;
 
 /**
  * Staff user interface. This is the main staff menu. This provides functionality for staff users to create and view reservations, manage rooms, staff and vouchers, and also exit the application.

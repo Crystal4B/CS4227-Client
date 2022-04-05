@@ -8,9 +8,9 @@ import java.util.Map;
 import hotelsystem.order.Order;
 import hotelsystem.order.OrderBuilder;
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.roomFactory.RoomFactory;
-import hotelsystem.userFactory.Guest;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.roomfactory.RoomFactory;
+import hotelsystem.userfactory.Guest;
 /**
  * A Update Reservation Paid Command for changing the Reservations paid status
  * @author Marcin Sęk

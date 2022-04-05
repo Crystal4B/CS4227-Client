@@ -7,8 +7,8 @@ import java.util.Map;
 import hotelsystem.order.Order;
 import hotelsystem.order.OrderBuilder;
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.userfactory.UserInterface;
 
 /**
  * A Create Reservation Command for creating a new reservation in the system

@@ -1,4 +1,4 @@
-package hotelsystem.roomFactory;
+package hotelsystem.roomfactory;
 
 /**
  * @author Jakub Pažej

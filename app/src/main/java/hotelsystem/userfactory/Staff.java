@@ -1,22 +1,24 @@
-package hotelsystem.userFactory;
+package hotelsystem.userfactory;
 
 /**
  * @author Jakub Pažej
- * Guest class implementing the user.
+ * Staff class implementing the user.
  */
-public class Guest implements UserInterface
+public class Staff implements UserInterface
 {
     protected String userName, password, email, firstName, lastName;
     protected int id;// ID for better database implementation and security reasons
-    final static String type = "Guest";
+    private int holidayDaysAvailable;
+    private double salary;
+    final static String type = "Staff";
 
-    public Guest() {
-    }
+    public Staff(){}
 
-    public Guest(String firstName, String lastName, int ID) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.id = ID;
+    public Staff(String userName, String password, String email)
+    {
+        this.userName=userName;
+        this.password=password;
+        this.email=email;
     }
 
     @Override
@@ -60,7 +62,7 @@ public class Guest implements UserInterface
 
     @Override
     public void setId(int id) {
-        this.id = id;
+        this.id=id;
     }
 
     @Override
@@ -70,7 +72,7 @@ public class Guest implements UserInterface
 
     @Override
     public void setFirstName(String name) {
-        this.firstName = name;
+        this.firstName=name;
     }
 
     @Override
@@ -80,7 +82,7 @@ public class Guest implements UserInterface
 
     @Override
     public void setLastName(String name) {
-        this.lastName = name;
+        this.lastName=name;
     }
 
     @Override
@@ -90,12 +92,37 @@ public class Guest implements UserInterface
 
     @Override
     public void setLegalName(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName=firstName;
+        this.lastName=lastName;
     }
 
     @Override
     public String getLegalName() {
-        return firstName + " " + lastName;
+        return firstName+" "+lastName;
+    }
+
+    public void setSalary(double salary)
+    {
+        this.salary=salary;
+    }
+
+    public double getSalary()
+    {
+        return salary;
+    }
+
+    public void setHolidays(int days)
+    {
+        this.holidayDaysAvailable=days;
+    }
+
+    public void addHolidays(int days)
+    {
+        this.holidayDaysAvailable+=days;
+    }
+
+    public int getHolidays()
+    {
+        return holidayDaysAvailable;
     }
 }

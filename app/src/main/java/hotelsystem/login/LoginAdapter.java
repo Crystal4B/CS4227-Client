@@ -1,6 +1,6 @@
 package hotelsystem.login;
 
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.userfactory.UserInterface;
 
 public class LoginAdapter implements LoginInterface{
     private SignupInterface signup;

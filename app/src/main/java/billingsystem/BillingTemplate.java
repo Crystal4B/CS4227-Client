@@ -40,12 +40,6 @@ abstract class BillingTemplate {
       return a.PercentConverter(num);
    }
 
-   Order TempOrder;
-
-   public Order GetOrder(){
-      return TempOrder;
-   }
-
    public String GetBill(Order order){
       return Bill(order);
    }

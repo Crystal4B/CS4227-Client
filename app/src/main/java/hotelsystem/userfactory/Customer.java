@@ -11,8 +11,17 @@ public class Customer implements UserInterface
     private boolean paid;
     final static String type = "Customer";
 
+	/**
+	 * Simple empty constructor for customer
+	 */
     public Customer(){}
 
+	/**
+	 * Simple Customer constructor
+	 * @param userName of the customer
+	 * @param password of the customer
+	 * @param email of the customer
+	 */
     public Customer(String userName, String password, String email)
     {
       this.userName=userName;
@@ -100,11 +109,19 @@ public class Customer implements UserInterface
         return firstName+" "+lastName;
     }
 
+	/**
+	 * Simple paid setter
+	 * @param bool boolean value to set paid to
+	 */
     public void setPaid(boolean bool)
     {
         this.paid=bool;
     }
 
+	/**
+	 * Simple getter for paid command
+	 * @return the paid value
+	 */
     public boolean getPaid()
     {
         return paid;

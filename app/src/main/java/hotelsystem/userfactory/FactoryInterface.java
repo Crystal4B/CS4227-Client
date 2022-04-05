@@ -47,7 +47,7 @@ public interface FactoryInterface
      * Creates a Guest user.
      * @param firstName Firstname of Guest
      * @param lastName Last name of guest
-     * @param id Id of guest
+     * @param ID Id of guest
      * @return a UserInterface object
      */
     static UserInterface createGuest(String firstName, String lastName, int ID){return null;}

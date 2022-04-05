@@ -411,6 +411,11 @@ public class StaffUI {
         return true;
     }
 
+	/**
+	 * Function to get the password from the UI
+	 * @param console the scanner being used
+	 * @return the password of the user
+	 */
 	public static String getPassword(Scanner console)
 	{
 		Console passwordConsole = System.console();

@@ -4,7 +4,7 @@ import hotelsystem.userfactory.UserInterface;
 
 /**
  * @author Eoin McDonough
- * Payment class to handle payment states
+ * Signup Interface
  */
 
 public interface SignupInterface {

@@ -64,6 +64,7 @@ public class MenuUI {
     /**
      * This is a function to view all reservations created by the user.
      * @param console Used to read user input.
+     * @return Validation of request
      */
     public static Boolean viewReservations(Scanner console){
         System.out.println("\n####################################################");

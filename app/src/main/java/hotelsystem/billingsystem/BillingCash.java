@@ -12,6 +12,7 @@ public class BillingCash extends BillingTemplate {
     /**
 	 * Method to that returns that a user is paying by cash
      * @param order the order the payment is attached to
+     * @return Validation of payment
 	 */
     public boolean PaymentSend(Order order){
         Payment pay = new Payment();

@@ -9,6 +9,10 @@ import hotelsystem.order.OrderBuilder;
 import hotelsystem.userfactory.Guest;
 import hotelsystem.userfactory.UserInterface;
 
+/**
+ * ReservationUI handles the reservation state of the user interface
+ * @author Jordan Marshall
+ */
 public class ReservationUI {
 
     private static OrderBuilder builder = new OrderBuilder();

@@ -2,9 +2,19 @@ package hotelsystem.login;
 
 import hotelsystem.userfactory.UserInterface;
 
+/**
+ * @author Eoin McDonough
+ * Login Adapter for Signup Interface
+ */
+
 public class LoginAdapter implements LoginInterface{
     private SignupInterface signup;
     private String username;
+    /**
+     * Adapts signup for login interface
+     * 
+     * @param signup SignupInterface 
+     */
     public LoginAdapter(SignupInterface signup) {
         this.signup = signup;
     }

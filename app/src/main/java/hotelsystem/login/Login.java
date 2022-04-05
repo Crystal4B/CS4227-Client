@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Eoin McDonough
- * Payment class to handle payment states
+ * Login class to handle logging in
  */
 
     /**

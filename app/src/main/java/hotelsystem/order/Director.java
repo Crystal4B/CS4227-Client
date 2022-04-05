@@ -82,7 +82,6 @@ public class Director {
      * @param builder The OrderBuilder object that is being used to build the order.
      * @param option The index of the room in the list of rooms.
      */
-
     public void addRoom(Scanner console, OrderBuilder builder, int option){
 
         String roomKey = (String)rooms.keySet().toArray()[option];
@@ -138,6 +137,12 @@ public class Director {
         return builder.toString();
     }
 
+	/**
+	 * Function for viewing of the Rooms already added into the order
+	 * 
+	 * @param builder the builder building the order
+	 * @return number of rooms in the order
+	 */
     public int viewRoomsInCart(OrderBuilder builder){
         for (int i=0; i < builder.getRoomsBuilder().size(); i++) 
         { 

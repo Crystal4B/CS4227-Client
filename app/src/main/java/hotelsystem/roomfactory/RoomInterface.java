@@ -47,7 +47,7 @@ public interface RoomInterface
 
     /**
      * Adds multiple occupants
-     * @param occupants of type ArrayList<UserInterface>
+     * @param occupants of type ArrayList[UserInterface]
      */
     void addOccupants(ArrayList<UserInterface> occupants);
 
@@ -65,7 +65,7 @@ public interface RoomInterface
 
     /**
      * Removes multiple occupants
-     * @param occupants of type ArrayList<UserInterface>
+     * @param occupants of type ArrayList[UserInterface]
      */
     void removeOccupants(ArrayList<UserInterface> occupants);
 
@@ -75,7 +75,7 @@ public interface RoomInterface
     void removeAllOccupants();
 
     /**
-     * @return Occupants as ArrayList<UserInterface>
+     * @return Occupants as ArrayList[UserInterface]
      */
     ArrayList<UserInterface>  getOccupants();
 

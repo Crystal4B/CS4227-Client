@@ -49,7 +49,7 @@ public interface Builder {
 
     /**
      * This is a function to set end date on order/reservation. This represents check-out date of reservation.
-     * @param startDate A timestamp object to represent check-out date of reservation.
+     * @param endDate A timestamp object to represent check-out date of reservation.
      */
     void setEndDate(Timestamp endDate);
 

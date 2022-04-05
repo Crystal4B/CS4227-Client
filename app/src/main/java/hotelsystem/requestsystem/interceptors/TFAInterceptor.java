@@ -30,10 +30,16 @@ public class TFAInterceptor implements InterceptorInterface{
         new Email(email, "Platinum Hotels Signup Confirmation", emailToSend);
         System.out.println("Please enter the code sent to " + email);
     	Scanner console = new Scanner(System.in);
-		int number = Integer.parseInt(console.nextLine());
+		int number = 0;
+		try {
+            number = Integer.parseInt(console.nextLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+        }
 		if(number == authKey) {
 			System.out.println("Signed in");
 		}
+		console.close();
 	}
 
 	public void afterCompletion(){

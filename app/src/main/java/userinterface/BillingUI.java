@@ -125,6 +125,11 @@ public class BillingUI {
         }
     }
 
+    /**
+     * Checks for which menu to send the user back to
+     * @return int to signify which menu to return to
+     */
+
     public static int returnToMenu(){ 
         if(LoginUI.getUser().getUserType().equals("Customer")){
             return UI.MENU_STATE;
@@ -135,6 +140,12 @@ public class BillingUI {
 		return UI.MENU_STATE;
     }
 
+    /**
+     * Method used to set paid state 
+     * @param console Used to read user input.
+     * @return boolean depending on if request succeeds
+     */
+
     public static Boolean payOnArrival(Console console){
         System.out.println("\n Reservation will be paid for at Reception");
         BillingCash bill = new BillingCash();
@@ -143,6 +154,13 @@ public class BillingUI {
         return true;
         
     }
+
+    /**
+     * Method used to set paid state with using credit card
+     * @param console Used to read user input.
+     * @return boolean depending on if request succeeds
+     */
+
 
     public static Boolean payByCard(Console console){
         System.out.println("\n####################################################");
@@ -167,9 +185,20 @@ public class BillingUI {
         }
     }
 
+    /**
+     * Method used to set final order 
+     * @param console Used to read user input.
+     */
+
+
     public static void setFinalOrder(Order finalOrder){
         order = finalOrder;
     }
+
+    /**
+     * Method used to get final order 
+     * @return Returns finalOrder item
+     */
 
     public static Order getFinalOrder(){
         return order;

@@ -1,6 +1,6 @@
 package hotelsystem.userinterface;
 
-import java.io.Console;
+import java.util.Scanner;
 
 import hotelsystem.login.Login;
 import hotelsystem.login.LoginAdapter;
@@ -17,7 +17,7 @@ public class LoginUI {
      * @param console Used to read user input.
      * @return The next state.
      */
-    public static int run(Console console){
+    public static int run(Scanner console){
         
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
@@ -30,7 +30,7 @@ public class LoginUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = Integer.parseInt(console.readLine());
+            option = console.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return UI.LOGIN_STATE;
@@ -44,11 +44,11 @@ public class LoginUI {
         
     }
 
-    public static int login(Console console) {
+    public static int login(Scanner console) {
         System.out.println("Please enter email");
-        String email = console.readLine();
+        String email = console.nextLine();
         System.out.println("Please enter password");
-        String password = String.valueOf(console.readPassword());
+        String password = StaffUI.getPassword(console);
         Login login = new Login();
         if(login.login(email, password)) {
             setUser(login.returnUser());
@@ -66,13 +66,13 @@ public class LoginUI {
         return UI.LOGIN_STATE;
     }
 
-    public static int signup(Console console) {
+    public static int signup(Scanner console) {
         System.out.println("Please enter email");
-        String email = console.readLine();
+        String email = console.nextLine();
         System.out.println("Please enter username");
-        String username = console.readLine();
+        String username = console.nextLine();
         System.out.println("Please enter password");
-        String password = String.valueOf(console.readPassword());
+        String password = StaffUI.getPassword(console);
         LoginAdapter signup = new LoginAdapter(new Signup());
         signup.setName(username);
         signup.setType(userType);

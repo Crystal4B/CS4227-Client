@@ -1,9 +1,11 @@
-import requestsystem.RequestDispatcher;
-import requestsystem.commands.users.LoginUserCommand;
-import requestsystem.commands.users.RegisterUserCommand;
-import requestsystem.interceptors.LoginInterceptor;
-import requestsystem.interceptors.TFAInterceptor;
-import userinterface.UI;
+package hotelsystem;
+
+import hotelsystem.requestsystem.RequestDispatcher;
+import hotelsystem.requestsystem.commands.users.LoginUserCommand;
+import hotelsystem.requestsystem.commands.users.RegisterUserCommand;
+import hotelsystem.requestsystem.interceptors.LoginInterceptor;
+import hotelsystem.requestsystem.interceptors.TFAInterceptor;
+import hotelsystem.userinterface.UI;
 
 public class App
 {

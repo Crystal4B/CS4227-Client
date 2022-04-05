@@ -1,7 +1,7 @@
 package hotelsystem.userinterface;
 
-import java.io.Console;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import hotelsystem.order.Director;
 import hotelsystem.order.Order;
@@ -20,7 +20,7 @@ public class ReservationUI {
      * @param console Used to read user input.
      * @return The next state.
      */
-    public static int run(Console console){
+    public static int run(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -34,7 +34,7 @@ public class ReservationUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = Integer.parseInt(console.readLine());
+            option = console.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return UI.RESERVATION_STATE;
@@ -87,14 +87,14 @@ public class ReservationUI {
      * @param console Used to read user input.
      * @return If operation is sucessful. Changes current state in run function.
      */
-    public static Boolean addRoomToCart(Console console){
+    public static Boolean addRoomToCart(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println("Please enter check-in date (YYYY-MM-DD) @ 12:00:");
-        String checkInDate = console.readLine();
+        String checkInDate = console.nextLine();
         System.out.println("Please enter check-out date (YYYY-MM-DD) @ 12:00:");
-        String checkOutDate = console.readLine();
+        String checkOutDate = console.nextLine();
         if(!director.setDates(builder, checkInDate, checkOutDate)){
             System.out.println("Invalid Input: Please try again!");
             return false;
@@ -106,7 +106,7 @@ public class ReservationUI {
         }
         int option;
         try {
-            option = Integer.parseInt(console.readLine());
+            option = console.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;
@@ -121,7 +121,7 @@ public class ReservationUI {
      * @param console Used to read user input.
      * @return If operation is sucessful. Changes current state in run function.
      */
-    public static Boolean removeRoomFromCart(Console console){
+    public static Boolean removeRoomFromCart(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -129,7 +129,7 @@ public class ReservationUI {
         int numberOfRoomsInCart = director.viewRoomsInCart(builder);
         int option;
         try {
-            option = Integer.parseInt(console.readLine());
+            option = console.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;
@@ -148,7 +148,7 @@ public class ReservationUI {
      * @param console Used to read user input.
      * @return If operation is sucessful. Changes current state in run function.
      */
-    public static Boolean viewOrder(Console console){
+    public static Boolean viewOrder(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -159,7 +159,7 @@ public class ReservationUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = Integer.parseInt(console.readLine());
+            option = console.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;
@@ -173,13 +173,13 @@ public class ReservationUI {
      * @param roomSize Number of occupants in room.
      * @return A list of users
      */
-    public static ArrayList<UserInterface> addGuests(Console console, int roomSize){
+    public static ArrayList<UserInterface> addGuests(Scanner console, int roomSize){
         ArrayList<UserInterface> guests = new ArrayList<>();
         for(int i=0; i < roomSize; i++){
             System.out.println("Please the first name of guest " + (i+1));
-            String firstName = console.readLine();
+            String firstName = console.nextLine();
             System.out.println("Please the last name of guest " + (i+1));
-            String lastName = console.readLine();
+            String lastName = console.nextLine();
             Guest guest = new Guest(firstName, lastName, -1);
             guests.add(guest);
         }

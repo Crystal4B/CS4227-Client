@@ -1,11 +1,11 @@
 package hotelsystem.order;
 
-import java.io.Console;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Scanner;
 
 import hotelsystem.roomFactory.RoomInterface;
 import hotelsystem.userinterface.ReservationUI;
@@ -79,7 +79,7 @@ public class Director {
      * @param option The index of the room in the list of rooms.
      */
 
-    public void addRoom(Console console, OrderBuilder builder, int option){
+    public void addRoom(Scanner console, OrderBuilder builder, int option){
 
         String roomKey = (String)rooms.keySet().toArray()[option];
         List<RoomInterface> roomValue = rooms.get(roomKey);

@@ -1,6 +1,6 @@
 package hotelsystem.userinterface;
 
-import java.io.Console;
+import java.util.Scanner;
 
 import hotelsystem.billingsystem.BillingCard;
 import hotelsystem.billingsystem.BillingCash;
@@ -24,7 +24,7 @@ public class BillingUI {
      * @param console Used to read user input.
      * @return The next state.
      */
-    public static int run(Console console) {
+    public static int run(Scanner console) {
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -38,7 +38,7 @@ public class BillingUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = Integer.parseInt(console.readLine());
+            option = console.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return UI.BILLING_STATE;
@@ -84,12 +84,12 @@ public class BillingUI {
      * @param console Used to read user input.
      * @return boolean depending on the validity of the coupon.
      */
-    public static Boolean couponCode(Console console){
+    public static Boolean couponCode(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println(" Please enter coupon code :");
-        String codeNum = console.readLine();
+        String codeNum = console.nextLine();
         a.CodeSet(codeNum);
         if (a.CouponInput()!=0.0) {
             System.out.println(" Applying discount of :");
@@ -107,12 +107,12 @@ public class BillingUI {
      * @param console Used to read user input.
      * @return boolean depending on the validity of the voucher.
      */
-    public static Boolean voucherCode(Console console){
+    public static Boolean voucherCode(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println(" Please enter voucher code :");
-        String codeNum = console.readLine();
+        String codeNum = console.nextLine();
         BillingCashless bill = new BillingCashless();
         a.CodeSet(codeNum);
         if (bill.AcceptCouponVisitorCode(a)!=0.0) {
@@ -135,7 +135,7 @@ public class BillingUI {
 		return UI.MENU_STATE;
     }
 
-    public static Boolean payOnArrival(Console console){
+    public static Boolean payOnArrival(Scanner console){
         System.out.println("\n Reservation will be paid for at Reception");
         BillingCash bill = new BillingCash();
         bill.PaymentSend(order); 
@@ -144,18 +144,18 @@ public class BillingUI {
         
     }
 
-    public static Boolean payByCard(Console console){
+    public static Boolean payByCard(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println(" Name on Card :");
-        String cardName = console.readLine();
+        String cardName = console.nextLine();
         System.out.println(" Card Number :");
-        String cardNum = console.readLine();
+        String cardNum = console.nextLine();
         System.out.println(" Expiry Date   ( MM/YY ) :");
-        int cardDate = Integer.parseInt(console.readLine());
+        int cardDate = console.nextInt();
         System.out.println(" CSV :");
-        int csv = Integer.parseInt(console.readLine());
+        int csv = console.nextInt();
         BillingCard bill = new BillingCard();
         if (bill.PaymentSend(cardNum, cardName, cardDate, csv, order)) {
             bill.SendEmail(order);

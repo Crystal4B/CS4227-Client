@@ -1,7 +1,7 @@
 package hotelsystem.userinterface;
 
-import java.io.Console;
 import java.util.List;
+import java.util.Scanner;
 
 import hotelsystem.order.Order;
 import hotelsystem.requestsystem.commands.CommandInvoker;
@@ -15,7 +15,7 @@ public class MenuUI {
      * @param console Used to read user input.
      * @return The next state.
      */
-    public static int run(Console console){
+    public static int run(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -28,7 +28,7 @@ public class MenuUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = Integer.parseInt(console.readLine());
+            option = console.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return UI.MENU_STATE;
@@ -61,7 +61,7 @@ public class MenuUI {
      * View list of reservations for user.
      * @param console Used to read user input.
      */
-    public static Boolean viewReservations(Console console){
+    public static Boolean viewReservations(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -72,7 +72,7 @@ public class MenuUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = Integer.parseInt(console.readLine());
+            option = console.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;
@@ -102,7 +102,7 @@ public class MenuUI {
      * @param console Used to read user input.
      * @return If operation is sucessful. Changes current state in run function.
      */
-    public static boolean cancelUserReservation(Console console){
+    public static boolean cancelUserReservation(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -113,7 +113,7 @@ public class MenuUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = Integer.parseInt(console.readLine());
+            option = console.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;

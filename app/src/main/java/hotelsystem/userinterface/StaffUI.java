@@ -4,6 +4,7 @@ import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
 import hotelsystem.billingsystem.CouponVisitor;
 import hotelsystem.login.LoginAdapter;
@@ -30,7 +31,7 @@ public class StaffUI {
      * @param console Used to read user input.
      * @return The next state.
      */
-    public static int run(Console console){
+    public static int run(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -45,7 +46,7 @@ public class StaffUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = Integer.parseInt(console.readLine());
+            option = console.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return UI.STAFF_MENU;
@@ -81,7 +82,7 @@ public class StaffUI {
         }
     }
 
-    public static Boolean manageRooms(Console console){
+    public static Boolean manageRooms(Scanner console){
         CommandInvoker invoker = new CommandInvoker();
         invoker.setCommand(new GetAllRoomsCommand());
         invoker.execute();
@@ -93,7 +94,7 @@ public class StaffUI {
         System.out.println("1. \t Add Room");
         System.out.println("2. \t Remove Room");
         System.out.println("3. \t Back");
-        int option = Integer.parseInt(console.readLine());
+        int option = console.nextInt();
         System.out.println("\n####################################################\n");
         switch (option) {
             case 1:
@@ -121,7 +122,7 @@ public class StaffUI {
         return false;
     }
 
-    public static RoomInterface addRoom(Console console){
+    public static RoomInterface addRoom(Scanner console){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -130,7 +131,7 @@ public class StaffUI {
         System.out.println("1. \t Standard Room");
         int option;
         try {
-            option = Integer.parseInt(console.readLine());
+            option = console.nextInt();
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return addRoom(console);
@@ -144,7 +145,7 @@ public class StaffUI {
         };
     }
 
-    public static RoomInterface removeRoom(Console console, ArrayList<RoomInterface> roomFactories){
+    public static RoomInterface removeRoom(Scanner console, ArrayList<RoomInterface> roomFactories){
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -156,7 +157,7 @@ public class StaffUI {
         }
         int option;
         try {
-            option = Integer.parseInt(console.readLine())-1;
+            option = console.nextInt()-1;
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return addRoom(console);
@@ -171,7 +172,7 @@ public class StaffUI {
         return removeRoom(console, roomFactories);
     }
 
-    public static boolean manageStaffAccount(Console console) {
+    public static boolean manageStaffAccount(Scanner console) {
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -180,7 +181,7 @@ public class StaffUI {
         System.out.println("2. \t Remove Staff");
         System.out.println("3. \t List Staff Emails");
         System.out.println("4. \t Back");
-        int option = Integer.parseInt(console.readLine());
+        int option = console.nextInt();
         System.out.println("\n####################################################\n");
         switch (option) {
             case 1:
@@ -211,13 +212,13 @@ public class StaffUI {
         return false;
     }
 
-    public static boolean signupStaffAccount(Console console) {
+    public static boolean signupStaffAccount(Scanner console) {
         System.out.println("Please enter email for new User");
-        String email = console.readLine();
+        String email = console.nextLine();
         System.out.println("Please enter username for new User");
-        String username = console.readLine();
+        String username = console.nextLine();
         System.out.println("Please enter temporary password");
-        String password = String.valueOf(console.readPassword());
+        String password = getPassword(console);
         LoginAdapter signup = new LoginAdapter(new Signup());
         signup.setName(username);
         signup.setType("Staff");
@@ -225,10 +226,10 @@ public class StaffUI {
         return true;
     }
 
-    public static boolean removeStaffAccount(Console console) {
+    public static boolean removeStaffAccount(Scanner console) {
         CommandInvoker invoker = new CommandInvoker();
         System.out.println("Please enter email of User to remove");
-        String email = console.readLine();
+        String email = console.nextLine();
         invoker.setCommand(new GetAllStaffUsersCommand());
 		invoker.execute();
         List<UserInterface> result = invoker.getResponse();
@@ -243,7 +244,7 @@ public class StaffUI {
         return true;
     }
 
-    public static boolean listStaff(Console console) {
+    public static boolean listStaff(Scanner console) {
         CommandInvoker invoker = new CommandInvoker();
         invoker.setCommand(new GetAllStaffUsersCommand());
 		invoker.execute();
@@ -254,7 +255,7 @@ public class StaffUI {
         return true;
     }
 
-    public static boolean manageVouchers(Console console) {
+    public static boolean manageVouchers(Scanner console) {
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
@@ -263,7 +264,7 @@ public class StaffUI {
         System.out.println("2. \t Remove Voucher");
         System.out.println("3. \t Update Voucher");
         System.out.println("4. \t Back");
-        int option = Integer.parseInt(console.readLine());
+        int option = console.nextInt();
         System.out.println("\n####################################################\n");
         switch (option) {
             case 1:
@@ -295,12 +296,12 @@ public class StaffUI {
     }
 
     
-    public static boolean createVoucher(Console console) {
+    public static boolean createVoucher(Scanner console) {
         CommandInvoker invoker = new CommandInvoker();
         CouponVisitor visitor = new CouponVisitor();
         visitor.TypeSet("Voucher");  
         System.out.println("Please enter discount amount");
-        double discount = Double.parseDouble(console.readLine());
+        double discount = console.nextDouble();
         visitor.DiscountSet(discount);
         invoker.setCommand(new CreateVoucherCommand(visitor));
 		invoker.execute();
@@ -309,10 +310,10 @@ public class StaffUI {
         return true;
     }
 
-    public static boolean removeVoucher(Console console) {
+    public static boolean removeVoucher(Scanner console) {
         CommandInvoker invoker = new CommandInvoker();
         System.out.println("Please enter voucher code to remove");
-        String code = String.valueOf(console.readLine());
+        String code = console.nextLine();
         CouponVisitor visitor = new CouponVisitor(code);
         invoker.setCommand(new ValidateVoucherCommand(visitor));
         invoker.execute();
@@ -323,12 +324,12 @@ public class StaffUI {
         return true;
     }
 
-    public static boolean updateVoucher(Console console) {
+    public static boolean updateVoucher(Scanner console) {
         CommandInvoker invoker = new CommandInvoker();
         System.out.println("Please enter voucher code to update");
-        String code = String.valueOf(console.readLine());
+        String code = console.nextLine();
         System.out.println("Please enter new discount");
-        double amount = Double.parseDouble(console.readLine());
+        double amount = console.nextDouble();
         CouponVisitor visitor = new CouponVisitor(code);
         visitor.DiscountSet(amount);
         invoker.setCommand(new UpdateVoucherCommand(visitor));
@@ -340,4 +341,17 @@ public class StaffUI {
         System.out.println("Your voucher has been update with code : " +result.CodeGet() + " and discount : " +result.DiscountGet());
         return true;
     }
+
+	public static String getPassword(Scanner console)
+	{
+		Console passwordConsole = System.console();
+		if (passwordConsole == null)
+		{
+			return console.nextLine();
+		}
+		else
+		{
+			return passwordConsole.readPassword().toString();
+		}
+	}
 }

@@ -1,10 +1,10 @@
 package hotelsystem.userinterface;
 
-import java.io.Console;
+import java.util.Scanner;
 
 public class UI {
 
-    private Console console = System.console();
+    private Scanner console = new Scanner(System.in);
 
     public final static int EXIT = -1;
     public final static int LOGIN_STATE = 0;

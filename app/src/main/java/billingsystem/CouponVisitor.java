@@ -3,6 +3,10 @@ package billingsystem;
 import requestsystem.commands.CommandInvoker;
 import requestsystem.commands.vouchers.ValidateVoucherCommand;
 
+/**
+ * @author Aleksandr Jakusevs
+ * Coupon/voucher class
+ */
 public class CouponVisitor implements CouponInterface {
    Double discount = 0.0;
    String code = "";

@@ -5,11 +5,19 @@ import java.util.Map;
 import billingsystem.CouponVisitor;
 import requestsystem.commands.CommandTemplate;
 
+/**
+ * @author Aleksandr Jakusevs
+ * Command for validating a voucher within the system
+ */
 public class ValidateVoucherCommand extends CommandTemplate<CouponVisitor> {
 
     private static final String QUERY_NAME = "validateVoucher";
 	private CouponVisitor couponvisitor;
 
+	/**
+	 * Simple constructor for the ValidateVoucherCommand
+	 * @param Couponvisitor the voucher/coupan
+	 */
     public ValidateVoucherCommand(CouponVisitor couponvisitor){
 		this.couponvisitor = couponvisitor;
 	}

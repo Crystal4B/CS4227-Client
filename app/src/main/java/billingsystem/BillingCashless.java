@@ -2,6 +2,10 @@ package billingsystem;
 
 import order.*;
 
+/**
+ * @author Aleksandr Jakusevs
+ * Billing for voucher payments
+ */
 public class BillingCashless extends BillingTemplate {
 
     /**

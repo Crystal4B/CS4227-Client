@@ -8,6 +8,12 @@ import billingsystem.BillingCashless;
 import billingsystem.CouponVisitor;
 import order.Order;
 
+/**
+ * @author Aleksandr Jakusevs
+ * @author Eoin McDonough
+ * @author Jordan Marshall
+ * UI for billing and payments
+ */
 public class BillingUI {
     private static CouponVisitor a = new CouponVisitor();
 

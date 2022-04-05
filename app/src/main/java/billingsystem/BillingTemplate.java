@@ -4,6 +4,10 @@ import order.*;
 import hotelsystem.userFactory.*;
 import email.Email;
 
+/**
+ * @author Aleksandr Jakusevs
+ * Billing template class
+ */
 abstract class BillingTemplate {
    double discount = 0.0;
    CouponVisitor visitor = new CouponVisitor();

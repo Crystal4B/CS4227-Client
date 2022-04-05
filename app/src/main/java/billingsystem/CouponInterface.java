@@ -1,5 +1,9 @@
 package billingsystem;
 
+/**
+ * @author Aleksandr Jakusevs
+ * Interface class for coupons/vouchers
+ */
 public interface CouponInterface {
     
     /**

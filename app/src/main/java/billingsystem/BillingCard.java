@@ -4,6 +4,10 @@ import order.*;
 
 import payment.*;
 
+/**
+ * @author Aleksandr Jakusevs
+ * Billing for card payments
+ */
 public class BillingCard extends BillingTemplate {
 
     /**

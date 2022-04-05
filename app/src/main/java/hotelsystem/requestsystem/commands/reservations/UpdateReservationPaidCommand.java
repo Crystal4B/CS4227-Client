@@ -73,13 +73,14 @@ public class UpdateReservationPaidCommand extends CommandTemplate<Order>
 
 			if (!found) {
 				String type = (String) roomMap.get("type");
-				int numberOfBeds = Integer.parseInt((String) roomMap.get("numberOfBeds"));
+				int numberOfBeds = (int) roomMap.get("numberOfBeds");
 				switch (type) {
 					case "Standard" -> standardRoom = (RoomFactory.createStandard(id, numberOfBeds));
 					case "Deluxe" -> standardRoom = (RoomFactory.createDeluxe(id, numberOfBeds));
 					case "VIP" -> standardRoom = (RoomFactory.createVIP(id, numberOfBeds));
 					default -> System.out.println("Unknown type of Room!");
 				}
+				rooms.add(standardRoom);
 			}
 
 			int guestId = Integer.parseInt((String) guestMap.get("id"));

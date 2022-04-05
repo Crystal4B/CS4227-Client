@@ -11,8 +11,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import hotelsystem.login.Login;
 import hotelsystem.login.Signup;
 import hotelsystem.requestsystem.commands.CommandInvoker;
-import hotelsystem.requestsystem.commands.users.RemoveUserCommand;
-import hotelsystem.userFactory.Customer;
 
 import static org.junit.jupiter.api.Assertions.*;
 

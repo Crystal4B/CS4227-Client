@@ -1,7 +1,7 @@
 package hotelsystem.order;
 
-import hotelsystem.roomFactory.Room;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.userfactory.UserInterface;
 
 import java.sql.Timestamp;
 import java.time.Duration;

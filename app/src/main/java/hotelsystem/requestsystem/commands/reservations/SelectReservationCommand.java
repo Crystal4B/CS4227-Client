@@ -7,7 +7,7 @@ import java.util.Map;
 import hotelsystem.order.Order;
 import hotelsystem.order.OrderBuilder;
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.roomFactory.RoomFactory;
+import hotelsystem.roomfactory.RoomFactory;
 
 /**
  * A Select Reservation Command for selecting reservation data from the API

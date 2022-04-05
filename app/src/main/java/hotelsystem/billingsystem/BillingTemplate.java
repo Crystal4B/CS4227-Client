@@ -2,7 +2,7 @@ package hotelsystem.billingsystem;
 
 import hotelsystem.email.Email;
 import hotelsystem.order.Order;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.userfactory.UserInterface;
 
 /**
  * @author Aleksandr Jakusevs

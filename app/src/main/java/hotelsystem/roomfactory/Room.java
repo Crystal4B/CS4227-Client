@@ -1,6 +1,6 @@
-package hotelsystem.roomFactory;
+package hotelsystem.roomfactory;
 
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.userfactory.UserInterface;
 
 import java.util.ArrayList;
 import java.util.Collections;

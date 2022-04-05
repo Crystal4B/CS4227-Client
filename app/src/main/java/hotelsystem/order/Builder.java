@@ -2,8 +2,8 @@ package hotelsystem.order;
 
 import java.util.ArrayList;
 import java.sql.Timestamp;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.userfactory.UserInterface;
 
 /**
  * This is an interface for builder concrete classes. Implementation is in concrete classes.

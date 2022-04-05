@@ -2,8 +2,8 @@ package order;
 
 import hotelsystem.order.Order;
 import hotelsystem.order.OrderBuilder;
-import hotelsystem.roomFactory.RoomFactory;
-import hotelsystem.userFactory.Customer;
+import hotelsystem.roomfactory.RoomFactory;
+import hotelsystem.userfactory.Customer;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

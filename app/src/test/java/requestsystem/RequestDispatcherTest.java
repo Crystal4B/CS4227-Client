@@ -27,11 +27,11 @@ import hotelsystem.requestsystem.commands.users.GetAllStaffUsersCommand;
 import hotelsystem.requestsystem.commands.users.LoginUserCommand;
 import hotelsystem.requestsystem.commands.users.RegisterUserCommand;
 import hotelsystem.requestsystem.commands.users.RemoveUserCommand;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.roomFactory.RoomFactory;
-import hotelsystem.userFactory.Customer;
-import hotelsystem.userFactory.UserFactory;
-import hotelsystem.userFactory.UserInterface;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.roomfactory.RoomFactory;
+import hotelsystem.userfactory.Customer;
+import hotelsystem.userfactory.UserFactory;
+import hotelsystem.userfactory.UserInterface;
 
 public class RequestDispatcherTest
 {

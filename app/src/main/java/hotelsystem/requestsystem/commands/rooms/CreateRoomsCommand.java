@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.roomFactory.Room;
-import hotelsystem.roomFactory.RoomFactory;
+import hotelsystem.roomfactory.Room;
+import hotelsystem.roomfactory.RoomFactory;
 
 /**
  * Command for adding new rooms into the system

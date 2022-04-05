@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import hotelsystem.roomFactory.RoomInterface;
+import hotelsystem.roomfactory.RoomInterface;
 import hotelsystem.requestsystem.commands.CommandTemplate;
-import hotelsystem.roomFactory.RoomFactory;
+import hotelsystem.roomfactory.RoomFactory;
 
 /**
  * Command for getting all available rooms for specified dates

@@ -1,8 +1,8 @@
 package hotelsystem;
 
-import hotelsystem.userFactory.Customer;
-import hotelsystem.userFactory.Guest;
-import hotelsystem.userFactory.Staff;
+import hotelsystem.userfactory.Customer;
+import hotelsystem.userfactory.Guest;
+import hotelsystem.userfactory.Staff;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

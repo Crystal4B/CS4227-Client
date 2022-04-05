@@ -44,6 +44,9 @@ public class Signup implements SignupInterface{
         person = this.createsUser(email, username, password);
         invoker.setCommand(new RegisterUserCommand(person, defaultPassword));
         invoker.execute();
+        if(invoker.getResponse() == null) {
+            return false;
+        }
         return true;
     }
 

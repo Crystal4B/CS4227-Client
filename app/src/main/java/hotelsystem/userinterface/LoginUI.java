@@ -77,8 +77,11 @@ public class LoginUI {
         LoginAdapter signup = new LoginAdapter(new Signup());
         signup.setName(username);
         signup.setType(userType);
-        signup.login(email, password);
+        boolean newAccount = signup.login(email, password);
         userInterface = signup.returnUser();
+        if(newAccount == false){
+            return UI.LOGIN_STATE;
+        }
         if(userInterface.getClass().getSimpleName().equals("Staff")){
             return UI.STAFF_MENU;
         }

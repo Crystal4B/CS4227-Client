@@ -10,8 +10,13 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import hotelsystem.login.Login;
 import hotelsystem.login.Signup;
+import hotelsystem.requestsystem.commands.CommandInvoker;
+import hotelsystem.requestsystem.commands.users.RemoveUserCommand;
+import hotelsystem.userFactory.Customer;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Random;
 
 import org.junit.jupiter.api.Order;
 
@@ -19,11 +24,15 @@ import org.junit.jupiter.api.Order;
 class LoginTest {
 
     // Signup Unit Tests
-    
+    static CommandInvoker invoker = new CommandInvoker();
+    int prefix;
+
 	@Order(1)
     @Test void checkSignup() {
         Signup signup = new Signup();
-        assertTrue(signup.signup("test@test.com", "#Password123"));
+        prefix = new Random().nextInt(10000);
+
+        assertTrue(signup.signup(prefix+"@test.com", "#Password123"));
     }
     
     @Test void checkSignupInvalidEmail() {

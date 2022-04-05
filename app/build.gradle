@@ -39,6 +39,10 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+javadoc {
+	options.tags = ['apiNote']
+}
+
 test {
 	testLogging {
 		events "PASSED", "SKIPPED", "FAILED"

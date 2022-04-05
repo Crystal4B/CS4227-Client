@@ -18,7 +18,7 @@ public class RemoveVoucherCommand extends CommandTemplate<CouponVisitor> {
 
 	/**
 	 * Simple constructor for the RemoveVoucherCommand
-	 * @param Couponvisitor the voucher/coupan
+	 * @param couponvisitor the voucher/coupan
 	 */
     public RemoveVoucherCommand(CouponVisitor couponvisitor){
 		this.couponvisitor = couponvisitor;

@@ -18,7 +18,7 @@ public class UpdateVoucherCommand extends CommandTemplate<CouponVisitor> {
 
 	/**
 	 * Simple constructor for the UpdateVoucherCommand
-	 * @param Couponvisitor the voucher/coupan
+	 * @param couponvisitor the voucher/coupan
 	 */
     public UpdateVoucherCommand(CouponVisitor couponvisitor){
 		this.couponvisitor = couponvisitor;

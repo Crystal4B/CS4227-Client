@@ -9,16 +9,19 @@ public interface CouponInterface {
     /**
 	* Method to check if a discount has been applied then add a string to the bill string
     * @param b the template object
+    * @return Amount paid off
 	*/
     String CouponPaid(BillingTemplate b);
 
     /**
 	* Method to check if the inputted coupon is valid
+    * @return Returns discount
 	*/
     double CouponInput();
 
     /**
 	* Method to check if the inputted voucher is valid
+    * @return Returns voucher percent off
 	*/
     double VoucherInput();
 
@@ -73,6 +76,7 @@ public interface CouponInterface {
     /**
 	* method to convert a double into a percent value eg 0.2 becomes 20%
     * @param num the double that is to be modified
+    * @return Returns percent
 	*/
     String PercentConverter(double num);
     

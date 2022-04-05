@@ -16,7 +16,7 @@ public class ValidateVoucherCommand extends CommandTemplate<CouponVisitor> {
 
 	/**
 	 * Simple constructor for the ValidateVoucherCommand
-	 * @param Couponvisitor the voucher/coupan
+	 * @param couponvisitor the voucher/coupan
 	 */
     public ValidateVoucherCommand(CouponVisitor couponvisitor){
 		this.couponvisitor = couponvisitor;

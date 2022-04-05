@@ -140,6 +140,12 @@ public class BillingUI {
 		return UI.MENU_STATE;
     }
 
+    /**
+	* Sets payment to be on arrival
+    * @param console Used to read user input.
+    * @return Validation of success
+	*/
+
     public static Boolean payOnArrival(Scanner console){
         System.out.println("\n Reservation will be paid for at Reception");
         BillingCash bill = new BillingCash();
@@ -148,6 +154,12 @@ public class BillingUI {
         return true;
         
     }
+
+    /**
+	* Sets payment to paid
+    * @param console Used to read user input.
+    * @return Validation of success
+	*/
 
     public static Boolean payByCard(Scanner console){
         System.out.println("\n####################################################");
@@ -182,7 +194,7 @@ public class BillingUI {
 
     /**
      * Method used to set final order 
-     * @param console Used to read user input.
+     * @param finalOrder Final Order
      */
 
 

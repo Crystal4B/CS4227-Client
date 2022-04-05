@@ -15,6 +15,7 @@ abstract class BillingTemplate {
    /**
 	* Method to calculate the discount if applied into the bill string
    * @param order the order the bill is attached to
+   * @return FinalCost of Order
 	*/
    public double BillCalc(Order order) {
       return order.getFinalCost()*(1-discount);
@@ -32,6 +33,7 @@ abstract class BillingTemplate {
    /**
 	* Abstract method to be overriden through extension
    * @param order the order the bill is attached to
+   * @return Itemised bill as a string
 	*/
    abstract public String Bill(Order order);
 
@@ -62,6 +64,7 @@ abstract class BillingTemplate {
    /**
 	 * Method to accept a CouponVisitor object and use one of its functions to return a string
 	 * @param a the CouponVisitor object that was accepted
+    * @return Validation of paid coupon
 	 */
    public String AcceptCouponVisitor(CouponVisitor a){
       return a.CouponPaid(this);
@@ -70,6 +73,7 @@ abstract class BillingTemplate {
    /**
 	* Abstract method to be overriden through extension
    * @param a the CouponVisitor object that was accepted
+   * @return Returns discount off amount
 	*/
    abstract public double AcceptCouponVisitorCode(CouponVisitor a);
 
@@ -77,6 +81,7 @@ abstract class BillingTemplate {
 	* Method to accept a CouponVisitor object and use one of its functions to return a string
    * @param a the CouponVisitor object that was accepted
    * @param num the double that is to be modified
+   * @return Percent taken off
 	*/
    public String PercentConverter(CouponVisitor a, double num){
       return a.PercentConverter(num);
@@ -85,6 +90,7 @@ abstract class BillingTemplate {
    /**
 	* Method to return the a bill for a specific order
    * @param order the order the bill is attached to
+   * @return Itemised bill
 	*/
    public String GetBill(Order order){
       return Bill(order);

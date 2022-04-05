@@ -1,8 +1,8 @@
 package hotelsystem.requestsystem.interceptors;
 
-import java.io.Console;
 import java.util.Map;
 import java.util.Random;
+import java.util.Scanner;
 
 import hotelsystem.email.Email;
 
@@ -31,8 +31,8 @@ public class TFAInterceptor implements InterceptorInterface{
         //TODO Remove next line before release
 		System.out.println("\n\n\nAUTHKEY FOR DEVELOPMENT PURPOSES //// TO BE REMOVED   : " + authKey);
         System.out.println("Please enter the code sent to " + email);
-    	Console console = System.console();
-		int number = Integer.parseInt(console.readLine());
+    	Scanner console = new Scanner(System.in);
+		int number = Integer.parseInt(console.nextLine());
 		if(number == authKey) {
 			System.out.println("Signed in");
 		}

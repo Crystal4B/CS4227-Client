@@ -15,6 +15,10 @@ import hotelsystem.roomfactory.RoomFactory;
  * @author Marcin Sęk
  * @apiNote Response type of Map[String, List[Room]]
  */
+
+ /**
+     * Default Constructor for command
+     */
 public class GetAvailableRoomsCommand extends CommandTemplate<Map<String, List<RoomInterface>>>
 {
 	public static final String QUERY_NAME = "availableRoomsByDates";

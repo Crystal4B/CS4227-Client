@@ -15,6 +15,10 @@ import hotelsystem.userfactory.UserInterface;
  * @author Marcin Sęk
  * @apiNote Response of type Order
  */
+
+ 	/**
+     * Default Constructor for command
+     */
 public class CancelReservationCommand extends CommandTemplate<Order>
 {
 	public static final String MUTATION_NAME = "removeReservation";

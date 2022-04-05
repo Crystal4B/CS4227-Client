@@ -7,6 +7,10 @@ import hotelsystem.userfactory.Customer;
 import hotelsystem.userfactory.Staff;
 import hotelsystem.userfactory.UserInterface;
 
+/**
+ * Command for changing the user password
+ * @author Marcin Sęk
+ */
 public class ChangeUserPasswordCommand extends CommandTemplate<UserInterface>
 {
 	public static final String MUTATION_NAME = "changeUserPassword";
@@ -16,6 +20,8 @@ public class ChangeUserPasswordCommand extends CommandTemplate<UserInterface>
 
 	/**
 	 * Simple constructor for command
+	 * @param id Id of user
+	 * @param password new Password
 	 */
 	public ChangeUserPasswordCommand(int id, String password)
 	{

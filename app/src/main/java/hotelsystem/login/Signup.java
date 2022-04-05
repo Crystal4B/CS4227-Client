@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Eoin McDonough
- * Payment class to handle payment states
+ * Signup class to handle signup requests
  */
 
 public class Signup implements SignupInterface{

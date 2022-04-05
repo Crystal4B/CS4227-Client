@@ -5,14 +5,29 @@ package hotelsystem.userfactory;
  * Guest class implementing the user.
  */
 public class Guest implements UserInterface
-{
-    protected String userName, password, email, firstName, lastName;
-    protected int id;// ID for better database implementation and security reasons
-    final static String type = "Guest";
+{   
+
+     protected String userName, password, email, firstName, lastName;
+     protected int id;
+     final static String type = "Guest";
+
+
+
+    /**
+     * Creates a guest account
+     * 
+     */
 
     public Guest() {
     }
 
+    /**
+     * Creates a guest account
+     * 
+     * @param firstName Firstname of user
+     * @param lastName Lastname of user
+     * @param ID id of User
+     */
     public Guest(String firstName, String lastName, int ID) {
         this.firstName = firstName;
         this.lastName = lastName;

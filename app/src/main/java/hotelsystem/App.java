@@ -7,6 +7,9 @@ import hotelsystem.requestsystem.interceptors.LoginInterceptor;
 import hotelsystem.requestsystem.interceptors.TFAInterceptor;
 import hotelsystem.userinterface.UI;
 
+/**
+ * Main Class and Entry Point into the Application
+ */
 public class App
 {
 	/**

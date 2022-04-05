@@ -7,6 +7,10 @@ import hotelsystem.login.LoginAdapter;
 import hotelsystem.login.Signup;
 import hotelsystem.userfactory.UserInterface;
 
+/**
+ * Logininterface. This is the login menu. This provides functionality for users to create an account or login to an existing account
+ * @author Eoin McDonough
+ */
 public class LoginUI {
 
     private static UserInterface userInterface;

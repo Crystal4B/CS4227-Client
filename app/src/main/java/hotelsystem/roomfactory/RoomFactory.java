@@ -5,12 +5,23 @@ package hotelsystem.roomfactory;
  * Factory method for creating different types of rooms.
  */
 public class RoomFactory implements FactoryInterface {
+    /**
+     * Creates a Standard Room.
+     * @param numberBeds number of beds in the room
+     * @param roomNumber room number
+     * @return a Room object
+     */
     public static Room createStandard(int roomNumber, int numberBeds) {
         Room room = new Room(roomNumber, numberBeds);
         room.setRoomName("Standard");
         return room;
     }
-
+    /**
+     * Creates a Deluxe Room.
+     * @param numberBeds number of beds in the room
+     * @param roomNumber room number
+     * @return a Room object
+     */
     public static Room createDeluxe(int roomNumber, int numberBeds) {
         Room room = new Room(roomNumber, numberBeds);
         room.removeAllOccupants();
@@ -21,7 +32,12 @@ public class RoomFactory implements FactoryInterface {
         room.setPrice(500);
         return room;
     }
-
+    /**
+     * Creates a VIP Room.
+     * @param numberBeds number of beds in the room
+     * @param roomNumber room number
+     * @return a Room object
+     */
     public static Room createVIP(int roomNumber, int numberBeds) {
         Room room = new Room(roomNumber, numberBeds);
         room.removeAllOccupants();

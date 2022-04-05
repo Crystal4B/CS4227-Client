@@ -121,6 +121,7 @@ public class Staff implements UserInterface
 
     /**
      * Get salary for staff
+	 * @return salary of the staff memeber
      */
     public double getSalary()
     {
@@ -147,6 +148,7 @@ public class Staff implements UserInterface
 
     /**
      * Get holidays for staff.
+	 * @return number of holidays available
      */
     public int getHolidays()
     {

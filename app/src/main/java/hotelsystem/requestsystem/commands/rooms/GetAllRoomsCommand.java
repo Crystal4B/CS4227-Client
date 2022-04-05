@@ -13,6 +13,10 @@ import hotelsystem.roomfactory.RoomFactory;
  * @author Marcin Sęk
  * @apiNote Response of type List[RoomInterface]
  */
+
+ /**
+     * Default Constructor for command
+     */
 public class GetAllRoomsCommand extends CommandTemplate<List<RoomInterface>>
 {
 	public static final String QUERY_NAME = "allRooms";

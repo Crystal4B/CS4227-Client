@@ -16,7 +16,8 @@ public class BillingCard extends BillingTemplate {
      * @param date the expiry date of the card mm/yy
      * @param csv the security code on the back of the card
      * @param order the order the payment is attached to
-	 */
+     * @return Validation of card
+     */
     public boolean PaymentSend(String num, String name, int date, int csv, Order order){
         Payment pay = new Payment();
         pay.setCost(BillCalc(order));

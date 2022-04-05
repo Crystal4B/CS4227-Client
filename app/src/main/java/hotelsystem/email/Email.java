@@ -11,7 +11,17 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * @author Eoin McDonough
+ * Email class to handle sending emails
+ */
 public class Email {
+    /**
+     * Sends email
+     *@param email Users email
+     *@param subject Subject of email
+     *@param emailMessage Message to send
+     */
     public Email(String email, String subject, String emailMessage) {
         String from = "teamplatinumlimerick@gmail.com";
         String host = "smtp.gmail.com";

@@ -30,7 +30,7 @@ public class LoginUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = console.nextInt();
+            option = Integer.parseInt(console.nextLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return UI.LOGIN_STATE;
@@ -49,6 +49,7 @@ public class LoginUI {
         String email = console.nextLine();
         System.out.println("Please enter password");
         String password = StaffUI.getPassword(console);
+		System.out.println("PASSWORD " + password);
         Login login = new Login();
         if(login.login(email, password)) {
             setUser(login.returnUser());

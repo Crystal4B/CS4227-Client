@@ -50,7 +50,7 @@ public class StaffUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = console.nextInt();
+            option = Integer.parseInt(console.nextLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return UI.STAFF_MENU;
@@ -103,7 +103,7 @@ public class StaffUI {
         System.out.println("1. \t Add Room");
         System.out.println("2. \t Remove Room");
         System.out.println("3. \t Back");
-        int option = console.nextInt();
+        int option = Integer.parseInt(console.nextLine());
         System.out.println("\n####################################################\n");
         switch (option) {
             case 1:
@@ -147,7 +147,7 @@ public class StaffUI {
         System.out.println("3. \t VIP Room");
         int option;
         try {
-            option = console.nextInt();
+            option = Integer.parseInt(console.nextLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return addRoom(console);
@@ -180,7 +180,7 @@ public class StaffUI {
         }
         int option;
         try {
-            option = console.nextInt()-1;
+            option = Integer.parseInt(console.nextLine())-1;
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return addRoom(console);
@@ -209,7 +209,7 @@ public class StaffUI {
         System.out.println("2. \t Remove Staff");
         System.out.println("3. \t List Staff Emails");
         System.out.println("4. \t Back");
-        int option = console.nextInt();
+        int option = Integer.parseInt(console.nextLine());
         System.out.println("\n####################################################\n");
         switch (option) {
             case 1:
@@ -312,7 +312,7 @@ public class StaffUI {
         System.out.println("2. \t Remove Voucher");
         System.out.println("3. \t Update Voucher");
         System.out.println("4. \t Back");
-        int option = console.nextInt();
+        int option = Integer.parseInt(console.nextLine());
         System.out.println("\n####################################################\n");
         switch (option) {
             case 1:
@@ -353,7 +353,7 @@ public class StaffUI {
         CouponVisitor visitor = new CouponVisitor();
         visitor.TypeSet("Voucher");  
         System.out.println("Please enter discount amount");
-        double discount = console.nextDouble();
+        double discount = Double.parseDouble(console.nextLine());
         visitor.DiscountSet(discount);
         invoker.setCommand(new CreateVoucherCommand(visitor));
 		invoker.execute();
@@ -391,7 +391,7 @@ public class StaffUI {
         System.out.println("Please enter voucher code to update");
         String code = console.nextLine();
         System.out.println("Please enter new discount");
-        double amount = console.nextDouble();
+        double amount = Double.parseDouble(console.nextLine());
         CouponVisitor visitor = new CouponVisitor(code);
         visitor.DiscountSet(amount);
         invoker.setCommand(new UpdateVoucherCommand(visitor));
@@ -413,7 +413,7 @@ public class StaffUI {
 		}
 		else
 		{
-			return passwordConsole.readPassword().toString();
+			return String.valueOf(passwordConsole.readPassword());
 		}
 	}
 }

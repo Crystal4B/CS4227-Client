@@ -34,7 +34,7 @@ public class ReservationUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = console.nextInt();
+            option = Integer.parseInt(console.nextLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return UI.RESERVATION_STATE;
@@ -106,7 +106,7 @@ public class ReservationUI {
         }
         int option;
         try {
-            option = console.nextInt();
+            option = Integer.parseInt(console.nextLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;
@@ -129,7 +129,7 @@ public class ReservationUI {
         int numberOfRoomsInCart = director.viewRoomsInCart(builder);
         int option;
         try {
-            option = console.nextInt();
+            option = Integer.parseInt(console.nextLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;
@@ -159,7 +159,7 @@ public class ReservationUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = console.nextInt();
+            option = Integer.parseInt(console.nextLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;

@@ -38,7 +38,7 @@ public class BillingUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = console.nextInt();
+            option = Integer.parseInt(console.nextLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return UI.BILLING_STATE;
@@ -153,9 +153,9 @@ public class BillingUI {
         System.out.println(" Card Number :");
         String cardNum = console.nextLine();
         System.out.println(" Expiry Date   ( MM/YY ) :");
-        int cardDate = console.nextInt();
+        int cardDate = Integer.parseInt(console.nextLine());
         System.out.println(" CSV :");
-        int csv = console.nextInt();
+        int csv = Integer.parseInt(console.nextLine());
         BillingCard bill = new BillingCard();
         if (bill.PaymentSend(cardNum, cardName, cardDate, csv, order)) {
             bill.SendEmail(order);

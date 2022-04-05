@@ -28,7 +28,7 @@ public class MenuUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = console.nextInt();
+            option = Integer.parseInt(console.nextLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return UI.MENU_STATE;
@@ -72,7 +72,7 @@ public class MenuUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = console.nextInt();
+            option = Integer.parseInt(console.nextLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;
@@ -113,7 +113,7 @@ public class MenuUI {
         System.out.println("Enter option here:");
         int option;
         try {
-            option = console.nextInt();
+            option = Integer.parseInt(console.nextLine());
         } catch (Exception e) {
             System.out.println("Invalid Input: Please try again!");
             return false;

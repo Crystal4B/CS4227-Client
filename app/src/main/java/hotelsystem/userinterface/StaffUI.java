@@ -166,6 +166,7 @@ public class StaffUI {
     /**
      * This function allows staff users to remove rooms for availability in the database.
      * @param console Used to read user input.
+     * @param roomFactories A list of rooms to display as options.
      * @return Returns room of chosen type by user.
      */
     public static RoomInterface removeRoom(Scanner console, ArrayList<RoomInterface> roomFactories){

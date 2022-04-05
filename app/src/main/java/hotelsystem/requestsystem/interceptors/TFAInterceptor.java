@@ -28,8 +28,6 @@ public class TFAInterceptor implements InterceptorInterface{
 		String email = (String) userData.get("email");
         String emailToSend = "Thank you for signing up to Platinum Hotels \n Your confirmation code is: " + authKey;
         new Email(email, "Platinum Hotels Signup Confirmation", emailToSend);
-        //TODO Remove next line before release
-		System.out.println("\n\n\nAUTHKEY FOR DEVELOPMENT PURPOSES //// TO BE REMOVED   : " + authKey);
         System.out.println("Please enter the code sent to " + email);
     	Console console = System.console();
 		int number = Integer.parseInt(console.readLine());

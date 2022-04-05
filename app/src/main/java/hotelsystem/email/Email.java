@@ -43,10 +43,7 @@ public class Email {
             message.setSubject(subject);
             message.setText(emailMessage);
 
-            System.out.println("sending...");
-
             Transport.send(message);
-            System.out.println("Sent message successfully....");
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }

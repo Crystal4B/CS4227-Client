@@ -38,8 +38,6 @@ public class LoginInterceptor implements InterceptorInterface{
 			String email = (String) userData.get("email");
 			String emailToSend = "Thank you for signing up to Platinum Hotels \n Your confirmation code is: " + authKey;
 			new Email(email, "Platinum Hotels Signup Confirmation", emailToSend);
-			//TODO Remove next line before release
-			System.out.println("\n\n\nAUTHKEY FOR DEVELOPMENT PURPOSES //// TO BE REMOVED   : " + authKey);
 			System.out.println("Please enter the code sent to " + email);
 			int number = Integer.parseInt(console.readLine());
 			if(number == authKey) {

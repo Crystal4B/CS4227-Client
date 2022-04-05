@@ -40,6 +40,7 @@ public class TFAInterceptor implements InterceptorInterface{
 		if(number == authKey) {
 			System.out.println("Signed in");
 		}
+		console.close();
 	}
 
 	public void afterCompletion(){

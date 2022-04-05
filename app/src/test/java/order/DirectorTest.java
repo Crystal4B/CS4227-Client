@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import hotelsystem.order.Director;
+import hotelsystem.order.OrderBuilder;
 import hotelsystem.roomFactory.RoomFactory;
 
 public class DirectorTest {

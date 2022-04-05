@@ -12,32 +12,33 @@ import java.util.List;
 import java.util.Map;
 
 import hotelsystem.userFactory.*;
+import hotelsystem.userinterface.LoginUI;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
-import billingsystem.CouponVisitor;
+import hotelsystem.billingsystem.CouponVisitor;
+import hotelsystem.order.OrderBuilder;
+import hotelsystem.requestsystem.commands.CommandInvoker;
+import hotelsystem.requestsystem.commands.reservations.CancelReservationCommand;
+import hotelsystem.requestsystem.commands.reservations.CreateReservationCommand;
+import hotelsystem.requestsystem.commands.reservations.GetReservationsByUserCommand;
+import hotelsystem.requestsystem.commands.rooms.CreateRoomsCommand;
+import hotelsystem.requestsystem.commands.rooms.GetAvailableRoomsCommand;
+import hotelsystem.requestsystem.commands.rooms.RemoveRoomsCommand;
+import hotelsystem.requestsystem.commands.users.ChangeUserPasswordCommand;
+import hotelsystem.requestsystem.commands.users.GetAllStaffUsersCommand;
+import hotelsystem.requestsystem.commands.users.LoginUserCommand;
+import hotelsystem.requestsystem.commands.users.RegisterUserCommand;
+import hotelsystem.requestsystem.commands.users.RemoveUserCommand;
+import hotelsystem.requestsystem.commands.vouchers.CreateVoucherCommand;
+import hotelsystem.requestsystem.commands.vouchers.RemoveVoucherCommand;
+import hotelsystem.requestsystem.commands.vouchers.UpdateVoucherCommand;
+import hotelsystem.requestsystem.commands.vouchers.ValidateVoucherCommand;
 import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
-import order.OrderBuilder;
-import requestsystem.commands.CommandInvoker;
-import requestsystem.commands.reservations.CancelReservationCommand;
-import requestsystem.commands.reservations.CreateReservationCommand;
-import requestsystem.commands.reservations.GetReservationsByUserCommand;
-import requestsystem.commands.rooms.CreateRoomsCommand;
-import requestsystem.commands.rooms.GetAvailableRoomsCommand;
-import requestsystem.commands.rooms.RemoveRoomsCommand;
-import requestsystem.commands.users.ChangeUserPasswordCommand;
-import requestsystem.commands.users.GetAllStaffUsersCommand;
-import requestsystem.commands.users.LoginUserCommand;
-import requestsystem.commands.users.RegisterUserCommand;
-import requestsystem.commands.users.RemoveUserCommand;
-import requestsystem.commands.vouchers.CreateVoucherCommand;
-import requestsystem.commands.vouchers.RemoveVoucherCommand;
-import requestsystem.commands.vouchers.UpdateVoucherCommand;
-import requestsystem.commands.vouchers.ValidateVoucherCommand;
-import userinterface.LoginUI;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class CommandExecuteTest
@@ -58,7 +59,7 @@ public class CommandExecuteTest
 
 	static CouponVisitor coupan;
 
-	static order.Order reservation;
+	static hotelsystem.order.Order reservation;
 
 	public boolean contains(ArrayList<Room> list, Room room)
 	{
@@ -358,14 +359,14 @@ public class CommandExecuteTest
 		builder.addRoom(room);
 		builder.setUser(customer);
 
-		order.Order order = builder.getOrder();
+		hotelsystem.order.Order order = builder.getOrder();
 
 		// Send new createRooms request
 		invoker.setCommand(new CreateReservationCommand(order));
 		invoker.execute();
 
 		// Retrieve response and assert
-		order.Order resultOrder = invoker.getResponse();
+		hotelsystem.order.Order resultOrder = invoker.getResponse();
 		assertEquals(order.getStartDate(), resultOrder.getStartDate());
 		assertEquals(order.getEndDate(), resultOrder.getEndDate());
 		assertEquals(order.getNumberOfDaysBooked(), resultOrder.getNumberOfDaysBooked());
@@ -413,10 +414,10 @@ public class CommandExecuteTest
 		// Weird ordering issue
 
 		//Retrieve Response and assert
-		List<order.Order> reservations = invoker.getResponse();
+		List<hotelsystem.order.Order> reservations = invoker.getResponse();
 		assertEquals(1, reservations.size());
 		
-		order.Order resultReservation = reservations.get(0);
+		hotelsystem.order.Order resultReservation = reservations.get(0);
 		assertEquals(reservation.getOrderID(), resultReservation.getOrderID());
 		assertEquals(resultReservation.getStartDate(), resultReservation.getStartDate());
 		assertEquals(resultReservation.getEndDate(), resultReservation.getEndDate());
@@ -494,7 +495,7 @@ public class CommandExecuteTest
 		invoker.execute();
 
 		// Retrieve response and assert
-		order.Order resultOrder = invoker.getResponse();
+		hotelsystem.order.Order resultOrder = invoker.getResponse();
 		assertEquals(reservation.getStartDate(), resultOrder.getStartDate());
 		assertEquals(reservation.getEndDate(), resultOrder.getEndDate());
 		assertEquals(reservation.getNumberOfDaysBooked(), resultOrder.getNumberOfDaysBooked());

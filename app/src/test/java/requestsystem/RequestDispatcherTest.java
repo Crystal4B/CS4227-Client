@@ -8,29 +8,30 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import hotelsystem.order.OrderBuilder;
+import hotelsystem.requestsystem.RequestDispatcher;
+import hotelsystem.requestsystem.commands.CommandTemplate;
+import hotelsystem.requestsystem.commands.reservations.CancelReservationCommand;
+import hotelsystem.requestsystem.commands.reservations.CreateReservationCommand;
+import hotelsystem.requestsystem.commands.reservations.GetReservationsByUserCommand;
+import hotelsystem.requestsystem.commands.reservations.SelectReservationCommand;
+import hotelsystem.requestsystem.commands.reservations.UpdateReservationPaidCommand;
+import hotelsystem.requestsystem.commands.rooms.CreateRoomCommand;
+import hotelsystem.requestsystem.commands.rooms.CreateRoomsCommand;
+import hotelsystem.requestsystem.commands.rooms.GetAllRoomsCommand;
+import hotelsystem.requestsystem.commands.rooms.GetAvailableRoomsCommand;
+import hotelsystem.requestsystem.commands.rooms.RemoveRoomCommand;
+import hotelsystem.requestsystem.commands.rooms.RemoveRoomsCommand;
+import hotelsystem.requestsystem.commands.users.ChangeUserPasswordCommand;
+import hotelsystem.requestsystem.commands.users.GetAllStaffUsersCommand;
+import hotelsystem.requestsystem.commands.users.LoginUserCommand;
+import hotelsystem.requestsystem.commands.users.RegisterUserCommand;
+import hotelsystem.requestsystem.commands.users.RemoveUserCommand;
 import hotelsystem.roomFactory.Room;
 import hotelsystem.roomFactory.RoomFactory;
 import hotelsystem.userFactory.Customer;
 import hotelsystem.userFactory.UserFactory;
 import hotelsystem.userFactory.UserInterface;
-import order.OrderBuilder;
-import requestsystem.commands.CommandTemplate;
-import requestsystem.commands.reservations.CancelReservationCommand;
-import requestsystem.commands.reservations.CreateReservationCommand;
-import requestsystem.commands.reservations.GetReservationsByUserCommand;
-import requestsystem.commands.reservations.SelectReservationCommand;
-import requestsystem.commands.reservations.UpdateReservationPaidCommand;
-import requestsystem.commands.rooms.CreateRoomCommand;
-import requestsystem.commands.rooms.CreateRoomsCommand;
-import requestsystem.commands.rooms.GetAllRoomsCommand;
-import requestsystem.commands.rooms.GetAvailableRoomsCommand;
-import requestsystem.commands.rooms.RemoveRoomCommand;
-import requestsystem.commands.rooms.RemoveRoomsCommand;
-import requestsystem.commands.users.ChangeUserPasswordCommand;
-import requestsystem.commands.users.GetAllStaffUsersCommand;
-import requestsystem.commands.users.LoginUserCommand;
-import requestsystem.commands.users.RegisterUserCommand;
-import requestsystem.commands.users.RemoveUserCommand;
 
 public class RequestDispatcherTest
 {
@@ -57,7 +58,7 @@ public class RequestDispatcherTest
 		builder.addRoom(room);
 		builder.setUser(customer);
 
-		order.Order order = builder.getOrder();
+		hotelsystem.order.Order order = builder.getOrder();
 
 		CreateReservationCommand command = new CreateReservationCommand(order);
 		validateMessageEvent(command, CreateReservationCommand.MUTATION_NAME);
@@ -79,7 +80,7 @@ public class RequestDispatcherTest
 		builder.addRoom(room);
 		builder.setUser(customer);
 
-		order.Order order = builder.getOrder();
+		hotelsystem.order.Order order = builder.getOrder();
 
 		CancelReservationCommand command = new CancelReservationCommand(order);
 		validateMessageEvent(command, CancelReservationCommand.MUTATION_NAME);

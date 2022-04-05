@@ -353,7 +353,13 @@ public class StaffUI {
         CouponVisitor visitor = new CouponVisitor();
         visitor.TypeSet("Voucher");  
         System.out.println("Please enter discount amount");
-        double discount = Double.parseDouble(console.nextLine());
+        double discount ;
+        try {
+            discount = Double.parseDouble(console.nextLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return false;
+        }
         visitor.DiscountSet(discount);
         invoker.setCommand(new CreateVoucherCommand(visitor));
 		invoker.execute();

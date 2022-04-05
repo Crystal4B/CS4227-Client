@@ -158,11 +158,17 @@ public class BillingUI {
         System.out.println(" Card Number :");
         String cardNum = console.nextLine();
         System.out.println(" Expiry Date   ( MM/YY ) :");
-        String cardDate = String.valueOf(console.nextLine());
+        String cardDate = console.nextLine();
         cardDate = cardDate.replace("/", ""); 
-        System.out.println(" CVC :");
         int date = Integer.parseInt(cardDate);
-        int cvc = Integer.parseInt(console.nextLine());
+        System.out.println(" CVC :");
+        int cvc;
+        try {
+            cvc = Integer.parseInt(console.nextLine());
+        } catch (Exception e) {
+            System.out.println("Invalid Input: Please try again!");
+            return false;
+        }
         BillingCard bill = new BillingCard();
         if (bill.PaymentSend(cardNum, cardName, date, cvc, order)) {
             bill.SendEmail(order);

@@ -14,9 +14,9 @@ public class ReservationUI {
     private static Order finalOrder;
     
     /**
-     * Run function of current state.
+     * This runs the current state specified in UI.java and can also change sub-states.
      * @param console Used to read user input.
-     * @return The next state.
+     * @return Returns boolean to break loop and change state.
      */
     public static int run(Console console){
         System.out.println("\n####################################################");
@@ -81,7 +81,7 @@ public class ReservationUI {
     }
 
     /**
-     * Add room to order builder.
+     * This function allows users to add a room with details provided to this order/reservation.
      * @param console Used to read user input.
      * @return If operation is sucessful. Changes current state in run function.
      */
@@ -115,7 +115,7 @@ public class ReservationUI {
     }
 
     /**
-     * Removes room from order builder.
+     * This function allows users to remove a chosen room from this order/reservation.
      * @param console Used to read user input.
      * @return If operation is sucessful. Changes current state in run function.
      */
@@ -142,7 +142,7 @@ public class ReservationUI {
     }
 
     /**
-     * View preview of order being built.
+     * This is a function to view a the current state of the order/reservation. This lists out all rooms added along with additional information on the order.
      * @param console Used to read user input.
      * @return If operation is sucessful. Changes current state in run function.
      */
@@ -166,10 +166,10 @@ public class ReservationUI {
     }
 
     /**
-     * Add guests to room object.
+     * This is a function called when creating a room to add guest names to room object.
      * @param console Used to read user input.
      * @param roomSize Number of occupants in room.
-     * @return A list of users
+     * @return A list of users staying in room.
      */
     public static ArrayList<UserInterface> addGuests(Console console, int roomSize){
         ArrayList<UserInterface> guests = new ArrayList<>();

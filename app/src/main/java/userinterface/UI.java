@@ -14,7 +14,7 @@ public class UI {
     public final static int STAFF_MENU = 4;
 
     /**
-     * State manager. Switches between different states. Called in main java file.
+     * This the main state manager function which s/witches between different states. It is called in App.java file.
      */
     public void run() {
         int state = 0;

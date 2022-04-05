@@ -20,19 +20,19 @@ public class BillingUI {
     private static Order order;
 
     /**
-     * Run function of current state.
+     * This runs the current state specified in UI.java and can also change sub-states.
      * @param console Used to read user input.
-     * @return The next state.
+     * @return Returns boolean to break loop and change state.
      */
     public static int run(Console console) {
         System.out.println("\n####################################################");
         System.out.println("#     Welcome to the Hotel Reservation System      #");
         System.out.println("####################################################\n");
         System.out.println("Please select one of the following options:");
-        System.out.println("1. \tPay with Card");
-        System.out.println("2. \tUse Voucher");
-        System.out.println("3. \tUse Coupon Code");
-        System.out.println("4. \tPay on Arrival");
+        System.out.println("1. \t Pay with Card");
+        System.out.println("2. \t Use Voucher");
+        System.out.println("3. \t Use Coupon Code");
+        System.out.println("4. \t Pay on Arrival");
         System.out.println("5. \t Back");
         System.out.println("\n####################################################\n");
         System.out.println("Enter option here:");

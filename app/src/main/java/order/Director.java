@@ -14,6 +14,10 @@ import requestsystem.commands.reservations.CreateReservationCommand;
 import requestsystem.commands.rooms.GetAvailableRoomsCommand;
 import userinterface.ReservationUI;
 
+/**
+ * Director class that defines steps of builder.
+ * @author Jordan Marshall
+ */
 public class Director {
 
     private Map<String, List<RoomInterface>> rooms;

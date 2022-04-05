@@ -13,9 +13,9 @@ public class LoginUI {
     private static String userType = "Customer";
     
     /**
-     * Run function of current state.
+     * This runs the current state specified in UI.java and can also change sub-states.
      * @param console Used to read user input.
-     * @return The next state.
+     * @return Returns boolean to break loop and change state.
      */
     public static int run(Console console){
         

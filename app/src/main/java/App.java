@@ -8,7 +8,7 @@ import userinterface.UI;
 public class App
 {
 	/**
-	 * Main Java function. Runs UI state machine.
+	 * Main Java function. This begins UI state machine and registers interceptors.
 	 * @param args List of arguments as strings.
 	 */
 	public static void main(String[] args)

@@ -10,13 +10,27 @@ public class CouponVisitor implements CouponInterface {
    int reservationId;
    boolean available = true;
    
+   /**
+	 * Simple constructor for the CouponVisitor
+	 */
    public CouponVisitor(){
    }
 
+   /**
+	 * Simple constructor for the CouponVisitor
+	 * @param code the id of the voucher
+	 */
    public CouponVisitor(String code){
       this.code = code;
    }
 
+   /**
+	 * Simple constructor for the CouponVisitor
+	 * @param code the id of the voucher
+	 * @param type the type of the voucher
+    * @param discount the discount value of the voucher
+    * @param available the availability of the voucher
+	 */
    public CouponVisitor(String code, String type, double discount, boolean available){
       this.code = code;
       this.type = type;
@@ -24,6 +38,14 @@ public class CouponVisitor implements CouponInterface {
       this.available = available;
    }
 
+   /**
+	 * Simple constructor for the CouponVisitor
+	 * @param code the id of the voucher
+	 * @param type the type of the voucher
+    * @param discount the discount value of the voucher
+    * @param available the availability of the voucher
+    * @param reservationId the id of the reservation to which the voucher is attached to
+	 */
    public CouponVisitor(String code, String type, double discount, boolean available, int reservationId){
       this.code = code;
       this.type = type;

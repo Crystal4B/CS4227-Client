@@ -52,7 +52,7 @@ public abstract class CommandTemplate<T>
 
 	/**
 	 * abstract parseResponse function for converting response to desired Object
-	 * @param response JSON response from server as Map<String, Object>
+	 * @param response JSON response from server as Map[String, Object]
 	 */
 	public abstract void parseResponse(Map<?, ?> response);
 }
